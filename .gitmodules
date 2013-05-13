@@ -2,5 +2,5 @@
 	path = Libraries/MYNetwork
 	url = git@github.com:snej/MYNetwork.git
 [submodule "Libraries/MYUtilities"]
-	path = Libraries/MYUtilities
+	path = Libraries/MYNetwork/vendor/MYUtilities
 	url = git@github.com:snej/MYUtilities.git

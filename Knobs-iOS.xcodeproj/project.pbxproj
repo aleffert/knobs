@@ -8,8 +8,54 @@
 
 /* Begin PBXBuildFile section */
 		772F3121174149C9009807FD /* EKNKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F3120174149C6009807FD /* EKNKnobs.m */; };
+		772F31A817415933009807FD /* libMYNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 772F319F17415909009807FD /* libMYNetwork.a */; };
 		77873FF2174147E700A47A27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FF1174147E700A47A27 /* Foundation.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		772F319C17415909009807FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 279E8F9E0F9FDD0800608D8D;
+			remoteInfo = Library;
+		};
+		772F319E17415909009807FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27F87B171557764300F0A416;
+			remoteInfo = "iOS Library";
+		};
+		772F31A017415909009807FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 270461720DE49340003D9D3F;
+			remoteInfo = SelfTest;
+		};
+		772F31A217415909009807FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 277904260DE91C7900C6D295;
+			remoteInfo = "BLIP Echo Client";
+		};
+		772F31A417415909009807FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2779052D0DE9E5BC00C6D295;
+			remoteInfo = "BLIP Echo Server";
+		};
+		772F31A617415909009807FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27F87B4515577BCA00F0A416;
+			remoteInfo = "iOS BLIP Echo";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		77873FEC174147E700A47A27 /* CopyFiles */ = {
@@ -27,6 +73,7 @@
 		772F311F174149C6009807FD /* EKNKnobs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNKnobs.h; path = iOS/EKNKnobs.h; sourceTree = SOURCE_ROOT; };
 		772F3120174149C6009807FD /* EKNKnobs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNKnobs.m; path = iOS/EKNKnobs.m; sourceTree = SOURCE_ROOT; };
 		772F3123174149F9009807FD /* Knobs-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-iOS-Prefix.pch"; path = "iOS/Knobs-iOS-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		772F319217415909009807FD /* MYNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MYNetwork.xcodeproj; path = Libraries/MYNetwork/MYNetwork.xcodeproj; sourceTree = "<group>"; };
 		77873FEE174147E700A47A27 /* libKnobs-client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libKnobs-client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77873FF1174147E700A47A27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -36,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				772F31A817415933009807FD /* libMYNetwork.a in Frameworks */,
 				77873FF2174147E700A47A27 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,9 +91,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		772F319317415909009807FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				772F319D17415909009807FD /* libMYNetwork.a */,
+				772F319F17415909009807FD /* libMYNetwork.a */,
+				772F31A117415909009807FD /* MYNetwork */,
+				772F31A317415909009807FD /* BLIP Echo Client.app */,
+				772F31A517415909009807FD /* BLIPEchoServer */,
+				772F31A717415909009807FD /* BLIP Echo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		77873FE5174147E700A47A27 = {
 			isa = PBXGroup;
 			children = (
+				772F319217415909009807FD /* MYNetwork.xcodeproj */,
 				77873FF3174147E700A47A27 /* Knobs-iOS */,
 				77873FF0174147E700A47A27 /* Frameworks */,
 				77873FEF174147E700A47A27 /* Products */,
@@ -127,12 +189,63 @@
 			mainGroup = 77873FE5174147E700A47A27;
 			productRefGroup = 77873FEF174147E700A47A27 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 772F319317415909009807FD /* Products */;
+					ProjectRef = 772F319217415909009807FD /* MYNetwork.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				77873FED174147E700A47A27 /* Knobs-client */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		772F319D17415909009807FD /* libMYNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMYNetwork.a;
+			remoteRef = 772F319C17415909009807FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		772F319F17415909009807FD /* libMYNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMYNetwork.a;
+			remoteRef = 772F319E17415909009807FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		772F31A117415909009807FD /* MYNetwork */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = MYNetwork;
+			remoteRef = 772F31A017415909009807FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		772F31A317415909009807FD /* BLIP Echo Client.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "BLIP Echo Client.app";
+			remoteRef = 772F31A217415909009807FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		772F31A517415909009807FD /* BLIPEchoServer */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BLIPEchoServer;
+			remoteRef = 772F31A417415909009807FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		772F31A717415909009807FD /* BLIP Echo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "BLIP Echo.app";
+			remoteRef = 772F31A617415909009807FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		77873FEA174147E700A47A27 /* Sources */ = {
@@ -172,6 +285,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				MYUtilities = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -196,6 +310,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				MYUtilities = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

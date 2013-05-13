@@ -4,4 +4,7 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import "Test.h"
+    #import "Target.h"
+    #import "Logging.h"
 #endif

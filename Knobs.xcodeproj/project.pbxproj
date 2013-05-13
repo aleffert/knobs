@@ -14,6 +14,26 @@
 		772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F312E1741544C009807FD /* EKNAppDelegate.m */; };
 		772F313B174154CC009807FD /* EKNPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31301741544C009807FD /* EKNPanelWindowController.m */; };
 		772F313E174154E3009807FD /* EKNPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F313C174154E3009807FD /* EKNPanelWindowController.xib */; };
+		772F316617415682009807FD /* CollectionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314217415682009807FD /* CollectionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316717415682009807FD /* ConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314417415682009807FD /* ConcurrentOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316817415682009807FD /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314617415682009807FD /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316917415682009807FD /* Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314817415682009807FD /* Logging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316A17415682009807FD /* MYBlockUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314A17415682009807FD /* MYBlockUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316B17415682009807FD /* MYDynamicObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314C17415682009807FD /* MYDynamicObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316C17415682009807FD /* MYErrorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314E17415682009807FD /* MYErrorUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
+		772F316D17415682009807FD /* MYRegexUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315017415682009807FD /* MYRegexUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316E17415682009807FD /* MYStreamUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315217415682009807FD /* MYStreamUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F316F17415682009807FD /* MYURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315417415682009807FD /* MYURLHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F317017415682009807FD /* MYURLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315617415682009807FD /* MYURLUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F317117415682009807FD /* MYUtilities.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 772F315717415682009807FD /* MYUtilities.xcconfig */; };
+		772F317217415682009807FD /* MYUtilities_Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 772F315817415682009807FD /* MYUtilities_Debug.xcconfig */; };
+		772F317317415682009807FD /* MYUtilities_Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 772F315A17415682009807FD /* MYUtilities_Release.xcconfig */; };
+		772F317417415682009807FD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 772F315B17415682009807FD /* README.md */; };
+		772F317517415682009807FD /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315D17415682009807FD /* Target.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F317617415682009807FD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315F17415682009807FD /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		772F317717415682009807FD /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F316417415682009807FD /* GTMNSData+zlib.m */; };
+		772F317817415682009807FD /* README in Resources */ = {isa = PBXBuildFile; fileRef = 772F316517415682009807FD /* README */; };
+		772F317A174157E4009807FD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 772F3179174157E4009807FD /* libz.dylib */; };
 		77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +49,42 @@
 		772F31321741545A009807FD /* Knobs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-Prefix.pch"; path = "Desktop/Knobs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		772F31331741545A009807FD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Desktop/main.m; sourceTree = SOURCE_ROOT; };
 		772F313D174154E3009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNPanelWindowController.xib; sourceTree = SOURCE_ROOT; };
+		772F314117415682009807FD /* CollectionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionUtils.h; sourceTree = "<group>"; };
+		772F314217415682009807FD /* CollectionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionUtils.m; sourceTree = "<group>"; };
+		772F314317415682009807FD /* ConcurrentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperation.h; sourceTree = "<group>"; };
+		772F314417415682009807FD /* ConcurrentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcurrentOperation.m; sourceTree = "<group>"; };
+		772F314517415682009807FD /* ExceptionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExceptionUtils.h; sourceTree = "<group>"; };
+		772F314617415682009807FD /* ExceptionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExceptionUtils.m; sourceTree = "<group>"; };
+		772F314717415682009807FD /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
+		772F314817415682009807FD /* Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logging.m; sourceTree = "<group>"; };
+		772F314917415682009807FD /* MYBlockUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlockUtils.h; sourceTree = "<group>"; };
+		772F314A17415682009807FD /* MYBlockUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlockUtils.m; sourceTree = "<group>"; };
+		772F314B17415682009807FD /* MYDynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYDynamicObject.h; sourceTree = "<group>"; };
+		772F314C17415682009807FD /* MYDynamicObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYDynamicObject.m; sourceTree = "<group>"; };
+		772F314D17415682009807FD /* MYErrorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYErrorUtils.h; sourceTree = "<group>"; };
+		772F314E17415682009807FD /* MYErrorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYErrorUtils.m; sourceTree = "<group>"; };
+		772F314F17415682009807FD /* MYRegexUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYRegexUtils.h; sourceTree = "<group>"; };
+		772F315017415682009807FD /* MYRegexUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYRegexUtils.m; sourceTree = "<group>"; };
+		772F315117415682009807FD /* MYStreamUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYStreamUtils.h; sourceTree = "<group>"; };
+		772F315217415682009807FD /* MYStreamUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYStreamUtils.m; sourceTree = "<group>"; };
+		772F315317415682009807FD /* MYURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLHandler.h; sourceTree = "<group>"; };
+		772F315417415682009807FD /* MYURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLHandler.m; sourceTree = "<group>"; };
+		772F315517415682009807FD /* MYURLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLUtils.h; sourceTree = "<group>"; };
+		772F315617415682009807FD /* MYURLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLUtils.m; sourceTree = "<group>"; };
+		772F315717415682009807FD /* MYUtilities.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities.xcconfig; sourceTree = "<group>"; };
+		772F315817415682009807FD /* MYUtilities_Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Debug.xcconfig; sourceTree = "<group>"; };
+		772F315917415682009807FD /* MYUtilities_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYUtilities_Prefix.pch; sourceTree = "<group>"; };
+		772F315A17415682009807FD /* MYUtilities_Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Release.xcconfig; sourceTree = "<group>"; };
+		772F315B17415682009807FD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		772F315C17415682009807FD /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		772F315D17415682009807FD /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
+		772F315E17415682009807FD /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		772F315F17415682009807FD /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
+		772F316217415682009807FD /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		772F316317415682009807FD /* GTMNSData+zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSData+zlib.h"; sourceTree = "<group>"; };
+		772F316417415682009807FD /* GTMNSData+zlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSData+zlib.m"; sourceTree = "<group>"; };
+		772F316517415682009807FD /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		772F3179174157E4009807FD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		77873FC017413BEC00A47A27 /* Knobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77873FC317413BEC00A47A27 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		77873FC617413BEC00A47A27 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -41,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				772F317A174157E4009807FD /* libz.dylib in Frameworks */,
 				77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,9 +114,69 @@
 			name = XIB;
 			sourceTree = "<group>";
 		};
+		772F314017415682009807FD /* MYUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				772F314117415682009807FD /* CollectionUtils.h */,
+				772F314217415682009807FD /* CollectionUtils.m */,
+				772F314317415682009807FD /* ConcurrentOperation.h */,
+				772F314417415682009807FD /* ConcurrentOperation.m */,
+				772F314517415682009807FD /* ExceptionUtils.h */,
+				772F314617415682009807FD /* ExceptionUtils.m */,
+				772F314717415682009807FD /* Logging.h */,
+				772F314817415682009807FD /* Logging.m */,
+				772F314917415682009807FD /* MYBlockUtils.h */,
+				772F314A17415682009807FD /* MYBlockUtils.m */,
+				772F314B17415682009807FD /* MYDynamicObject.h */,
+				772F314C17415682009807FD /* MYDynamicObject.m */,
+				772F314D17415682009807FD /* MYErrorUtils.h */,
+				772F314E17415682009807FD /* MYErrorUtils.m */,
+				772F314F17415682009807FD /* MYRegexUtils.h */,
+				772F315017415682009807FD /* MYRegexUtils.m */,
+				772F315117415682009807FD /* MYStreamUtils.h */,
+				772F315217415682009807FD /* MYStreamUtils.m */,
+				772F315317415682009807FD /* MYURLHandler.h */,
+				772F315417415682009807FD /* MYURLHandler.m */,
+				772F315517415682009807FD /* MYURLUtils.h */,
+				772F315617415682009807FD /* MYURLUtils.m */,
+				772F315717415682009807FD /* MYUtilities.xcconfig */,
+				772F315817415682009807FD /* MYUtilities_Debug.xcconfig */,
+				772F315917415682009807FD /* MYUtilities_Prefix.pch */,
+				772F315A17415682009807FD /* MYUtilities_Release.xcconfig */,
+				772F315B17415682009807FD /* README.md */,
+				772F315C17415682009807FD /* Target.h */,
+				772F315D17415682009807FD /* Target.m */,
+				772F315E17415682009807FD /* Test.h */,
+				772F315F17415682009807FD /* Test.m */,
+				772F316017415682009807FD /* vendor */,
+			);
+			name = MYUtilities;
+			path = Libraries/MYUtilities;
+			sourceTree = "<group>";
+		};
+		772F316017415682009807FD /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				772F316117415682009807FD /* google-toolbox-for-mac */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		772F316117415682009807FD /* google-toolbox-for-mac */ = {
+			isa = PBXGroup;
+			children = (
+				772F316217415682009807FD /* GTMDefines.h */,
+				772F316317415682009807FD /* GTMNSData+zlib.h */,
+				772F316417415682009807FD /* GTMNSData+zlib.m */,
+				772F316517415682009807FD /* README */,
+			);
+			path = "google-toolbox-for-mac";
+			sourceTree = "<group>";
+		};
 		77873FB717413BEC00A47A27 = {
 			isa = PBXGroup;
 			children = (
+				772F314017415682009807FD /* MYUtilities */,
 				77873FC917413BEC00A47A27 /* Knobs */,
 				77873FC217413BEC00A47A27 /* Frameworks */,
 				77873FC117413BEC00A47A27 /* Products */,
@@ -77,6 +194,7 @@
 		77873FC217413BEC00A47A27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				772F3179174157E4009807FD /* libz.dylib */,
 				77873FC317413BEC00A47A27 /* Cocoa.framework */,
 				77873FC517413BEC00A47A27 /* Other Frameworks */,
 			);
@@ -174,6 +292,11 @@
 				772F312C1741543A009807FD /* MainMenu.xib in Resources */,
 				772F3139174154BF009807FD /* InfoPlist.strings in Resources */,
 				772F313E174154E3009807FD /* EKNPanelWindowController.xib in Resources */,
+				772F317117415682009807FD /* MYUtilities.xcconfig in Resources */,
+				772F317217415682009807FD /* MYUtilities_Debug.xcconfig in Resources */,
+				772F317317415682009807FD /* MYUtilities_Release.xcconfig in Resources */,
+				772F317417415682009807FD /* README.md in Resources */,
+				772F317817415682009807FD /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +310,20 @@
 				772F31351741545A009807FD /* main.m in Sources */,
 				772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */,
 				772F313B174154CC009807FD /* EKNPanelWindowController.m in Sources */,
+				772F316617415682009807FD /* CollectionUtils.m in Sources */,
+				772F316717415682009807FD /* ConcurrentOperation.m in Sources */,
+				772F316817415682009807FD /* ExceptionUtils.m in Sources */,
+				772F316917415682009807FD /* Logging.m in Sources */,
+				772F316A17415682009807FD /* MYBlockUtils.m in Sources */,
+				772F316B17415682009807FD /* MYDynamicObject.m in Sources */,
+				772F316C17415682009807FD /* MYErrorUtils.m in Sources */,
+				772F316D17415682009807FD /* MYRegexUtils.m in Sources */,
+				772F316E17415682009807FD /* MYStreamUtils.m in Sources */,
+				772F316F17415682009807FD /* MYURLHandler.m in Sources */,
+				772F317017415682009807FD /* MYURLUtils.m in Sources */,
+				772F317517415682009807FD /* Target.m in Sources */,
+				772F317617415682009807FD /* Test.m in Sources */,
+				772F317717415682009807FD /* GTMNSData+zlib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
