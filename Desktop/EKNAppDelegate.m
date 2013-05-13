@@ -8,11 +8,14 @@
 
 #import "EKNAppDelegate.h"
 
+#import "EKNDeviceFinder.h"
 #import "EKNPanelWindowController.h"
 
 @interface EKNAppDelegate ()
 
 @property (strong, nonatomic) EKNPanelWindowController* windowController;
+
+@property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
 
 @end
 
@@ -20,11 +23,14 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    self.deviceFinder = [[EKNDeviceFinder alloc] init];
     [self makeNewWindow];
+    [self.deviceFinder start];
 }
 
 - (void)makeNewWindow {
     self.windowController = [[EKNPanelWindowController alloc] init];
+    self.windowController.deviceFinder = self.deviceFinder;
     [self.windowController showWindow:self];
 }
 

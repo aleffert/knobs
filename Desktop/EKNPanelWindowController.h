@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class EKNDeviceFinder;
+
 @interface EKNPanelWindowController : NSWindowController
+
+@property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
 
 @end
