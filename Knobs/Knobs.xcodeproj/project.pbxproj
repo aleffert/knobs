@@ -1,0 +1,311 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
+		77873FCE17413BEC00A47A27 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77873FCC17413BEC00A47A27 /* InfoPlist.strings */; };
+		77873FD017413BEC00A47A27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FCF17413BEC00A47A27 /* main.m */; };
+		77873FD417413BEC00A47A27 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 77873FD217413BEC00A47A27 /* Credits.rtf */; };
+		77873FD717413BEC00A47A27 /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FD617413BEC00A47A27 /* EKNAppDelegate.m */; };
+		77873FDA17413BEC00A47A27 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77873FD817413BEC00A47A27 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		77873FC017413BEC00A47A27 /* Knobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77873FC317413BEC00A47A27 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		77873FC617413BEC00A47A27 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		77873FC717413BEC00A47A27 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		77873FC817413BEC00A47A27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		77873FCB17413BEC00A47A27 /* Knobs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Knobs-Info.plist"; sourceTree = "<group>"; };
+		77873FCD17413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		77873FCF17413BEC00A47A27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		77873FD117413BEC00A47A27 /* Knobs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Knobs-Prefix.pch"; sourceTree = "<group>"; };
+		77873FD317413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		77873FD517413BEC00A47A27 /* EKNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EKNAppDelegate.h; sourceTree = "<group>"; };
+		77873FD617413BEC00A47A27 /* EKNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EKNAppDelegate.m; sourceTree = "<group>"; };
+		77873FD917413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		77873FBD17413BEC00A47A27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		77873FB717413BEC00A47A27 = {
+			isa = PBXGroup;
+			children = (
+				77873FC917413BEC00A47A27 /* Knobs */,
+				77873FC217413BEC00A47A27 /* Frameworks */,
+				77873FC117413BEC00A47A27 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		77873FC117413BEC00A47A27 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				77873FC017413BEC00A47A27 /* Knobs.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		77873FC217413BEC00A47A27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77873FC317413BEC00A47A27 /* Cocoa.framework */,
+				77873FC517413BEC00A47A27 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77873FC517413BEC00A47A27 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77873FC617413BEC00A47A27 /* AppKit.framework */,
+				77873FC717413BEC00A47A27 /* CoreData.framework */,
+				77873FC817413BEC00A47A27 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		77873FC917413BEC00A47A27 /* Knobs */ = {
+			isa = PBXGroup;
+			children = (
+				77873FD517413BEC00A47A27 /* EKNAppDelegate.h */,
+				77873FD617413BEC00A47A27 /* EKNAppDelegate.m */,
+				77873FD817413BEC00A47A27 /* MainMenu.xib */,
+				77873FCA17413BEC00A47A27 /* Supporting Files */,
+			);
+			path = Knobs;
+			sourceTree = "<group>";
+		};
+		77873FCA17413BEC00A47A27 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				77873FCB17413BEC00A47A27 /* Knobs-Info.plist */,
+				77873FCC17413BEC00A47A27 /* InfoPlist.strings */,
+				77873FCF17413BEC00A47A27 /* main.m */,
+				77873FD117413BEC00A47A27 /* Knobs-Prefix.pch */,
+				77873FD217413BEC00A47A27 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		77873FBF17413BEC00A47A27 /* Knobs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77873FDD17413BEC00A47A27 /* Build configuration list for PBXNativeTarget "Knobs" */;
+			buildPhases = (
+				77873FBC17413BEC00A47A27 /* Sources */,
+				77873FBD17413BEC00A47A27 /* Frameworks */,
+				77873FBE17413BEC00A47A27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Knobs;
+			productName = Knobs;
+			productReference = 77873FC017413BEC00A47A27 /* Knobs.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		77873FB817413BEC00A47A27 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = EKN;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Akiva Leffert";
+			};
+			buildConfigurationList = 77873FBB17413BEC00A47A27 /* Build configuration list for PBXProject "Knobs" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 77873FB717413BEC00A47A27;
+			productRefGroup = 77873FC117413BEC00A47A27 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				77873FBF17413BEC00A47A27 /* Knobs */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		77873FBE17413BEC00A47A27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77873FCE17413BEC00A47A27 /* InfoPlist.strings in Resources */,
+				77873FD417413BEC00A47A27 /* Credits.rtf in Resources */,
+				77873FDA17413BEC00A47A27 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		77873FBC17413BEC00A47A27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77873FD017413BEC00A47A27 /* main.m in Sources */,
+				77873FD717413BEC00A47A27 /* EKNAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		77873FCC17413BEC00A47A27 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77873FCD17413BEC00A47A27 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		77873FD217413BEC00A47A27 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77873FD317413BEC00A47A27 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		77873FD817413BEC00A47A27 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77873FD917413BEC00A47A27 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		77873FDB17413BEC00A47A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		77873FDC17413BEC00A47A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		77873FDE17413BEC00A47A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Knobs/Knobs-Prefix.pch";
+				INFOPLIST_FILE = "Knobs/Knobs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		77873FDF17413BEC00A47A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Knobs/Knobs-Prefix.pch";
+				INFOPLIST_FILE = "Knobs/Knobs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		77873FBB17413BEC00A47A27 /* Build configuration list for PBXProject "Knobs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77873FDB17413BEC00A47A27 /* Debug */,
+				77873FDC17413BEC00A47A27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77873FDD17413BEC00A47A27 /* Build configuration list for PBXNativeTarget "Knobs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77873FDE17413BEC00A47A27 /* Debug */,
+				77873FDF17413BEC00A47A27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 77873FB817413BEC00A47A27 /* Project object */;
+}
