@@ -7,33 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		772F312A1741543A009807FD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 772F31241741543A009807FD /* Credits.rtf */; };
+		772F312C1741543A009807FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F31281741543A009807FD /* MainMenu.xib */; };
+		772F31351741545A009807FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31331741545A009807FD /* main.m */; };
+		772F3139174154BF009807FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 772F31261741543A009807FD /* InfoPlist.strings */; };
+		772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F312E1741544C009807FD /* EKNAppDelegate.m */; };
+		772F313B174154CC009807FD /* EKNPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31301741544C009807FD /* EKNPanelWindowController.m */; };
+		772F313E174154E3009807FD /* EKNPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F313C174154E3009807FD /* EKNPanelWindowController.xib */; };
 		77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
-		77873FCE17413BEC00A47A27 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77873FCC17413BEC00A47A27 /* InfoPlist.strings */; };
-		77873FD017413BEC00A47A27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FCF17413BEC00A47A27 /* main.m */; };
-		77873FD417413BEC00A47A27 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 77873FD217413BEC00A47A27 /* Credits.rtf */; };
-		77873FD717413BEC00A47A27 /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FD617413BEC00A47A27 /* EKNAppDelegate.m */; };
-		77873FDA17413BEC00A47A27 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77873FD817413BEC00A47A27 /* MainMenu.xib */; };
-		77873FE217413E9E00A47A27 /* EKNPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FE117413E9E00A47A27 /* EKNPanelWindowController.m */; };
-		77873FE417413FEC00A47A27 /* EKNPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77873FE317413FEC00A47A27 /* EKNPanelWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		772F31251741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = Desktop/en.lproj/Credits.rtf; sourceTree = SOURCE_ROOT; };
+		772F31271741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		772F31291741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		772F312D1741544C009807FD /* EKNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNAppDelegate.h; path = Desktop/EKNAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		772F312E1741544C009807FD /* EKNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNAppDelegate.m; path = Desktop/EKNAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		772F312F1741544C009807FD /* EKNPanelWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNPanelWindowController.h; path = Desktop/EKNPanelWindowController.h; sourceTree = SOURCE_ROOT; };
+		772F31301741544C009807FD /* EKNPanelWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNPanelWindowController.m; path = Desktop/EKNPanelWindowController.m; sourceTree = SOURCE_ROOT; };
+		772F31311741545A009807FD /* Knobs-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Knobs-Info.plist"; path = "Desktop/Knobs-Info.plist"; sourceTree = SOURCE_ROOT; };
+		772F31321741545A009807FD /* Knobs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-Prefix.pch"; path = "Desktop/Knobs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		772F31331741545A009807FD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Desktop/main.m; sourceTree = SOURCE_ROOT; };
+		772F313D174154E3009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNPanelWindowController.xib; sourceTree = SOURCE_ROOT; };
 		77873FC017413BEC00A47A27 /* Knobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77873FC317413BEC00A47A27 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		77873FC617413BEC00A47A27 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		77873FC717413BEC00A47A27 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		77873FC817413BEC00A47A27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		77873FCB17413BEC00A47A27 /* Knobs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Knobs-Info.plist"; sourceTree = "<group>"; };
-		77873FCD17413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		77873FCF17413BEC00A47A27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		77873FD117413BEC00A47A27 /* Knobs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Knobs-Prefix.pch"; sourceTree = "<group>"; };
-		77873FD317413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		77873FD517413BEC00A47A27 /* EKNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EKNAppDelegate.h; sourceTree = "<group>"; };
-		77873FD617413BEC00A47A27 /* EKNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EKNAppDelegate.m; sourceTree = "<group>"; };
-		77873FD917413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		77873FE017413E9E00A47A27 /* EKNPanelWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNPanelWindowController.h; sourceTree = "<group>"; };
-		77873FE117413E9E00A47A27 /* EKNPanelWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNPanelWindowController.m; sourceTree = "<group>"; };
-		77873FE317413FEC00A47A27 /* EKNPanelWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EKNPanelWindowController.xib; path = XIB/EKNPanelWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		772F313F174154ED009807FD /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				772F313C174154E3009807FD /* EKNPanelWindowController.xib */,
+				772F31281741543A009807FD /* MainMenu.xib */,
+			);
+			name = XIB;
+			sourceTree = "<group>";
+		};
 		77873FB717413BEC00A47A27 = {
 			isa = PBXGroup;
 			children = (
@@ -87,12 +96,12 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
-				77873FD517413BEC00A47A27 /* EKNAppDelegate.h */,
-				77873FD617413BEC00A47A27 /* EKNAppDelegate.m */,
-				77873FE017413E9E00A47A27 /* EKNPanelWindowController.h */,
-				77873FE317413FEC00A47A27 /* EKNPanelWindowController.xib */,
-				77873FE117413E9E00A47A27 /* EKNPanelWindowController.m */,
-				77873FD817413BEC00A47A27 /* MainMenu.xib */,
+				772F312D1741544C009807FD /* EKNAppDelegate.h */,
+				772F312E1741544C009807FD /* EKNAppDelegate.m */,
+				772F312F1741544C009807FD /* EKNPanelWindowController.h */,
+				772F31301741544C009807FD /* EKNPanelWindowController.m */,
+				772F31331741545A009807FD /* main.m */,
+				772F313F174154ED009807FD /* XIB */,
 				77873FCA17413BEC00A47A27 /* Supporting Files */,
 			);
 			path = Knobs;
@@ -101,11 +110,10 @@
 		77873FCA17413BEC00A47A27 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				77873FCB17413BEC00A47A27 /* Knobs-Info.plist */,
-				77873FCC17413BEC00A47A27 /* InfoPlist.strings */,
-				77873FCF17413BEC00A47A27 /* main.m */,
-				77873FD117413BEC00A47A27 /* Knobs-Prefix.pch */,
-				77873FD217413BEC00A47A27 /* Credits.rtf */,
+				772F31311741545A009807FD /* Knobs-Info.plist */,
+				772F31321741545A009807FD /* Knobs-Prefix.pch */,
+				772F31241741543A009807FD /* Credits.rtf */,
+				772F31261741543A009807FD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -162,10 +170,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77873FCE17413BEC00A47A27 /* InfoPlist.strings in Resources */,
-				77873FD417413BEC00A47A27 /* Credits.rtf in Resources */,
-				77873FDA17413BEC00A47A27 /* MainMenu.xib in Resources */,
-				77873FE417413FEC00A47A27 /* EKNPanelWindowController.xib in Resources */,
+				772F312A1741543A009807FD /* Credits.rtf in Resources */,
+				772F312C1741543A009807FD /* MainMenu.xib in Resources */,
+				772F3139174154BF009807FD /* InfoPlist.strings in Resources */,
+				772F313E174154E3009807FD /* EKNPanelWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,37 +184,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77873FD017413BEC00A47A27 /* main.m in Sources */,
-				77873FD717413BEC00A47A27 /* EKNAppDelegate.m in Sources */,
-				77873FE217413E9E00A47A27 /* EKNPanelWindowController.m in Sources */,
+				772F31351741545A009807FD /* main.m in Sources */,
+				772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */,
+				772F313B174154CC009807FD /* EKNPanelWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		77873FCC17413BEC00A47A27 /* InfoPlist.strings */ = {
+		772F31241741543A009807FD /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				77873FCD17413BEC00A47A27 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		77873FD217413BEC00A47A27 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				77873FD317413BEC00A47A27 /* en */,
+				772F31251741543A009807FD /* en */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		77873FD817413BEC00A47A27 /* MainMenu.xib */ = {
+		772F31261741543A009807FD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				77873FD917413BEC00A47A27 /* en */,
+				772F31271741543A009807FD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		772F31281741543A009807FD /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				772F31291741543A009807FD /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		772F313C174154E3009807FD /* EKNPanelWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				772F313D174154E3009807FD /* en */,
+			);
+			name = EKNPanelWindowController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -278,8 +294,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Knobs/Knobs-Prefix.pch";
-				INFOPLIST_FILE = "Knobs/Knobs-Info.plist";
+				GCC_PREFIX_HEADER = "Desktop/Knobs-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/Knobs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -290,8 +306,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Knobs/Knobs-Prefix.pch";
-				INFOPLIST_FILE = "Knobs/Knobs-Info.plist";
+				GCC_PREFIX_HEADER = "Desktop/Knobs-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/Knobs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -316,6 +332,7 @@
 				77873FDF17413BEC00A47A27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
