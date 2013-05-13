@@ -8,11 +8,24 @@
 
 #import "EKNAppDelegate.h"
 
+#import "EKNPanelWindowController.h"
+
+@interface EKNAppDelegate ()
+
+@property (strong, nonatomic) EKNPanelWindowController* windowController;
+
+@end
+
 @implementation EKNAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    [self makeNewWindow];
+}
+
+- (void)makeNewWindow {
+    self.windowController = [[EKNPanelWindowController alloc] init];
+    [self.windowController showWindow:self];
 }
 
 @end

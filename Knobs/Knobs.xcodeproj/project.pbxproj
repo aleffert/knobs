@@ -13,6 +13,8 @@
 		77873FD417413BEC00A47A27 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 77873FD217413BEC00A47A27 /* Credits.rtf */; };
 		77873FD717413BEC00A47A27 /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FD617413BEC00A47A27 /* EKNAppDelegate.m */; };
 		77873FDA17413BEC00A47A27 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77873FD817413BEC00A47A27 /* MainMenu.xib */; };
+		77873FE217413E9E00A47A27 /* EKNPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77873FE117413E9E00A47A27 /* EKNPanelWindowController.m */; };
+		77873FE417413FEC00A47A27 /* EKNPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77873FE317413FEC00A47A27 /* EKNPanelWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,9 @@
 		77873FD517413BEC00A47A27 /* EKNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EKNAppDelegate.h; sourceTree = "<group>"; };
 		77873FD617413BEC00A47A27 /* EKNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EKNAppDelegate.m; sourceTree = "<group>"; };
 		77873FD917413BEC00A47A27 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		77873FE017413E9E00A47A27 /* EKNPanelWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNPanelWindowController.h; sourceTree = "<group>"; };
+		77873FE117413E9E00A47A27 /* EKNPanelWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNPanelWindowController.m; sourceTree = "<group>"; };
+		77873FE317413FEC00A47A27 /* EKNPanelWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EKNPanelWindowController.xib; path = XIB/EKNPanelWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +89,9 @@
 			children = (
 				77873FD517413BEC00A47A27 /* EKNAppDelegate.h */,
 				77873FD617413BEC00A47A27 /* EKNAppDelegate.m */,
+				77873FE017413E9E00A47A27 /* EKNPanelWindowController.h */,
+				77873FE317413FEC00A47A27 /* EKNPanelWindowController.xib */,
+				77873FE117413E9E00A47A27 /* EKNPanelWindowController.m */,
 				77873FD817413BEC00A47A27 /* MainMenu.xib */,
 				77873FCA17413BEC00A47A27 /* Supporting Files */,
 			);
@@ -157,6 +165,7 @@
 				77873FCE17413BEC00A47A27 /* InfoPlist.strings in Resources */,
 				77873FD417413BEC00A47A27 /* Credits.rtf in Resources */,
 				77873FDA17413BEC00A47A27 /* MainMenu.xib in Resources */,
+				77873FE417413FEC00A47A27 /* EKNPanelWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +178,7 @@
 			files = (
 				77873FD017413BEC00A47A27 /* main.m in Sources */,
 				77873FD717413BEC00A47A27 /* EKNAppDelegate.m in Sources */,
+				77873FE217413E9E00A47A27 /* EKNPanelWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +235,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -252,6 +263,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
