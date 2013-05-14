@@ -18,6 +18,8 @@
 @property (readonly, assign, nonatomic) NSUInteger port;
 @property (readonly, strong, nonatomic) NSString* name;
 
+@property (readonly, strong, nonatomic) MYBonjourService* service;
+
 @end
 
 

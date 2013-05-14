@@ -9,6 +9,7 @@
 #import "EKNPanelWindowController.h"
 
 #import "EKNDevice.h"
+#import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
 
 @interface EKNPanelWindowController ()
@@ -54,7 +55,6 @@
 }
 
 - (void)deviceListChanged:(NSNotification*)notification {
-    NSLog(@"devices are %@", self.deviceFinder.activeDevices);
     self.devicePopup.menu = [self menuFromDevices:self.deviceFinder.activeDevices activeDevice:self.activeDevice];
     if(self.activeDevice == nil) {
         [self.devicePopup selectItemAtIndex:0];
@@ -72,9 +72,15 @@
     }
 }
 
+- (void)setActiveDevice:(EKNDevice *)activeDevice {
+    _activeDevice = activeDevice;
+    if(self.deviceConnection.activeDevice != activeDevice) {
+        [self.deviceConnection connectToDevice:activeDevice];
+    }
+}
+
 - (IBAction)choseNoDevice:(id)sender {
     self.activeDevice = nil;
-    NSLog(@"chose device: %@", nil);
 }
 
 - (IBAction)choseDevice:(NSMenuItem*)sender {

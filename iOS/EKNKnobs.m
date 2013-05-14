@@ -13,7 +13,7 @@
 
 #import "EKNSharedConstants.h"
 
-@interface EKNKnobs ()
+@interface EKNKnobs () <TCPListenerDelegate>
 
 + (EKNKnobs*)sharedController;
 
@@ -37,6 +37,7 @@
 - (id)init {
     if(self = [super init]) {
         self.listener = [[BLIPListener alloc] initWithPort:0];
+        self.listener.delegate = self;
         self.bonjourBroadcast = [[MYBonjourRegistration alloc] initWithServiceType:@"_knobs._tcp" port:0];
         self.bonjourBroadcast.name = [NSString stringWithFormat:@"%@ - %@", [[UIDevice currentDevice] name], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]];
     }
@@ -64,6 +65,10 @@
         [self.bonjourBroadcast stop];
         [self.listener close];
     }
+}
+
+- (void)listener:(TCPListener *)listener didAcceptConnection:(TCPConnection *)connection {
+    NSLog(@"connection is %@", connection);
 }
 
 @end

@@ -62,6 +62,7 @@
 		77B797391741889D008242D4 /* EKNSharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797381741889D008242D4 /* EKNSharedConstants.m */; };
 		77B7973C17418C27008242D4 /* EKNDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973B17418C27008242D4 /* EKNDevice.m */; };
 		77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */; };
+		77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797421741AE36008242D4 /* EKNDeviceConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +173,8 @@
 		77B7973B17418C27008242D4 /* EKNDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDevice.m; path = Desktop/EKNDevice.m; sourceTree = SOURCE_ROOT; };
 		77B7973E17418CB5008242D4 /* NSArray+EKNFunctional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+EKNFunctional.h"; path = "Shared/NSArray+EKNFunctional.h"; sourceTree = SOURCE_ROOT; };
 		77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+EKNFunctional.m"; path = "Shared/NSArray+EKNFunctional.m"; sourceTree = SOURCE_ROOT; };
+		77B797411741AE36008242D4 /* EKNDeviceConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDeviceConnection.h; path = Desktop/EKNDeviceConnection.h; sourceTree = SOURCE_ROOT; };
+		77B797421741AE36008242D4 /* EKNDeviceConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDeviceConnection.m; path = Desktop/EKNDeviceConnection.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +301,8 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
+				77B797411741AE36008242D4 /* EKNDeviceConnection.h */,
+				77B797421741AE36008242D4 /* EKNDeviceConnection.m */,
 				77B797361741889D008242D4 /* Shared */,
 				77B7972F17418374008242D4 /* EKNDeviceFinder.h */,
 				77B7973017418374008242D4 /* EKNDeviceFinder.m */,
@@ -545,6 +550,7 @@
 				77B797391741889D008242D4 /* EKNSharedConstants.m in Sources */,
 				77B7973C17418C27008242D4 /* EKNDevice.m in Sources */,
 				77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */,
+				77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

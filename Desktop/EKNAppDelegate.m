@@ -8,6 +8,7 @@
 
 #import "EKNAppDelegate.h"
 
+#import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
 #import "EKNPanelWindowController.h"
 
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) EKNPanelWindowController* windowController;
 
 @property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
+@property (strong, nonatomic) EKNDeviceConnection* deviceConnection;
 
 @end
 
@@ -24,6 +26,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.deviceFinder = [[EKNDeviceFinder alloc] init];
+    self.deviceConnection = [[EKNDeviceConnection alloc] init];
     [self makeNewWindow];
     [self.deviceFinder start];
 }
@@ -31,6 +34,7 @@
 - (void)makeNewWindow {
     self.windowController = [[EKNPanelWindowController alloc] init];
     self.windowController.deviceFinder = self.deviceFinder;
+    self.windowController.deviceConnection = self.deviceConnection;
     [self.windowController showWindow:self];
 }
 
