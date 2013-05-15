@@ -73,6 +73,12 @@
 		77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77F70CDD1743DF180064E665 /* Logger.bundle */; };
 		77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */; };
 		77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */; };
+		77F70CFE1743E5A30064E665 /* EKNLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70CFD1743E5A30064E665 /* EKNLoggerViewController.xib */; };
+		77F70D0417440CB00064E665 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F70D0317440CB00064E665 /* WebKit.framework */; };
+		77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0617440DA30064E665 /* EKNWireImage.m */; };
+		77F70D0D174418530064E665 /* EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0C174418530064E665 /* EKNDOMRepresentation.m */; };
+		77F70D1017441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0F17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m */; };
+		77F70D1317441C4A0064E665 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1217441C4A0064E665 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +234,16 @@
 		77F70CF31743DF970064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/Logger/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		77F70CFA1743E3CB0064E665 /* EKNLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLoggerViewController.h; path = Desktop/Logger/EKNLoggerViewController.h; sourceTree = SOURCE_ROOT; };
 		77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLoggerViewController.m; path = Desktop/Logger/EKNLoggerViewController.m; sourceTree = SOURCE_ROOT; };
+		77F70CFD1743E5A30064E665 /* EKNLoggerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EKNLoggerViewController.xib; sourceTree = "<group>"; };
+		77F70D0317440CB00064E665 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		77F70D0517440DA30064E665 /* EKNWireImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNWireImage.h; sourceTree = "<group>"; };
+		77F70D0617440DA30064E665 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNWireImage.m; sourceTree = "<group>"; };
+		77F70D0B174418530064E665 /* EKNDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDOMRepresentation.h; path = Desktop/EKNDOMRepresentation.h; sourceTree = SOURCE_ROOT; };
+		77F70D0C174418530064E665 /* EKNDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDOMRepresentation.m; path = Desktop/EKNDOMRepresentation.m; sourceTree = SOURCE_ROOT; };
+		77F70D0E17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ENKWireImage+ENKDOMRepresentation.h"; path = "Desktop/ENKWireImage+ENKDOMRepresentation.h"; sourceTree = SOURCE_ROOT; };
+		77F70D0F17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ENKWireImage+ENKDOMRepresentation.m"; path = "Desktop/ENKWireImage+ENKDOMRepresentation.m"; sourceTree = SOURCE_ROOT; };
+		77F70D1117441C4A0064E665 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Libraries/NSData_Base64/NSData+Base64.h"; sourceTree = "<group>"; };
+		77F70D1217441C4A0064E665 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Libraries/NSData_Base64/NSData+Base64.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F70D0417440CB00064E665 /* WebKit.framework in Frameworks */,
 				77F70CDE1743DF180064E665 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				772F3179174157E4009807FD /* libz.dylib */,
+				77F70D0317440CB00064E665 /* WebKit.framework */,
 				77B7970D17417807008242D4 /* Security.framework */,
 				77873FC317413BEC00A47A27 /* Cocoa.framework */,
 				77873FC517413BEC00A47A27 /* Other Frameworks */,
@@ -365,6 +383,10 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
+				77F70D0B174418530064E665 /* EKNDOMRepresentation.h */,
+				77F70D0E17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.h */,
+				77F70D0F17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m */,
+				77F70D0C174418530064E665 /* EKNDOMRepresentation.m */,
 				77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */,
 				77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */,
 				77B7976A1743D0B8008242D4 /* EKNConsolePluginRegistry.h */,
@@ -490,6 +512,7 @@
 		77B7970B174177A8008242D4 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				77F70D1417441C4E0064E665 /* NSData+Base64 */,
 				77B7966C17417755008242D4 /* MYNetwork */,
 				772F314017415682009807FD /* MYUtilities */,
 			);
@@ -499,6 +522,8 @@
 		77B797361741889D008242D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				77F70D0517440DA30064E665 /* EKNWireImage.h */,
+				77F70D0617440DA30064E665 /* EKNWireImage.m */,
 				77B7976917430B88008242D4 /* EKNChannel.h */,
 				77B7976617430A88008242D4 /* EKNNamedChannel.h */,
 				77B7976717430A88008242D4 /* EKNNamedChannel.m */,
@@ -513,6 +538,7 @@
 		77F70CDF1743DF180064E665 /* Logger */ = {
 			isa = PBXGroup;
 			children = (
+				77F70CFD1743E5A30064E665 /* EKNLoggerViewController.xib */,
 				77F70CFA1743E3CB0064E665 /* EKNLoggerViewController.h */,
 				77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */,
 				77F70CEC1743DF840064E665 /* EKNLoggerPlugin.h */,
@@ -530,6 +556,15 @@
 				77F70CF01743DF920064E665 /* Logger-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		77F70D1417441C4E0064E665 /* NSData+Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				77F70D1117441C4A0064E665 /* NSData+Base64.h */,
+				77F70D1217441C4A0064E665 /* NSData+Base64.m */,
+			);
+			name = "NSData+Base64";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -622,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77F70CF41743DF970064E665 /* InfoPlist.strings in Resources */,
+				77F70CFE1743E5A30064E665 /* EKNLoggerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +716,8 @@
 				77B7976817430A89008242D4 /* EKNNamedChannel.m in Sources */,
 				77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */,
 				77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */,
+				77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */,
+				77F70D1017441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +727,8 @@
 			files = (
 				77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */,
 				77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */,
+				77F70D0D174418530064E665 /* EKNDOMRepresentation.m in Sources */,
+				77F70D1317441C4A0064E665 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

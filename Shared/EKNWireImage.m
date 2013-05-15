@@ -12,8 +12,10 @@
 
 @property (nonatomic, strong) NSData* data;
 
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
 @property (nonatomic, strong) UIImage* image;
+#else
+@property (nonatomic, strong) NSImage* image;
 #endif
 
 @end
@@ -33,11 +35,14 @@
     [aCoder encodeObject:self.data forKey:@"data"];
 }
 
+
+
+- (NSString*)description {
+    return [NSString stringWithFormat:@"<%@: %p, data = %p, image = %@>", [self class], self, self.data, self.image];
+}
+
 #if TARGET_OS_IPHONE
 
-- (void)buildImageFromData {
-    self.image = [UIImage imageWithData:self.data];
-}
 
 - (id)initWithImage:(UIImage *)image {
     self = [super init];
@@ -47,6 +52,25 @@
         self.image = image;
     }
     return self;
+}
+
+- (void)buildImageFromData {
+    self.image = [UIImage imageWithData:self.data];
+}
+
+#else
+
+- (id)initWithImage:(NSImage *)image {
+    self = [super init];
+    if(self != nil) {
+        self.data = [[image representations][0] representationUsingType:NSPNGFileType properties:nil];
+        self.image = image;
+    }
+    return self;
+}
+
+- (void)buildImageFromData {
+    self.image = [[NSImage alloc] initWithData:self.data];
 }
 
 #endif

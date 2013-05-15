@@ -44,10 +44,11 @@
             [plugins setObject:plugin forKey:plugin.name];
         }
     }
+    self.plugins = plugins;
 }
 
 - (id <EKNConsolePlugin>)pluginWithName:(NSString *)name {
-    return nil;
+    return [self.plugins objectForKey:name];
 }
 
 @end

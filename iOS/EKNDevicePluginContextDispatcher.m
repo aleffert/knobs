@@ -18,4 +18,8 @@
     [self.delegate sendMessage:message onChannel:channel];
 }
 
+- (BOOL)isConnected {
+    return [self.delegate isConnected];
+}
+
 @end

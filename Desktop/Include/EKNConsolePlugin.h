@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 
 #import "EKNChannel.h"
+#import "EKNConsolePlugin.h"
+
+@protocol EKNConsoleController;
 
 @protocol EKNConsoleControllerContext <NSObject>
 
 - (void)sendMessage:(NSData*)data onChannel:(id <EKNChannel>)channel;
+- (void)updatedView:(NSViewController <EKNConsoleController>*)controller ofChannel:(id <EKNChannel>)channel;
 
 @end
 

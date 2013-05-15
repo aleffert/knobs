@@ -10,6 +10,13 @@
 
 @implementation EKNNamedChannel
 
+- (id)copyWithZone:(NSZone *)zone {
+    EKNNamedChannel* channel = [[EKNNamedChannel allocWithZone:zone] init];
+    channel.name = self.name;
+    channel.ownerName = self.ownerName;
+    return channel;
+}
+
 - (NSUInteger)hash {
     return self.ownerName.hash;
 }

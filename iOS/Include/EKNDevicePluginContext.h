@@ -15,5 +15,6 @@
 
 - (id <EKNChannel>)channelWithName:(NSString*)name fromPlugin:(id <EKNDevicePlugin>)plugin;
 - (void)sendMessage:(NSData*)message onChannel:(id <EKNChannel>)channel;
+@property (readonly, nonatomic, getter = isConnected) BOOL connected;
 
 @end

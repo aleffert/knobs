@@ -10,6 +10,6 @@
 
 #import "EKNConsolePlugin.h"
 
-@interface EKNLoggerViewController : NSViewController
+@interface EKNLoggerViewController : NSViewController <EKNConsoleController>
 
 @end

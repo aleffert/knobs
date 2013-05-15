@@ -8,6 +8,8 @@
 
 #import "EKNLoggerPlugin.h"
 
+#import "EKNLoggerViewController.h"
+
 @implementation EKNLoggerPlugin
 
 - (NSString*)name {
@@ -19,7 +21,8 @@
 }
 
 - (NSViewController <EKNConsoleController>*)viewControllerWithChannel:(id<EKNChannel>)channel {
-    return nil;
+    EKNLoggerViewController* controller = [[EKNLoggerViewController alloc] initWithNibName:@"EKNLoggerViewController" bundle:[NSBundle bundleForClass:[self class]]];
+    return controller;
 }
 
 @end

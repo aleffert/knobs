@@ -60,26 +60,34 @@
 }
 
 - (void)start {
-    if(!self.enabled) {
-        self.enabled = YES;
+    self.enabled = YES;
+    
+    if(!self.listener.isOpen) {
         [self.listener open];
+    }
+    if(!self.bonjourBroadcast.isRunning) {
         self.bonjourBroadcast.port = self.listener.port;
         [self.bonjourBroadcast start];
     }
 }
 
 - (void)stop {
-    if(self.enabled) {
+    self.enabled = NO;
+}
+
+- (void)stopListening {
+    if(self.bonjourBroadcast.isRunning) {
         [self.bonjourBroadcast stop];
+    }
+    if(self.listener.isOpen) {
         [self.listener close];
     }
-    self.enabled = NO;
 }
 
 - (void)listener:(TCPListener *)listener didAcceptConnection:(BLIPConnection *)connection {
     self.connection = connection;
     connection.delegate = self;
-    [self stop];
+    [self stopListening];
     NSLog(@"OPENING KNOBS CONNECTION");
 }
 
@@ -92,6 +100,10 @@
 }
 
 #pragma mark Plugin Context
+
+- (BOOL)isConnected {
+    return self.connection != nil;
+}
 
 - (id <EKNChannel>)channelWithName:(NSString *)name fromPlugin:(id<EKNDevicePlugin>)plugin {
     EKNNamedChannel* channel = [[EKNNamedChannel alloc] init];

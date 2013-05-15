@@ -10,6 +10,8 @@
 
 #import "EKNConsolePlugin.h"
 
+// Simple bouncer to prevent a retain cycle
+
 @interface EKNConsoleControllerContextDispatcher : NSObject <EKNConsoleControllerContext>
 
 @property (weak, nonatomic) id <EKNConsoleControllerContext> delegate;

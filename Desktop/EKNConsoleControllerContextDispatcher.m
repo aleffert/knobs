@@ -14,4 +14,8 @@
     [self.delegate sendMessage:data onChannel:channel];
 }
 
+- (void)updatedView:(NSViewController<EKNConsoleController> *)controller ofChannel:(id<EKNChannel>)channel {
+    [self.delegate updatedView:controller ofChannel:channel];
+}
+
 @end

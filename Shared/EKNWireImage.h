@@ -11,10 +11,18 @@
 
 @interface EKNWireImage : NSObject <NSCoding>
 
-#ifdef TARGET_OS_IPHONE
+
+@property (readonly, nonatomic, strong) NSData* data;
+
+#if TARGET_OS_IPHONE
 
 - (id)initWithImage:(UIImage*)image;
 @property (readonly, nonatomic, strong) UIImage* image;
+
+#else
+
+- (id)initWithImage:(NSImage*)image;
+@property (readonly, nonatomic, strong) NSImage* image;
 
 #endif
 

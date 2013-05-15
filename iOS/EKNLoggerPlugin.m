@@ -80,11 +80,11 @@
 
 - (void)logToChannel:(NSString *)channelName withRows:(NSArray *)params {
     id <EKNChannel> channel = [self channelWithName:channelName];
-    if(channel) {
+    if(self.context.connected && channel != nil) {
         NSMutableData* result = [[NSMutableData alloc] init];
         NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:result];
         archiver.delegate = self.archiveDelegate;
-        [archiver encodeRootObject:params];
+        [archiver encodeObject:params forKey:@"root"];
         [archiver finishEncoding];
         [self.context sendMessage:result onChannel:channel];
     }

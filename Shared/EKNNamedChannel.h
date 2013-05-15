@@ -10,7 +10,7 @@
 
 #import "EKNChannel.h"
 
-@interface EKNNamedChannel : NSObject <EKNChannel>
+@interface EKNNamedChannel : NSObject <EKNChannel, NSCopying>
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* ownerName;
