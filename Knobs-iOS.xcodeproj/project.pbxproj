@@ -46,6 +46,7 @@
 		77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797581742C76C008242D4 /* EKNLoggerPlugin.m */; };
 		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
 		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
+		77F70D1A174430E70064E665 /* EKNWireColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D19174430E70064E665 /* EKNWireColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -158,6 +159,8 @@
 		77B7975C1742E2A3008242D4 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireImage.m; path = Shared/EKNWireImage.m; sourceTree = SOURCE_ROOT; };
 		77B7976317430A4D008242D4 /* EKNNamedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNNamedChannel.h; path = Shared/EKNNamedChannel.h; sourceTree = SOURCE_ROOT; };
 		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
+		77F70D18174430E70064E665 /* EKNWireColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNWireColor.h; path = Shared/EKNWireColor.h; sourceTree = SOURCE_ROOT; };
+		77F70D19174430E70064E665 /* EKNWireColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireColor.m; path = Shared/EKNWireColor.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +266,8 @@
 				77B7976417430A4E008242D4 /* EKNNamedChannel.m */,
 				77B7975B1742E2A2008242D4 /* EKNWireImage.h */,
 				77B7975C1742E2A3008242D4 /* EKNWireImage.m */,
+				77F70D18174430E70064E665 /* EKNWireColor.h */,
+				77F70D19174430E70064E665 /* EKNWireColor.m */,
 				77B7975A1742C77B008242D4 /* EKNLoggerPlugin.h */,
 				77B797581742C76C008242D4 /* EKNLoggerPlugin.m */,
 				77B797531742C0EA008242D4 /* EKNChannel.h */,
@@ -475,6 +480,7 @@
 				77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */,
 				77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */,
 				77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */,
+				77F70D1A174430E70064E665 /* EKNWireColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

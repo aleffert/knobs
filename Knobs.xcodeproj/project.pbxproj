@@ -79,6 +79,8 @@
 		77F70D0D174418530064E665 /* EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0C174418530064E665 /* EKNDOMRepresentation.m */; };
 		77F70D1017441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0F17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m */; };
 		77F70D1317441C4A0064E665 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1217441C4A0064E665 /* NSData+Base64.m */; };
+		77F70D1717442DC30064E665 /* EKNWireColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1617442DC30064E665 /* EKNWireColor.m */; };
+		77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +246,10 @@
 		77F70D0F17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ENKWireImage+ENKDOMRepresentation.m"; path = "Desktop/ENKWireImage+ENKDOMRepresentation.m"; sourceTree = SOURCE_ROOT; };
 		77F70D1117441C4A0064E665 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Libraries/NSData_Base64/NSData+Base64.h"; sourceTree = "<group>"; };
 		77F70D1217441C4A0064E665 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Libraries/NSData_Base64/NSData+Base64.m"; sourceTree = "<group>"; };
+		77F70D1517442DC30064E665 /* EKNWireColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNWireColor.h; sourceTree = "<group>"; };
+		77F70D1617442DC30064E665 /* EKNWireColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNWireColor.m; sourceTree = "<group>"; };
+		77F70D1B1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EKNWireColor+EKNDOMRepresentation.h"; path = "Desktop/EKNWireColor+EKNDOMRepresentation.h"; sourceTree = SOURCE_ROOT; };
+		77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EKNWireColor+EKNDOMRepresentation.m"; path = "Desktop/EKNWireColor+EKNDOMRepresentation.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +390,8 @@
 			isa = PBXGroup;
 			children = (
 				77F70D0B174418530064E665 /* EKNDOMRepresentation.h */,
+				77F70D1B1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.h */,
+				77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */,
 				77F70D0E17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.h */,
 				77F70D0F17441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m */,
 				77F70D0C174418530064E665 /* EKNDOMRepresentation.m */,
@@ -522,6 +530,8 @@
 		77B797361741889D008242D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				77F70D1517442DC30064E665 /* EKNWireColor.h */,
+				77F70D1617442DC30064E665 /* EKNWireColor.m */,
 				77F70D0517440DA30064E665 /* EKNWireImage.h */,
 				77F70D0617440DA30064E665 /* EKNWireImage.m */,
 				77B7976917430B88008242D4 /* EKNChannel.h */,
@@ -718,6 +728,8 @@
 				77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */,
 				77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */,
 				77F70D1017441A310064E665 /* ENKWireImage+ENKDOMRepresentation.m in Sources */,
+				77F70D1717442DC30064E665 /* EKNWireColor.m in Sources */,
+				77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

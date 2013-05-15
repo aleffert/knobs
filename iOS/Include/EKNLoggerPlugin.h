@@ -18,5 +18,8 @@
 // Only use things in foundation. There is a special exception for UIImage and UIColor which are handled specially
 - (void)logToChannel:(NSString*)channelName withRows:(NSArray*)params;
 - (void)logToChannel:(NSString*)channelName withImage:(UIImage*)image;
+- (void)logToChannel:(NSString*)channelName withColor:(UIColor*)color;
+
+//TODO: Convenience functions. Maybe a default channel name these can go to
 
 @end

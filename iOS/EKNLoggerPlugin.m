@@ -9,6 +9,7 @@
 #import "EKNLoggerPlugin.h"
 
 #import "EKNDevicePluginContext.h"
+#import "EKNWireColor.h"
 #import "EKNWireImage.h"
 
 
@@ -29,8 +30,12 @@
 @implementation EKNLoggerPluginArchiveSubstituter
 
 - (id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object {
+    // TODO: Make this a table lookup
     if([object isKindOfClass:[UIImage class]]) {
         return [[EKNWireImage alloc] initWithImage:object];
+    }
+    else if([object isKindOfClass:[UIColor class]]) {
+        return [[EKNWireColor alloc] initWithColor:object];
     }
     return object;
 }
@@ -92,6 +97,10 @@
 
 - (void)logToChannel:(NSString*)channelName withImage:(UIImage*)image {
     [self logToChannel:channelName withRows:@[image]];
+}
+
+- (void)logToChannel:(NSString*)channelName withColor:(UIColor*)color {
+    [self logToChannel:channelName withRows:@[color]];
 }
 
 @end
