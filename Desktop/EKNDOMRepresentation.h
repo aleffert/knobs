@@ -16,6 +16,10 @@
 
 @end
 
+@interface NSObject (EKNDomRepresentation) <EKNDOMRepresentation>
+
+@end
+
 @interface NSString (EKNDOMRepresentation) <EKNDOMRepresentation>
 
 @end
