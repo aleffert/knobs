@@ -50,6 +50,10 @@
     }
 }
 
+- (void)close {
+    [self.connection close];
+}
+
 - (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {
     EKNNamedChannel* channel = [[EKNNamedChannel alloc] init];
     channel.name = [request.properties valueOfProperty:@"channelName"];

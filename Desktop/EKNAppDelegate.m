@@ -13,9 +13,9 @@
 #import "EKNPanelWindowController.h"
 #import "EKNConsolePluginRegistry.h"
 
-@interface EKNAppDelegate ()
+@interface EKNAppDelegate () <EKNPanelWindowControllerDelegate>
 
-@property (strong, nonatomic) EKNPanelWindowController* windowController;
+@property (strong, nonatomic) NSMutableArray* activeWindows;
 @property (strong, nonatomic) EKNConsolePluginRegistry* pluginRegistry;
 
 @end
@@ -26,18 +26,23 @@
 {
     self.pluginRegistry = [[EKNConsolePluginRegistry alloc] init];
     [self.pluginRegistry loadPlugins];
+    self.activeWindows = [NSMutableArray array];
+    [self makeNewWindow];
+}
+
+- (IBAction)newDocument:(id)sender {
     [self makeNewWindow];
 }
 
 - (void)makeNewWindow {
-    self.windowController = [[EKNPanelWindowController alloc] initWithPluginRegistry:self.pluginRegistry];
-    
-//    self.deviceFinder = [[EKNDeviceFinder alloc] init];
-//    self.deviceConnection = [[EKNDeviceConnection alloc] init];
-//    [self.deviceFinder start];
-//    self.windowController.deviceFinder = self.deviceFinder;
-//    self.windowController.deviceConnection = self.deviceConnection;
-    [self.windowController showWindow:self];
+    EKNPanelWindowController* controller = [[EKNPanelWindowController alloc] initWithPluginRegistry:self.pluginRegistry];
+    controller.delegate = self;
+    [self.activeWindows addObject:controller];
+    [controller showWindow:self];
+}
+
+- (void)willCloseWindowWithController:(EKNPanelWindowController *)windowController {
+    [self.activeWindows removeObject:windowController];
 }
 
 @end

@@ -63,6 +63,11 @@
     [self showDevicePicker];
 }
 
+- (void)windowWillClose:(NSNotification *)notification {
+    [self.delegate willCloseWindowWithController:self];
+    [self.deviceConnection close];
+}
+
 - (void)showDevicePicker {
     NSAssert([NSThread isMainThread], @"Not on main thread");
     self.showingDeviceFinder = YES;

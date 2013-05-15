@@ -13,7 +13,7 @@
 
 @interface EKNDeviceFinderView : NSView <NSTableViewDelegate, NSTableViewDataSource>
 
-@property (assign, nonatomic) IBOutlet id <EKNDeviceFinderViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet id <EKNDeviceFinderViewDelegate> delegate;
 
 @end
 

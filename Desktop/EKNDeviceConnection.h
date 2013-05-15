@@ -18,6 +18,7 @@
 @property (weak, nonatomic) id <EKNDeviceConnectionDelegate> delegate;
 
 - (void)connectToDevice:(EKNDevice*)device;
+- (void)close;
 
 - (void)sendMessage:(NSData*)data onChannel:(EKNNamedChannel*)channel;
 
