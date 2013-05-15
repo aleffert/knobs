@@ -8,18 +8,43 @@
 
 #import "EKNPanelWindowController.h"
 
+#import "EKNConsoleControllerContextDispatcher.h"
+#import "EKNConsolePlugin.h"
+#import "EKNConsolePluginRegistry.h"
 #import "EKNDevice.h"
 #import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
+#import "EKNDeviceFinderView.h"
+#import "EKNNamedChannel.h"
 
-@interface EKNPanelWindowController ()
+@interface EKNPanelWindowController () <EKNDeviceFinderViewDelegate, EKNDeviceConnectionDelegate, EKNConsoleControllerContext>
 
-@property (strong, nonatomic) IBOutlet NSPopUpButton* devicePopup;
 @property (strong, nonatomic) EKNDevice* activeDevice;
+
+@property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
+@property (strong, nonatomic) EKNDeviceConnection* deviceConnection;
+@property (strong, nonatomic) EKNConsolePluginRegistry* pluginRegistry;
+@property (strong, nonatomic) EKNConsoleControllerContextDispatcher* pluginContext;
+@property (strong, nonatomic) IBOutlet NSPanel* devicePickerSheet;
+@property (strong, nonatomic) IBOutlet EKNDeviceFinderView* finderView;
+
+@property (assign, nonatomic) BOOL showingDeviceFinder;
+
+@property (strong, nonatomic) NSMutableDictionary* activeChannels;
 
 @end
 
 @implementation EKNPanelWindowController
+
+- (id)initWithPluginRegistry:(EKNConsolePluginRegistry*)pluginRegistry {
+    self = [super init];
+    if(self != nil) {
+        self.pluginRegistry = pluginRegistry;
+        self.pluginContext = [[EKNConsoleControllerContextDispatcher alloc] init];
+        self.pluginContext.delegate = self;
+    }
+    return self;
+}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -31,61 +56,45 @@
 
 - (void)windowDidLoad
 {
+    self.activeChannels = [[NSMutableDictionary alloc] init];
     [super windowDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceListChanged:) name:EKNActiveDeviceListChangedNotification object:nil];
+    self.window.delegate = self;
+    [self showDevicePicker];
 }
 
-- (NSMenu*)menuFromDevices:(NSArray*)devices activeDevice:(EKNDevice*)activeDevice {
-    NSMenu* menu = [[NSMenu alloc] init];
-    if(devices.count == 0) {
-        NSMenuItem* noneItem = [[NSMenuItem alloc] initWithTitle:@"No Devices Found" action:@selector(choseNoDevice:) keyEquivalent:@""];
-        [menu addItem:noneItem];
-    }
-    else {
-        NSMenuItem* noneItem = [[NSMenuItem alloc] initWithTitle:@"None" action:@selector(choseNoDevice:) keyEquivalent:@""];
-        [menu addItem:noneItem];
-        for(EKNDevice* device in devices) {
-            NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:device.name action:@selector(choseDevice:) keyEquivalent:@""];
-            item.representedObject = device;
-            [menu addItem:item];
-        }
-    }
-    
-    return menu;
+- (void)showDevicePicker {
+    NSAssert([NSThread isMainThread], @"Not on main thread");
+    self.showingDeviceFinder = YES;
+    [[NSBundle mainBundle] loadNibNamed:@"EKNDeviceFinderSheet" owner:self topLevelObjects:nil];
+    [NSApp beginSheet:self.devicePickerSheet modalForWindow:self.window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
-- (void)deviceListChanged:(NSNotification*)notification {
-    self.devicePopup.menu = [self menuFromDevices:self.deviceFinder.activeDevices activeDevice:self.activeDevice];
-    if(self.activeDevice == nil) {
-        [self.devicePopup selectItemAtIndex:0];
-    }
-    else {
-        NSUInteger index = [self.devicePopup.menu.itemArray indexOfObjectPassingTest:^BOOL(NSMenuItem* obj, NSUInteger idx, BOOL *stop) {
-            return [obj.representedObject isEqualTo:self.activeDevice];
-        }];
-        if(index == NSNotFound) {
-            [self.devicePopup selectItemAtIndex:0];
-        }
-        else {
-            [self.devicePopup selectItemAtIndex:index];
-        }
-    }
+- (void)deviceFinderViewCancelled:(EKNDeviceFinderView *)view {
+    [NSApp endSheet:self.devicePickerSheet];
+    [self.window orderOut:nil];
+    [self.delegate willCloseWindowWithController:self];
 }
 
-- (void)setActiveDevice:(EKNDevice *)activeDevice {
-    _activeDevice = activeDevice;
-    if(self.deviceConnection.activeDevice != activeDevice) {
-        [self.deviceConnection connectToDevice:activeDevice];
+- (void)deviceFinderView:(EKNDeviceFinderView *)view choseDevice:(EKNDevice *)device {
+    self.deviceConnection = [[EKNDeviceConnection alloc] init];
+    self.deviceConnection.delegate = self;
+    [self.deviceConnection connectToDevice:device];
+    [NSApp endSheet:self.devicePickerSheet];
+    [self.devicePickerSheet orderOut:nil];
+}
+
+- (void)deviceConnection:(EKNDeviceConnection *)connection receivedMessage:(NSData *)data onChannel:(EKNNamedChannel *)channel {
+    NSViewController<EKNConsoleController>* controller = [self.activeChannels objectForKey:channel];
+    if(controller == nil) {
+        id <EKNConsolePlugin> plugin = [self.pluginRegistry pluginWithName:channel.ownerName];
+        controller = [plugin viewControllerWithChannel:channel];
+        [controller connectedToDeviceWithContext:self.pluginContext onChannel:channel];
     }
+    [controller receivedMessage:data onChannel:channel];
 }
 
-- (IBAction)choseNoDevice:(id)sender {
-    self.activeDevice = nil;
-}
-
-- (IBAction)choseDevice:(NSMenuItem*)sender {
-    NSLog(@"chose device: %@", sender.representedObject);
-    self.activeDevice = [sender representedObject];
+- (void)sendMessage:(NSData *)data onChannel:(EKNNamedChannel*)channel {
+    [self.deviceConnection sendMessage:data onChannel:channel];
 }
 
 @end

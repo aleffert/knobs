@@ -68,7 +68,7 @@ NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedN
 - (NSArray*)activeDevices {
     // Bring into an NSSet so we don't end up with duplicates on different ports
     return [[NSSet setWithArray:[self.foundDevices filter:^BOOL(EKNDevice* device) {
-        return device.hostname != nil;
+        return device.hostname != nil && NSMaxRange([device.hostname rangeOfString:@"icloud.com."]) != device.hostname.length;
     }]] allObjects];
 }
 

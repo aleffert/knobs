@@ -8,14 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BLIP.h"
-
 @class EKNDevice;
+@class EKNNamedChannel;
+@protocol EKNDeviceConnectionDelegate;
 
-@interface EKNDeviceConnection : NSObject <BLIPConnectionDelegate>
+@interface EKNDeviceConnection : NSObject
 
 @property (readonly, nonatomic) EKNDevice* activeDevice;
+@property (weak, nonatomic) id <EKNDeviceConnectionDelegate> delegate;
 
 - (void)connectToDevice:(EKNDevice*)device;
+
+- (void)sendMessage:(NSData*)data onChannel:(EKNNamedChannel*)channel;
+
+@end
+
+
+@protocol EKNDeviceConnectionDelegate <NSObject>
+
+- (void)deviceConnection:(EKNDeviceConnection*)connection receivedMessage:(NSData*)data onChannel:(EKNNamedChannel*)channel;
 
 @end

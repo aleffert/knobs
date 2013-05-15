@@ -11,13 +11,12 @@
 #import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
 #import "EKNPanelWindowController.h"
+#import "EKNConsolePluginRegistry.h"
 
 @interface EKNAppDelegate ()
 
 @property (strong, nonatomic) EKNPanelWindowController* windowController;
-
-@property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
-@property (strong, nonatomic) EKNDeviceConnection* deviceConnection;
+@property (strong, nonatomic) EKNConsolePluginRegistry* pluginRegistry;
 
 @end
 
@@ -25,16 +24,19 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.deviceFinder = [[EKNDeviceFinder alloc] init];
-    self.deviceConnection = [[EKNDeviceConnection alloc] init];
+    self.pluginRegistry = [[EKNConsolePluginRegistry alloc] init];
+    [self.pluginRegistry loadPlugins];
     [self makeNewWindow];
-    [self.deviceFinder start];
 }
 
 - (void)makeNewWindow {
-    self.windowController = [[EKNPanelWindowController alloc] init];
-    self.windowController.deviceFinder = self.deviceFinder;
-    self.windowController.deviceConnection = self.deviceConnection;
+    self.windowController = [[EKNPanelWindowController alloc] initWithPluginRegistry:self.pluginRegistry];
+    
+//    self.deviceFinder = [[EKNDeviceFinder alloc] init];
+//    self.deviceConnection = [[EKNDeviceConnection alloc] init];
+//    [self.deviceFinder start];
+//    self.windowController.deviceFinder = self.deviceFinder;
+//    self.windowController.deviceConnection = self.deviceConnection;
     [self.windowController showWindow:self];
 }
 

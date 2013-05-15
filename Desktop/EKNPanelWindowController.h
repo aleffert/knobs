@@ -8,12 +8,22 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class EKNConsolePluginRegistry;
 @class EKNDeviceConnection;
 @class EKNDeviceFinder;
 
-@interface EKNPanelWindowController : NSWindowController
+@protocol EKNPanelWindowControllerDelegate;
 
-@property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
-@property (strong, nonatomic) EKNDeviceConnection* deviceConnection;
+@interface EKNPanelWindowController : NSWindowController <NSWindowDelegate>
+
+- (id)initWithPluginRegistry:(EKNConsolePluginRegistry*)pluginRegistry;
+
+@property (weak, nonatomic) id <EKNPanelWindowControllerDelegate> delegate;
+
+@end
+
+@protocol EKNPanelWindowControllerDelegate <NSObject>
+
+- (void)willCloseWindowWithController:(EKNPanelWindowController*)windowController;
 
 @end

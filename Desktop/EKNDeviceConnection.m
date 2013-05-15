@@ -9,10 +9,12 @@
 #import "EKNDeviceConnection.h"
 
 #import "EKNDevice.h"
+#import "EKNNamedChannel.h"
 
 #import "MYBonjourService.h"
+#import "BLIP.h"
 
-@interface EKNDeviceConnection ()
+@interface EKNDeviceConnection ()  <BLIPConnectionDelegate>
 
 @property (strong, nonatomic) BLIPConnection* connection;
 @property (strong, nonatomic) EKNDevice* activeDevice;
@@ -46,6 +48,19 @@
         NSLog(@"connection failed to open");
         self.activeDevice = nil;
     }
+}
+
+- (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {
+    EKNNamedChannel* channel = [[EKNNamedChannel alloc] init];
+    channel.name = [request.properties valueOfProperty:@"channelName"];
+    channel.ownerName = [request.properties valueOfProperty:@"ownerName"];
+    [self.delegate deviceConnection:self receivedMessage:request.body onChannel:channel];
+    return YES;
+}
+
+- (void)sendMessage:(NSData*)data onChannel:(EKNNamedChannel*)channel {
+    BLIPRequest* request = [BLIPRequest requestWithBody:data properties:@{@"channelName": channel.name, @"ownerName" : channel.ownerName}];
+    [self.connection sendRequest:request];
 }
 
 @end

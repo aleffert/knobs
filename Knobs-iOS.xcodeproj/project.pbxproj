@@ -42,6 +42,10 @@
 		77B7966A17417504008242D4 /* MYPortMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7966717417504008242D4 /* MYPortMapper.m */; };
 		77B7972A17417AD2008242D4 /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31B3174162BB009807FD /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77B7972E174180A6008242D4 /* EKNSharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7972D174180A6008242D4 /* EKNSharedConstants.m */; };
+		77B797521742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797511742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m */; };
+		77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797581742C76C008242D4 /* EKNLoggerPlugin.m */; };
+		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
+		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -143,6 +147,17 @@
 		77B7972B17417B81008242D4 /* EKNKnobs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobs.h; path = iOS/Include/EKNKnobs.h; sourceTree = SOURCE_ROOT; };
 		77B7972C174180A6008242D4 /* EKNSharedConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNSharedConstants.h; path = Shared/EKNSharedConstants.h; sourceTree = SOURCE_ROOT; };
 		77B7972D174180A6008242D4 /* EKNSharedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNSharedConstants.m; path = Shared/EKNSharedConstants.m; sourceTree = SOURCE_ROOT; };
+		77B797441742B790008242D4 /* EKNDevicePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDevicePlugin.h; path = iOS/Include/EKNDevicePlugin.h; sourceTree = SOURCE_ROOT; };
+		77B797451742B808008242D4 /* EKNDevicePluginContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDevicePluginContext.h; path = iOS/Include/EKNDevicePluginContext.h; sourceTree = SOURCE_ROOT; };
+		77B797501742BCC0008242D4 /* EKNDevicePluginContextDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDevicePluginContextDispatcher.h; path = iOS/EKNDevicePluginContextDispatcher.h; sourceTree = SOURCE_ROOT; };
+		77B797511742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDevicePluginContextDispatcher.m; path = iOS/EKNDevicePluginContextDispatcher.m; sourceTree = SOURCE_ROOT; };
+		77B797531742C0EA008242D4 /* EKNChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChannel.h; path = iOS/Include/EKNChannel.h; sourceTree = SOURCE_ROOT; };
+		77B797581742C76C008242D4 /* EKNLoggerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLoggerPlugin.m; path = iOS/EKNLoggerPlugin.m; sourceTree = SOURCE_ROOT; };
+		77B7975A1742C77B008242D4 /* EKNLoggerPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLoggerPlugin.h; path = iOS/Include/EKNLoggerPlugin.h; sourceTree = SOURCE_ROOT; };
+		77B7975B1742E2A2008242D4 /* EKNWireImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNWireImage.h; path = Shared/EKNWireImage.h; sourceTree = SOURCE_ROOT; };
+		77B7975C1742E2A3008242D4 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireImage.m; path = Shared/EKNWireImage.m; sourceTree = SOURCE_ROOT; };
+		77B7976317430A4D008242D4 /* EKNNamedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNNamedChannel.h; path = Shared/EKNNamedChannel.h; sourceTree = SOURCE_ROOT; };
+		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +259,17 @@
 		77873FF3174147E700A47A27 /* Knobs-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				77B7976317430A4D008242D4 /* EKNNamedChannel.h */,
+				77B7976417430A4E008242D4 /* EKNNamedChannel.m */,
+				77B7975B1742E2A2008242D4 /* EKNWireImage.h */,
+				77B7975C1742E2A3008242D4 /* EKNWireImage.m */,
+				77B7975A1742C77B008242D4 /* EKNLoggerPlugin.h */,
+				77B797581742C76C008242D4 /* EKNLoggerPlugin.m */,
+				77B797531742C0EA008242D4 /* EKNChannel.h */,
+				77B797501742BCC0008242D4 /* EKNDevicePluginContextDispatcher.h */,
+				77B797511742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m */,
+				77B797441742B790008242D4 /* EKNDevicePlugin.h */,
+				77B797451742B808008242D4 /* EKNDevicePluginContext.h */,
 				77B7972C174180A6008242D4 /* EKNSharedConstants.h */,
 				77B7972D174180A6008242D4 /* EKNSharedConstants.m */,
 				77B7970C174177B4008242D4 /* Libraries */,
@@ -445,6 +471,10 @@
 				77B7966917417504008242D4 /* MYDNSService.m in Sources */,
 				77B7966A17417504008242D4 /* MYPortMapper.m in Sources */,
 				77B7972E174180A6008242D4 /* EKNSharedConstants.m in Sources */,
+				77B797521742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m in Sources */,
+				77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */,
+				77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */,
+				77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

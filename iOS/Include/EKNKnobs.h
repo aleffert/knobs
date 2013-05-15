@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EKNDevicePlugin.h"
+
 @interface EKNKnobs : NSObject
 
-+ (void)start;
-+ (void)stop;
++ (EKNKnobs*)sharedController;
+- (void)registerPlugin:(id <EKNDevicePlugin>)plugin;
+- (void)start;
+- (void)stop;
 
 @end

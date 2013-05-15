@@ -63,6 +63,11 @@
 		77B7973C17418C27008242D4 /* EKNDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973B17418C27008242D4 /* EKNDevice.m */; };
 		77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */; };
 		77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797421741AE36008242D4 /* EKNDeviceConnection.m */; };
+		77B797621742F6D1008242D4 /* EKNDeviceFinderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797611742F6D0008242D4 /* EKNDeviceFinderView.m */; };
+		77B7976817430A89008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976717430A88008242D4 /* EKNNamedChannel.m */; };
+		77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976B1743D0B9008242D4 /* EKNConsolePluginRegistry.m */; };
+		77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */; };
+		77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,6 +180,17 @@
 		77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+EKNFunctional.m"; path = "Shared/NSArray+EKNFunctional.m"; sourceTree = SOURCE_ROOT; };
 		77B797411741AE36008242D4 /* EKNDeviceConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDeviceConnection.h; path = Desktop/EKNDeviceConnection.h; sourceTree = SOURCE_ROOT; };
 		77B797421741AE36008242D4 /* EKNDeviceConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDeviceConnection.m; path = Desktop/EKNDeviceConnection.m; sourceTree = SOURCE_ROOT; };
+		77B797601742F6D0008242D4 /* EKNDeviceFinderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDeviceFinderView.h; path = Desktop/EKNDeviceFinderView.h; sourceTree = SOURCE_ROOT; };
+		77B797611742F6D0008242D4 /* EKNDeviceFinderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDeviceFinderView.m; path = Desktop/EKNDeviceFinderView.m; sourceTree = SOURCE_ROOT; };
+		77B7976617430A88008242D4 /* EKNNamedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNNamedChannel.h; path = Shared/EKNNamedChannel.h; sourceTree = SOURCE_ROOT; };
+		77B7976717430A88008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
+		77B7976917430B88008242D4 /* EKNChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChannel.h; path = iOS/Include/EKNChannel.h; sourceTree = SOURCE_ROOT; };
+		77B7976A1743D0B8008242D4 /* EKNConsolePluginRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConsolePluginRegistry.h; path = Desktop/EKNConsolePluginRegistry.h; sourceTree = SOURCE_ROOT; };
+		77B7976B1743D0B9008242D4 /* EKNConsolePluginRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNConsolePluginRegistry.m; path = Desktop/EKNConsolePluginRegistry.m; sourceTree = SOURCE_ROOT; };
+		77B7976D1743D16F008242D4 /* EKNConsolePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConsolePlugin.h; path = Desktop/Include/EKNConsolePlugin.h; sourceTree = SOURCE_ROOT; };
+		77B7976F1743D4E8008242D4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNDeviceFinderSheet.xib; sourceTree = SOURCE_ROOT; };
+		77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConsoleControllerContextDispatcher.h; path = Desktop/EKNConsoleControllerContextDispatcher.h; sourceTree = SOURCE_ROOT; };
+		77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNConsoleControllerContextDispatcher.m; path = Desktop/EKNConsoleControllerContextDispatcher.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +210,7 @@
 		772F313F174154ED009807FD /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */,
 				772F313C174154E3009807FD /* EKNPanelWindowController.xib */,
 				772F31281741543A009807FD /* MainMenu.xib */,
 			);
@@ -301,8 +318,15 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
+				77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */,
+				77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */,
+				77B7976A1743D0B8008242D4 /* EKNConsolePluginRegistry.h */,
+				77B7976B1743D0B9008242D4 /* EKNConsolePluginRegistry.m */,
+				77B7976D1743D16F008242D4 /* EKNConsolePlugin.h */,
 				77B797411741AE36008242D4 /* EKNDeviceConnection.h */,
 				77B797421741AE36008242D4 /* EKNDeviceConnection.m */,
+				77B797601742F6D0008242D4 /* EKNDeviceFinderView.h */,
+				77B797611742F6D0008242D4 /* EKNDeviceFinderView.m */,
 				77B797361741889D008242D4 /* Shared */,
 				77B7972F17418374008242D4 /* EKNDeviceFinder.h */,
 				77B7973017418374008242D4 /* EKNDeviceFinder.m */,
@@ -428,6 +452,9 @@
 		77B797361741889D008242D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				77B7976917430B88008242D4 /* EKNChannel.h */,
+				77B7976617430A88008242D4 /* EKNNamedChannel.h */,
+				77B7976717430A88008242D4 /* EKNNamedChannel.m */,
 				77B7973E17418CB5008242D4 /* NSArray+EKNFunctional.h */,
 				77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */,
 				77B797371741889D008242D4 /* EKNSharedConstants.h */,
@@ -497,6 +524,7 @@
 				772F317317415682009807FD /* MYUtilities_Release.xcconfig in Resources */,
 				772F317417415682009807FD /* README.md in Resources */,
 				772F317817415682009807FD /* README in Resources */,
+				77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +579,10 @@
 				77B7973C17418C27008242D4 /* EKNDevice.m in Sources */,
 				77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */,
 				77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */,
+				77B797621742F6D1008242D4 /* EKNDeviceFinderView.m in Sources */,
+				77B7976817430A89008242D4 /* EKNNamedChannel.m in Sources */,
+				77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */,
+				77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +619,14 @@
 				772F313D174154E3009807FD /* en */,
 			);
 			name = EKNPanelWindowController.xib;
+			sourceTree = "<group>";
+		};
+		77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77B7976F1743D4E8008242D4 /* en */,
+			);
+			name = EKNDeviceFinderSheet.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
