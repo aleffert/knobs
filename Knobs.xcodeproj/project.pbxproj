@@ -68,7 +68,36 @@
 		77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976B1743D0B9008242D4 /* EKNConsolePluginRegistry.m */; };
 		77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */; };
 		77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */; };
+		77F70CDE1743DF180064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
+		77F70CF41743DF970064E665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77F70CF21743DF970064E665 /* InfoPlist.strings */; };
+		77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77F70CDD1743DF180064E665 /* Logger.bundle */; };
+		77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */; };
+		77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		77F70CF51743DFC40064E665 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77873FB817413BEC00A47A27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77F70CDC1743DF170064E665;
+			remoteInfo = Logger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		77F70CF71743DFC90064E665 /* Copy Files (1 item) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */,
+			);
+			name = "Copy Files (1 item)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		772F31251741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = Desktop/en.lproj/Credits.rtf; sourceTree = SOURCE_ROOT; };
@@ -191,6 +220,14 @@
 		77B7976F1743D4E8008242D4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNDeviceFinderSheet.xib; sourceTree = SOURCE_ROOT; };
 		77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConsoleControllerContextDispatcher.h; path = Desktop/EKNConsoleControllerContextDispatcher.h; sourceTree = SOURCE_ROOT; };
 		77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNConsoleControllerContextDispatcher.m; path = Desktop/EKNConsoleControllerContextDispatcher.m; sourceTree = SOURCE_ROOT; };
+		77F70CDD1743DF180064E665 /* Logger.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Logger.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F70CEC1743DF840064E665 /* EKNLoggerPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLoggerPlugin.h; path = Desktop/Logger/EKNLoggerPlugin.h; sourceTree = SOURCE_ROOT; };
+		77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLoggerPlugin.m; path = Desktop/Logger/EKNLoggerPlugin.m; sourceTree = SOURCE_ROOT; };
+		77F70CEF1743DF920064E665 /* Logger-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Logger-Info.plist"; path = "Desktop/Logger/Logger-Info.plist"; sourceTree = SOURCE_ROOT; };
+		77F70CF01743DF920064E665 /* Logger-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Logger-Prefix.pch"; path = "Desktop/Logger/Logger-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		77F70CF31743DF970064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/Logger/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		77F70CFA1743E3CB0064E665 /* EKNLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLoggerViewController.h; path = Desktop/Logger/EKNLoggerViewController.h; sourceTree = SOURCE_ROOT; };
+		77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLoggerViewController.m; path = Desktop/Logger/EKNLoggerViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +238,14 @@
 				77B7970E17417807008242D4 /* Security.framework in Frameworks */,
 				772F317A174157E4009807FD /* libz.dylib in Frameworks */,
 				77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77F70CDA1743DF170064E665 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F70CDE1743DF180064E665 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +326,7 @@
 			children = (
 				77B7970B174177A8008242D4 /* Vendor */,
 				77873FC917413BEC00A47A27 /* Knobs */,
+				77F70CDF1743DF180064E665 /* Logger */,
 				77873FC217413BEC00A47A27 /* Frameworks */,
 				77873FC117413BEC00A47A27 /* Products */,
 			);
@@ -290,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				77873FC017413BEC00A47A27 /* Knobs.app */,
+				77F70CDD1743DF180064E665 /* Logger.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,6 +510,28 @@
 			path = Shared;
 			sourceTree = SOURCE_ROOT;
 		};
+		77F70CDF1743DF180064E665 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				77F70CFA1743E3CB0064E665 /* EKNLoggerViewController.h */,
+				77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */,
+				77F70CEC1743DF840064E665 /* EKNLoggerPlugin.h */,
+				77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */,
+				77F70CE01743DF180064E665 /* Supporting Files */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		77F70CE01743DF180064E665 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				77F70CF21743DF970064E665 /* InfoPlist.strings */,
+				77F70CEF1743DF920064E665 /* Logger-Info.plist */,
+				77F70CF01743DF920064E665 /* Logger-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -473,15 +542,34 @@
 				77873FBC17413BEC00A47A27 /* Sources */,
 				77873FBD17413BEC00A47A27 /* Frameworks */,
 				77873FBE17413BEC00A47A27 /* Resources */,
+				77F70CF71743DFC90064E665 /* Copy Files (1 item) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				77F70CF61743DFC40064E665 /* PBXTargetDependency */,
 			);
 			name = Knobs;
 			productName = Knobs;
 			productReference = 77873FC017413BEC00A47A27 /* Knobs.app */;
 			productType = "com.apple.product-type.application";
+		};
+		77F70CDC1743DF170064E665 /* Logger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77F70CE61743DF180064E665 /* Build configuration list for PBXNativeTarget "Logger" */;
+			buildPhases = (
+				77F70CD91743DF170064E665 /* Sources */,
+				77F70CDA1743DF170064E665 /* Frameworks */,
+				77F70CDB1743DF170064E665 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Logger;
+			productName = Logger;
+			productReference = 77F70CDD1743DF180064E665 /* Logger.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -506,6 +594,7 @@
 			projectRoot = "";
 			targets = (
 				77873FBF17413BEC00A47A27 /* Knobs */,
+				77F70CDC1743DF170064E665 /* Logger */,
 			);
 		};
 /* End PBXProject section */
@@ -525,6 +614,14 @@
 				772F317417415682009807FD /* README.md in Resources */,
 				772F317817415682009807FD /* README in Resources */,
 				77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77F70CDB1743DF170064E665 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F70CF41743DF970064E665 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +683,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77F70CD91743DF170064E665 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */,
+				77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		77F70CF61743DFC40064E665 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77F70CDC1743DF170064E665 /* Logger */;
+			targetProxy = 77F70CF51743DFC40064E665 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		772F31241741543A009807FD /* Credits.rtf */ = {
@@ -627,6 +741,14 @@
 				77B7976F1743D4E8008242D4 /* en */,
 			);
 			name = EKNDeviceFinderSheet.xib;
+			sourceTree = "<group>";
+		};
+		77F70CF21743DF970064E665 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77F70CF31743DF970064E665 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -717,6 +839,32 @@
 			};
 			name = Release;
 		};
+		77F70CE71743DF180064E665 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Desktop/Logger/Logger-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/Logger/Logger-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		77F70CE81743DF180064E665 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Desktop/Logger/Logger-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/Logger/Logger-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -737,6 +885,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		77F70CE61743DF180064E665 /* Build configuration list for PBXNativeTarget "Logger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77F70CE71743DF180064E665 /* Debug */,
+				77F70CE81743DF180064E665 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

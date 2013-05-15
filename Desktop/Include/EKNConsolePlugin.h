@@ -26,8 +26,8 @@
 
 @protocol EKNConsolePlugin <NSObject>
 
-- (NSString*)name;
-- (NSString*)displayName;
+@property (readonly, nonatomic) NSString* name;
+@property (readonly, nonatomic) NSString* displayName;
 
 - (NSViewController <EKNConsoleController>*)viewControllerWithChannel:(id <EKNChannel>)channel;
 
