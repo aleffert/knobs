@@ -47,6 +47,9 @@
 		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
 		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
 		77F70D1A174430E70064E665 /* EKNWireColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D19174430E70064E665 /* EKNWireColor.m */; };
+		77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D21174443530064E665 /* EKNViewFrobPlugin.m */; };
+		77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D2717444AE40064E665 /* EKNViewFrob.m */; };
+		77F70D5617452C2D0064E665 /* UIView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -161,6 +164,12 @@
 		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
 		77F70D18174430E70064E665 /* EKNWireColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNWireColor.h; path = Shared/EKNWireColor.h; sourceTree = SOURCE_ROOT; };
 		77F70D19174430E70064E665 /* EKNWireColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireColor.m; path = Shared/EKNWireColor.m; sourceTree = SOURCE_ROOT; };
+		77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobPlugin.h; path = iOS/Include/EKNViewFrobPlugin.h; sourceTree = SOURCE_ROOT; };
+		77F70D21174443530064E665 /* EKNViewFrobPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobPlugin.m; path = iOS/EKNViewFrobPlugin.m; sourceTree = SOURCE_ROOT; };
+		77F70D2617444AE40064E665 /* EKNViewFrob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrob.h; path = Shared/ViewFrobber/EKNViewFrob.h; sourceTree = SOURCE_ROOT; };
+		77F70D2717444AE40064E665 /* EKNViewFrob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrob.m; path = Shared/ViewFrobber/EKNViewFrob.m; sourceTree = SOURCE_ROOT; };
+		77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+EKNFrobInfo.h"; path = "iOS/UIView+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
+		77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+EKNFrobInfo.m"; path = "iOS/UIView+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +271,12 @@
 		77873FF3174147E700A47A27 /* Knobs-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */,
+				77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */,
+				77F70D2617444AE40064E665 /* EKNViewFrob.h */,
+				77F70D2717444AE40064E665 /* EKNViewFrob.m */,
+				77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */,
+				77F70D21174443530064E665 /* EKNViewFrobPlugin.m */,
 				77B7976317430A4D008242D4 /* EKNNamedChannel.h */,
 				77B7976417430A4E008242D4 /* EKNNamedChannel.m */,
 				77B7975B1742E2A2008242D4 /* EKNWireImage.h */,
@@ -481,6 +496,9 @@
 				77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */,
 				77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */,
 				77F70D1A174430E70064E665 /* EKNWireColor.m in Sources */,
+				77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */,
+				77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */,
+				77F70D5617452C2D0064E665 /* UIView+EKNFrobInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

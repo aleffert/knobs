@@ -13,6 +13,7 @@
 @interface EKNKnobs : NSObject
 
 + (EKNKnobs*)sharedController;
+- (void)registerDefaultPlugins;
 - (void)registerPlugin:(id <EKNDevicePlugin>)plugin;
 - (void)start;
 - (void)stop;

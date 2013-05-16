@@ -1,12 +1,12 @@
 //
-//  EKNPanelWindowController.m
+//  EKNConsoleWindowController.m
 //  Knobs
 //
 //  Created by Akiva Leffert on 5/13/13.
 //  Copyright (c) 2013 Akiva Leffert. All rights reserved.
 //
 
-#import "EKNPanelWindowController.h"
+#import "EKNConsoleWindowController.h"
 
 #import "EKNConsoleControllerContextDispatcher.h"
 #import "EKNConsolePlugin.h"
@@ -17,7 +17,7 @@
 #import "EKNDeviceFinderView.h"
 #import "EKNNamedChannel.h"
 
-@interface EKNPanelWindowController () <EKNDeviceFinderViewDelegate, EKNDeviceConnectionDelegate, EKNConsoleControllerContext>
+@interface EKNConsoleWindowController () <EKNDeviceFinderViewDelegate, EKNDeviceConnectionDelegate, EKNConsoleControllerContext>
 
 @property (strong, nonatomic) EKNDevice* activeDevice;
 @property (assign, nonatomic) BOOL showingDeviceFinder;
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation EKNPanelWindowController
+@implementation EKNConsoleWindowController
 
 - (id)initWithPluginRegistry:(EKNConsolePluginRegistry*)pluginRegistry {
     self = [super init];
@@ -52,7 +52,7 @@
 }
 
 - (NSString*)windowNibName {
-    return @"EKNPanelWindowController";
+    return @"EKNConsoleWindowController";
 }
 
 - (void)windowDidLoad
@@ -64,8 +64,8 @@
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-    [self.delegate willCloseWindowWithController:self];
     [self.deviceConnection close];
+    [self.delegate willCloseWindowWithController:self];
 }
 
 - (void)showDevicePicker {

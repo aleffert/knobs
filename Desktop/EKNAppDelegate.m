@@ -10,10 +10,10 @@
 
 #import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
-#import "EKNPanelWindowController.h"
+#import "EKNConsoleWindowController.h"
 #import "EKNConsolePluginRegistry.h"
 
-@interface EKNAppDelegate () <EKNPanelWindowControllerDelegate>
+@interface EKNAppDelegate () <EKNConsoleWindowControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray* activeWindows;
 @property (strong, nonatomic) EKNConsolePluginRegistry* pluginRegistry;
@@ -35,13 +35,13 @@
 }
 
 - (void)makeNewWindow {
-    EKNPanelWindowController* controller = [[EKNPanelWindowController alloc] initWithPluginRegistry:self.pluginRegistry];
+    EKNConsoleWindowController* controller = [[EKNConsoleWindowController alloc] initWithPluginRegistry:self.pluginRegistry];
     controller.delegate = self;
     [self.activeWindows addObject:controller];
     [controller showWindow:self];
 }
 
-- (void)willCloseWindowWithController:(EKNPanelWindowController *)windowController {
+- (void)willCloseWindowWithController:(EKNConsoleWindowController *)windowController {
     [self.activeWindows removeObject:windowController];
 }
 

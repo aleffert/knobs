@@ -65,6 +65,12 @@
     return @"com.knobs.logger";
 }
 
+- (void)beganConnection {
+}
+
+- (void)endedConnection {
+}
+
 - (void)useContext:(id<EKNDevicePluginContext>)context {
     self.context = context;
 }

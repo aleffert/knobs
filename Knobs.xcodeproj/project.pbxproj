@@ -12,8 +12,8 @@
 		772F31351741545A009807FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31331741545A009807FD /* main.m */; };
 		772F3139174154BF009807FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 772F31261741543A009807FD /* InfoPlist.strings */; };
 		772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F312E1741544C009807FD /* EKNAppDelegate.m */; };
-		772F313B174154CC009807FD /* EKNPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31301741544C009807FD /* EKNPanelWindowController.m */; };
-		772F313E174154E3009807FD /* EKNPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F313C174154E3009807FD /* EKNPanelWindowController.xib */; };
+		772F313B174154CC009807FD /* EKNConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31301741544C009807FD /* EKNConsoleWindowController.m */; };
+		772F313E174154E3009807FD /* EKNConsoleWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F313C174154E3009807FD /* EKNConsoleWindowController.xib */; };
 		772F316617415682009807FD /* CollectionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314217415682009807FD /* CollectionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		772F316717415682009807FD /* ConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314417415682009807FD /* ConcurrentOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		772F316817415682009807FD /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314617415682009807FD /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -73,7 +73,6 @@
 		77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77F70CDD1743DF180064E665 /* Logger.bundle */; };
 		77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */; };
 		77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */; };
-		77F70CFE1743E5A30064E665 /* EKNLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70CFD1743E5A30064E665 /* EKNLoggerViewController.xib */; };
 		77F70D0417440CB00064E665 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F70D0317440CB00064E665 /* WebKit.framework */; };
 		77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0617440DA30064E665 /* EKNWireImage.m */; };
 		77F70D0D174418530064E665 /* EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0C174418530064E665 /* EKNDOMRepresentation.m */; };
@@ -81,6 +80,14 @@
 		77F70D1317441C4A0064E665 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1217441C4A0064E665 /* NSData+Base64.m */; };
 		77F70D1717442DC30064E665 /* EKNWireColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1617442DC30064E665 /* EKNWireColor.m */; };
 		77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */; };
+		77F70D2B17444B1E0064E665 /* EKNLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D2917444B1E0064E665 /* EKNLoggerViewController.xib */; };
+		77F70D3117444B370064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
+		77F70D4117444B8B0064E665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D3F17444B8B0064E665 /* InfoPlist.strings */; };
+		77F70D4717444C680064E665 /* ViewFrob.bundle in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77F70D3017444B370064E665 /* ViewFrob.bundle */; };
+		77F70D4A17444CB60064E665 /* EKNViewFrobPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4917444CB60064E665 /* EKNViewFrobPlugin.m */; };
+		77F70D4D17444CDB0064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4C17444CDB0064E665 /* EKNViewFrob.m */; };
+		77F70D5017444D5C0064E665 /* EKNViewFrobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */; };
+		77F70D53174450290064E665 /* EKNViewFrobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D51174450290064E665 /* EKNViewFrobViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +98,13 @@
 			remoteGlobalIDString = 77F70CDC1743DF170064E665;
 			remoteInfo = Logger;
 		};
+		77F70D4517444C3D0064E665 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77873FB817413BEC00A47A27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77F70D2F17444B370064E665;
+			remoteInfo = ViewFrob;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,6 +114,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				77F70D4717444C680064E665 /* ViewFrob.bundle in Copy Files (1 item) */,
 				77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */,
 			);
 			name = "Copy Files (1 item)";
@@ -113,12 +128,12 @@
 		772F31291741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		772F312D1741544C009807FD /* EKNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNAppDelegate.h; path = Desktop/EKNAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		772F312E1741544C009807FD /* EKNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNAppDelegate.m; path = Desktop/EKNAppDelegate.m; sourceTree = SOURCE_ROOT; };
-		772F312F1741544C009807FD /* EKNPanelWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNPanelWindowController.h; path = Desktop/EKNPanelWindowController.h; sourceTree = SOURCE_ROOT; };
-		772F31301741544C009807FD /* EKNPanelWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNPanelWindowController.m; path = Desktop/EKNPanelWindowController.m; sourceTree = SOURCE_ROOT; };
+		772F312F1741544C009807FD /* EKNConsoleWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNConsoleWindowController.h; path = Desktop/EKNConsoleWindowController.h; sourceTree = SOURCE_ROOT; };
+		772F31301741544C009807FD /* EKNConsoleWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNConsoleWindowController.m; path = Desktop/EKNConsoleWindowController.m; sourceTree = SOURCE_ROOT; };
 		772F31311741545A009807FD /* Knobs-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Knobs-Info.plist"; path = "Desktop/Knobs-Info.plist"; sourceTree = SOURCE_ROOT; };
 		772F31321741545A009807FD /* Knobs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-Prefix.pch"; path = "Desktop/Knobs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		772F31331741545A009807FD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Desktop/main.m; sourceTree = SOURCE_ROOT; };
-		772F313D174154E3009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNPanelWindowController.xib; sourceTree = SOURCE_ROOT; };
+		772F313D174154E3009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNConsoleWindowController.xib; sourceTree = SOURCE_ROOT; };
 		772F314117415682009807FD /* CollectionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionUtils.h; sourceTree = "<group>"; };
 		772F314217415682009807FD /* CollectionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionUtils.m; sourceTree = "<group>"; };
 		772F314317415682009807FD /* ConcurrentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperation.h; sourceTree = "<group>"; };
@@ -236,7 +251,6 @@
 		77F70CF31743DF970064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/Logger/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		77F70CFA1743E3CB0064E665 /* EKNLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLoggerViewController.h; path = Desktop/Logger/EKNLoggerViewController.h; sourceTree = SOURCE_ROOT; };
 		77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLoggerViewController.m; path = Desktop/Logger/EKNLoggerViewController.m; sourceTree = SOURCE_ROOT; };
-		77F70CFD1743E5A30064E665 /* EKNLoggerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EKNLoggerViewController.xib; sourceTree = "<group>"; };
 		77F70D0317440CB00064E665 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		77F70D0517440DA30064E665 /* EKNWireImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNWireImage.h; sourceTree = "<group>"; };
 		77F70D0617440DA30064E665 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNWireImage.m; sourceTree = "<group>"; };
@@ -250,6 +264,18 @@
 		77F70D1617442DC30064E665 /* EKNWireColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNWireColor.m; sourceTree = "<group>"; };
 		77F70D1B1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EKNWireColor+EKNDOMRepresentation.h"; path = "Desktop/EKNWireColor+EKNDOMRepresentation.h"; sourceTree = SOURCE_ROOT; };
 		77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EKNWireColor+EKNDOMRepresentation.m"; path = "Desktop/EKNWireColor+EKNDOMRepresentation.m"; sourceTree = SOURCE_ROOT; };
+		77F70D2A17444B1E0064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/Logger/en.lproj/EKNLoggerViewController.xib; sourceTree = SOURCE_ROOT; };
+		77F70D3017444B370064E665 /* ViewFrob.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewFrob.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F70D3C17444B5B0064E665 /* ViewFrob-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ViewFrob-Info.plist"; path = "Desktop/ViewFrob/ViewFrob-Info.plist"; sourceTree = SOURCE_ROOT; };
+		77F70D3D17444B5B0064E665 /* ViewFrob-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ViewFrob-Prefix.pch"; path = "Desktop/ViewFrob/ViewFrob-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		77F70D4017444B8B0064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/ViewFrob/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		77F70D4817444CB60064E665 /* EKNViewFrobPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobPlugin.h; path = Desktop/ViewFrob/EKNViewFrobPlugin.h; sourceTree = SOURCE_ROOT; };
+		77F70D4917444CB60064E665 /* EKNViewFrobPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobPlugin.m; path = Desktop/ViewFrob/EKNViewFrobPlugin.m; sourceTree = SOURCE_ROOT; };
+		77F70D4B17444CDB0064E665 /* EKNViewFrob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrob.h; path = Shared/ViewFrobber/EKNViewFrob.h; sourceTree = SOURCE_ROOT; };
+		77F70D4C17444CDB0064E665 /* EKNViewFrob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrob.m; path = Shared/ViewFrobber/EKNViewFrob.m; sourceTree = SOURCE_ROOT; };
+		77F70D4E17444D5B0064E665 /* EKNViewFrobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobViewController.h; path = Desktop/ViewFrob/EKNViewFrobViewController.h; sourceTree = SOURCE_ROOT; };
+		77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobViewController.m; path = Desktop/ViewFrob/EKNViewFrobViewController.m; sourceTree = SOURCE_ROOT; };
+		77F70D52174450290064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/ViewFrob/en.lproj/EKNViewFrobViewController.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +298,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77F70D2D17444B370064E665 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F70D3117444B370064E665 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -279,7 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */,
-				772F313C174154E3009807FD /* EKNPanelWindowController.xib */,
+				772F313C174154E3009807FD /* EKNConsoleWindowController.xib */,
 				772F31281741543A009807FD /* MainMenu.xib */,
 			);
 			name = XIB;
@@ -350,6 +384,7 @@
 				77B7970B174177A8008242D4 /* Vendor */,
 				77873FC917413BEC00A47A27 /* Knobs */,
 				77F70CDF1743DF180064E665 /* Logger */,
+				77F70D3217444B370064E665 /* ViewFrob */,
 				77873FC217413BEC00A47A27 /* Frameworks */,
 				77873FC117413BEC00A47A27 /* Products */,
 			);
@@ -360,6 +395,7 @@
 			children = (
 				77873FC017413BEC00A47A27 /* Knobs.app */,
 				77F70CDD1743DF180064E665 /* Logger.bundle */,
+				77F70D3017444B370064E665 /* ViewFrob.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,8 +447,8 @@
 				772F312E1741544C009807FD /* EKNAppDelegate.m */,
 				77B7973A17418C27008242D4 /* EKNDevice.h */,
 				77B7973B17418C27008242D4 /* EKNDevice.m */,
-				772F312F1741544C009807FD /* EKNPanelWindowController.h */,
-				772F31301741544C009807FD /* EKNPanelWindowController.m */,
+				772F312F1741544C009807FD /* EKNConsoleWindowController.h */,
+				772F31301741544C009807FD /* EKNConsoleWindowController.m */,
 				772F31331741545A009807FD /* main.m */,
 				772F313F174154ED009807FD /* XIB */,
 				77873FCA17413BEC00A47A27 /* Supporting Files */,
@@ -548,7 +584,7 @@
 		77F70CDF1743DF180064E665 /* Logger */ = {
 			isa = PBXGroup;
 			children = (
-				77F70CFD1743E5A30064E665 /* EKNLoggerViewController.xib */,
+				77F70D2917444B1E0064E665 /* EKNLoggerViewController.xib */,
 				77F70CFA1743E3CB0064E665 /* EKNLoggerViewController.h */,
 				77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */,
 				77F70CEC1743DF840064E665 /* EKNLoggerPlugin.h */,
@@ -577,6 +613,31 @@
 			name = "NSData+Base64";
 			sourceTree = "<group>";
 		};
+		77F70D3217444B370064E665 /* ViewFrob */ = {
+			isa = PBXGroup;
+			children = (
+				77F70D4E17444D5B0064E665 /* EKNViewFrobViewController.h */,
+				77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */,
+				77F70D51174450290064E665 /* EKNViewFrobViewController.xib */,
+				77F70D4B17444CDB0064E665 /* EKNViewFrob.h */,
+				77F70D4C17444CDB0064E665 /* EKNViewFrob.m */,
+				77F70D4817444CB60064E665 /* EKNViewFrobPlugin.h */,
+				77F70D4917444CB60064E665 /* EKNViewFrobPlugin.m */,
+				77F70D3317444B370064E665 /* Supporting Files */,
+			);
+			path = ViewFrob;
+			sourceTree = "<group>";
+		};
+		77F70D3317444B370064E665 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				77F70D3F17444B8B0064E665 /* InfoPlist.strings */,
+				77F70D3C17444B5B0064E665 /* ViewFrob-Info.plist */,
+				77F70D3D17444B5B0064E665 /* ViewFrob-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -592,6 +653,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				77F70D4617444C3D0064E665 /* PBXTargetDependency */,
 				77F70CF61743DFC40064E665 /* PBXTargetDependency */,
 			);
 			name = Knobs;
@@ -614,6 +676,23 @@
 			name = Logger;
 			productName = Logger;
 			productReference = 77F70CDD1743DF180064E665 /* Logger.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		77F70D2F17444B370064E665 /* ViewFrob */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77F70D3917444B370064E665 /* Build configuration list for PBXNativeTarget "ViewFrob" */;
+			buildPhases = (
+				77F70D2C17444B370064E665 /* Sources */,
+				77F70D2D17444B370064E665 /* Frameworks */,
+				77F70D2E17444B370064E665 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViewFrob;
+			productName = ViewFrob;
+			productReference = 77F70D3017444B370064E665 /* ViewFrob.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -640,6 +719,7 @@
 			targets = (
 				77873FBF17413BEC00A47A27 /* Knobs */,
 				77F70CDC1743DF170064E665 /* Logger */,
+				77F70D2F17444B370064E665 /* ViewFrob */,
 			);
 		};
 /* End PBXProject section */
@@ -652,7 +732,7 @@
 				772F312A1741543A009807FD /* Credits.rtf in Resources */,
 				772F312C1741543A009807FD /* MainMenu.xib in Resources */,
 				772F3139174154BF009807FD /* InfoPlist.strings in Resources */,
-				772F313E174154E3009807FD /* EKNPanelWindowController.xib in Resources */,
+				772F313E174154E3009807FD /* EKNConsoleWindowController.xib in Resources */,
 				772F317117415682009807FD /* MYUtilities.xcconfig in Resources */,
 				772F317217415682009807FD /* MYUtilities_Debug.xcconfig in Resources */,
 				772F317317415682009807FD /* MYUtilities_Release.xcconfig in Resources */,
@@ -667,7 +747,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				77F70CF41743DF970064E665 /* InfoPlist.strings in Resources */,
-				77F70CFE1743E5A30064E665 /* EKNLoggerViewController.xib in Resources */,
+				77F70D2B17444B1E0064E665 /* EKNLoggerViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77F70D2E17444B370064E665 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F70D4117444B8B0064E665 /* InfoPlist.strings in Resources */,
+				77F70D53174450290064E665 /* EKNViewFrobViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +769,7 @@
 			files = (
 				772F31351741545A009807FD /* main.m in Sources */,
 				772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */,
-				772F313B174154CC009807FD /* EKNPanelWindowController.m in Sources */,
+				772F313B174154CC009807FD /* EKNConsoleWindowController.m in Sources */,
 				772F316617415682009807FD /* CollectionUtils.m in Sources */,
 				772F316717415682009807FD /* ConcurrentOperation.m in Sources */,
 				772F316817415682009807FD /* ExceptionUtils.m in Sources */,
@@ -744,6 +833,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77F70D2C17444B370064E665 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F70D4A17444CB60064E665 /* EKNViewFrobPlugin.m in Sources */,
+				77F70D4D17444CDB0064E665 /* EKNViewFrob.m in Sources */,
+				77F70D5017444D5C0064E665 /* EKNViewFrobViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -751,6 +850,11 @@
 			isa = PBXTargetDependency;
 			target = 77F70CDC1743DF170064E665 /* Logger */;
 			targetProxy = 77F70CF51743DFC40064E665 /* PBXContainerItemProxy */;
+		};
+		77F70D4617444C3D0064E665 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77F70D2F17444B370064E665 /* ViewFrob */;
+			targetProxy = 77F70D4517444C3D0064E665 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -779,12 +883,12 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		772F313C174154E3009807FD /* EKNPanelWindowController.xib */ = {
+		772F313C174154E3009807FD /* EKNConsoleWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				772F313D174154E3009807FD /* en */,
 			);
-			name = EKNPanelWindowController.xib;
+			name = EKNConsoleWindowController.xib;
 			sourceTree = "<group>";
 		};
 		77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */ = {
@@ -801,6 +905,30 @@
 				77F70CF31743DF970064E665 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		77F70D2917444B1E0064E665 /* EKNLoggerViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77F70D2A17444B1E0064E665 /* en */,
+			);
+			name = EKNLoggerViewController.xib;
+			sourceTree = "<group>";
+		};
+		77F70D3F17444B8B0064E665 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77F70D4017444B8B0064E665 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		77F70D51174450290064E665 /* EKNViewFrobViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77F70D52174450290064E665 /* en */,
+			);
+			name = EKNViewFrobViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -917,6 +1045,32 @@
 			};
 			name = Release;
 		};
+		77F70D3A17444B370064E665 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Desktop/ViewFrob/ViewFrob-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/ViewFrob/ViewFrob-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		77F70D3B17444B370064E665 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Desktop/ViewFrob/ViewFrob-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/ViewFrob/ViewFrob-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -943,6 +1097,14 @@
 			buildConfigurations = (
 				77F70CE71743DF180064E665 /* Debug */,
 				77F70CE81743DF180064E665 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		77F70D3917444B370064E665 /* Build configuration list for PBXNativeTarget "ViewFrob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77F70D3A17444B370064E665 /* Debug */,
+				77F70D3B17444B370064E665 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

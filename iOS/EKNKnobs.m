@@ -12,6 +12,8 @@
 #import "MYBonjourRegistration.h"
 
 #import "EKNDevicePluginContextDispatcher.h"
+#import "EKNLoggerPlugin.h"
+#import "EKNViewFrobPlugin.h"
 #import "EKNNamedChannel.h"
 #import "EKNSharedConstants.h"
 
@@ -54,6 +56,11 @@
     return self;
 }
 
+- (void)registerDefaultPlugins {
+    [[EKNKnobs sharedController] registerPlugin:[EKNLoggerPlugin sharedLogger]];
+    [[EKNKnobs sharedController] registerPlugin:[EKNViewFrobPlugin sharedFrobber]];
+}
+
 - (void)registerPlugin:(id <EKNDevicePlugin>)plugin {
     [self.pluginRegistry setObject:plugin forKey:plugin.name];
     [plugin useContext:self.pluginContext];
@@ -89,14 +96,30 @@
     connection.delegate = self;
     [self stopListening];
     NSLog(@"OPENING KNOBS CONNECTION");
+    for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
+        [plugin beganConnection];
+    }
 }
 
 - (void)connectionDidClose:(TCPConnection *)connection {
     self.connection = nil;
     NSLog(@"CLOSING KNOBS CONNECTION");
+    for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
+        [plugin endedConnection];
+    }
     if(self.enabled) {
         [self start];
     }
+}
+
+- (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {
+    EKNNamedChannel* channel = [[EKNNamedChannel alloc] init];
+    channel.name = [request.properties valueOfProperty:@"channelName"];
+    channel.ownerName = [request.properties valueOfProperty:@"ownerName"];
+    
+    id <EKNDevicePlugin> plugin = [self.pluginRegistry objectForKey:channel.ownerName];
+    [plugin receivedMessage:request.body onChannel:channel];
+    return YES;
 }
 
 #pragma mark Plugin Context

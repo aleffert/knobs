@@ -16,6 +16,8 @@
 @property (copy, nonatomic, readonly) NSString* name;
 
 - (void)useContext:(id <EKNDevicePluginContext>)context;
+- (void)beganConnection;
+- (void)endedConnection;
 - (void)receivedMessage:(NSData*)data onChannel:(id <EKNChannel>)channel;
 
 @end

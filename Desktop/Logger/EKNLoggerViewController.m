@@ -63,7 +63,7 @@
 }
 
 - (void)disconnectedFromDevice {
-    // TODO
+    // TODO. Show something useful
 }
 
 @end

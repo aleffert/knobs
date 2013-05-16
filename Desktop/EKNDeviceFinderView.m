@@ -58,6 +58,10 @@ static NSString* EKNDeviceNameColumnIdentifier = @"EKNDeviceNameColumnIdentifier
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)awakeFromNib {
     [self.deviceFinder start];
     [self deviceListChanged:nil];

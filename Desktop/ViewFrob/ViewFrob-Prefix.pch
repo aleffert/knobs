@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'ViewFrob' target in the 'ViewFrob' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
