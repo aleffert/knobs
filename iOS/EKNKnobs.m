@@ -82,19 +82,17 @@
     self.enabled = NO;
 }
 
-- (void)stopListening {
+- (void)stopBroadcasting {
     if(self.bonjourBroadcast.isRunning) {
         [self.bonjourBroadcast stop];
     }
-    if(self.listener.isOpen) {
-        [self.listener close];
-    }
+    // TODO: Fix deadlock and reenable self.listener stop;
 }
 
 - (void)listener:(TCPListener *)listener didAcceptConnection:(BLIPConnection *)connection {
     self.connection = connection;
     connection.delegate = self;
-    [self stopListening];
+    [self stopBroadcasting];
     NSLog(@"OPENING KNOBS CONNECTION");
     for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
         [plugin beganConnection];

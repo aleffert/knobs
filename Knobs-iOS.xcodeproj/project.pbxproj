@@ -50,6 +50,7 @@
 		77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D21174443530064E665 /* EKNViewFrobPlugin.m */; };
 		77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D2717444AE40064E665 /* EKNViewFrob.m */; };
 		77F70D5617452C2D0064E665 /* UIView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */; };
+		77F70D59174540EE0064E665 /* EKNViewFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D58174540ED0064E665 /* EKNViewFrobInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -170,6 +171,8 @@
 		77F70D2717444AE40064E665 /* EKNViewFrob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrob.m; path = Shared/ViewFrobber/EKNViewFrob.m; sourceTree = SOURCE_ROOT; };
 		77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+EKNFrobInfo.h"; path = "iOS/UIView+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
 		77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+EKNFrobInfo.m"; path = "iOS/UIView+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
+		77F70D57174540ED0064E665 /* EKNViewFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobInfo.h; path = Shared/ViewFrobber/EKNViewFrobInfo.h; sourceTree = SOURCE_ROOT; };
+		77F70D58174540ED0064E665 /* EKNViewFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobInfo.m; path = Shared/ViewFrobber/EKNViewFrobInfo.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +276,8 @@
 			children = (
 				77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */,
 				77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */,
+				77F70D57174540ED0064E665 /* EKNViewFrobInfo.h */,
+				77F70D58174540ED0064E665 /* EKNViewFrobInfo.m */,
 				77F70D2617444AE40064E665 /* EKNViewFrob.h */,
 				77F70D2717444AE40064E665 /* EKNViewFrob.m */,
 				77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */,
@@ -499,6 +504,7 @@
 				77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */,
 				77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */,
 				77F70D5617452C2D0064E665 /* UIView+EKNFrobInfo.m in Sources */,
+				77F70D59174540EE0064E665 /* EKNViewFrobInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 
 #import "EKNDevicePluginContext.h"
 #import "EKNViewFrob.h"
+#import "EKNViewFrobInfo.h"
 
 #import "UIView+EKNFrobInfo.h"
 
@@ -27,6 +28,7 @@
     static EKNViewFrobPlugin* frobber = nil;
     dispatch_once(&onceToken, ^{
         frobber = [[EKNViewFrobPlugin alloc] init];
+        [UIView enableFrobbing];
     });
     return frobber;
 }
@@ -48,21 +50,11 @@
 - (void)endedConnection {
 }
 
-- (void)accumulateView:(UIView*)view infoInto:(NSMutableDictionary*)result {
-    NSDictionary* viewInfo = [view frobInfo];
-    [result setObject:viewInfo forKey:[NSString stringWithFormat:@"%p", view]];
-    for(UIView* child in view.subviews) {
-        [self accumulateView:child infoInto:result];
-    }
-}
 
 - (void)sendInitialInfo {
-    NSMutableDictionary* info = [[NSMutableDictionary alloc] init];
-    
     UIView* rootView = [[UIApplication sharedApplication] keyWindow];
-    [self accumulateView:rootView infoInto:info];
     
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageLoadAll, EKNViewFrobLoadAllViewInfosKey : info}];
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootKey : [rootView frobInfo]}];
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
@@ -71,6 +63,19 @@
     NSString* messageType = [message objectForKey:EKNViewFrobSentMessageKey];
     if([messageType isEqualToString:EKNViewFrobMessageLoadAll]) {
         [self sendInitialInfo];
+    }
+}
+
+#pragma mark View Operations
+
+- (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview {
+    if(superview == nil) {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : [view frobInfo].viewID }];
+        [self.context sendMessage:archive onChannel:self.channel];
+    }
+    else {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewSuperviewKey : [superview frobInfo] }];
+        [self.context sendMessage:archive onChannel:self.channel];
     }
 }
 

@@ -9,7 +9,18 @@
 #import <Foundation/Foundation.h>
 
 extern NSString* EKNViewFrobName;
-extern NSString* EKNViewFrobMessageBegin;
-extern NSString* EKNViewFrobMessageLoadAll;
+
 extern NSString* EKNViewFrobSentMessageKey;
-extern NSString* EKNViewFrobLoadAllViewInfosKey;
+// messages
+extern NSString* EKNViewFrobMessageBegin;
+
+extern NSString* EKNViewFrobMessageLoadAll;
+
+extern NSString* EKNViewFrobMessageUpdateAll;
+extern NSString* EKNViewFrobUpdateAllRootKey;
+
+extern NSString* EKNViewFrobMessageUpdatedView;
+extern NSString* EKNViewFrobUpdatedViewSuperviewKey;
+
+extern NSString* EKNViewFrobMessageRemovedView;
+extern NSString* EKNViewFrobRemovedViewID;

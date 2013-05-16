@@ -116,4 +116,8 @@
     // TODO. Mark tab as unread
 }
 
+- (IBAction)close:(id)sender {
+    [self close];
+}
+
 @end

@@ -14,4 +14,7 @@
 
 + (EKNViewFrobPlugin*)sharedFrobber;
 
+- (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview;
+
 @end
+

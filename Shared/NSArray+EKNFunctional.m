@@ -29,4 +29,18 @@
     return result;
 }
 
+- (NSArray*)arrayByInsertingObject:(id)object atIndex:(NSUInteger)index {
+    NSMutableArray* result = [self mutableCopy];
+    [result insertObject:object atIndex:index];
+    
+    return result;
+}
+
+
+- (NSArray*)arrayByReplacingObjectAtIndex:(NSUInteger)index withObject:(id)object {
+    NSMutableArray* result = [self mutableCopy];
+    [result replaceObjectAtIndex:index withObject:object];
+    return result;
+}
+
 @end

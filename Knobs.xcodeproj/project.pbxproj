@@ -88,6 +88,7 @@
 		77F70D4D17444CDB0064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4C17444CDB0064E665 /* EKNViewFrob.m */; };
 		77F70D5017444D5C0064E665 /* EKNViewFrobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */; };
 		77F70D53174450290064E665 /* EKNViewFrobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D51174450290064E665 /* EKNViewFrobViewController.xib */; };
+		77F70D5C17454D4B0064E665 /* EKNViewFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D5B17454D4B0064E665 /* EKNViewFrobInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,6 +277,8 @@
 		77F70D4E17444D5B0064E665 /* EKNViewFrobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobViewController.h; path = Desktop/ViewFrob/EKNViewFrobViewController.h; sourceTree = SOURCE_ROOT; };
 		77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobViewController.m; path = Desktop/ViewFrob/EKNViewFrobViewController.m; sourceTree = SOURCE_ROOT; };
 		77F70D52174450290064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/ViewFrob/en.lproj/EKNViewFrobViewController.xib; sourceTree = SOURCE_ROOT; };
+		77F70D5A17454D4B0064E665 /* EKNViewFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobInfo.h; path = Shared/ViewFrobber/EKNViewFrobInfo.h; sourceTree = SOURCE_ROOT; };
+		77F70D5B17454D4B0064E665 /* EKNViewFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobInfo.m; path = Shared/ViewFrobber/EKNViewFrobInfo.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -616,6 +619,8 @@
 		77F70D3217444B370064E665 /* ViewFrob */ = {
 			isa = PBXGroup;
 			children = (
+				77F70D5A17454D4B0064E665 /* EKNViewFrobInfo.h */,
+				77F70D5B17454D4B0064E665 /* EKNViewFrobInfo.m */,
 				77F70D4E17444D5B0064E665 /* EKNViewFrobViewController.h */,
 				77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */,
 				77F70D51174450290064E665 /* EKNViewFrobViewController.xib */,
@@ -840,6 +845,7 @@
 				77F70D4A17444CB60064E665 /* EKNViewFrobPlugin.m in Sources */,
 				77F70D4D17444CDB0064E665 /* EKNViewFrob.m in Sources */,
 				77F70D5017444D5C0064E665 /* EKNViewFrobViewController.m in Sources */,
+				77F70D5C17454D4B0064E665 /* EKNViewFrobInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

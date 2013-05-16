@@ -14,4 +14,7 @@
 - (NSArray*)map:(id(^)(id o))f;
 - (NSArray*)filter:(BOOL(^)(id o))f;
 
+- (NSArray*)arrayByInsertingObject:(id)object atIndex:(NSUInteger)index;
+- (NSArray*)arrayByReplacingObjectAtIndex:(NSUInteger)index withObject:(id)object;
+
 @end

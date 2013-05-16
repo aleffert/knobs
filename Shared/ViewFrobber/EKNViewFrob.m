@@ -9,7 +9,20 @@
 #import "EKNViewFrob.h"
 
 NSString* EKNViewFrobName = @"com.knobs.view-frobber";
-NSString* EKNViewFrobMessageBegin = @"Begin";
-NSString* EKNViewFrobMessageLoadAll = @"LoadAll";
+
 NSString* EKNViewFrobSentMessageKey = @"message";
-NSString* EKNViewFrobLoadAllViewInfosKey = @"infos";
+// messages
+// TODO: Consider replacing all these messages and strings with custom message classes
+NSString* EKNViewFrobMessageBegin = @"Begin";
+
+NSString* EKNViewFrobMessageLoadAll = @"LoadAll";
+
+NSString* EKNViewFrobMessageUpdateAll = @"UpdateAll";
+NSString* EKNViewFrobUpdateAllRootKey = @"root";
+
+NSString* EKNViewFrobMessageUpdatedView = @"UpdatedView";
+NSString* EKNViewFrobUpdatedViewSuperviewKey = @"superview";
+NSString* EKNViewFrobUpdatedViewInfoKey = @"info";
+
+NSString* EKNViewFrobMessageRemovedView = @"RemovedView";
+NSString* EKNViewFrobRemovedViewID = @"viewID";

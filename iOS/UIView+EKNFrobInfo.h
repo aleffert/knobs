@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (EKNFrobInfo)
+@class EKNViewFrobInfo;
 
-- (NSDictionary*)frobInfo;
+@interface UIView (EKNFrob)
+
++ (void)enableFrobbing;
++ (NSString*)frobIDForView:(UIView*)view;
+- (EKNViewFrobInfo*)frobInfo;
 
 @end
