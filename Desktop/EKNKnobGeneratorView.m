@@ -30,6 +30,7 @@
         [[NSBundle mainBundle] loadNibNamed:@"EKNKnobGeneratorView" owner:self topLevelObjects:NULL];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:EKNPropertyTypeColor];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:EKNPropertyTypeSlider];
         self.scrollView.frame = self.bounds;
         [self addSubview:self.scrollView];
     }
@@ -60,6 +61,12 @@
     EKNPropertyInfo* info = [self.properties objectAtIndex:row];
     if([info.propertyDescription.type isEqualToString:EKNPropertyTypeColor]) {
         return 57;
+    }
+    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeToggle]) {
+        return 57;
+    }
+    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeSlider]) {
+        return 71;
     }
     else {
         return 40;

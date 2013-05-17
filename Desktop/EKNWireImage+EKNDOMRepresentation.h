@@ -1,5 +1,5 @@
 //
-//  ENKWireImage+ENKDOMRepresentation.h
+//  EKNWireImage+EKNDOMRepresentation.h
 //  Knobs
 //
 //  Created by Akiva Leffert on 5/15/13.
@@ -10,6 +10,6 @@
 
 #import "EKNDOMRepresentation.h"
 
-@interface EKNWireImage (ENKDOMRepresentation) <EKNDOMRepresentation>
+@interface EKNWireImage (EKNDOMRepresentation) <EKNDOMRepresentation>
 
 @end

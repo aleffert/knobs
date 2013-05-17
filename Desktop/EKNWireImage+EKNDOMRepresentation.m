@@ -1,19 +1,19 @@
 //
-//  ENKWireImage+ENKDOMRepresentation.m
+//  EKNWireImage+EKNDOMRepresentation.m
 //  Knobs
 //
 //  Created by Akiva Leffert on 5/15/13.
 //  Copyright (c) 2013 Akiva Leffert. All rights reserved.
 //
 
-#import "ENKWireImage+ENKDOMRepresentation.h"
+#import "EKNWireImage+EKNDOMRepresentation.h"
 
 #import "EKNDOMRepresentation.h"
 #import "NSData+Base64.h"
 
 #import <openssl/bio.h>
 
-@implementation EKNWireImage (ENKDOMRepresentation)
+@implementation EKNWireImage (EKNDOMRepresentation)
 
 - (DOMHTMLElement*)DOMRepresentationInDocument:(DOMDocument*)document {
     // TODO deal with html escaping

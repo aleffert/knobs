@@ -10,6 +10,7 @@
 
 NSString* EKNPropertyTypeColor = @"color";
 NSString* EKNPropertyTypeToggle = @"toggle";
+NSString* EKNPropertyTypeSlider = @"slider";
 
 @interface EKNPropertyDescription ()
 
@@ -37,6 +38,10 @@ NSString* EKNPropertyTypeToggle = @"toggle";
     return [self propertyWithName:name type:EKNPropertyTypeToggle parameters:@{}];
 }
 
++ (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max {
+    return [self propertyWithName:name type:EKNPropertyTypeSlider parameters:@{@(EKNPropertySliderMin): @(min),@(EKNPropertySliderMax) : @(max), @(EKNPropertySliderContinuous) : @YES}];
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
@@ -53,14 +58,18 @@ NSString* EKNPropertyTypeToggle = @"toggle";
     [aCoder encodeObject:self.parameters forKey:@"parameters"];
 }
 
-- (id)getValueFrom:(id)source {
-    id result = [source valueForKey:self.name];
+- (id)getValueFromSource:(id)source {
+    id result = [source valueForKeyPath:self.name];
     if(result == nil) {
         return [NSNull null];
     }
     else {
         return result;
     }
+}
+
+- (void)setValue:(id)value ofSource:(id)source {
+    [source setValue:value forKeyPath:self.name];
 }
 
 

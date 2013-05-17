@@ -59,6 +59,7 @@ static NSMapTable* gFrobViewTable = nil;
         @[
           [EKNPropertyDescription colorPropertyWithName:@"backgroundColor"],
           [EKNPropertyDescription togglePropertyWithName:@"hidden"],
+          [EKNPropertyDescription continuousSliderPropertyWithName:@"alpha" min:0 max:1],
           ];
     });
     return viewProperties;
@@ -105,7 +106,7 @@ static NSMapTable* gFrobViewTable = nil;
 - (NSArray*)frob_properties {
     NSMutableArray* properties = [NSMutableArray array];
     for(EKNPropertyDescription* description in [[self class] frob_propertyInfos]) {
-        id value = [description getValueFrom:self];
+        id value = [description getValueFromSource:self];
         EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:description value:value];
         [properties addObject:info];
     }
