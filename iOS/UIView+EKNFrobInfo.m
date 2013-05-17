@@ -16,22 +16,44 @@
 #import <objc/runtime.h>
 
 static NSString* EKNFrobInfoFrobEnabled = @"EKNFrobInfoFrobEnabled";
+static NSString* EKNFrobViewIDKey = @"EKNFrobViewIDKey";
+
+static NSMapTable* gFrobViewTable = nil;
 
 @implementation UIView (EKNFrob)
 
-+ (NSString*)frobIDForView:(UIView*)view {
++ (NSString*)frob_IDForView:(UIView*)view {
+    NSString* frob_ID = view.frob_ID;
+    if(frob_ID == nil) {
+        view.frob_ID = [[NSUUID UUID] UUIDString];
+    }
     return view == nil ? @"" : [NSString stringWithFormat:@"%p", view];
 }
 
-+ (void)enableFrobbing {
++ (void)frob_enable {
+    gFrobViewTable = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
+    
     Method original = class_getInstanceMethod([UIView class], @selector(didMoveToSuperview));
     Method frobbed = class_getInstanceMethod([UIView class], @selector(frob_didMoveToSuperview));
     method_exchangeImplementations(original, frobbed);
 }
 
++ (UIView*)frob_viewWithID:(NSString*)viewID {
+    return [gFrobViewTable objectForKey:viewID];
+}
+
+- (NSString*)frob_ID {
+    return objc_getAssociatedObject(self, &EKNFrobViewIDKey);
+}
+
+- (void)setFrob_ID:(NSString*)frobID {
+    [gFrobViewTable setObject:self forKey:frobID];
+    objc_setAssociatedObject(self, &EKNFrobViewIDKey, frobID, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
 - (void)enableFrobbingIfNecessary {
-    if(!self.frobEnabled) {
-        self.frobEnabled = YES;
+    if(!self.frob_enabled) {
+        self.frob_enabled = YES;
     }
 }
 
@@ -40,25 +62,26 @@ static NSString* EKNFrobInfoFrobEnabled = @"EKNFrobInfoFrobEnabled";
     [self frob_didMoveToSuperview];
 }
 
-- (void)setFrobEnabled:(BOOL)enabled {
+- (void)setFrob_enabled:(BOOL)enabled {
     objc_setAssociatedObject(self, &EKNFrobInfoFrobEnabled, @(enabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (BOOL)frobEnabled {
+- (BOOL)frob_enabled {
     return [objc_getAssociatedObject(self, &EKNFrobInfoFrobEnabled) boolValue];
 }
 
-- (EKNViewFrobInfo*)frobInfo {
+- (EKNViewFrobInfo*)frob_info {
     NSMutableArray* children = [NSMutableArray array];
     for(UIView* child in self.subviews) {
-        [children addObject:[child frobInfo]];
+        [children addObject:[child frob_info]];
     }
     EKNViewFrobInfo* info = [[EKNViewFrobInfo alloc] init];
     info.children = children;
-    info.viewID = [UIView frobIDForView:self];
+    info.viewID = [UIView frob_IDForView:self];
     info.className = NSStringFromClass([self class]);
     info.layerClassName = NSStringFromClass([self.layer class]);
-    info.parentID = [UIView frobIDForView:self.superview];
+    info.parentID = [UIView frob_IDForView:self.superview];
+    info.address = [NSString stringWithFormat:@"%p", self];
     return info;
 }
 

@@ -19,6 +19,7 @@
         self.children = [aDecoder decodeObjectForKey:@"children"];
         self.properties = [aDecoder decodeObjectForKey:@"properties"];
         self.parentID = [aDecoder decodeObjectForKey:@"parentID"];
+        self.address = [aDecoder decodeObjectForKey:@"address"];
     }
     return self;
 }
@@ -30,6 +31,7 @@
     [aCoder encodeObject:self.children forKey:@"children"];
     [aCoder encodeObject:self.properties forKey:@"properties"];
     [aCoder encodeObject:self.parentID forKey:@"parentID"];
+    [aCoder encodeObject:self.address forKey:@"address"];
 }
 
 - (NSString*)description {

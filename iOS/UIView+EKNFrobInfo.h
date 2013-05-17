@@ -12,8 +12,9 @@
 
 @interface UIView (EKNFrob)
 
-+ (void)enableFrobbing;
-+ (NSString*)frobIDForView:(UIView*)view;
-- (EKNViewFrobInfo*)frobInfo;
++ (void)frob_enable;
++ (UIView*)frob_viewWithID:(NSString*)viewID;
++ (NSString*)frob_IDForView:(UIView*)view;
+- (EKNViewFrobInfo*)frob_info;
 
 @end

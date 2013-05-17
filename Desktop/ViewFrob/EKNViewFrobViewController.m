@@ -169,7 +169,7 @@
         view.textField.stringValue = info.className;
     }
     else if([tableColumn.identifier isEqualToString:@"Address"]) {
-        view.textField.stringValue = info.viewID;
+        view.textField.stringValue = info.address;
     }
     else {
         NSAssert(NO, @"Unexpected table column %@", tableColumn.identifier);

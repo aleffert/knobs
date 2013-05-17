@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSString* layerClassName;
 @property (copy, nonatomic) NSString* viewID;
 @property (copy, nonatomic) NSString* parentID;
+@property (copy, nonatomic) NSString* address;
 @property (copy, nonatomic) NSArray* children;
 @property (strong, nonatomic) NSDictionary* properties;
 

@@ -28,7 +28,7 @@
     static EKNViewFrobPlugin* frobber = nil;
     dispatch_once(&onceToken, ^{
         frobber = [[EKNViewFrobPlugin alloc] init];
-        [UIView enableFrobbing];
+        [UIView frob_enable];
     });
     return frobber;
 }
@@ -54,7 +54,7 @@
 - (void)sendInitialInfo {
     UIView* rootView = [[UIApplication sharedApplication] keyWindow];
     
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootKey : [rootView frobInfo]}];
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootKey : [rootView frob_info]}];
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
@@ -70,11 +70,11 @@
 
 - (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview {
     if(superview == nil) {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : [view frobInfo].viewID }];
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : [view frob_info].viewID }];
         [self.context sendMessage:archive onChannel:self.channel];
     }
     else {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewSuperviewKey : [superview frobInfo] }];
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewSuperviewKey : [superview frob_info] }];
         [self.context sendMessage:archive onChannel:self.channel];
     }
 }
