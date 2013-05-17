@@ -60,6 +60,9 @@ static NSMapTable* gFrobViewTable = nil;
           [EKNPropertyDescription colorPropertyWithName:@"backgroundColor"],
           [EKNPropertyDescription togglePropertyWithName:@"hidden"],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"alpha" min:0 max:1],
+          [EKNPropertyDescription colorPropertyWithName:@"layer.borderColor" wrapCG:YES],
+          [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.borderWidth" min:0 max:20],
+          [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.cornerRadius" min:0 max:20],
           ];
     });
     return viewProperties;

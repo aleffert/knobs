@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+//TODO decide whether it's actually a good idea to use int keys
 NSString* EKNPropertyTypeColor;
+enum {
+    EKNPropertyColorWrapCG
+};
+
 NSString* EKNPropertyTypeToggle;
 NSString* EKNPropertyTypeSlider;
 
-//TODO decide whether it's actually a good idea to use int keys
 enum {
     EKNPropertySliderMin,
     EKNPropertySliderMax,
@@ -23,6 +27,7 @@ enum {
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
 

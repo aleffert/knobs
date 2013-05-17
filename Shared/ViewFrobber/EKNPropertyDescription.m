@@ -31,7 +31,11 @@ NSString* EKNPropertyTypeSlider = @"slider";
 }
 
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name {
-    return [self propertyWithName:name type:EKNPropertyTypeColor parameters:@{}];
+    return [self colorPropertyWithName:name wrapCG:NO];
+}
+
++ (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG {
+    return [self propertyWithName:name type:EKNPropertyTypeColor parameters:@{@(EKNPropertyColorWrapCG) : @(wrapCG)}];
 }
 
 + (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name {
@@ -64,11 +68,22 @@ NSString* EKNPropertyTypeSlider = @"slider";
         return [NSNull null];
     }
     else {
+        if([self.type isEqualToString:EKNPropertyTypeColor] && [[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
+#if TARGET_OS_IPHONE
+            result = [UIColor colorWithCGColor:(CGColorRef)result];
+#else
+            result = [NSColor colorWithCGColor:(CGColorRef)result];
+#endif
+        }
+        
         return result;
     }
 }
 
 - (void)setValue:(id)value ofSource:(id)source {
+    if([self.type isEqualToString:EKNPropertyTypeColor] && [[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
+        value = (id)[value CGColor];
+    }
     [source setValue:value forKeyPath:self.name];
 }
 

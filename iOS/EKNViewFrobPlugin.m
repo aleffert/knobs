@@ -101,7 +101,7 @@
         NSString* viewID = [message objectForKey:EKNViewFrobChangedPropertyViewID];
         UIView* view = [UIView frob_viewWithID:viewID];
         EKNPropertyInfo* info = [message objectForKey:EKNViewFrobChangedPropertyInfo];
-        [view setValue:info.value forKey:info.propertyDescription.name];
+        [info.propertyDescription setValue:info.value ofSource:view];
     }
 }
 
