@@ -29,6 +29,11 @@ enum {
 };
 
 NSString* EKNPropertyTypeRect;
+NSString* EKNPropertyTypeFloatPair;
+
+enum {
+    EKNPropertyFloatPairFieldNames
+};
 
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
@@ -39,6 +44,8 @@ NSString* EKNPropertyTypeRect;
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
 + (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)pointPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)sizePropertyWithName:(NSString*)name;
 
 @property (readonly, copy) NSString* name;
 @property (readonly, copy) NSString* type;

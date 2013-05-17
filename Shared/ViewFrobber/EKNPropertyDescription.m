@@ -15,6 +15,7 @@ NSString* EKNPropertyTypeToggle = @"toggle";
 NSString* EKNPropertyTypeSlider = @"slider";
 NSString* EKNPropertyTypeImage = @"image";
 NSString* EKNPropertyTypeRect = @"rect";
+NSString* EKNPropertyTypeFloatPair = @"floatPair";
 
 @interface EKNPropertyDescription ()
 
@@ -60,6 +61,14 @@ NSString* EKNPropertyTypeRect = @"rect";
 
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
     return [self propertyWithName:name type:EKNPropertyTypeRect parameters:@{}];
+}
+
++ (EKNPropertyDescription*)pointPropertyWithName:(NSString *)name {
+    return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"x", @"y"]}];
+}
+
++ (EKNPropertyDescription*)sizePropertyWithName:(NSString *)name {
+    return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"width", @"height"]}];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

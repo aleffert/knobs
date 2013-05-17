@@ -57,8 +57,10 @@ static NSMapTable* gFrobViewTable = nil;
     dispatch_once(&onceToken, ^{
         viewProperties =
         @[
+          [EKNPropertyDescription imagePropertyWithName:@"layer.contents" wrapCG:YES],
           [EKNPropertyDescription colorPropertyWithName:@"backgroundColor"],
           [EKNPropertyDescription togglePropertyWithName:@"hidden"],
+          [EKNPropertyDescription pointPropertyWithName:@"center"],
           [EKNPropertyDescription togglePropertyWithName:@"clipsToBounds"],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"alpha" min:0 max:1],
           [EKNPropertyDescription rectPropertyWithName:@"frame"],
@@ -66,7 +68,8 @@ static NSMapTable* gFrobViewTable = nil;
           [EKNPropertyDescription colorPropertyWithName:@"layer.borderColor" wrapCG:YES],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.borderWidth" min:0 max:20],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.cornerRadius" min:0 max:20],
-          [EKNPropertyDescription imagePropertyWithName:@"layer.contents" wrapCG:YES]
+          [EKNPropertyDescription rectPropertyWithName:@"layer.contentsRect"],
+          [EKNPropertyDescription rectPropertyWithName:@"layer.contentsCenter"],
           ];
     });
     return viewProperties;
