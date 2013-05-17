@@ -8,13 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "EKNPropertyEditor.h"
+
 @class EKNPropertyDescription;
 
 @protocol EKNKnobGeneratorViewDelegate;
 
-@interface EKNKnobGeneratorView : NSView
+@interface EKNKnobGeneratorView : NSView <EKNPropertyEditorDelegate>
 
-@property (assign, nonatomic) id <EKNKnobGeneratorViewDelegate> delegate;
+@property (assign, nonatomic) IBOutlet id <EKNKnobGeneratorViewDelegate> delegate;
 
 // Array of EKNPropertyInfo*
 - (void)representObject:(id)object withProperties:(NSArray*)properties;
@@ -24,6 +26,6 @@
 
 @protocol EKNKnobGeneratorViewDelegate <NSObject>
 
-- (void)generatorView:(EKNKnobGeneratorView*)view updatedProperty:(EKNPropertyDescription*)property toValue:(id <NSCoding>)value;
+- (void)generatorView:(EKNKnobGeneratorView*)view changedProperty:(EKNPropertyDescription*)property toValue:(id <NSCoding>)value;
 
 @end

@@ -10,6 +10,6 @@
 
 #import "EKNConsolePlugin.h"
 
-@interface EKNViewFrobViewController : NSViewController <EKNConsoleController, NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface EKNViewFrobViewController : NSViewController <EKNConsoleController>
 
 @end

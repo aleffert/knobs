@@ -10,12 +10,15 @@
 
 #import "EKNKnobGeneratorView.h"
 
+#import "EKNPropertyInfo.h"
+
 #import "EKNViewFrob.h"
 #import "EKNViewFrobInfo.h"
 
+
 #import "NSArray+EKNFunctional.h"
 
-@interface EKNViewFrobViewController ()
+@interface EKNViewFrobViewController () <EKNKnobGeneratorViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
@@ -174,6 +177,7 @@
 }
 
 - (void)disconnectedFromDevice {
+    // TODO. Show something useful
 }
 
 #pragma mark Outline View
@@ -237,6 +241,15 @@
         [self.context sendMessage:archive onChannel:self.channel];
     }
     [self.knobEditor representObject:nil withProperties:nil];
+}
+
+#pragma Knob Editor
+
+- (void)generatorView:(EKNKnobGeneratorView *)view changedProperty:(EKNPropertyDescription *)property toValue:(id<NSCoding>)value {
+    EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:property value:value];
+    NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageChangedProperty, EKNViewFrobChangedPropertyInfo : info, EKNViewFrobChangedPropertyViewID : self.selectedInfo.viewID};
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
+    [self.context sendMessage:archive onChannel:self.channel];
 }
 
 @end

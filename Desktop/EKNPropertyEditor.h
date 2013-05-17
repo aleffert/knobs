@@ -21,7 +21,7 @@
 
 @protocol EKNPropertyEditor <NSObject>
 
-@property (weak, nonatomic) id <EKNPropertyEditorDelegate> delegate;
+@property (weak, nonatomic) IBOutlet id <EKNPropertyEditorDelegate> delegate;
 @property (strong, nonatomic) EKNPropertyInfo* info;
 
 @end

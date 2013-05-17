@@ -36,7 +36,7 @@
 }
 
 - (void)representObject:(id)object withProperties:(NSArray *)properties {
-    BOOL fullUpdate = [self.representedObject isEqualToString: object] || properties.count != self.properties.count;
+    BOOL fullUpdate = ![self.representedObject isEqualToString: object] || properties.count != self.properties.count;
     self.representedObject = object;
     self.properties = properties;
     
@@ -67,6 +67,12 @@
     NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
     view.info = info;
     return view;
+}
+
+#pragma mark Editor Delegate
+
+- (void)propertyEditor:(id<EKNPropertyEditor>)editor changedProperty:(EKNPropertyDescription *)property toValue:(id)value {
+    [self.delegate generatorView:self changedProperty:property toValue:value];
 }
 
 @end

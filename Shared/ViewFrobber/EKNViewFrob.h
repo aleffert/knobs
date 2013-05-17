@@ -31,3 +31,8 @@ extern NSString* EKNViewFrobFocusViewID;
 extern NSString* EKNViewFrobMessageUpdateProperties;
 extern NSString* EKNViewFrobUpdatedProperties;
 extern NSString* EKNViewFrobUpdatedViewID;
+
+extern NSString* EKNViewFrobMessageChangedProperty;
+extern NSString* EKNViewFrobChangedPropertyViewID;
+extern NSString* EKNViewFrobChangedPropertyInfo;
+

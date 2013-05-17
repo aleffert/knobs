@@ -33,3 +33,7 @@ NSString* EKNViewFrobFocusViewID = @"viewID";
 NSString* EKNViewFrobMessageUpdateProperties = @"UpdatedProperties";
 NSString* EKNViewFrobUpdatedProperties = @"properties";
 NSString* EKNViewFrobUpdatedViewID = @"viewID";
+
+NSString* EKNViewFrobMessageChangedProperty = @"ChangedProperty";
+NSString* EKNViewFrobChangedPropertyViewID = @"viewID";
+NSString* EKNViewFrobChangedPropertyInfo = @"info";
