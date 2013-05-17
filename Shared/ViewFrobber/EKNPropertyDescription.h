@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 NSString* EKNPropertyTypeColor;
+NSString* EKNPropertyTypeToggle;
 
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name;
 
 @property (readonly, copy) NSString* name;
 @property (readonly, copy) NSString* type;

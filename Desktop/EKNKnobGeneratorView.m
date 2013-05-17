@@ -29,6 +29,7 @@
     if(self != nil) {
         [[NSBundle mainBundle] loadNibNamed:@"EKNKnobGeneratorView" owner:self topLevelObjects:NULL];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:EKNPropertyTypeColor];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
         self.scrollView.frame = self.bounds;
         [self addSubview:self.scrollView];
     }
@@ -44,7 +45,10 @@
         [self.knobTable reloadData];
     }
     else {
-        // TODO: Update visible cells
+        [self.properties enumerateObjectsUsingBlock:^(EKNPropertyInfo* info, NSUInteger index, BOOL *stop) {
+            NSView <EKNPropertyEditor>* editor = [self.knobTable viewAtColumn:0 row:index makeIfNecessary:NO];
+            editor.info = info;
+        }];
     }
 }
 

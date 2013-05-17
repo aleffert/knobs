@@ -9,6 +9,7 @@
 #import "EKNPropertyDescription.h"
 
 NSString* EKNPropertyTypeColor = @"color";
+NSString* EKNPropertyTypeToggle = @"toggle";
 
 @interface EKNPropertyDescription ()
 
@@ -30,6 +31,10 @@ NSString* EKNPropertyTypeColor = @"color";
 
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name {
     return [self propertyWithName:name type:EKNPropertyTypeColor parameters:@{}];
+}
+
++ (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypeToggle parameters:@{}];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

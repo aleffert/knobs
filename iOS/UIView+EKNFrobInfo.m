@@ -55,7 +55,11 @@ static NSMapTable* gFrobViewTable = nil;
     static NSArray* viewProperties = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        viewProperties = @[[EKNPropertyDescription colorPropertyWithName:@"backgroundColor"]];
+        viewProperties =
+        @[
+          [EKNPropertyDescription colorPropertyWithName:@"backgroundColor"],
+          [EKNPropertyDescription togglePropertyWithName:@"hidden"],
+          ];
     });
     return viewProperties;
 }

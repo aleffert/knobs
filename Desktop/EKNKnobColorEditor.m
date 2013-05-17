@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) IBOutlet NSColorWell* colorWell;
 @property (strong, nonatomic) IBOutlet NSTextField* fieldName;
+@property (strong, nonatomic) IBOutlet NSColor* lastReadColor;
 
 @end
 
@@ -24,30 +25,18 @@
 @synthesize info = _info;
 @synthesize delegate = _delegate;
 
-- (id)initWithFrame:(NSRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
-- (void)drawRect:(NSRect)dirtyRect
-{
-    // Drawing code here.
-}
-
 - (void)setInfo:(EKNPropertyInfo *)info {
     _info = info;
     self.fieldName.stringValue = info.propertyDescription.name;
     NSColor* color = info.value;
-    if([color isKindOfClass:[NSNull class]]) {
-        self.colorWell.color = [NSColor clearColor];
-    }
-    else {
-        self.colorWell.color = color;
+    if(![self.lastReadColor isEqual:color]) {
+        if([color isKindOfClass:[NSNull class]]) {
+            self.colorWell.color = [NSColor clearColor];
+        }
+        else {
+            self.colorWell.color = color;
+        }
+        self.lastReadColor = color;
     }
 }
 
