@@ -102,10 +102,8 @@ static NSMapTable* gFrobViewTable = nil;
     NSMutableArray* properties = [NSMutableArray array];
     for(EKNPropertyDescription* description in [[self class] frob_propertyInfos]) {
         id value = [description getValueFrom:self];
-        if(value != nil) {
-            EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:description value:value];
-            [properties addObject:info];
-        }
+        EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:description value:value];
+        [properties addObject:info];
     }
     
     return properties;

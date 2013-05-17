@@ -11,7 +11,7 @@
 @interface EKNPropertyInfo ()
 
 @property (nonatomic, strong) EKNPropertyDescription* propertyDescription;
-@property (nonatomic, strong) id <NSCoding> value;
+@property (nonatomic, strong) id value;
 
 @end
 

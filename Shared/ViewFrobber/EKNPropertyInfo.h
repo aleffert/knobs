@@ -15,6 +15,6 @@
 + (EKNPropertyInfo*)infoWithDescription:(EKNPropertyDescription*)description value:(id <NSCoding>)value;
 
 @property (readonly, nonatomic, strong) EKNPropertyDescription* propertyDescription;
-@property (readonly, nonatomic, strong) id <NSCoding> value;
+@property (readonly, nonatomic, strong) id value;
 
 @end

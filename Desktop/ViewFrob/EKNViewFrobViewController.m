@@ -138,10 +138,11 @@
 }
 
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
-    NSString* removedID = [message objectForKey:EKNViewFrobUpdatedViewID];
+    NSString* updatedID = [message objectForKey:EKNViewFrobUpdatedViewID];
     NSArray* properties = [message objectForKey:EKNViewFrobUpdatedProperties];
-    [self.knobEditor setProperties:properties];
-    [self.knobEditor setRepresentedObject:removedID];
+    if([updatedID isEqual:[self selectedInfo].viewID]) {
+        [self.knobEditor representObject:updatedID withProperties:properties];
+    }
 }
 
 - (void)processMessage:(NSDictionary*)message {
@@ -176,6 +177,16 @@
 }
 
 #pragma mark Outline View
+
+- (EKNViewFrobInfo*)selectedInfo {
+    NSInteger selectedRow = [self.outline selectedRow];
+    if(selectedRow == -1) {
+        return nil;
+    }
+    else {
+        return [self.viewInfos objectForKey:[self.outline itemAtRow:selectedRow]];
+    }
+}
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(NSString*)itemID {
     if(itemID == nil) {
@@ -216,16 +227,16 @@
 }
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
-    NSInteger selectedRow = [self.outline selectedRow];
-    if(selectedRow == -1) {
+    EKNViewFrobInfo* info = [self selectedInfo];
+    if(info == nil) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView}];
         [self.context sendMessage:archive onChannel:self.channel];
     }
     else {
-        NSString* itemID = [self.outline itemAtRow:selectedRow];
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : itemID}];
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
         [self.context sendMessage:archive onChannel:self.channel];
     }
+    [self.knobEditor representObject:nil withProperties:nil];
 }
 
 @end

@@ -52,6 +52,8 @@
 }
 
 - (void)endedConnection {
+    [self.pushViewTimer invalidate];
+    self.pushViewTimer = nil;
 }
 
 
@@ -63,7 +65,8 @@
 }
 
 - (void)sendFullViewInfo:(UIView*)focusedView {
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdateProperties, EKNViewFrobUpdatedProperties : [focusedView frob_properties], EKNViewFrobUpdatedViewID : focusedView.frob_viewID}];
+    NSArray* properties = [focusedView frob_properties];
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdateProperties, EKNViewFrobUpdatedProperties : properties, EKNViewFrobUpdatedViewID : focusedView.frob_viewID}];
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
@@ -71,6 +74,7 @@
     UIView* focusedView = [UIView frob_viewWithID:self.focusedViewID];
     if(focusedView == nil) {
         [timer invalidate];
+        self.pushViewTimer = nil;
     }
     else {
         [self sendFullViewInfo:focusedView];
@@ -85,8 +89,8 @@
     }
     else if([messageType isEqualToString:EKNViewFrobMessageFocusView]) {
         self.focusedViewID = [message objectForKey:EKNViewFrobFocusViewID];
-        NSLog(@"focusing on %@", self.focusedViewID);
         [self.pushViewTimer invalidate];
+        self.pushViewTimer = nil;
         if(self.focusedViewID != nil) {
             self.pushViewTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(pushFocusedView:) userInfo:nil repeats:YES];
         }

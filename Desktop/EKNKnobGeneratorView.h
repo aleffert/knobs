@@ -14,9 +14,11 @@
 
 @interface EKNKnobGeneratorView : NSView
 
-- (void)setProperties:(NSArray*)properties;
 @property (assign, nonatomic) id <EKNKnobGeneratorViewDelegate> delegate;
-@property (strong, nonatomic) id representedObject;
+
+// Array of EKNPropertyInfo*
+- (void)representObject:(id)object withProperties:(NSArray*)properties;
+@property (readonly, nonatomic) id representedObject;
 
 @end
 

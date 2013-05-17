@@ -8,7 +8,7 @@
 
 #import "EKNPropertyDescription.h"
 
-NSString* EKNFrobTypeColor = @"color";
+NSString* EKNPropertyTypeColor = @"color";
 
 @interface EKNPropertyDescription ()
 
@@ -49,7 +49,13 @@ NSString* EKNFrobTypeColor = @"color";
 }
 
 - (id)getValueFrom:(id)source {
-    return [source valueForKey:self.name];
+    id result = [source valueForKey:self.name];
+    if(result == nil) {
+        return [NSNull null];
+    }
+    else {
+        return result;
+    }
 }
 
 
