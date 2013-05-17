@@ -27,10 +27,12 @@
 - (id)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     if(self != nil) {
+        self.knobTable.allows
         [[NSBundle mainBundle] loadNibNamed:@"EKNKnobGeneratorView" owner:self topLevelObjects:NULL];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:EKNPropertyTypeColor];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:EKNPropertyTypeSlider];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:EKNPropertyTypeImage];
         self.scrollView.frame = self.bounds;
         [self addSubview:self.scrollView];
     }
@@ -68,6 +70,9 @@
     else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeSlider]) {
         return 71;
     }
+    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeImage]) {
+        return 236;
+    }
     else {
         return 40;
     }
@@ -78,6 +83,10 @@
     NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
     view.info = info;
     return view;
+}
+
+- (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
+    return [NSIndexSet indexSet];
 }
 
 #pragma mark Editor Delegate

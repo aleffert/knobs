@@ -8,9 +8,12 @@
 
 #import "EKNPropertyDescription.h"
 
+#import "EKNWireImage.h"
+
 NSString* EKNPropertyTypeColor = @"color";
 NSString* EKNPropertyTypeToggle = @"toggle";
 NSString* EKNPropertyTypeSlider = @"slider";
+NSString* EKNPropertyTypeImage = @"image";
 
 @interface EKNPropertyDescription ()
 
@@ -36,6 +39,14 @@ NSString* EKNPropertyTypeSlider = @"slider";
 
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG {
     return [self propertyWithName:name type:EKNPropertyTypeColor parameters:@{@(EKNPropertyColorWrapCG) : @(wrapCG)}];
+}
+
++ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name {
+    return [self imagePropertyWithName:name wrapCG:NO];
+}
+
++ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG {
+    return [self propertyWithName:name type:EKNPropertyTypeImage parameters:@{@(EKNPropertyImageWrapCG) : @(wrapCG)}];
 }
 
 + (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name {
@@ -75,6 +86,24 @@ NSString* EKNPropertyTypeSlider = @"slider";
             result = [NSColor colorWithCGColor:(CGColorRef)result];
 #endif
         }
+        else if([self.type isEqualToString:EKNPropertyTypeImage]) {
+            if([self.parameters objectForKey:@(EKNPropertyImageWrapCG)]) {
+#if TARGET_OS_IPHONE
+                result = [[EKNWireImage alloc] initWithImage:[[UIImage alloc] initWithCGImage:(CGImageRef)result]];
+#else
+                CGImageRef image = (__bridge CGImageRef)result;
+                NSSize size = NSMakeSize(CGImageGetWidth(image), CGImageGetHeight(image));
+                result = [[EKNWireImage alloc] initWithImage:[[NSImage alloc] initWithCGImage:image size:size]];
+#endif
+            }
+            else {
+#if TARGET_OS_IPHONE
+                result = [[EKNWireImage alloc] initWithImage:result];
+#else
+                result = [[EKNWireImage alloc] initWithImage:result];
+#endif
+            }
+        }
         
         return result;
     }
@@ -83,6 +112,14 @@ NSString* EKNPropertyTypeSlider = @"slider";
 - (void)setValue:(id)value ofSource:(id)source {
     if([self.type isEqualToString:EKNPropertyTypeColor] && [[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
         value = (id)[value CGColor];
+    }
+    else if([self.type isEqualToString:EKNPropertyTypeImage]) {
+        if([[self.parameters objectForKey:@(EKNPropertyImageWrapCG)] boolValue]) {
+            value = (id)[value CGImage];
+        }
+        else {
+            value = [value image];
+        }
     }
     [source setValue:value forKeyPath:self.name];
 }
