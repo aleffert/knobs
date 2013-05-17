@@ -61,6 +61,8 @@ static NSMapTable* gFrobViewTable = nil;
           [EKNPropertyDescription togglePropertyWithName:@"hidden"],
           [EKNPropertyDescription togglePropertyWithName:@"clipsToBounds"],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"alpha" min:0 max:1],
+          [EKNPropertyDescription rectPropertyWithName:@"frame"],
+          [EKNPropertyDescription rectPropertyWithName:@"bounds"],
           [EKNPropertyDescription colorPropertyWithName:@"layer.borderColor" wrapCG:YES],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.borderWidth" min:0 max:20],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.cornerRadius" min:0 max:20],

@@ -32,6 +32,7 @@
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:EKNPropertyTypeSlider];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:EKNPropertyTypeImage];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobRectEditor" bundle:nil] forIdentifier:EKNPropertyTypeRect];
         self.scrollView.frame = self.bounds;
         [self addSubview:self.scrollView];
     }
@@ -72,6 +73,9 @@
     else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeImage]) {
         return 236;
     }
+    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeRect]) {
+        return 122;
+    }
     else {
         return 40;
     }
@@ -84,9 +88,9 @@
     return view;
 }
 
-- (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
-    return [NSIndexSet indexSet];
-}
+//- (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
+//    return [NSIndexSet indexSet];
+//}
 
 #pragma mark Editor Delegate
 

@@ -28,6 +28,8 @@ enum {
     EKNPropertyImageWrapCG
 };
 
+NSString* EKNPropertyTypeRect;
+
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters;
@@ -36,6 +38,7 @@ enum {
 + (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
 + (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
++ (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;
 
 @property (readonly, copy) NSString* name;
 @property (readonly, copy) NSString* type;

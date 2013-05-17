@@ -14,6 +14,7 @@ NSString* EKNPropertyTypeColor = @"color";
 NSString* EKNPropertyTypeToggle = @"toggle";
 NSString* EKNPropertyTypeSlider = @"slider";
 NSString* EKNPropertyTypeImage = @"image";
+NSString* EKNPropertyTypeRect = @"rect";
 
 @interface EKNPropertyDescription ()
 
@@ -55,6 +56,10 @@ NSString* EKNPropertyTypeImage = @"image";
 
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max {
     return [self propertyWithName:name type:EKNPropertyTypeSlider parameters:@{@(EKNPropertySliderMin): @(min),@(EKNPropertySliderMax) : @(max), @(EKNPropertySliderContinuous) : @YES}];
+}
+
++ (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
+    return [self propertyWithName:name type:EKNPropertyTypeRect parameters:@{}];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
