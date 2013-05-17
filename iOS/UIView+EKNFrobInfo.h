@@ -14,7 +14,12 @@
 
 + (void)frob_enable;
 + (UIView*)frob_viewWithID:(NSString*)viewID;
-+ (NSString*)frob_IDForView:(UIView*)view;
+
+// EKNViewFrobPropertyInfo array
++ (NSArray*)frob_propertyInfos;
+
 - (EKNViewFrobInfo*)frob_info;
+- (NSArray*)frob_properties;
+- (NSString*)frob_viewID;
 
 @end

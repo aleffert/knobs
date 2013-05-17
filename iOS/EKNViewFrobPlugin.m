@@ -19,6 +19,10 @@
 @property (strong, nonatomic) id <EKNDevicePluginContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
 
+@property (strong, nonatomic) NSString* focusedViewID;
+
+@property (strong, nonatomic) NSTimer* pushViewTimer;
+
 @end
 
 @implementation EKNViewFrobPlugin
@@ -58,11 +62,34 @@
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
+- (void)sendFullViewInfo:(UIView*)focusedView {
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdateProperties, EKNViewFrobUpdatedProperties : [focusedView frob_properties], EKNViewFrobUpdatedViewID : focusedView.frob_viewID}];
+    [self.context sendMessage:archive onChannel:self.channel];
+}
+
+- (void)pushFocusedView:(NSTimer*)timer {
+    UIView* focusedView = [UIView frob_viewWithID:self.focusedViewID];
+    if(focusedView == nil) {
+        [timer invalidate];
+    }
+    else {
+        [self sendFullViewInfo:focusedView];
+    }
+}
+
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
     NSDictionary* message = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSString* messageType = [message objectForKey:EKNViewFrobSentMessageKey];
     if([messageType isEqualToString:EKNViewFrobMessageLoadAll]) {
         [self sendInitialInfo];
+    }
+    else if([messageType isEqualToString:EKNViewFrobMessageFocusView]) {
+        self.focusedViewID = [message objectForKey:EKNViewFrobFocusViewID];
+        NSLog(@"focusing on %@", self.focusedViewID);
+        [self.pushViewTimer invalidate];
+        if(self.focusedViewID != nil) {
+            self.pushViewTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(pushFocusedView:) userInfo:nil repeats:YES];
+        }
     }
 }
 
@@ -70,7 +97,7 @@
 
 - (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview {
     if(superview == nil) {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : [view frob_info].viewID }];
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID }];
         [self.context sendMessage:archive onChannel:self.channel];
     }
     else {

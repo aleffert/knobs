@@ -24,3 +24,10 @@ extern NSString* EKNViewFrobUpdatedViewSuperviewKey;
 
 extern NSString* EKNViewFrobMessageRemovedView;
 extern NSString* EKNViewFrobRemovedViewID;
+
+extern NSString* EKNViewFrobMessageFocusView;
+extern NSString* EKNViewFrobFocusViewID;
+
+extern NSString* EKNViewFrobMessageUpdateProperties;
+extern NSString* EKNViewFrobUpdatedProperties;
+extern NSString* EKNViewFrobUpdatedViewID;

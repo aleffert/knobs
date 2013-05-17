@@ -26,3 +26,10 @@ NSString* EKNViewFrobUpdatedViewInfoKey = @"info";
 
 NSString* EKNViewFrobMessageRemovedView = @"RemovedView";
 NSString* EKNViewFrobRemovedViewID = @"viewID";
+
+NSString* EKNViewFrobMessageFocusView = @"FocusView";
+NSString* EKNViewFrobFocusViewID = @"viewID";
+
+NSString* EKNViewFrobMessageUpdateProperties = @"UpdatedProperties";
+NSString* EKNViewFrobUpdatedProperties = @"properties";
+NSString* EKNViewFrobUpdatedViewID = @"viewID";

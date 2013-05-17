@@ -8,6 +8,8 @@
 
 #import "EKNViewFrobViewController.h"
 
+#import "EKNKnobGeneratorView.h"
+
 #import "EKNViewFrob.h"
 #import "EKNViewFrobInfo.h"
 
@@ -19,6 +21,7 @@
 @property (strong, nonatomic) id <EKNChannel> channel;
 
 @property (strong, nonatomic) IBOutlet NSOutlineView* outline;
+@property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobEditor;
 
 @property (strong, nonatomic) NSMutableDictionary* viewInfos;
 @property (strong, nonatomic) EKNViewFrobInfo* root;
@@ -26,6 +29,7 @@
 // This SUCKS. NSOutlineView uses pointer comparisons instead of isEqual:
 // So canonicalize all of our ids.
 // We leak these, but it's just a bunch of small strings so it should be okay :(((
+// TODO. Switch to NSMapTable
 @property (strong, nonatomic) NSMutableDictionary* canonicalKeys;
 
 @end
@@ -48,6 +52,8 @@
 - (void)loadView {
     [super loadView];
     [self.outline setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
+    [self.outline setAllowsMultipleSelection:NO];
+    self.outline.headerView = nil;
 }
 
 - (void)connectedToDeviceWithContext:(id<EKNConsoleControllerContext>)context onChannel:(id<EKNChannel>)channel {
@@ -84,49 +90,80 @@
     return existingCanon;
 }
 
+#pragma mark Message Processing
+
+- (void)processBeginMessage:(NSDictionary*)message {
+    NSData* responseData = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageLoadAll}];
+    [self.context sendMessage:responseData onChannel:self.channel];
+}
+
+- (void)processUpdateAllMessage:(NSDictionary*)message {
+    self.root = [message objectForKey:EKNViewFrobUpdateAllRootKey];
+    [self.viewInfos removeAllObjects];
+    [self addTreeAnchoredAt:self.root];
+    [self.outline reloadData];
+}
+
+- (void)processUpdatedViewMessage:(NSDictionary*)message {
+    EKNViewFrobInfo* updatedInfo = [message objectForKey:EKNViewFrobUpdatedViewSuperviewKey];
+    
+    EKNViewFrobInfo* oldInfo = [self.viewInfos objectForKey:updatedInfo.viewID];
+    if(oldInfo != nil) {
+        [self removeTreeAnchoredAt:oldInfo];
+    }
+    if(updatedInfo.parentID.length > 0 || [updatedInfo.viewID isEqualToString:self.root.viewID]) {
+        EKNViewFrobInfo* parent = [self.viewInfos objectForKey:updatedInfo.parentID];
+        NSUInteger index = [parent.children indexOfObjectPassingTest:^BOOL(EKNViewFrobInfo* child, NSUInteger idx, BOOL *stop) {
+            return [child.viewID isEqualToString:updatedInfo.viewID];
+        }];
+        if(index != NSNotFound) {
+            parent.children = [parent.children arrayByReplacingObjectAtIndex:index withObject:updatedInfo];
+        }
+        [self addTreeAnchoredAt:updatedInfo];
+        [self.outline reloadItem:[self canonicalize: updatedInfo.viewID] reloadChildren:YES];
+    }
+}
+
+- (void)processRemovedViewMessage:(NSDictionary*)message {
+    NSString* removedID = [message objectForKey:EKNViewFrobRemovedViewID];
+    EKNViewFrobInfo* info = [self.viewInfos objectForKey:removedID];
+    if(info != nil) {
+        [self removeTreeAnchoredAt:info];
+        EKNViewFrobInfo* parent = [self.viewInfos objectForKey:info.parentID];
+        parent.children = [parent.children filter:^BOOL(EKNViewFrobInfo* child) {
+            return ![child.viewID isEqualToString:removedID];
+        }];
+        [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
+    }
+}
+
+- (void)processUpdatedViewProperties:(NSDictionary*)message {
+    NSString* removedID = [message objectForKey:EKNViewFrobUpdatedViewID];
+    NSArray* properties = [message objectForKey:EKNViewFrobUpdatedProperties];
+    [self.knobEditor setProperties:properties];
+    [self.knobEditor setRepresentedObject:removedID];
+}
+
 - (void)processMessage:(NSDictionary*)message {
     NSString* messageType = [message objectForKey:EKNViewFrobSentMessageKey];
-    // TODO. Dispatch this in a more sane manor
+
     if([messageType isEqualToString:EKNViewFrobMessageBegin]) {
-        NSData* responseData = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageLoadAll}];
-        [self.context sendMessage:responseData onChannel:self.channel];
+        [self processBeginMessage:message];
     }
     else if([messageType isEqualToString:EKNViewFrobMessageUpdateAll]) {
-        self.root = [message objectForKey:EKNViewFrobUpdateAllRootKey];
-        [self.viewInfos removeAllObjects];
-        [self addTreeAnchoredAt:self.root];
-        [self.outline reloadData];
+        [self processUpdateAllMessage:message];
     }
     else if ([messageType isEqualToString:EKNViewFrobMessageUpdatedView]) {
-        EKNViewFrobInfo* updatedInfo = [message objectForKey:EKNViewFrobUpdatedViewSuperviewKey];
-        
-        EKNViewFrobInfo* oldInfo = [self.viewInfos objectForKey:updatedInfo.viewID];
-        if(oldInfo != nil) {
-            [self removeTreeAnchoredAt:oldInfo];
-        }
-        if(updatedInfo.parentID.length > 0 || [updatedInfo.viewID isEqualToString:self.root.viewID]) {
-            EKNViewFrobInfo* parent = [self.viewInfos objectForKey:updatedInfo.parentID];
-            NSUInteger index = [parent.children indexOfObjectPassingTest:^BOOL(EKNViewFrobInfo* child, NSUInteger idx, BOOL *stop) {
-                return [child.viewID isEqualToString:updatedInfo.viewID];
-            }];
-            if(index != NSNotFound) {
-                parent.children = [parent.children arrayByReplacingObjectAtIndex:index withObject:updatedInfo];
-            }
-            [self addTreeAnchoredAt:updatedInfo];
-            [self.outline reloadItem:[self canonicalize: updatedInfo.viewID] reloadChildren:YES];
-        }
+        [self processUpdatedViewMessage:message];
     }
     else if([messageType isEqualToString:EKNViewFrobMessageRemovedView]) {
-        NSString* removedID = [message objectForKey:EKNViewFrobRemovedViewID];
-        EKNViewFrobInfo* info = [self.viewInfos objectForKey:removedID];
-        if(info != nil) {
-            [self removeTreeAnchoredAt:info];
-            EKNViewFrobInfo* parent = [self.viewInfos objectForKey:info.parentID];
-            parent.children = [parent.children filter:^BOOL(EKNViewFrobInfo* child) {
-                return ![child.viewID isEqualToString:removedID];
-            }];
-            [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
-        }
+        [self processRemovedViewMessage:message];
+    }
+    else if([messageType isEqualToString:EKNViewFrobMessageUpdateProperties]) {
+        [self processUpdatedViewProperties:message];
+    }
+    else {
+        NSLog(@"unknown view frobber message type: %@", messageType);
     }
 }
 
@@ -178,5 +215,17 @@
     return view;
 }
 
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification {
+    NSInteger selectedRow = [self.outline selectedRow];
+    if(selectedRow == -1) {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView}];
+        [self.context sendMessage:archive onChannel:self.channel];
+    }
+    else {
+        NSString* itemID = [self.outline itemAtRow:selectedRow];
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : itemID}];
+        [self.context sendMessage:archive onChannel:self.channel];
+    }
+}
 
 @end
