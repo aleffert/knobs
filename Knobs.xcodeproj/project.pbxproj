@@ -52,6 +52,9 @@
 		778E54CC1746CDB7009D1BA1 /* EKNKnobRectEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54CA1746CDB7009D1BA1 /* EKNKnobRectEditor.xib */; };
 		778E54CF1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */; };
 		778E54D21746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54D01746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib */; };
+		77A51B181747F44300A66451 /* EKNKnobAffineTransformEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */; };
+		77A51B1B1747F75700A66451 /* NSValue+EKNAffineTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B1A1747F75700A66451 /* NSValue+EKNAffineTransform.m */; };
+		77A51B1E1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A51B1C1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib */; };
 		77B796CD17417755008242D4 /* BLIPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7967617417755008242D4 /* BLIPConnection.m */; };
 		77B796CE17417755008242D4 /* BLIPDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7967817417755008242D4 /* BLIPDispatcher.m */; };
 		77B796CF17417755008242D4 /* BLIPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7967A17417755008242D4 /* BLIPMessage.m */; };
@@ -216,6 +219,11 @@
 		778E54CD1746D33E009D1BA1 /* EKNKnobFloatPairEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobFloatPairEditor.h; path = Desktop/EKNKnobFloatPairEditor.h; sourceTree = SOURCE_ROOT; };
 		778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobFloatPairEditor.m; path = Desktop/EKNKnobFloatPairEditor.m; sourceTree = SOURCE_ROOT; };
 		778E54D11746D4B0009D1BA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobFloatPairEditor.xib; sourceTree = SOURCE_ROOT; };
+		77A51B161747F44300A66451 /* EKNKnobAffineTransformEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobAffineTransformEditor.h; path = Desktop/EKNKnobAffineTransformEditor.h; sourceTree = SOURCE_ROOT; };
+		77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobAffineTransformEditor.m; path = Desktop/EKNKnobAffineTransformEditor.m; sourceTree = SOURCE_ROOT; };
+		77A51B191747F75700A66451 /* NSValue+EKNAffineTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSValue+EKNAffineTransform.h"; path = "Desktop/NSValue+EKNAffineTransform.h"; sourceTree = SOURCE_ROOT; };
+		77A51B1A1747F75700A66451 /* NSValue+EKNAffineTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSValue+EKNAffineTransform.m"; path = "Desktop/NSValue+EKNAffineTransform.m"; sourceTree = SOURCE_ROOT; };
+		77A51B1D1747F9AC00A66451 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobAffineTransformEditor.xib; sourceTree = SOURCE_ROOT; };
 		77B7967217417755008242D4 /* BLIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLIP.h; sourceTree = "<group>"; };
 		77B7967417417755008242D4 /* BLIP_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLIP_Internal.h; sourceTree = "<group>"; };
 		77B7967517417755008242D4 /* BLIPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLIPConnection.h; sourceTree = "<group>"; };
@@ -359,6 +367,7 @@
 		772F313F174154ED009807FD /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				77A51B1C1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib */,
 				778E54D01746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib */,
 				778E54CA1746CDB7009D1BA1 /* EKNKnobRectEditor.xib */,
 				778E54C41746C662009D1BA1 /* EKNKnobImageEditor.xib */,
@@ -480,6 +489,8 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
+				77A51B191747F75700A66451 /* NSValue+EKNAffineTransform.h */,
+				77A51B1A1747F75700A66451 /* NSValue+EKNAffineTransform.m */,
 				778E54A41746A0C2009D1BA1 /* EKNPropertyEditor.h */,
 				77F70D0B174418530064E665 /* EKNDOMRepresentation.h */,
 				77F70D1B1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.h */,
@@ -527,6 +538,8 @@
 		778E54AB1746A3DE009D1BA1 /* Knob Generator */ = {
 			isa = PBXGroup;
 			children = (
+				77A51B161747F44300A66451 /* EKNKnobAffineTransformEditor.h */,
+				77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */,
 				778E54CD1746D33E009D1BA1 /* EKNKnobFloatPairEditor.h */,
 				778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */,
 				778E54C71746CB5C009D1BA1 /* EKNKnobRectEditor.h */,
@@ -831,6 +844,7 @@
 				778E54C61746C662009D1BA1 /* EKNKnobImageEditor.xib in Resources */,
 				778E54CC1746CDB7009D1BA1 /* EKNKnobRectEditor.xib in Resources */,
 				778E54D21746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib in Resources */,
+				77A51B1E1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +933,8 @@
 				778E54C31746C577009D1BA1 /* EKNKnobImageEditor.m in Sources */,
 				778E54C91746CB5D009D1BA1 /* EKNKnobRectEditor.m in Sources */,
 				778E54CF1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m in Sources */,
+				77A51B181747F44300A66451 /* EKNKnobAffineTransformEditor.m in Sources */,
+				77A51B1B1747F75700A66451 /* NSValue+EKNAffineTransform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,6 +1063,14 @@
 				778E54D11746D4B0009D1BA1 /* en */,
 			);
 			name = EKNKnobFloatPairEditor.xib;
+			sourceTree = "<group>";
+		};
+		77A51B1C1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77A51B1D1747F9AC00A66451 /* en */,
+			);
+			name = EKNKnobAffineTransformEditor.xib;
 			sourceTree = "<group>";
 		};
 		77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */ = {

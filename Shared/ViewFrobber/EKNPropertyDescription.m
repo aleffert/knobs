@@ -16,6 +16,7 @@ NSString* EKNPropertyTypeSlider = @"slider";
 NSString* EKNPropertyTypeImage = @"image";
 NSString* EKNPropertyTypeRect = @"rect";
 NSString* EKNPropertyTypeFloatPair = @"floatPair";
+NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 
 @interface EKNPropertyDescription ()
 
@@ -69,6 +70,10 @@ NSString* EKNPropertyTypeFloatPair = @"floatPair";
 
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString *)name {
     return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"width", @"height"]}];
+}
+
++ (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypeAffineTransform parameters:@{}];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

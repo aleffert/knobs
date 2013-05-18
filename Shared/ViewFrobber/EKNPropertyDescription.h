@@ -30,6 +30,7 @@ enum {
 
 NSString* EKNPropertyTypeRect;
 NSString* EKNPropertyTypeFloatPair;
+NSString* EKNPropertyTypeAffineTransform;
 
 enum {
     EKNPropertyFloatPairFieldNames
@@ -46,6 +47,7 @@ enum {
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;
 
 @property (readonly, copy) NSString* name;
 @property (readonly, copy) NSString* type;

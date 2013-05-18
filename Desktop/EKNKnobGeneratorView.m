@@ -34,6 +34,7 @@
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:EKNPropertyTypeImage];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobRectEditor" bundle:nil] forIdentifier:EKNPropertyTypeRect];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
         self.scrollView.frame = self.bounds;
         [self addSubview:self.scrollView];
     }
@@ -62,27 +63,16 @@
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     EKNPropertyInfo* info = [self.properties objectAtIndex:row];
-    if([info.propertyDescription.type isEqualToString:EKNPropertyTypeColor]) {
-        return 57;
-    }
-    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeToggle]) {
-        return 57;
-    }
-    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeSlider]) {
-        return 71;
-    }
-    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeImage]) {
-        return 236;
-    }
-    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeRect]) {
-        return 122;
-    }
-    else if([info.propertyDescription.type isEqualToString:EKNPropertyTypeFloatPair]) {
-        return 90;
-    }
-    else {
-        return 40;
-    }
+    NSDictionary* sizes = @{
+                            EKNPropertyTypeColor : @57,
+                            EKNPropertyTypeToggle : @57,
+                            EKNPropertyTypeSlider : @71,
+                            EKNPropertyTypeImage : @236,
+                            EKNPropertyTypeRect : @122,
+                            EKNPropertyTypeFloatPair : @90,
+                            EKNPropertyTypeAffineTransform : @154,
+                            };
+    return [[sizes objectForKey:info.propertyDescription.type] floatValue];
 }
 
 - (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
