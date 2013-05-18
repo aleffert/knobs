@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Akiva Leffert. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "EKNViewFrobPlugin.h"
 
 #import "EKNDevicePluginContext.h"
@@ -17,6 +19,8 @@
 #import "UIView+EKNFrobInfo.h"
 
 @interface EKNViewFrobPlugin ()
+
+@property (strong, nonatomic) UIWindow* focusOverlayWindow;
 
 @property (strong, nonatomic) id <EKNDevicePluginContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
@@ -35,6 +39,12 @@
     dispatch_once(&onceToken, ^{
         frobber = [[EKNViewFrobPlugin alloc] init];
         [UIView frob_enable];
+        frobber.focusOverlayWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        frobber.focusOverlayWindow.layer.borderWidth = 3;
+        frobber.focusOverlayWindow.layer.borderColor = [UIColor colorWithRed:0 green:.5 blue:1. alpha:1.].CGColor;
+        frobber.focusOverlayWindow.userInteractionEnabled = NO;
+        frobber.focusOverlayWindow.windowLevel = UIWindowLevelAlert;
+        frobber.focusOverlayWindow.hidden = YES;
     });
     return frobber;
 }
@@ -54,6 +64,8 @@
 }
 
 - (void)endedConnection {
+    self.focusedViewID = nil;
+    self.focusOverlayWindow.hidden = YES;
     [self.pushViewTimer invalidate];
     self.pushViewTimer = nil;
 }
@@ -77,8 +89,16 @@
     if(focusedView == nil) {
         [timer invalidate];
         self.pushViewTimer = nil;
+        self.focusedViewID = nil;
+        self.focusOverlayWindow.hidden = YES;
     }
     else {
+        self.focusOverlayWindow.hidden = NO;
+        CGRect focusFrame = [focusedView convertRect:focusedView.bounds toView:nil];
+        if(![focusedView isKindOfClass:[UIWindow class]]) {
+            focusFrame = [focusedView.window convertRect:focusFrame toWindow:nil];
+        }
+        self.focusOverlayWindow.frame = focusFrame;
         [self sendFullViewInfo:focusedView];
     }
 }
@@ -95,6 +115,9 @@
         self.pushViewTimer = nil;
         if(self.focusedViewID != nil) {
             self.pushViewTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(pushFocusedView:) userInfo:nil repeats:YES];
+        }
+        else {
+            self.focusOverlayWindow.hidden = YES;
         }
     }
     else if([messageType isEqualToString:EKNViewFrobMessageChangedProperty]) {
