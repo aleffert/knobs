@@ -106,7 +106,7 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 #endif
         }
         else if([self.type isEqualToString:EKNPropertyTypeImage]) {
-            if([self.parameters objectForKey:@(EKNPropertyImageWrapCG)]) {
+            if([[self.parameters objectForKey:@(EKNPropertyImageWrapCG)] boolValue]) {
 #if TARGET_OS_IPHONE
                 result = [[EKNWireImage alloc] initWithImage:[[UIImage alloc] initWithCGImage:(CGImageRef)result]];
 #else
@@ -133,7 +133,10 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
         value = (id)[value CGColor];
     }
     else if([self.type isEqualToString:EKNPropertyTypeImage]) {
-        if([[self.parameters objectForKey:@(EKNPropertyImageWrapCG)] boolValue]) {
+        if([value isEqual:[NSNull null]]) {
+            value = nil;
+        }
+        else if([[self.parameters objectForKey:@(EKNPropertyImageWrapCG)] boolValue]) {
             value = (id)[value CGImage];
         }
         else {

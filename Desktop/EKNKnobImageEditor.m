@@ -36,4 +36,14 @@
     self.fieldName.stringValue = info.propertyDescription.name;
 }
 
+- (IBAction)changedImage:(id)sender {
+    if(self.imageView.image == nil) {
+        [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:[NSNull null]];
+    }
+    else {
+        EKNWireImage* image = [[EKNWireImage alloc] initWithImage:self.imageView.image];
+        [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:image];
+    }
+}
+
 @end

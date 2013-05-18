@@ -57,7 +57,6 @@ static NSMapTable* gFrobViewTable = nil;
     dispatch_once(&onceToken, ^{
         viewProperties =
         @[
-          [EKNPropertyDescription imagePropertyWithName:@"layer.contents" wrapCG:YES],
           [EKNPropertyDescription colorPropertyWithName:@"backgroundColor"],
           [EKNPropertyDescription togglePropertyWithName:@"hidden"],
           [EKNPropertyDescription pointPropertyWithName:@"center"],
