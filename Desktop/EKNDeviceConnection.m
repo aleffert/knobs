@@ -40,6 +40,7 @@
     if(connection == self.connection) {
         NSLog(@"closed connection");
         self.activeDevice = nil;
+        [self.delegate deviceConnectionClosed:self];
     }
 }
 

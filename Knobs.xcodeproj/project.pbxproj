@@ -43,13 +43,13 @@
 		7733F47F174957460052158B /* EKNKnobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F476174954C80052158B /* EKNKnobInfo.m */; };
 		7733F480174957DB0052158B /* EKNPropertyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D66174692890064E665 /* EKNPropertyInfo.m */; };
 		7733F48317495D6C0052158B /* EKNLiveKnobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7733F48117495D6C0052158B /* EKNLiveKnobsViewController.xib */; };
+		7733F489174960A90052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F488174960A90052158B /* EKNPropertyDescription.m */; };
 		773C3B781746992500D6A805 /* icon_knob.icns in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B771746992500D6A805 /* icon_knob.icns */; };
 		773C3B7B17469D4800D6A805 /* EKNKnobGeneratorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */; };
 		773C3B8117469D9400D6A805 /* EKNKnobGeneratorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B7F17469D9400D6A805 /* EKNKnobGeneratorView.xib */; };
 		77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		778E54A71746A35B009D1BA1 /* EKNKnobColorEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54A51746A35B009D1BA1 /* EKNKnobColorEditor.xib */; };
 		778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54A91746A3D7009D1BA1 /* EKNKnobColorEditor.m */; };
-		778E54AC1746A477009D1BA1 /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D64174692880064E665 /* EKNPropertyDescription.m */; };
 		778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54B51746B286009D1BA1 /* EKNKnobToggleEditor.m */; };
 		778E54BA1746B332009D1BA1 /* EKNKnobToggleEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54B81746B332009D1BA1 /* EKNKnobToggleEditor.xib */; };
 		778E54BD1746B7F8009D1BA1 /* EKNKnobSliderEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54BC1746B7F8009D1BA1 /* EKNKnobSliderEditor.m */; };
@@ -220,6 +220,8 @@
 		7733F475174954C80052158B /* EKNKnobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobInfo.h; path = Desktop/EKNKnobInfo.h; sourceTree = SOURCE_ROOT; };
 		7733F476174954C80052158B /* EKNKnobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobInfo.m; path = Desktop/EKNKnobInfo.m; sourceTree = SOURCE_ROOT; };
 		7733F48217495D6C0052158B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/LiveKnobs/en.lproj/EKNLiveKnobsViewController.xib; sourceTree = SOURCE_ROOT; };
+		7733F4871749609E0052158B /* EKNPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNPropertyDescription.h; path = Shared/Include/EKNPropertyDescription.h; sourceTree = SOURCE_ROOT; };
+		7733F488174960A90052158B /* EKNPropertyDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyDescription.m; path = Shared/EKNPropertyDescription.m; sourceTree = SOURCE_ROOT; };
 		773C3B771746992500D6A805 /* icon_knob.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon_knob.icns; path = Desktop/icon_knob.icns; sourceTree = SOURCE_ROOT; };
 		773C3B7917469D4800D6A805 /* EKNKnobGeneratorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobGeneratorView.h; path = Desktop/EKNKnobGeneratorView.h; sourceTree = SOURCE_ROOT; };
 		773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobGeneratorView.m; path = Desktop/EKNKnobGeneratorView.m; sourceTree = SOURCE_ROOT; };
@@ -356,8 +358,6 @@
 		77F70D52174450290064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/ViewFrob/en.lproj/EKNViewFrobViewController.xib; sourceTree = SOURCE_ROOT; };
 		77F70D5A17454D4B0064E665 /* EKNViewFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobInfo.h; path = Shared/ViewFrobber/EKNViewFrobInfo.h; sourceTree = SOURCE_ROOT; };
 		77F70D5B17454D4B0064E665 /* EKNViewFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobInfo.m; path = Shared/ViewFrobber/EKNViewFrobInfo.m; sourceTree = SOURCE_ROOT; };
-		77F70D63174692880064E665 /* EKNPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNPropertyDescription.h; path = Shared/ViewFrobber/EKNPropertyDescription.h; sourceTree = SOURCE_ROOT; };
-		77F70D64174692880064E665 /* EKNPropertyDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyDescription.m; path = Shared/ViewFrobber/EKNPropertyDescription.m; sourceTree = SOURCE_ROOT; };
 		77F70D65174692890064E665 /* EKNPropertyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNPropertyInfo.h; path = Shared/ViewFrobber/EKNPropertyInfo.h; sourceTree = SOURCE_ROOT; };
 		77F70D66174692890064E665 /* EKNPropertyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyInfo.m; path = Shared/ViewFrobber/EKNPropertyInfo.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -564,6 +564,8 @@
 				77F70D0E17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.h */,
 				77F70D0F17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m */,
 				77F70D0C174418530064E665 /* EKNDOMRepresentation.m */,
+				7733F4871749609E0052158B /* EKNPropertyDescription.h */,
+				7733F488174960A90052158B /* EKNPropertyDescription.m */,
 				77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */,
 				77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */,
 				77B7976A1743D0B8008242D4 /* EKNConsolePluginRegistry.h */,
@@ -773,8 +775,6 @@
 		77F70D3217444B370064E665 /* ViewFrob */ = {
 			isa = PBXGroup;
 			children = (
-				77F70D63174692880064E665 /* EKNPropertyDescription.h */,
-				77F70D64174692880064E665 /* EKNPropertyDescription.m */,
 				77F70D65174692890064E665 /* EKNPropertyInfo.h */,
 				77F70D66174692890064E665 /* EKNPropertyInfo.m */,
 				77F70D5A17454D4B0064E665 /* EKNViewFrobInfo.h */,
@@ -1031,7 +1031,6 @@
 				77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */,
 				773C3B7B17469D4800D6A805 /* EKNKnobGeneratorView.m in Sources */,
 				778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */,
-				778E54AC1746A477009D1BA1 /* EKNPropertyDescription.m in Sources */,
 				778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */,
 				778E54BD1746B7F8009D1BA1 /* EKNKnobSliderEditor.m in Sources */,
 				778E54C31746C577009D1BA1 /* EKNKnobImageEditor.m in Sources */,
@@ -1041,6 +1040,7 @@
 				77A51B1B1747F75700A66451 /* NSValue+EKNAffineTransform.m in Sources */,
 				7733F47F174957460052158B /* EKNKnobInfo.m in Sources */,
 				7733F480174957DB0052158B /* EKNPropertyInfo.m in Sources */,
+				7733F489174960A90052158B /* EKNPropertyDescription.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

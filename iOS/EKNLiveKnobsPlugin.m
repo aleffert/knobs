@@ -13,13 +13,13 @@
 #import "EKNLiveKnobs.h"
 #import "EKNPropertyDescription.h"
 
+#import <objc/runtime.h>
 
 @interface EKNLiveKnobsPlugin () <EKNListenerInfoDelegate>
 
 @property (strong, nonatomic) id <EKNDevicePluginContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
 
-@property (strong, nonatomic) NSMapTable* listeners;
 @property (strong, nonatomic) NSMapTable* listenersByID;
 
 @end
@@ -38,8 +38,7 @@
 - (id)init {
     self = [super init];
     if(self != nil) {
-        self.listeners = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsObjectPersonality capacity:0];
-        self.listenersByID = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsWeakMemory capacity:0];
+        self.listenersByID = [NSMapTable strongToWeakObjectsMapTable];
     }
     return self;
 }
@@ -60,15 +59,20 @@
 - (void)endedConnection {
 }
 
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id value, id owner))callback {
-    NSMutableDictionary* infos = [self.listeners objectForKey:owner];
+static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
+
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback {
+    NSLog(@"listeners by id is %@", self.listenersByID);
+    NSLog(@"listeners is %@", self.listenersByID);
+    NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
-        infos = [NSMutableDictionary dictionary];
-        [self.listeners setObject:infos forKey:owner];
+        infos = [[NSMutableDictionary alloc] init];
+        objc_setAssociatedObject(owner, &EKNObjectListenersKey, infos, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
     EKNKnobListenerInfo* listenerInfo = [[EKNKnobListenerInfo alloc] init];
     listenerInfo.uuid = [[NSUUID UUID] UUIDString];
+    NSLog(@"adding %@ with id %@", listenerInfo, listenerInfo.uuid);
     listenerInfo.owner = owner;
     listenerInfo.callback = callback;
     listenerInfo.propertyDescription = description;
@@ -93,7 +97,7 @@
     if([messageType isEqualToNumber:@(EKNLiveKnobsMessageUpdateKnob)]) {
         NSString* uuid = [message objectForKey:@(EKNLiveKnobsUpdateIDKey)];
         id value = [message objectForKey:@(EKNLiveKnobsUpdateCurrentValueKey)];
-        EKNKnobListenerInfo* listenerInfo = [self.listeners objectForKey:uuid];
+        EKNKnobListenerInfo* listenerInfo = [self.listenersByID  objectForKey:uuid];
         if(listenerInfo.callback != nil) {
             listenerInfo.callback(listenerInfo.owner, value);
         }
@@ -104,7 +108,7 @@
 }
 
 - (void)updateValueWithOwner:(id)owner name:(NSString*)name value:(id)value {
-    NSMutableDictionary* listeners = [self.listeners objectForKey:owner];
+    NSMutableDictionary* listeners = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     EKNKnobListenerInfo* info = [listeners objectForKey:name];
     
     NSDictionary* message = @{
@@ -118,13 +122,12 @@
 
 - (void)cancelCallbackWithOwner:(id)owner name:(NSString*)name {
     if(name == nil) {
-        [self.listeners removeObjectForKey:owner];
+        objc_setAssociatedObject(owner, &EKNObjectListenersKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     else {
-        NSMutableDictionary* listeners = [self.listeners objectForKey:owner];
+        NSMutableDictionary* listeners = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
         EKNKnobListenerInfo* info = [listeners objectForKey:name];
         [self listenerCancelled:info];
-
     }
 }
 
@@ -137,9 +140,7 @@
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
     
-    
-    [self.listenersByID removeObjectForKey:info.uuid];
-    NSMutableDictionary* listeners = [self.listeners objectForKey:info.owner];
+    NSMutableDictionary* listeners = objc_getAssociatedObject(info.owner, &EKNObjectListenersKey);
     [listeners removeObjectForKey:info.uuid];
 }
 

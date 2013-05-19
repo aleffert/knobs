@@ -108,6 +108,13 @@
     [controller receivedMessage:data onChannel:channel];
 }
 
+- (void)deviceConnectionClosed:(EKNDeviceConnection *)connection {
+    for(id <EKNChannel> channel in self.activeChannels.allKeys) {
+        NSViewController<EKNConsoleController>* controller = [self.activeChannels objectForKey:channel];
+        [controller disconnectedFromDevice];
+    }
+}
+
 - (void)sendMessage:(NSData *)data onChannel:(EKNNamedChannel*)channel {
     [self.deviceConnection sendMessage:data onChannel:channel];
 }

@@ -8,6 +8,8 @@
 
 #import "EKNLiveKnobsPlugin.h"
 
+#import "EKNLiveKnobsViewController.h"
+
 @implementation EKNLiveKnobsPlugin
 
 - (NSString*)name {
@@ -19,7 +21,7 @@
 }
 
 - (NSViewController<EKNConsoleController>*)viewControllerWithChannel:(id<EKNChannel>)channel {
-    return nil;
+    return [[EKNLiveKnobsViewController alloc] init];
 }
 
 @end

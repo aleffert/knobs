@@ -10,7 +10,7 @@
 
 #import "EKNDevicePlugin.h"
 
-#import "EKNPropertyInfo.h"
+#import "EKNPropertyDescription.h"
 
 @interface EKNLiveKnobsPlugin : NSObject <EKNDevicePlugin>
 
@@ -20,7 +20,7 @@
 
 // owner is held weakly
 // knob is removed automatically if owner gets deallocated
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id value, id owner))callback;
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback;
 
 // Notify the listener that the value changed. Optional, but will make ensure the UI matches the actual value
 - (void)updateValueWithOwner:(id)owner name:(NSString*)name value:(id)value;

@@ -22,16 +22,16 @@
 
 @implementation EKNLiveKnobsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+- (id)init {
+    if(self = [super initWithNibName:@"EKNLiveKnobsViewController" bundle:[NSBundle bundleForClass:[self class]]]) {
+        self.title = @"Knobs";
     }
-    
     return self;
 }
 
 - (void)connectedToDeviceWithContext:(id<EKNConsoleControllerContext>)context onChannel:(id<EKNChannel>)channel {
+    self.context = context;
+    self.channel = channel;
 }
 
 - (void)processAddKnobMessage:(NSDictionary*)message {
