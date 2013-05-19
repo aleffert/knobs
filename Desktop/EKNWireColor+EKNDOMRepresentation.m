@@ -14,7 +14,6 @@
 - (DOMHTMLElement*)DOMRepresentationInDocument:(DOMDocument *)document {
     DOMHTMLElement* span = (DOMHTMLElement*)[document createElement:@"span"];
     [span setAttribute:@"style" value:[NSString stringWithFormat:@"width:1in; height:1in; display:block; background-color:rgb(%d, %d, %d); opacity : %f;", (int)round(255 * self.red), (int)round(255 * self.green),  (int)round(255 * self.blue), self.alpha]];
-    NSLog(@"span html is %@", span.outerHTML);
     return span;
 }
 

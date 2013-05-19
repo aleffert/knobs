@@ -62,8 +62,6 @@
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback {
-    NSLog(@"listeners by id is %@", self.listenersByID);
-    NSLog(@"listeners is %@", self.listenersByID);
     NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
         infos = [[NSMutableDictionary alloc] init];
@@ -72,7 +70,6 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     
     EKNKnobListenerInfo* listenerInfo = [[EKNKnobListenerInfo alloc] init];
     listenerInfo.uuid = [[NSUUID UUID] UUIDString];
-    NSLog(@"adding %@ with id %@", listenerInfo, listenerInfo.uuid);
     listenerInfo.owner = owner;
     listenerInfo.callback = callback;
     listenerInfo.propertyDescription = description;
