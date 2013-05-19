@@ -29,6 +29,18 @@
     return result;
 }
 
+- (NSArray*)filterWithIndex:(BOOL(^)(id o, NSUInteger index))f {
+    NSUInteger i = 0;
+    NSMutableArray* result = [NSMutableArray array];
+    for(id o in self) {
+        if(f(o, i)) {
+            [result addObject:o];
+        }
+        i++;
+    }
+    return result;
+}
+
 - (NSArray*)arrayByInsertingObject:(id)object atIndex:(NSUInteger)index {
     NSMutableArray* result = [self mutableCopy];
     [result insertObject:object atIndex:index];

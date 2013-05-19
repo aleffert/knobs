@@ -8,20 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@class EKNPropertyInfo;
-@class EKNPropertyDescription;
+@class EKNKnobInfo;
 
 @protocol EKNPropertyEditor;
 
 @protocol EKNPropertyEditorDelegate <NSObject>
 
-- (void)propertyEditor:(id <EKNPropertyEditor>)editor changedProperty:(EKNPropertyDescription*)property toValue:(id)value;
+- (void)propertyEditor:(id <EKNPropertyEditor>)editor changedKnob:(EKNKnobInfo*)knob;
 
 @end
 
 @protocol EKNPropertyEditor <NSObject>
 
 @property (weak, nonatomic) IBOutlet id <EKNPropertyEditorDelegate> delegate;
-@property (strong, nonatomic) EKNPropertyInfo* info;
+@property (strong, nonatomic) EKNKnobInfo* info;
 
 @end

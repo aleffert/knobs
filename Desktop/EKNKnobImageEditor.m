@@ -8,8 +8,8 @@
 
 #import "EKNKnobImageEditor.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
 #import "EKNWireImage.h"
 
 @interface EKNKnobImageEditor ()
@@ -24,7 +24,7 @@
 @synthesize delegate = _delegate;
 @synthesize info = _info;
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     EKNWireImage* image = info.value;
     if([image isKindOfClass:[NSNull class]]) {
@@ -38,12 +38,13 @@
 
 - (IBAction)changedImage:(id)sender {
     if(self.imageView.image == nil) {
-        [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:[NSNull null]];
+        self.info.value = [NSNull null];
     }
     else {
         EKNWireImage* image = [[EKNWireImage alloc] initWithImage:self.imageView.image];
-        [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:image];
+        self.info.value = image;
     }
+    [self.delegate propertyEditor:self changedKnob:self.info];
 }
 
 @end

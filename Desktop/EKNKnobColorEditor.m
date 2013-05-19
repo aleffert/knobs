@@ -8,8 +8,8 @@
 
 #import "EKNKnobColorEditor.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
 #import "EKNWireColor.h"
 
 @interface EKNKnobColorEditor ()
@@ -25,7 +25,7 @@
 @synthesize info = _info;
 @synthesize delegate = _delegate;
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     self.fieldName.stringValue = info.propertyDescription.name;
     NSColor* color = info.value;
@@ -41,7 +41,8 @@
 }
 
 - (IBAction)changedColor:(id)sender {
-    [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:self.colorWell.color];
+    self.info.value = self.colorWell.color;
+    [self.delegate propertyEditor:self changedKnob:self.info];
 }
 
 @end

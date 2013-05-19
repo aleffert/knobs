@@ -33,7 +33,7 @@
 
 @implementation EKNViewFrobPlugin
 
-+ (EKNViewFrobPlugin*)sharedFrobber {
++ (EKNViewFrobPlugin*)sharedPlugin {
     static dispatch_once_t onceToken;
     static EKNViewFrobPlugin* frobber = nil;
     dispatch_once(&onceToken, ^{

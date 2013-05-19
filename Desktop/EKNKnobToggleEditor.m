@@ -9,7 +9,7 @@
 #import "EKNKnobToggleEditor.h"
 
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
+#import "EKNKnobInfo.h"
 
 @interface EKNKnobToggleEditor ()
 
@@ -22,14 +22,15 @@
 @synthesize info = _info;
 @synthesize delegate = _delegate;
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     [self.checkbox setTitle:info.propertyDescription.name];
     [self.checkbox setState:[info.value boolValue]];
 }
 
 - (IBAction)toggledCheckbox:(id)sender {
-    [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:@(self.checkbox.state)];
+    self.info.value = @(self.checkbox.state);
+    [self.delegate propertyEditor:self changedKnob:self.info];
 }
 
 @end

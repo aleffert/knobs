@@ -8,8 +8,8 @@
 
 #import "EKNKnobRectEditor.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
 
 @interface EKNKnobRectEditor ()
 
@@ -27,7 +27,7 @@
 @synthesize delegate = _delegate;
 @synthesize info = _info;
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     NSRect rect = [info.value rectValue];
     if(!self.x.currentEditor) {
@@ -49,7 +49,8 @@
 - (IBAction)textFieldChanged:(id)sender {
     NSRect rect = NSMakeRect(self.x.floatValue, self.y.floatValue, self.width.floatValue, self.height.floatValue);
     NSValue* value = [NSValue valueWithRect:rect];
-    [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:value];
+    self.info.value = value;
+    [self.delegate propertyEditor:self changedKnob:self.info];
 }
 
 @end

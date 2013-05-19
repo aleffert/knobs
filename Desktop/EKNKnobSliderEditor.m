@@ -8,8 +8,8 @@
 
 #import "EKNKnobSliderEditor.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
 
 @interface EKNKnobSliderEditor ()
 
@@ -26,7 +26,7 @@
 @synthesize info = _info;
 @synthesize delegate = _delegate;
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     self.slider.minValue = [[info.propertyDescription.parameters objectForKey:@(EKNPropertySliderMin)] floatValue];
     self.slider.maxValue = [[info.propertyDescription.parameters objectForKey:@(EKNPropertySliderMax)] floatValue];
@@ -39,7 +39,8 @@
 }
 
 - (IBAction)changedSlider:(id)sender {
-    [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:@(self.slider.floatValue)];
+    self.info.value = @(self.slider.floatValue);
+    [self.delegate propertyEditor:self changedKnob:self.info];
     self.currentValue.floatValue = self.slider.floatValue;
 }
 

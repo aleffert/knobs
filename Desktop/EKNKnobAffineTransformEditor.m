@@ -8,8 +8,8 @@
 
 #import "EKNKnobAffineTransformEditor.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
 
 #import "NSValue+EKNAffineTransform.h"
 
@@ -43,7 +43,7 @@
              ];
 }
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     
     CGAffineTransform transform = [info.value ekn_CGAffineTransformValue];
@@ -63,7 +63,9 @@
     [self.fields enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
         transformFields[idx] = field.floatValue;
     }];
-    [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:[NSValue ekn_valueWithCGAffineTransform:transform]];
+    
+    self.info.value = [NSValue ekn_valueWithCGAffineTransform:transform];
+    [self.delegate propertyEditor:self changedKnob:self.info];
 }
 
 @end

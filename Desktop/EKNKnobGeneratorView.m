@@ -8,16 +8,18 @@
 
 #import "EKNKnobGeneratorView.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyEditor.h"
-#import "EKNPropertyInfo.h"
 #import "EKNPropertyDescription.h"
+
+#import "NSArray+EKNFunctional.h"
 
 @interface EKNKnobGeneratorView () <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet NSTableView* knobTable;
 @property (strong, nonatomic) id representedObject;
-@property (copy, nonatomic) NSArray* properties;
+@property (copy, nonatomic) NSArray* knobs;
 
 @end
 
@@ -41,28 +43,57 @@
     return self;
 }
 
-- (void)representObject:(id)object withProperties:(NSArray *)properties {
-    BOOL fullUpdate = ![self.representedObject isEqualToString: object] || properties.count != self.properties.count;
+- (void)representObject:(id)object withKnobs:(NSArray *)knobs {
+    BOOL fullUpdate = ![self.representedObject isEqualToString: object] || knobs.count != self.knobs.count;
     self.representedObject = object;
-    self.properties = properties;
+    self.knobs = knobs;
     
     if (fullUpdate) {
         [self.knobTable reloadData];
     }
     else {
-        [self.properties enumerateObjectsUsingBlock:^(EKNPropertyInfo* info, NSUInteger index, BOOL *stop) {
+        [self.knobs enumerateObjectsUsingBlock:^(EKNKnobInfo* info, NSUInteger index, BOOL *stop) {
             NSView <EKNPropertyEditor>* editor = [self.knobTable viewAtColumn:0 row:index makeIfNecessary:NO];
             editor.info = info;
         }];
     }
 }
 
+- (void)addKnob:(EKNKnobInfo *)knob {
+    self.knobs = [@[knob] arrayByAddingObjectsFromArray:self.knobs];
+    [self.knobTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationEffectGap];
+}
+
+- (void)updateKnobWithID:(NSString*)knobID toValue:(id)value {
+    [self.knobs enumerateObjectsUsingBlock:^(EKNKnobInfo* knob, NSUInteger idx, BOOL *stop) {
+        if([knob.knobID isEqualToString:knobID]) {
+            knob.value = value;
+            id <EKNPropertyEditor> editor = [self.knobTable viewAtColumn:0 row:idx makeIfNecessary:NO];
+            editor.info = knob;
+        }
+    }];
+}
+
+- (void)removeKnobWithID:(NSString *)knobID {
+    NSMutableIndexSet* set = [[NSMutableIndexSet alloc] init];
+    [self.knobs filterWithIndex:^BOOL(EKNKnobInfo* knob, NSUInteger index) {
+        if([knob.knobID isEqualToString:knobID]) {
+            [set addIndex:index];
+            return NO;
+        }
+        return YES;
+    }];
+    [self.knobTable removeRowsAtIndexes:set withAnimation:NSTableViewAnimationEffectGap];
+}
+
+#pragma mark Table View
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return self.properties.count;
+    return self.knobs.count;
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    EKNPropertyInfo* info = [self.properties objectAtIndex:row];
+    EKNKnobInfo* info = [self.knobs objectAtIndex:row];
     NSDictionary* sizes = @{
                             EKNPropertyTypeColor : @57,
                             EKNPropertyTypeToggle : @57,
@@ -76,7 +107,7 @@
 }
 
 - (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    EKNPropertyInfo* info = [self.properties objectAtIndex:row];
+    EKNKnobInfo* info = [self.knobs objectAtIndex:row];
     NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
     view.info = info;
     return view;
@@ -84,8 +115,8 @@
 
 #pragma mark Editor Delegate
 
-- (void)propertyEditor:(id<EKNPropertyEditor>)editor changedProperty:(EKNPropertyDescription *)property toValue:(id)value {
-    [self.delegate generatorView:self changedProperty:property toValue:value];
+- (void)propertyEditor:(id<EKNPropertyEditor>)editor changedKnob:(EKNKnobInfo *)knob {
+    [self.delegate generatorView:self changedKnob:knob];
 }
 
 @end

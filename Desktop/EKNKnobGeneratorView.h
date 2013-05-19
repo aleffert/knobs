@@ -18,14 +18,18 @@
 
 @property (assign, nonatomic) IBOutlet id <EKNKnobGeneratorViewDelegate> delegate;
 
-// Array of EKNPropertyInfo*
-- (void)representObject:(id)object withProperties:(NSArray*)properties;
+// Array of EKNKnobInfo*
+- (void)representObject:(id)object withKnobs:(NSArray*)properties;
 @property (readonly, nonatomic) id representedObject;
+
+- (void)addKnob:(EKNKnobInfo*)knob;
+- (void)updateKnobWithID:(NSString*)knobID toValue:(id)value;
+- (void)removeKnobWithID:(NSString*)knobID;
 
 @end
 
 @protocol EKNKnobGeneratorViewDelegate <NSObject>
 
-- (void)generatorView:(EKNKnobGeneratorView*)view changedProperty:(EKNPropertyDescription*)property toValue:(id <NSCoding>)value;
+- (void)generatorView:(EKNKnobGeneratorView*)view changedKnob:(EKNKnobInfo*)knob;
 
 @end

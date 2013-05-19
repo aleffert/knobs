@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'LiveKnobs' target in the 'LiveKnobs' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

@@ -13,6 +13,7 @@
 // Automatically filters out calls that return nil
 - (NSArray*)map:(id(^)(id o))f;
 - (NSArray*)filter:(BOOL(^)(id o))f;
+- (NSArray*)filterWithIndex:(BOOL(^)(id o, NSUInteger index))f;
 
 - (NSArray*)arrayByInsertingObject:(id)object atIndex:(NSUInteger)index;
 - (NSArray*)arrayByReplacingObjectAtIndex:(NSUInteger)index withObject:(id)object;

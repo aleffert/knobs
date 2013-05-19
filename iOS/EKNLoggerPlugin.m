@@ -30,7 +30,7 @@
 @implementation EKNLoggerPluginArchiveSubstituter
 
 - (id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object {
-    // TODO: Make this a table lookup
+    // TODO: Make this a table lookup for easier extensions?
     if([object isKindOfClass:[UIImage class]]) {
         return [[EKNWireImage alloc] initWithImage:object];
     }
@@ -44,7 +44,7 @@
 
 @implementation EKNLoggerPlugin
 
-+ (EKNLoggerPlugin*)sharedLogger {
++ (EKNLoggerPlugin*)sharedPlugin {
     static dispatch_once_t onceToken;
     static EKNLoggerPlugin* logger = nil;
     dispatch_once(&onceToken, ^{

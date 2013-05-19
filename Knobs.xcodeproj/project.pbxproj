@@ -34,6 +34,15 @@
 		772F317717415682009807FD /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F316417415682009807FD /* GTMNSData+zlib.m */; };
 		772F317817415682009807FD /* README in Resources */ = {isa = PBXBuildFile; fileRef = 772F316517415682009807FD /* README */; };
 		772F317A174157E4009807FD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 772F3179174157E4009807FD /* libz.dylib */; };
+		7733F45517493FD90052158B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
+		7733F4651749420A0052158B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7733F4631749420A0052158B /* InfoPlist.strings */; };
+		7733F468174942780052158B /* EKNLiveKnobsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F467174942780052158B /* EKNLiveKnobsPlugin.m */; };
+		7733F46B1749434E0052158B /* LiveKnobs.bundle in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 7733F45417493FD90052158B /* LiveKnobs.bundle */; };
+		7733F46E174943D10052158B /* EKNLiveKnobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F46D174943D10052158B /* EKNLiveKnobsViewController.m */; };
+		7733F4711749464A0052158B /* EKNLiveKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F4701749464A0052158B /* EKNLiveKnobs.m */; };
+		7733F47F174957460052158B /* EKNKnobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F476174954C80052158B /* EKNKnobInfo.m */; };
+		7733F480174957DB0052158B /* EKNPropertyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D66174692890064E665 /* EKNPropertyInfo.m */; };
+		7733F48317495D6C0052158B /* EKNLiveKnobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7733F48117495D6C0052158B /* EKNLiveKnobsViewController.xib */; };
 		773C3B781746992500D6A805 /* icon_knob.icns in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B771746992500D6A805 /* icon_knob.icns */; };
 		773C3B7B17469D4800D6A805 /* EKNKnobGeneratorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */; };
 		773C3B8117469D9400D6A805 /* EKNKnobGeneratorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B7F17469D9400D6A805 /* EKNKnobGeneratorView.xib */; };
@@ -42,7 +51,6 @@
 		778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54A91746A3D7009D1BA1 /* EKNKnobColorEditor.m */; };
 		778E54AC1746A477009D1BA1 /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D64174692880064E665 /* EKNPropertyDescription.m */; };
 		778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54B51746B286009D1BA1 /* EKNKnobToggleEditor.m */; };
-		778E54B71746B2BD009D1BA1 /* EKNPropertyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D66174692890064E665 /* EKNPropertyInfo.m */; };
 		778E54BA1746B332009D1BA1 /* EKNKnobToggleEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54B81746B332009D1BA1 /* EKNKnobToggleEditor.xib */; };
 		778E54BD1746B7F8009D1BA1 /* EKNKnobSliderEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54BC1746B7F8009D1BA1 /* EKNKnobSliderEditor.m */; };
 		778E54C01746B95A009D1BA1 /* EKNKnobSliderEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54BE1746B95A009D1BA1 /* EKNKnobSliderEditor.xib */; };
@@ -90,7 +98,7 @@
 		77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */; };
 		77F70CDE1743DF180064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		77F70CF41743DF970064E665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77F70CF21743DF970064E665 /* InfoPlist.strings */; };
-		77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77F70CDD1743DF180064E665 /* Logger.bundle */; };
+		77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 77F70CDD1743DF180064E665 /* Logger.bundle */; };
 		77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */; };
 		77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */; };
 		77F70D0417440CB00064E665 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F70D0317440CB00064E665 /* WebKit.framework */; };
@@ -103,7 +111,7 @@
 		77F70D2B17444B1E0064E665 /* EKNLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D2917444B1E0064E665 /* EKNLoggerViewController.xib */; };
 		77F70D3117444B370064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		77F70D4117444B8B0064E665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D3F17444B8B0064E665 /* InfoPlist.strings */; };
-		77F70D4717444C680064E665 /* ViewFrob.bundle in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77F70D3017444B370064E665 /* ViewFrob.bundle */; };
+		77F70D4717444C680064E665 /* ViewFrob.bundle in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 77F70D3017444B370064E665 /* ViewFrob.bundle */; };
 		77F70D4A17444CB60064E665 /* EKNViewFrobPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4917444CB60064E665 /* EKNViewFrobPlugin.m */; };
 		77F70D4D17444CDB0064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4C17444CDB0064E665 /* EKNViewFrob.m */; };
 		77F70D5017444D5C0064E665 /* EKNViewFrobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D4F17444D5C0064E665 /* EKNViewFrobViewController.m */; };
@@ -112,6 +120,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7733F4691749433E0052158B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77873FB817413BEC00A47A27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7733F45317493FD90052158B;
+			remoteInfo = LiveKnobs;
+		};
 		77F70CF51743DFC40064E665 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 77873FB817413BEC00A47A27 /* Project object */;
@@ -129,16 +144,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		77F70CF71743DFC90064E665 /* Copy Files (1 item) */ = {
+		77F70CF71743DFC90064E665 /* Copy Plugins */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				77F70D4717444C680064E665 /* ViewFrob.bundle in Copy Files (1 item) */,
-				77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Files (1 item) */,
+				7733F46B1749434E0052158B /* LiveKnobs.bundle in Copy Plugins */,
+				77F70D4717444C680064E665 /* ViewFrob.bundle in Copy Plugins */,
+				77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Plugins */,
 			);
-			name = "Copy Files (1 item)";
+			name = "Copy Plugins";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -191,6 +207,19 @@
 		772F316417415682009807FD /* GTMNSData+zlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSData+zlib.m"; sourceTree = "<group>"; };
 		772F316517415682009807FD /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		772F3179174157E4009807FD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7733F45417493FD90052158B /* LiveKnobs.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveKnobs.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		7733F460174942020052158B /* LiveKnobs-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "LiveKnobs-Info.plist"; path = "Desktop/LiveKnobs/LiveKnobs-Info.plist"; sourceTree = SOURCE_ROOT; };
+		7733F461174942020052158B /* LiveKnobs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LiveKnobs-Prefix.pch"; path = "Desktop/LiveKnobs/LiveKnobs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		7733F4641749420A0052158B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/LiveKnobs/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		7733F466174942780052158B /* EKNLiveKnobsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLiveKnobsPlugin.h; path = Desktop/LiveKnobs/EKNLiveKnobsPlugin.h; sourceTree = SOURCE_ROOT; };
+		7733F467174942780052158B /* EKNLiveKnobsPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLiveKnobsPlugin.m; path = Desktop/LiveKnobs/EKNLiveKnobsPlugin.m; sourceTree = SOURCE_ROOT; };
+		7733F46C174943D10052158B /* EKNLiveKnobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLiveKnobsViewController.h; path = Desktop/LiveKnobs/EKNLiveKnobsViewController.h; sourceTree = SOURCE_ROOT; };
+		7733F46D174943D10052158B /* EKNLiveKnobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLiveKnobsViewController.m; path = Desktop/LiveKnobs/EKNLiveKnobsViewController.m; sourceTree = SOURCE_ROOT; };
+		7733F46F1749464A0052158B /* EKNLiveKnobs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLiveKnobs.h; path = Shared/LiveKnobs/EKNLiveKnobs.h; sourceTree = SOURCE_ROOT; };
+		7733F4701749464A0052158B /* EKNLiveKnobs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLiveKnobs.m; path = Shared/LiveKnobs/EKNLiveKnobs.m; sourceTree = SOURCE_ROOT; };
+		7733F475174954C80052158B /* EKNKnobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobInfo.h; path = Desktop/EKNKnobInfo.h; sourceTree = SOURCE_ROOT; };
+		7733F476174954C80052158B /* EKNKnobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobInfo.m; path = Desktop/EKNKnobInfo.m; sourceTree = SOURCE_ROOT; };
+		7733F48217495D6C0052158B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/LiveKnobs/en.lproj/EKNLiveKnobsViewController.xib; sourceTree = SOURCE_ROOT; };
 		773C3B771746992500D6A805 /* icon_knob.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon_knob.icns; path = Desktop/icon_knob.icns; sourceTree = SOURCE_ROOT; };
 		773C3B7917469D4800D6A805 /* EKNKnobGeneratorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobGeneratorView.h; path = Desktop/EKNKnobGeneratorView.h; sourceTree = SOURCE_ROOT; };
 		773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobGeneratorView.m; path = Desktop/EKNKnobGeneratorView.m; sourceTree = SOURCE_ROOT; };
@@ -334,6 +363,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7733F45117493FD90052158B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7733F45517493FD90052158B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77873FBD17413BEC00A47A27 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,6 +479,31 @@
 			path = "google-toolbox-for-mac";
 			sourceTree = "<group>";
 		};
+		7733F45617493FD90052158B /* LiveKnobs */ = {
+			isa = PBXGroup;
+			children = (
+				7733F48117495D6C0052158B /* EKNLiveKnobsViewController.xib */,
+				7733F46F1749464A0052158B /* EKNLiveKnobs.h */,
+				7733F4701749464A0052158B /* EKNLiveKnobs.m */,
+				7733F46C174943D10052158B /* EKNLiveKnobsViewController.h */,
+				7733F46D174943D10052158B /* EKNLiveKnobsViewController.m */,
+				7733F466174942780052158B /* EKNLiveKnobsPlugin.h */,
+				7733F467174942780052158B /* EKNLiveKnobsPlugin.m */,
+				7733F45717493FD90052158B /* Supporting Files */,
+			);
+			path = LiveKnobs;
+			sourceTree = "<group>";
+		};
+		7733F45717493FD90052158B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7733F4631749420A0052158B /* InfoPlist.strings */,
+				7733F460174942020052158B /* LiveKnobs-Info.plist */,
+				7733F461174942020052158B /* LiveKnobs-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		77873FB717413BEC00A47A27 = {
 			isa = PBXGroup;
 			children = (
@@ -449,6 +511,7 @@
 				77873FC917413BEC00A47A27 /* Knobs */,
 				77F70CDF1743DF180064E665 /* Logger */,
 				77F70D3217444B370064E665 /* ViewFrob */,
+				7733F45617493FD90052158B /* LiveKnobs */,
 				77873FC217413BEC00A47A27 /* Frameworks */,
 				77873FC117413BEC00A47A27 /* Products */,
 			);
@@ -460,6 +523,7 @@
 				77873FC017413BEC00A47A27 /* Knobs.app */,
 				77F70CDD1743DF180064E665 /* Logger.bundle */,
 				77F70D3017444B370064E665 /* ViewFrob.bundle */,
+				7733F45417493FD90052158B /* LiveKnobs.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,6 +553,8 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
+				7733F475174954C80052158B /* EKNKnobInfo.h */,
+				7733F476174954C80052158B /* EKNKnobInfo.m */,
 				77A51B191747F75700A66451 /* NSValue+EKNAffineTransform.h */,
 				77A51B1A1747F75700A66451 /* NSValue+EKNAffineTransform.m */,
 				778E54A41746A0C2009D1BA1 /* EKNPropertyEditor.h */,
@@ -738,6 +804,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7733F45317493FD90052158B /* LiveKnobs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7733F45F17493FD90052158B /* Build configuration list for PBXNativeTarget "LiveKnobs" */;
+			buildPhases = (
+				7733F45017493FD90052158B /* Sources */,
+				7733F45117493FD90052158B /* Frameworks */,
+				7733F45217493FD90052158B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiveKnobs;
+			productName = LiveKnobs;
+			productReference = 7733F45417493FD90052158B /* LiveKnobs.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		77873FBF17413BEC00A47A27 /* Knobs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77873FDD17413BEC00A47A27 /* Build configuration list for PBXNativeTarget "Knobs" */;
@@ -745,11 +828,12 @@
 				77873FBC17413BEC00A47A27 /* Sources */,
 				77873FBD17413BEC00A47A27 /* Frameworks */,
 				77873FBE17413BEC00A47A27 /* Resources */,
-				77F70CF71743DFC90064E665 /* Copy Files (1 item) */,
+				77F70CF71743DFC90064E665 /* Copy Plugins */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7733F46A1749433E0052158B /* PBXTargetDependency */,
 				77F70D4617444C3D0064E665 /* PBXTargetDependency */,
 				77F70CF61743DFC40064E665 /* PBXTargetDependency */,
 			);
@@ -817,11 +901,21 @@
 				77873FBF17413BEC00A47A27 /* Knobs */,
 				77F70CDC1743DF170064E665 /* Logger */,
 				77F70D2F17444B370064E665 /* ViewFrob */,
+				7733F45317493FD90052158B /* LiveKnobs */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7733F45217493FD90052158B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7733F4651749420A0052158B /* InfoPlist.strings in Resources */,
+				7733F48317495D6C0052158B /* EKNLiveKnobsViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77873FBE17413BEC00A47A27 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -869,6 +963,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7733F45017493FD90052158B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7733F468174942780052158B /* EKNLiveKnobsPlugin.m in Sources */,
+				7733F46E174943D10052158B /* EKNLiveKnobsViewController.m in Sources */,
+				7733F4711749464A0052158B /* EKNLiveKnobs.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77873FBC17413BEC00A47A27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -935,6 +1039,8 @@
 				778E54CF1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m in Sources */,
 				77A51B181747F44300A66451 /* EKNKnobAffineTransformEditor.m in Sources */,
 				77A51B1B1747F75700A66451 /* NSValue+EKNAffineTransform.m in Sources */,
+				7733F47F174957460052158B /* EKNKnobInfo.m in Sources */,
+				7733F480174957DB0052158B /* EKNPropertyInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,13 +1063,17 @@
 				77F70D4D17444CDB0064E665 /* EKNViewFrob.m in Sources */,
 				77F70D5017444D5C0064E665 /* EKNViewFrobViewController.m in Sources */,
 				77F70D5C17454D4B0064E665 /* EKNViewFrobInfo.m in Sources */,
-				778E54B71746B2BD009D1BA1 /* EKNPropertyInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7733F46A1749433E0052158B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7733F45317493FD90052158B /* LiveKnobs */;
+			targetProxy = 7733F4691749433E0052158B /* PBXContainerItemProxy */;
+		};
 		77F70CF61743DFC40064E665 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 77F70CDC1743DF170064E665 /* Logger */;
@@ -1007,6 +1117,22 @@
 				772F313D174154E3009807FD /* en */,
 			);
 			name = EKNConsoleWindowController.xib;
+			sourceTree = "<group>";
+		};
+		7733F4631749420A0052158B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7733F4641749420A0052158B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7733F48117495D6C0052158B /* EKNLiveKnobsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7733F48217495D6C0052158B /* en */,
+			);
+			name = EKNLiveKnobsViewController.xib;
 			sourceTree = "<group>";
 		};
 		773C3B7F17469D9400D6A805 /* EKNKnobGeneratorView.xib */ = {
@@ -1117,6 +1243,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7733F45D17493FD90052158B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Desktop/LiveKnobs/LiveKnobs-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/LiveKnobs/LiveKnobs-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		7733F45E17493FD90052158B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Desktop/LiveKnobs/LiveKnobs-Prefix.pch";
+				INFOPLIST_FILE = "Desktop/LiveKnobs/LiveKnobs-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		77873FDB17413BEC00A47A27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1257,6 +1409,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7733F45F17493FD90052158B /* Build configuration list for PBXNativeTarget "LiveKnobs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7733F45D17493FD90052158B /* Debug */,
+				7733F45E17493FD90052158B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		77873FBB17413BEC00A47A27 /* Build configuration list for PBXProject "Knobs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

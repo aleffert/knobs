@@ -13,6 +13,7 @@
 
 #import "EKNDevicePluginContextDispatcher.h"
 #import "EKNLoggerPlugin.h"
+#import "EKNLiveKnobsPlugin.h"
 #import "EKNViewFrobPlugin.h"
 #import "EKNNamedChannel.h"
 #import "EKNSharedConstants.h"
@@ -57,8 +58,9 @@
 }
 
 - (void)registerDefaultPlugins {
-    [[EKNKnobs sharedController] registerPlugin:[EKNLoggerPlugin sharedLogger]];
-    [[EKNKnobs sharedController] registerPlugin:[EKNViewFrobPlugin sharedFrobber]];
+    [[EKNKnobs sharedController] registerPlugin:[EKNLoggerPlugin sharedPlugin]];
+    [[EKNKnobs sharedController] registerPlugin:[EKNViewFrobPlugin sharedPlugin]];
+    [[EKNKnobs sharedController] registerPlugin:[EKNLiveKnobsPlugin sharedPlugin]];
 }
 
 - (void)registerPlugin:(id <EKNDevicePlugin>)plugin {

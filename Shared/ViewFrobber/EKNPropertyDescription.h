@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 //TODO decide whether it's actually a good idea to use int keys
-NSString* EKNPropertyTypeColor;
+extern NSString* EKNPropertyTypeColor;
 enum {
     EKNPropertyColorWrapCG
 };
 
-NSString* EKNPropertyTypeToggle;
-NSString* EKNPropertyTypeSlider;
+extern NSString* EKNPropertyTypeToggle;
+extern NSString* EKNPropertyTypeSlider;
 
 enum {
     EKNPropertySliderMin,
@@ -23,14 +23,14 @@ enum {
     EKNPropertySliderContinuous,
 };
 
-NSString* EKNPropertyTypeImage;
+extern NSString* EKNPropertyTypeImage;
 enum {
     EKNPropertyImageWrapCG
 };
 
-NSString* EKNPropertyTypeRect;
-NSString* EKNPropertyTypeFloatPair;
-NSString* EKNPropertyTypeAffineTransform;
+extern NSString* EKNPropertyTypeRect;
+extern NSString* EKNPropertyTypeFloatPair;
+extern NSString* EKNPropertyTypeAffineTransform;
 
 enum {
     EKNPropertyFloatPairFieldNames

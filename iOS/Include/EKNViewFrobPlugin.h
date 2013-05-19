@@ -12,7 +12,7 @@
 
 @interface EKNViewFrobPlugin : NSObject <EKNDevicePlugin>
 
-+ (EKNViewFrobPlugin*)sharedFrobber;
++ (EKNViewFrobPlugin*)sharedPlugin;
 
 - (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview;
 

@@ -8,8 +8,8 @@
 
 #import "EKNKnobFloatPairEditor.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNPropertyInfo.h"
 
 @interface EKNKnobFloatPairEditor ()
 
@@ -28,7 +28,7 @@
 @synthesize delegate = _delegate;
 @synthesize info = _info;
 
-- (void)setInfo:(EKNPropertyInfo *)info {
+- (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     NSPoint point = [info.value pointValue];
     if(!self.left.currentEditor) {
@@ -49,7 +49,8 @@
 - (IBAction)textFieldChanged:(id)sender {
     NSPoint point = NSMakePoint(self.left.floatValue, self.right.floatValue);
     NSValue* value = [NSValue valueWithPoint:point];
-    [self.delegate propertyEditor:self changedProperty:self.info.propertyDescription toValue:value];
+    self.info.value = value;
+    [self.delegate propertyEditor:self changedKnob:self.info];
 }
 
 @end

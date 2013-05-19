@@ -86,7 +86,7 @@ static NSMapTable* gFrobViewTable = nil;
 }
 
 - (void)frob_didMoveToSuperview {
-    [[EKNViewFrobPlugin sharedFrobber] view:self didMoveToSuperview:self.superview];
+    [[EKNViewFrobPlugin sharedPlugin] view:self didMoveToSuperview:self.superview];
     [self frob_didMoveToSuperview];
 }
 

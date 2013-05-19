@@ -10,6 +10,8 @@
 
 #import "EKNKnobGeneratorView.h"
 
+#import "EKNKnobInfo.h"
+#import "EKNPropertyDescription.h"
 #import "EKNPropertyInfo.h"
 
 #import "EKNViewFrob.h"
@@ -143,8 +145,16 @@
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
     NSString* updatedID = [message objectForKey:EKNViewFrobUpdatedViewID];
     NSArray* properties = [message objectForKey:EKNViewFrobUpdatedProperties];
+    NSArray* knobs = [properties map:^id(EKNPropertyInfo* info) {
+        //Reference lazily since this is part of the app itself
+        EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
+        knob.propertyDescription = info.propertyDescription;
+        knob.value = info.value;
+        knob.knobID = knob.propertyDescription.name;
+        return knob;
+    }];
     if([updatedID isEqual:[self selectedInfo].viewID]) {
-        [self.knobEditor representObject:updatedID withProperties:properties];
+        [self.knobEditor representObject:updatedID withKnobs:knobs];
     }
 }
 
@@ -240,13 +250,14 @@
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
         [self.context sendMessage:archive onChannel:self.channel];
     }
-    [self.knobEditor representObject:nil withProperties:nil];
+    [self.knobEditor representObject:nil withKnobs:@[]];
 }
 
 #pragma Knob Editor
 
-- (void)generatorView:(EKNKnobGeneratorView *)view changedProperty:(EKNPropertyDescription *)property toValue:(id<NSCoding>)value {
-    EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:property value:value];
+- (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
+    //Reference lazily since this is part of the app itself
+    EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.propertyDescription value:knob.value];
     NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageChangedProperty, EKNViewFrobChangedPropertyInfo : info, EKNViewFrobChangedPropertyViewID : self.selectedInfo.viewID};
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
