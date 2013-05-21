@@ -98,9 +98,17 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
         return [NSNull null];
     }
     else {
-        if([self.type isEqualToString:EKNPropertyTypeColor] && [[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
+        if([self.type isEqualToString:EKNPropertyTypeColor]) {
 #if TARGET_OS_IPHONE
-            result = [UIColor colorWithCGColor:(CGColorRef)result];
+            if([[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
+                result = [UIColor colorWithCGColor:(CGColorRef)result];
+            }
+            CGColorSpaceRef space = CGColorGetColorSpace([result CGColor]);
+            CGColorSpaceModel model = CGColorSpaceGetModel(space);
+            // UIColor only supports archiving of RGB and White colors. So just ignore if we're not using one of those
+            if(!(model == kCGColorSpaceModelCMYK || model == kCGColorSpaceModelRGB)) {
+                result = [NSNull null];
+            }
 #else
             result = [NSColor colorWithCGColor:(CGColorRef)result];
 #endif
