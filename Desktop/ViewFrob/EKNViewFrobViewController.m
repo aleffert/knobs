@@ -88,7 +88,9 @@
 - (NSString*)canonicalize:(NSString*)key {
     NSString* existingCanon = [self.canonicalKeys objectForKey:key];
     if(existingCanon == nil) {
-        [self.canonicalKeys setObject:key forKey:key];
+        if(key != nil) {
+            [self.canonicalKeys setObject:key forKey:key];
+        }
         return key;
     }
     
