@@ -21,6 +21,7 @@
 @property (strong, nonatomic) id <EKNChannel> channel;
 
 @property (strong, nonatomic) NSMapTable* listenersByID;
+@property (strong, nonatomic) NSMapTable* valuesByID;
 
 @end
 
@@ -39,6 +40,7 @@
     self = [super init];
     if(self != nil) {
         self.listenersByID = [NSMapTable strongToWeakObjectsMapTable];
+        self.valuesByID = [NSMapTable strongToStrongObjectsMapTable];
     }
     return self;
 }
@@ -53,10 +55,28 @@
 }
 
 - (void)beganConnection {
-    // TODO. Send all existing knobs
+    for(EKNKnobListenerInfo* info in self.listenersByID.objectEnumerator) {
+        id value = [self.valuesByID objectForKey:info.uuid];
+        if(value != nil) {
+            [self sendAddMessageWithInfo:info value:value];
+        }
+    }
 }
 
 - (void)endedConnection {
+}
+
+- (void)sendAddMessageWithInfo:(EKNKnobListenerInfo*)info value:(id)value {
+    NSDictionary* message = @{
+                              EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageAddKnob),
+                              @(EKNLiveKnobsAddIDKey) : info.uuid,
+                              @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
+                              @(EKNLiveKnobsAddInitialValueKey) : value,
+                              };
+    
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
+    [self.context sendMessage:archive onChannel:self.channel];
+
 }
 
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
@@ -77,15 +97,10 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     [self.listenersByID setObject:listenerInfo forKey:listenerInfo.uuid];
     
     [infos setObject:listenerInfo forKey:listenerInfo.propertyDescription.name];
-    NSDictionary* message = @{
-      EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageAddKnob),
-      @(EKNLiveKnobsAddIDKey) : listenerInfo.uuid,
-      @(EKNLiveKnobsAddDescriptionKey) : description,
-      @(EKNLiveKnobsAddInitialValueKey) : value,
-      };
-
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
-    [self.context sendMessage:archive onChannel:self.channel];
+    if([self.context isConnected]) {
+        [self sendAddMessageWithInfo:listenerInfo value:value];
+    }
+    [self.valuesByID setObject:value forKey:listenerInfo.uuid];
 }
 
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
@@ -115,6 +130,8 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
                               };
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
+    
+    [self.valuesByID setObject:value forKey:info.uuid];
 }
 
 - (void)cancelCallbackWithOwner:(id)owner name:(NSString*)name {
@@ -130,6 +147,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)listenerCancelled:(EKNKnobListenerInfo *)info {
     info.delegate = nil;
+    [self.valuesByID removeObjectForKey:info.uuid];
     NSDictionary* message = @{
                               EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageRemoveKnob),
                               @(EKNLiveKnobsRemoveIDKey) : info.uuid,
