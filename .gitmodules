@@ -1,6 +1,6 @@
 [submodule "Libraries/MYNetwork"]
 	path = Libraries/MYNetwork
-	url = git@github.com:snej/MYNetwork.git
+	url = https://github.com/snej/MYNetwork.git
 [submodule "Libraries/MYUtilities"]
 	path = Libraries/MYUtilities
-	url = git@github.com:snej/MYUtilities.git
+	url = https://github.com/snej/MYUtilities.git
