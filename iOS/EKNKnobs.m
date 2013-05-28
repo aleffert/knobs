@@ -59,8 +59,13 @@
 
 - (void)registerDefaultPlugins {
     [[EKNKnobs sharedController] registerPlugin:[EKNLoggerPlugin sharedPlugin]];
-    [[EKNKnobs sharedController] registerPlugin:[EKNViewFrobPlugin sharedPlugin]];
-    [[EKNKnobs sharedController] registerPlugin:[EKNLiveKnobsPlugin sharedPlugin]];
+    
+    // These only work on iOS 6. They actually use NSMapTable, not NSPointerArray
+    // but NSMapTable is available, but hidden on iOS 5
+    if([NSPointerArray class]) {
+        [[EKNKnobs sharedController] registerPlugin:[EKNViewFrobPlugin sharedPlugin]];
+        [[EKNKnobs sharedController] registerPlugin:[EKNLiveKnobsPlugin sharedPlugin]];
+    }
 }
 
 - (void)registerPlugin:(id <EKNDevicePlugin>)plugin {
