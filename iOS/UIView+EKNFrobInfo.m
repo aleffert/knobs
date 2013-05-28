@@ -10,10 +10,11 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "EKNViewFrobInfo.h"
-#import "EKNViewFrobPlugin.h"
 #import "EKNPropertyDescription.h"
 #import "EKNPropertyInfo.h"
+#import "EKNUUID.h"
+#import "EKNViewFrobInfo.h"
+#import "EKNViewFrobPlugin.h"
 
 #import <objc/runtime.h>
 
@@ -31,7 +32,7 @@ static NSMapTable* gFrobViewTable = nil;
     else {
         NSString* frobID = objc_getAssociatedObject(view, &EKNFrobViewIDKey);
         if(frobID == nil) {
-            frobID = [[NSUUID UUID] UUIDString];
+            frobID = [EKNUUID UUIDString];
             [gFrobViewTable setObject:view forKey:frobID];
             objc_setAssociatedObject(view, &EKNFrobViewIDKey, frobID, OBJC_ASSOCIATION_COPY_NONATOMIC);
         }

@@ -9,6 +9,7 @@
 #import "EKNLiveKnobsPlugin.h"
 
 #import "EKNDevicePluginContext.h"
+#import "EKNUUID.h"
 #import "EKNKnobListenerInfo.h"
 #import "EKNLiveKnobs.h"
 #import "EKNPropertyDescription.h"
@@ -89,7 +90,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     }
     
     EKNKnobListenerInfo* listenerInfo = [[EKNKnobListenerInfo alloc] init];
-    listenerInfo.uuid = [[NSUUID UUID] UUIDString];
+    listenerInfo.uuid = [EKNUUID UUIDString];
     listenerInfo.owner = owner;
     listenerInfo.callback = callback;
     listenerInfo.propertyDescription = description;

@@ -21,6 +21,7 @@
 		772F31FE174172A7009807FD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31CC174162BB009807FD /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F44E17493F480052158B /* EKNLiveKnobs.m */; };
 		7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F48517495FAE0052158B /* EKNPropertyDescription.m */; };
+		77547AF41755518900566AF0 /* EKNUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77547AF31755518900566AF0 /* EKNUUID.m */; };
 		778E54D51746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */; };
 		77A51B211747FF8700A66451 /* UIImageView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */; };
 		77A51B2617480BF600A66451 /* EKNLiveKnobsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B2517480BF600A66451 /* EKNLiveKnobsPlugin.m */; };
@@ -114,6 +115,8 @@
 		7733F44E17493F480052158B /* EKNLiveKnobs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLiveKnobs.m; path = Shared/LiveKnobs/EKNLiveKnobs.m; sourceTree = SOURCE_ROOT; };
 		7733F48417495FA60052158B /* EKNPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNPropertyDescription.h; path = Shared/Include/EKNPropertyDescription.h; sourceTree = SOURCE_ROOT; };
 		7733F48517495FAE0052158B /* EKNPropertyDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyDescription.m; path = Shared/EKNPropertyDescription.m; sourceTree = SOURCE_ROOT; };
+		77547AF21755518900566AF0 /* EKNUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNUUID.h; path = iOS/EKNUUID.h; sourceTree = SOURCE_ROOT; };
+		77547AF31755518900566AF0 /* EKNUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNUUID.m; path = iOS/EKNUUID.m; sourceTree = SOURCE_ROOT; };
 		77873FF1174147E700A47A27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		778E54D31746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EKNViewFrobInfo.h"; path = "iOS/UIScrollView+EKNViewFrobInfo.h"; sourceTree = SOURCE_ROOT; };
 		778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EKNViewFrobInfo.m"; path = "iOS/UIScrollView+EKNViewFrobInfo.m"; sourceTree = SOURCE_ROOT; };
@@ -295,6 +298,8 @@
 		77873FF3174147E700A47A27 /* Knobs-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				77547AF21755518900566AF0 /* EKNUUID.h */,
+				77547AF31755518900566AF0 /* EKNUUID.m */,
 				77A51B2D17481C5500A66451 /* EKNKnobListenerInfo.h */,
 				77A51B2E17481C5500A66451 /* EKNKnobListenerInfo.m */,
 				77A51B2A17481AD100A66451 /* EKNLiveKnobs.h */,
@@ -547,6 +552,7 @@
 				77A51B2F17481C5600A66451 /* EKNKnobListenerInfo.m in Sources */,
 				7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */,
 				7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */,
+				77547AF41755518900566AF0 /* EKNUUID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
