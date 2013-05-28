@@ -24,6 +24,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
+    
     self.pluginRegistry = [[EKNConsolePluginRegistry alloc] init];
     [self.pluginRegistry loadPlugins];
     self.activeWindows = [NSMutableArray array];
