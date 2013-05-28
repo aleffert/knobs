@@ -15,11 +15,11 @@ So to check it out you'd do e.g.
 ### Adding As A Subproject
 Find Knobs/Knobs-iOS.xcodeproj and drag it into your XCode project as a subproject. It should look something like this:
 
-![Subproject added to XCode project](docs/screenshots/add-to-ios-project.png)
+![Subproject added to XCode project](screenshots/add-to-ios-project.png)
 
 ### Linking In and Adding Header Search Paths
 Go to the Target Settings > Build Phases and add libKnobs-IOS.a to your Target Dependencies and Link Binaries With Libraries.
-![Build Phases](docs/screenshots/build-phases.png)
+![Build Phases](screenshots/build-phases.png)
 
 Now you need to tell XCode where to find the Knobs headers.
 Go to Build Settings and search for "Header Search Paths".
