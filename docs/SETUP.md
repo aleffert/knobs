@@ -6,7 +6,7 @@ Knobs has two parts: A desktop app and an iOS library. This walks you through ad
 ### Checking Out
 
 You can checkout knobs wherever you want, but normal practice would be as a submodule in your iOS app's repo. For the rest of this HOWTO we're going to assume it's at
-    <your project dir>/Libraries/Knobs.
+    YOUR_PROJECT_DIR/Libraries/Knobs.
 
 So to check it out you'd do e.g.
 
@@ -26,7 +26,7 @@ Go to the Target Settings > Build Phases and add libKnobs-IOS.a to your Target D
 Now you need to tell XCode where to find the Knobs headers.
 Go to Build Settings and search for "Header Search Paths".
 Add
-    <place you put knobs>/iOS/Include/
+    KNOBS_DIR/iOS/Include/
 e.g. with our above example:
     $(SRCROOT)/Libraries/Knobs/iOS/Include/
 
@@ -45,5 +45,5 @@ The default plugins include:
 - A tool that lets you controls to the mac app that execute callbacks on the iOS side. See EKNLiveKnobsPlugin.h.
 
 ### Running the Desktop App
-Now that knobs is enabled in your iOS, you want to talk to it using the desktop app. Make sure your Mac and your iOS device are on the same network. Open up Knobs/Knobs.xcodeproj. Make sure the "Knobs" target is selected and hit Run. If your iOS app is running with Knobs enabled, it should show up in the device picker sheet that appears when you run Knobs on your Mac.
+Now that knobs is enabled in your iOS app, you want to talk to it using the desktop app. Make sure your Mac and your iOS device are on the same network. Open up Knobs/Knobs.xcodeproj. Make sure the "Knobs" target is selected and hit Run. If your iOS app is running with Knobs enabled, it should show up in the device picker sheet that appears when you run Knobs on your Mac.
 
