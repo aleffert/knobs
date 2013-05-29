@@ -77,7 +77,8 @@ static NSString* EKNDeviceNameColumnIdentifier = @"EKNDeviceNameColumnIdentifier
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    return [self.deviceFinder.activeDevices[row] name];
+    EKNDevice* device = self.deviceFinder.activeDevices[row];
+    return [NSString stringWithFormat:@"%@ - %@", device.name, device.hostname];
 }
 
 - (NSCell*)tableView:(NSTableView *)tableView dataCellForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
