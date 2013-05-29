@@ -7,10 +7,12 @@ Knobs has two parts: A desktop app and an iOS library. This walks you through ad
 
 You can checkout knobs wherever you want, but normal practice would be as a submodule in your iOS app's repo. For the rest of this HOWTO we're going to assume it's at
     <your project dir>/Libraries/Knobs.
-    
+
 So to check it out you'd do e.g.
-    cd <your project dir>
-    git submodule add <knobs git url> Libraries/Knobs
+
+    cd YOUR_PROJECT_DIRECTORY
+    git submodule add KNOBS_GITHUB_URL Libraries/Knobs
+    git submodule update --init --recursive
 
 ### Adding As A Subproject
 Find Knobs/Knobs-iOS.xcodeproj and drag it into your XCode project as a subproject. It should look something like this:
