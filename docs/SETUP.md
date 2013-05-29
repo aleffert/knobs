@@ -31,7 +31,9 @@ e.g. with our above example:
     $(SRCROOT)/Libraries/Knobs/iOS/Include/
 
 Next, you will need to enable the [ObjC linker flag](http://developer.apple.com/library/mac/#qa/qa1490/_index.html) in your project.
-Go into Build Settings, search for "Other Linker Flags", and add `-ObjC`
+Go into Build Settings, search for "Other Linker Flags", and add `-ObjC`. It should look like this:
+
+![Add ObjC linker flag to XCode project](screenshots/objc-linker-flag.png)
 
 Finally, add CFNetworking.framework and Security.framework to your project's Link Binaries With Libraries section.
 
