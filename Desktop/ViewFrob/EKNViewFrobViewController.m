@@ -35,7 +35,7 @@
 // So canonicalize all of our ids.
 // We leak these, but it's just a bunch of small strings so it should be okay :(((
 // TODO. Switch to NSMapTable
-@property (strong, nonatomic) NSMutableDictionary* canonicalKeys;
+@property (strong, nonatomic) NSMapTable* canonicalKeys;
 
 @end
 
@@ -45,7 +45,7 @@
     self = [super initWithNibName:@"EKNViewFrobViewController" bundle:[NSBundle bundleForClass:[self class]]];
     if(self != nil) {
         self.viewInfos = [[NSMutableDictionary alloc] init];
-        self.canonicalKeys = [[NSMutableDictionary alloc] init];
+        self.canonicalKeys = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsObjectPersonality | NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsObjectPersonality | NSPointerFunctionsWeakMemory capacity:0];
     }
     return self;
 }
@@ -58,7 +58,6 @@
     [super loadView];
     [self.outline setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
     [self.outline setAllowsMultipleSelection:NO];
-    self.outline.headerView = nil;
 }
 
 - (void)connectedToDeviceWithContext:(id<EKNConsoleControllerContext>)context onChannel:(id<EKNChannel>)channel {
@@ -234,6 +233,9 @@
     }
     else if([tableColumn.identifier isEqualToString:@"Address"]) {
         view.textField.stringValue = info.address;
+    }
+    else if([tableColumn.identifier isEqualToString:@"NextResponderClass"]) {
+        view.textField.stringValue = info.nextResponderClassName;
     }
     else {
         NSAssert(NO, @"Unexpected table column %@", tableColumn.identifier);

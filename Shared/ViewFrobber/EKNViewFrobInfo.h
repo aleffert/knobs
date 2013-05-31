@@ -12,6 +12,8 @@
 
 @property (copy, nonatomic) NSString* className;
 @property (copy, nonatomic) NSString* layerClassName;
+@property (copy, nonatomic) NSString* nextResponderClassName;
+@property (copy, nonatomic) NSString* nextResponderAddress;
 @property (copy, nonatomic) NSString* viewID;
 @property (copy, nonatomic) NSString* parentID;
 @property (copy, nonatomic) NSString* address;

@@ -20,6 +20,8 @@
         self.properties = [aDecoder decodeObjectForKey:@"properties"];
         self.parentID = [aDecoder decodeObjectForKey:@"parentID"];
         self.address = [aDecoder decodeObjectForKey:@"address"];
+        self.nextResponderAddress = [aDecoder decodeObjectForKey:@"nextResponderAddress"];
+        self.nextResponderClassName = [aDecoder decodeObjectForKey:@"nextResponderClassName"];
     }
     return self;
 }
@@ -32,6 +34,8 @@
     [aCoder encodeObject:self.properties forKey:@"properties"];
     [aCoder encodeObject:self.parentID forKey:@"parentID"];
     [aCoder encodeObject:self.address forKey:@"address"];
+    [aCoder encodeObject:self.nextResponderAddress forKey:@"nextResponderAddress"];
+    [aCoder encodeObject:self.nextResponderClassName forKey:@"nextResponderClassName"];
 }
 
 - (NSString*)description {
