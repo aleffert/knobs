@@ -12,6 +12,11 @@ NSString* EKNViewFrobName = @"com.knobs.view-frobber";
 
 NSString* EKNViewFrobSentMessageKey = @"message";
 // messages
+
+NSString* EKNViewFrobMessageBatch = @"Batch";
+NSString* EKNViewFrobBatchMessagesKey = @"messages";
+
+
 // TODO: Consider replacing all these messages and strings with custom message classes
 NSString* EKNViewFrobMessageBegin = @"Begin";
 

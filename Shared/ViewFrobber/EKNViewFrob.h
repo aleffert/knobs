@@ -11,7 +11,11 @@
 extern NSString* EKNViewFrobName;
 
 extern NSString* EKNViewFrobSentMessageKey;
+
 // messages
+extern NSString* EKNViewFrobMessageBatch;
+extern NSString* EKNViewFrobBatchMessagesKey;
+
 extern NSString* EKNViewFrobMessageBegin;
 
 extern NSString* EKNViewFrobMessageLoadAll;

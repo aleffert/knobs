@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) NSTimer* pushViewTimer;
 
+@property (strong, nonatomic) NSMutableArray* queuedMessages;
+
 @end
 
 @implementation EKNViewFrobPlugin
@@ -47,6 +49,14 @@
         frobber.focusOverlayWindow.hidden = YES;
     });
     return frobber;
+}
+
+- (id)init {
+    self = [super init];
+    if(self != nil) {
+        self.queuedMessages = [NSMutableArray array];
+    }
+    return self;
 }
 
 - (NSString*)name {
@@ -139,6 +149,20 @@
 
 #pragma mark View Operations
 
+- (void)flushMessages {
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageBatch, EKNViewFrobBatchMessagesKey : self.queuedMessages}];
+    [self.context sendMessage:archive onChannel:self.channel];
+}
+
+- (void)enqueueMessage:(NSDictionary*)message {
+    [self.queuedMessages addObject:message];
+    if(self.queuedMessages.count == 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self flushMessages];
+        });
+    }
+}
+
 - (void)view:(UIView *)view didMoveToWindow:(UIWindow *)window {
     if(window == [UIApplication sharedApplication].keyWindow) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
@@ -150,14 +174,13 @@
     }
 }
 
+
 - (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview {
     if(superview == nil) {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID }];
-        [self.context sendMessage:archive onChannel:self.channel];
+        [self enqueueMessage:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID}];
     }
     else {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
-        [self.context sendMessage:archive onChannel:self.channel];
+        [self enqueueMessage:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
     }
 }
 

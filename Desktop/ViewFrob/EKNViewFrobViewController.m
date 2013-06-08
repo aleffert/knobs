@@ -154,6 +154,12 @@
     else if([messageType isEqualToString:EKNViewFrobMessageUpdateProperties]) {
         [self processUpdatedViewProperties:message];
     }
+    else if([messageType isEqualToString:EKNViewFrobBatchMessagesKey]) {
+        NSArray* messages = [message objectForKey:EKNViewFrobBatchMessagesKey];
+        for(NSDictionary* childMessage in messages) {
+            [self processMessage:childMessage];
+        }
+    }
     else {
         NSLog(@"unknown view frobber message type: %@", messageType);
     }
