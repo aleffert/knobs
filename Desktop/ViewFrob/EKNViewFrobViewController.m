@@ -29,12 +29,10 @@
 @property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobEditor;
 
 @property (strong, nonatomic) NSMutableDictionary* viewInfos;
-@property (strong, nonatomic) EKNViewFrobInfo* root;
+@property (strong, nonatomic) NSString* rootID;
 
 // This SUCKS. NSOutlineView uses pointer comparisons instead of isEqual:
 // So canonicalize all of our ids.
-// We leak these, but it's just a bunch of small strings so it should be okay :(((
-// TODO. Switch to NSMapTable
 @property (strong, nonatomic) NSMapTable* canonicalKeys;
 
 @end
@@ -65,25 +63,6 @@
     self.context = context;
 }
 
-- (void)removeTreeAnchoredAt:(EKNViewFrobInfo*)info {
-    [self recurseThroughTree:info withAction:^(EKNViewFrobInfo* info) {
-        [self.viewInfos removeObjectForKey:info];
-    }];
-}
-
-- (void)addTreeAnchoredAt:(EKNViewFrobInfo*)info {
-    [self recurseThroughTree:info withAction:^(EKNViewFrobInfo* info) {
-        [self.viewInfos setObject:info forKey:info.viewID];
-    }];
-}
-
-- (void)recurseThroughTree:(EKNViewFrobInfo*)info withAction:(void(^)(EKNViewFrobInfo* info))action {
-    action(info);
-    for(EKNViewFrobInfo* child in info.children) {
-        [self recurseThroughTree:child withAction:action];
-    }
-}
-
 - (NSString*)canonicalize:(NSString*)key {
     NSString* existingCanon = [self.canonicalKeys objectForKey:key];
     if(existingCanon == nil) {
@@ -104,43 +83,41 @@
 }
 
 - (void)processUpdateAllMessage:(NSDictionary*)message {
-    self.root = [message objectForKey:EKNViewFrobUpdateAllRootKey];
+    self.rootID = [message objectForKey:EKNViewFrobUpdateAllRootKey];
     [self.viewInfos removeAllObjects];
-    [self addTreeAnchoredAt:self.root];
+    NSArray* infos = [message objectForKey:EKNViewFrobUpdateAllInfosKey];
+    
+    for(EKNViewFrobInfo* info in infos) {
+        [self.viewInfos setObject:info forKey:[self canonicalize:info.viewID]];
+    }
+    
     [self.outline reloadData];
 }
 
 - (void)processUpdatedViewMessage:(NSDictionary*)message {
-    EKNViewFrobInfo* updatedInfo = [message objectForKey:EKNViewFrobUpdatedViewSuperviewKey];
+    EKNViewFrobInfo* updatedParent = [message objectForKey:EKNViewFrobUpdatedSuperviewKey];
+    EKNViewFrobInfo* updatedView = [message objectForKey:EKNViewFrobUpdatedViewKey];
+    EKNViewFrobInfo* oldParent = [self.viewInfos objectForKey:updatedParent.viewID];
     
-    EKNViewFrobInfo* oldInfo = [self.viewInfos objectForKey:updatedInfo.viewID];
-    if(oldInfo != nil) {
-        [self removeTreeAnchoredAt:oldInfo];
-    }
-    if(updatedInfo.parentID.length > 0 || [updatedInfo.viewID isEqualToString:self.root.viewID]) {
-        EKNViewFrobInfo* parent = [self.viewInfos objectForKey:updatedInfo.parentID];
-        NSUInteger index = [parent.children indexOfObjectPassingTest:^BOOL(EKNViewFrobInfo* child, NSUInteger idx, BOOL *stop) {
-            return [child.viewID isEqualToString:updatedInfo.viewID];
-        }];
-        if(index != NSNotFound) {
-            parent.children = [parent.children arrayByReplacingObjectAtIndex:index withObject:updatedInfo];
-        }
-        [self addTreeAnchoredAt:updatedInfo];
-        [self.outline reloadItem:[self canonicalize: updatedInfo.viewID] reloadChildren:YES];
-    }
+    [self.viewInfos setObject:updatedParent forKey:updatedParent.viewID];
+    [self.viewInfos setObject:updatedView forKey:updatedView.viewID];
+    oldParent.children = [oldParent.children filter:^BOOL(NSString* childID) {
+        return ![childID isEqualToString:updatedView.viewID];
+    }];
+    
+    BOOL childrenChanged = ![updatedParent.children isEqualToArray:oldParent.children];
+    [self.outline reloadItem:[self canonicalize:updatedParent.viewID] reloadChildren:childrenChanged];
+    
 }
 
 - (void)processRemovedViewMessage:(NSDictionary*)message {
     NSString* removedID = [message objectForKey:EKNViewFrobRemovedViewID];
-    EKNViewFrobInfo* info = [self.viewInfos objectForKey:removedID];
-    if(info != nil) {
-        [self removeTreeAnchoredAt:info];
-        EKNViewFrobInfo* parent = [self.viewInfos objectForKey:info.parentID];
-        parent.children = [parent.children filter:^BOOL(EKNViewFrobInfo* child) {
-            return ![child.viewID isEqualToString:removedID];
-        }];
-        [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
-    }
+    EKNViewFrobInfo* removedInfo = [self.viewInfos objectForKey:removedID];
+    EKNViewFrobInfo* parent = [self.viewInfos objectForKey:removedInfo.parentID];
+    parent.children = [parent.children filter:^BOOL(NSString* childID) {
+        return ![childID isEqualToString:removedID];
+    }];
+    [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
 }
 
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
@@ -203,25 +180,36 @@
     }
 }
 
+- (NSArray*)childrenOfInfo:(EKNViewFrobInfo*)info {
+    return [info.children map:^id(NSString* viewID) {
+        return [self.viewInfos objectForKey:viewID];
+    }];
+}
+
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(NSString*)itemID {
     if(itemID == nil) {
-        return self.root == nil ? 0 : 1;
+        return self.rootID == nil ? 0 : 1;
     }
-    EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
-    return info.children.count;
+    else {
+        EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
+        
+        NSArray* children = [self childrenOfInfo:info];
+        return children.count;
+    }
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(NSString*)itemID {
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
-    return info.children.count > 0;
+    return [self childrenOfInfo:info].count;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(NSString*)itemID {
     if(itemID == nil) {
-        return [self canonicalize:self.root.viewID];
+        return [self canonicalize:self.rootID];
     }
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
-    EKNViewFrobInfo* child = [info.children objectAtIndex:index];
+    NSArray* children = [self childrenOfInfo:info];
+    EKNViewFrobInfo* child = [children objectAtIndex:index];
     return [self canonicalize:child.viewID];
 }
 

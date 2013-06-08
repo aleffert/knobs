@@ -14,7 +14,9 @@
     NSMutableArray* result = [NSMutableArray array];
     for(id o in self) {
         id r = f(o);
-        [result addObject:r];
+        if(r) {
+            [result addObject:r];
+        }
     }
     return result;
 }

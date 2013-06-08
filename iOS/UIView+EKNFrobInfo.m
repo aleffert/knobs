@@ -40,12 +40,16 @@ static NSMapTable* gFrobViewTable = nil;
     }
 }
 
++ (void)frob_swapMethodWithSelector:(SEL)originalSelector withSelector:(SEL)updatedSelector {
+    Method original = class_getInstanceMethod([UIView class], originalSelector);
+    Method frobbed = class_getInstanceMethod([UIView class], updatedSelector);
+    method_exchangeImplementations(original, frobbed);
+}
+
 + (void)frob_enable {
     gFrobViewTable = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
-    
-    Method original = class_getInstanceMethod([UIView class], @selector(didMoveToSuperview));
-    Method frobbed = class_getInstanceMethod([UIView class], @selector(frob_didMoveToSuperview));
-    method_exchangeImplementations(original, frobbed);
+    [self frob_swapMethodWithSelector:@selector(didMoveToSuperview) withSelector:@selector(frob_didMoveToSuperview)];
+    [self frob_swapMethodWithSelector:@selector(didMoveToWindow) withSelector:@selector(frob_didMoveToWindow)];
 }
 
 + (UIView*)frob_viewWithID:(NSString*)viewID {
@@ -91,6 +95,11 @@ static NSMapTable* gFrobViewTable = nil;
     [self frob_didMoveToSuperview];
 }
 
+- (void)frob_didMoveToWindow {
+    [[EKNViewFrobPlugin sharedPlugin] view:self didMoveToWindow:self.window];
+    [self frob_didMoveToWindow];
+}
+
 - (void)setFrob_enabled:(BOOL)enabled {
     objc_setAssociatedObject(self, &EKNFrobInfoFrobEnabled, @(enabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -102,14 +111,14 @@ static NSMapTable* gFrobViewTable = nil;
 - (EKNViewFrobInfo*)frob_info {
     NSMutableArray* children = [NSMutableArray array];
     for(UIView* child in self.subviews) {
-        [children addObject:[child frob_info]];
+        [children addObject:[UIView frob_IDForView:child]];
     }
     EKNViewFrobInfo* info = [[EKNViewFrobInfo alloc] init];
-    info.children = children;
     info.viewID = [UIView frob_IDForView:self];
     info.className = NSStringFromClass([self class]);
     info.layerClassName = NSStringFromClass([self.layer class]);
     info.parentID = [UIView frob_IDForView:self.superview];
+    info.children = children;
     info.address = [NSString stringWithFormat:@"%p", self];
     info.nextResponderAddress = [NSString stringWithFormat:@"%p", self.nextResponder];
     info.nextResponderClassName = [NSString stringWithFormat:@"%@", [self.nextResponder class]];

@@ -17,10 +17,12 @@ extern NSString* EKNViewFrobMessageBegin;
 extern NSString* EKNViewFrobMessageLoadAll;
 
 extern NSString* EKNViewFrobMessageUpdateAll;
+extern NSString* EKNViewFrobUpdateAllInfosKey;
 extern NSString* EKNViewFrobUpdateAllRootKey;
 
 extern NSString* EKNViewFrobMessageUpdatedView;
-extern NSString* EKNViewFrobUpdatedViewSuperviewKey;
+extern NSString* EKNViewFrobUpdatedViewKey;
+extern NSString* EKNViewFrobUpdatedSuperviewKey;
 
 extern NSString* EKNViewFrobMessageRemovedView;
 extern NSString* EKNViewFrobRemovedViewID;

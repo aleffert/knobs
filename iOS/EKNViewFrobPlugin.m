@@ -70,11 +70,20 @@
     self.pushViewTimer = nil;
 }
 
+- (void)recursivelyAccumulateInfoForView:(UIView*)view into:(NSMutableArray*)accumulation {
+    [accumulation addObject:[view frob_info]];
+    for(UIView* subview in view.subviews) {
+        [self recursivelyAccumulateInfoForView:subview into:accumulation];
+    }
+}
 
 - (void)sendInitialInfo {
-    UIView* rootView = [[UIApplication sharedApplication] keyWindow];
+    NSMutableArray* accumulation = [NSMutableArray array];
     
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootKey : [rootView frob_info]}];
+    UIView* rootView = [[UIApplication sharedApplication] keyWindow];
+    [self recursivelyAccumulateInfoForView:rootView into:accumulation];
+    
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootKey : rootView.frob_viewID, EKNViewFrobUpdateAllInfosKey : accumulation}];
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
@@ -130,13 +139,24 @@
 
 #pragma mark View Operations
 
+- (void)view:(UIView *)view didMoveToWindow:(UIWindow *)window {
+    if(window == [UIApplication sharedApplication].keyWindow) {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
+        [self.context sendMessage:archive onChannel:self.channel];
+    }
+    else {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID }];
+        [self.context sendMessage:archive onChannel:self.channel];
+    }
+}
+
 - (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview {
     if(superview == nil) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID }];
         [self.context sendMessage:archive onChannel:self.channel];
     }
     else {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewSuperviewKey : [superview frob_info] }];
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
         [self.context sendMessage:archive onChannel:self.channel];
     }
 }

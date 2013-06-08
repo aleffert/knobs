@@ -19,10 +19,11 @@ NSString* EKNViewFrobMessageLoadAll = @"LoadAll";
 
 NSString* EKNViewFrobMessageUpdateAll = @"UpdateAll";
 NSString* EKNViewFrobUpdateAllRootKey = @"root";
+NSString* EKNViewFrobUpdateAllInfosKey = @"infos";
 
 NSString* EKNViewFrobMessageUpdatedView = @"UpdatedView";
-NSString* EKNViewFrobUpdatedViewSuperviewKey = @"superview";
-NSString* EKNViewFrobUpdatedViewInfoKey = @"info";
+NSString* EKNViewFrobUpdatedSuperviewKey = @"superview";
+NSString* EKNViewFrobUpdatedViewKey = @"info";
 
 NSString* EKNViewFrobMessageRemovedView = @"RemovedView";
 NSString* EKNViewFrobRemovedViewID = @"viewID";
