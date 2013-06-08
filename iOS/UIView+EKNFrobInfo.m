@@ -22,23 +22,6 @@ static NSString* EKNFrobViewIDKey = @"EKNFrobViewIDKey";
 
 static NSMapTable* gFrobViewTable = nil;
 
-@interface EKNViewFrobKVOListener : NSObject
-
-@end
-
-@implementation EKNViewFrobKVOListener
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if(context == (__bridge void *)([EKNViewFrobKVOListener class])) {
-        [[EKNViewFrobPlugin sharedPlugin] viewUpdated:object];
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
-@end
-
 @implementation UIView (EKNFrob)
 
 + (NSString*)frob_IDForView:(UIView*)view {
@@ -101,12 +84,12 @@ static NSMapTable* gFrobViewTable = nil;
 }
 
 - (void)frob_didMoveToSuperview {
-    [[EKNViewFrobPlugin sharedPlugin] view:self didMoveToSuperview:self.superview];
+    [[EKNViewFrobPlugin sharedPlugin] markViewUpdated:self];
     [self frob_didMoveToSuperview];
 }
 
 - (void)frob_didMoveToWindow {
-    [[EKNViewFrobPlugin sharedPlugin] view:self didMoveToWindow:self.window];
+    [[EKNViewFrobPlugin sharedPlugin] markViewUpdated:self];
     [self frob_didMoveToWindow];
 }
 

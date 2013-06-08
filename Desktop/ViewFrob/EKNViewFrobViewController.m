@@ -106,19 +106,21 @@
 }
 
 - (void)processUpdatedViewMessage:(NSDictionary*)message {
-    EKNViewFrobInfo* updatedParent = [message objectForKey:EKNViewFrobUpdatedSuperviewKey];
-    EKNViewFrobInfo* updatedView = [message objectForKey:EKNViewFrobUpdatedViewKey];
-    EKNViewFrobInfo* oldParent = [self.viewInfos objectForKey:updatedParent.viewID];
+    EKNViewFrobInfo* updatedViewInfo = [message objectForKey:EKNViewFrobUpdatedViewKey];
+    EKNViewFrobInfo* oldViewInfo = [self.viewInfos objectForKey:updatedViewInfo.viewID];
+    NSString* oldParentID = [self.viewInfos objectForKey:updatedViewInfo.parentID];
+    EKNViewFrobInfo* oldParent = [self.viewInfos objectForKey:oldParentID];
     
-    [self.viewInfos setObject:updatedParent forKey:updatedParent.viewID];
-    [self.viewInfos setObject:updatedView forKey:updatedView.viewID];
+    [self.viewInfos setObject:updatedViewInfo forKey:updatedViewInfo.viewID];
+    
     oldParent.children = [oldParent.children filter:^BOOL(NSString* childID) {
-        return ![childID isEqualToString:updatedView.viewID];
+        return ![childID isEqualToString:updatedViewInfo.viewID];
     }];
     
-    BOOL childrenChanged = ![updatedParent.children isEqualToArray:oldParent.children];
-    [self.outline reloadItem:[self canonicalize:updatedParent.viewID] reloadChildren:childrenChanged];
+    BOOL childrenChanged = ![updatedViewInfo.children isEqualToArray:oldViewInfo.children];
     
+    [self.outline reloadItem:[self canonicalize:updatedViewInfo.viewID] reloadChildren:childrenChanged];
+    [self.outline reloadItem:[self canonicalize:oldParentID] reloadChildren:YES];
 }
 
 - (void)processRemovedViewMessage:(NSDictionary*)message {
@@ -159,7 +161,7 @@
     else if([messageType isEqualToString:EKNViewFrobMessageUpdateProperties]) {
         [self processUpdatedViewProperties:message];
     }
-    else if([messageType isEqualToString:EKNViewFrobBatchMessagesKey]) {
+    else if([messageType isEqualToString:EKNViewFrobMessageBatch]) {
         NSArray* messages = [message objectForKey:EKNViewFrobBatchMessagesKey];
         for(NSDictionary* childMessage in messages) {
             [self processMessage:childMessage];

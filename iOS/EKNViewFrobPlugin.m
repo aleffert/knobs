@@ -31,6 +31,9 @@
 
 @property (strong, nonatomic) NSMutableArray* queuedMessages;
 
+@property (strong, nonatomic) NSHashTable* updatedViews;
+@property (strong, nonatomic) NSMutableSet* updatedViewIDs;
+
 @end
 
 @implementation EKNViewFrobPlugin
@@ -55,6 +58,8 @@
     self = [super init];
     if(self != nil) {
         self.queuedMessages = [NSMutableArray array];
+        self.updatedViews = [NSHashTable weakObjectsHashTable];
+        self.updatedViewIDs = [NSMutableSet set];
     }
     return self;
 }
@@ -152,45 +157,57 @@
 - (void)flushMessages {
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageBatch, EKNViewFrobBatchMessagesKey : self.queuedMessages}];
     [self.context sendMessage:archive onChannel:self.channel];
+    [self.queuedMessages removeAllObjects];
 }
 
 - (void)enqueueMessage:(NSDictionary*)message {
     // TODO: Go through message list and remove redundant messages
     [self.queuedMessages addObject:message];
-    if(self.queuedMessages.count == 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self flushMessages];
-        });
+
+}
+
+- (NSDictionary*)updatedViewMessage:(UIView*)view {
+    return @{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info]};
+}
+
+- (NSDictionary*)removedViewIDMessage:(NSString*)viewID {
+    return @{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : viewID};
+}
+
+- (void)processUpdatedViews {
+    NSMutableSet* removedViewIDs = self.updatedViewIDs.mutableCopy;
+    for(UIView* view in self.updatedViews) {
+        if(view.window == [UIApplication sharedApplication].keyWindow) {
+            [removedViewIDs removeObject:view.frob_viewID];
+            [self enqueueMessage:[self updatedViewMessage:view]];
+        }
     }
+    
+    for(NSString* removedViewID in removedViewIDs) {
+        [self enqueueMessage:[self removedViewIDMessage:removedViewID]];
+    }
+    
+    [self flushMessages];
+    [self.updatedViewIDs removeAllObjects];
+    [self.updatedViews removeAllObjects];
 }
 
 @end
 
 @implementation EKNViewFrobPlugin (EKNPrivate)
 
-- (void)view:(UIView *)view didMoveToWindow:(UIWindow *)window {
-    if(window == [UIApplication sharedApplication].keyWindow) {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
-        [self.context sendMessage:archive onChannel:self.channel];
+- (void)markViewUpdated:(UIView *)view {
+    if(self.updatedViewIDs.count == 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self processUpdatedViews];
+        });
     }
-    else {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID }];
-        [self.context sendMessage:archive onChannel:self.channel];
+    [self.updatedViews addObject:view];
+    [self.updatedViewIDs addObject:view.frob_viewID];
+    if(view.superview) {
+        [self.updatedViews addObject:view.superview];
+        [self.updatedViewIDs addObject:view.superview.frob_viewID];
     }
-}
-
-
-- (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview {
-    if(superview == nil) {
-        [self enqueueMessage:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : view.frob_viewID}];
-    }
-    else {
-        [self enqueueMessage:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
-    }
-}
-
-- (void)viewUpdated:(UIView *)view {
-    [self sendFullViewInfo:view];
 }
 
 @end

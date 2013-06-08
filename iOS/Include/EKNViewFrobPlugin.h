@@ -19,8 +19,6 @@
 
 @interface EKNViewFrobPlugin (EKNPrivate)
 
-- (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview;
-- (void)view:(UIView*)view didMoveToWindow:(UIView*)superview;
-- (void)viewUpdated:(UIView*)view;
+- (void)markViewUpdated:(UIView*)view;
 
 @end

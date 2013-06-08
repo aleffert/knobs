@@ -26,7 +26,6 @@ extern NSString* EKNViewFrobUpdateAllRootKey;
 
 extern NSString* EKNViewFrobMessageUpdatedView;
 extern NSString* EKNViewFrobUpdatedViewKey;
-extern NSString* EKNViewFrobUpdatedSuperviewKey;
 
 extern NSString* EKNViewFrobMessageRemovedView;
 extern NSString* EKNViewFrobRemovedViewID;

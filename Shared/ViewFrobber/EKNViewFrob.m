@@ -27,7 +27,6 @@ NSString* EKNViewFrobUpdateAllRootKey = @"root";
 NSString* EKNViewFrobUpdateAllInfosKey = @"infos";
 
 NSString* EKNViewFrobMessageUpdatedView = @"UpdatedView";
-NSString* EKNViewFrobUpdatedSuperviewKey = @"superview";
 NSString* EKNViewFrobUpdatedViewKey = @"info";
 
 NSString* EKNViewFrobMessageRemovedView = @"RemovedView";
