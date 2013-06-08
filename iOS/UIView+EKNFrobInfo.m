@@ -18,10 +18,26 @@
 
 #import <objc/runtime.h>
 
-static NSString* EKNFrobInfoFrobEnabled = @"EKNFrobInfoFrobEnabled";
 static NSString* EKNFrobViewIDKey = @"EKNFrobViewIDKey";
 
 static NSMapTable* gFrobViewTable = nil;
+
+@interface EKNViewFrobKVOListener : NSObject
+
+@end
+
+@implementation EKNViewFrobKVOListener
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if(context == (__bridge void *)([EKNViewFrobKVOListener class])) {
+        [[EKNViewFrobPlugin sharedPlugin] viewUpdated:object];
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+@end
 
 @implementation UIView (EKNFrob)
 
@@ -84,12 +100,6 @@ static NSMapTable* gFrobViewTable = nil;
     return [UIView frob_IDForView:self];
 }
 
-- (void)enableFrobbingIfNecessary {
-    if(!self.frob_enabled) {
-        self.frob_enabled = YES;
-    }
-}
-
 - (void)frob_didMoveToSuperview {
     [[EKNViewFrobPlugin sharedPlugin] view:self didMoveToSuperview:self.superview];
     [self frob_didMoveToSuperview];
@@ -98,14 +108,6 @@ static NSMapTable* gFrobViewTable = nil;
 - (void)frob_didMoveToWindow {
     [[EKNViewFrobPlugin sharedPlugin] view:self didMoveToWindow:self.window];
     [self frob_didMoveToWindow];
-}
-
-- (void)setFrob_enabled:(BOOL)enabled {
-    objc_setAssociatedObject(self, &EKNFrobInfoFrobEnabled, @(enabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)frob_enabled {
-    return [objc_getAssociatedObject(self, &EKNFrobInfoFrobEnabled) boolValue];
 }
 
 - (EKNViewFrobInfo*)frob_info {
@@ -119,6 +121,7 @@ static NSMapTable* gFrobViewTable = nil;
     info.layerClassName = NSStringFromClass([self.layer class]);
     info.parentID = [UIView frob_IDForView:self.superview];
     info.children = children;
+    info.properties = [self frob_properties];
     info.address = [NSString stringWithFormat:@"%p", self];
     info.nextResponderAddress = [NSString stringWithFormat:@"%p", self.nextResponder];
     info.nextResponderClassName = [NSString stringWithFormat:@"%@", [self.nextResponder class]];

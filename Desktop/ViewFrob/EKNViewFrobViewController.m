@@ -75,6 +75,17 @@
     return existingCanon;
 }
 
+- (void)showKnobsForInfo:(EKNViewFrobInfo*)info {
+    NSArray* knobs = [info.properties map:^id(EKNPropertyInfo* info) {
+        //Reference lazily since this is part of the app itself
+        EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
+        knob.propertyDescription = info.propertyDescription;
+        knob.value = info.value;
+        knob.knobID = knob.propertyDescription.name;
+        return knob;
+    }];
+    [self.knobEditor representObject:info.viewID withKnobs:knobs];
+}
 #pragma mark Message Processing
 
 - (void)processBeginMessage:(NSDictionary*)message {
@@ -123,16 +134,10 @@
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
     NSString* updatedID = [message objectForKey:EKNViewFrobUpdatedViewID];
     NSArray* properties = [message objectForKey:EKNViewFrobUpdatedProperties];
-    NSArray* knobs = [properties map:^id(EKNPropertyInfo* info) {
-        //Reference lazily since this is part of the app itself
-        EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
-        knob.propertyDescription = info.propertyDescription;
-        knob.value = info.value;
-        knob.knobID = knob.propertyDescription.name;
-        return knob;
-    }];
+    EKNViewFrobInfo* info = [self.viewInfos objectForKey:updatedID];
+    info.properties = properties;
     if([updatedID isEqual:[self selectedInfo].viewID]) {
-        [self.knobEditor representObject:updatedID withKnobs:knobs];
+        [self showKnobsForInfo:info];
     }
 }
 
@@ -240,6 +245,7 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
     EKNViewFrobInfo* info = [self selectedInfo];
+    [self.knobEditor representObject:nil withKnobs:@[]];
     if(info == nil) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView}];
         [self.context sendMessage:archive onChannel:self.channel];
@@ -247,8 +253,9 @@
     else {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
         [self.context sendMessage:archive onChannel:self.channel];
+        [self showKnobsForInfo:info];
     }
-    [self.knobEditor representObject:nil withKnobs:@[]];
+
 }
 
 #pragma Knob Editor

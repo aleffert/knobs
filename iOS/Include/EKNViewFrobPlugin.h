@@ -14,9 +14,13 @@
 
 + (EKNViewFrobPlugin*)sharedPlugin;
 
-// For internal use only
-- (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview;
-- (void)view:(UIView*)view didMoveToWindow:(UIView*)superview;
-
 @end
 
+
+@interface EKNViewFrobPlugin (EKNPrivate)
+
+- (void)view:(UIView*)view didMoveToSuperview:(UIView*)superview;
+- (void)view:(UIView*)view didMoveToWindow:(UIView*)superview;
+- (void)viewUpdated:(UIView*)view;
+
+@end

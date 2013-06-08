@@ -155,6 +155,7 @@
 }
 
 - (void)enqueueMessage:(NSDictionary*)message {
+    // TODO: Go through message list and remove redundant messages
     [self.queuedMessages addObject:message];
     if(self.queuedMessages.count == 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -162,6 +163,10 @@
         });
     }
 }
+
+@end
+
+@implementation EKNViewFrobPlugin (EKNPrivate)
 
 - (void)view:(UIView *)view didMoveToWindow:(UIWindow *)window {
     if(window == [UIApplication sharedApplication].keyWindow) {
@@ -182,6 +187,10 @@
     else {
         [self enqueueMessage:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdatedView, EKNViewFrobUpdatedViewKey : [view frob_info], EKNViewFrobUpdatedSuperviewKey : [view.superview frob_info]}];
     }
+}
+
+- (void)viewUpdated:(UIView *)view {
+    [self sendFullViewInfo:view];
 }
 
 @end

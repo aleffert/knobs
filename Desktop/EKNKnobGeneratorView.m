@@ -44,7 +44,7 @@
 }
 
 - (void)representObject:(id)object withKnobs:(NSArray *)knobs {
-    BOOL fullUpdate = ![self.representedObject isEqualToString: object] || knobs.count != self.knobs.count;
+    BOOL fullUpdate = ![self.representedObject isEqual: object] || knobs.count != self.knobs.count;
     self.representedObject = object;
     self.knobs = knobs;
     
