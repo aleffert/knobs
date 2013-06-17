@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770851F2176F6B8100570BDE /* CollectionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851CE176F6B8100570BDE /* CollectionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		770851F3176F6B8100570BDE /* ConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851D0176F6B8100570BDE /* ConcurrentOperation.m */; };
+		770851F4176F6B8100570BDE /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851D2176F6B8100570BDE /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		770851F5176F6B8100570BDE /* Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851D4176F6B8100570BDE /* Logging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		770851F6176F6B8100570BDE /* MYBlockUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851D6176F6B8100570BDE /* MYBlockUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		770851F7176F6B8100570BDE /* MYDynamicObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851D8176F6B8100570BDE /* MYDynamicObject.m */; };
+		770851F8176F6B8100570BDE /* MYErrorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851DA176F6B8100570BDE /* MYErrorUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-deprecated"; }; };
+		770851F9176F6B8100570BDE /* MYRegexUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851DC176F6B8100570BDE /* MYRegexUtils.m */; };
+		770851FA176F6B8100570BDE /* MYStreamUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851DE176F6B8100570BDE /* MYStreamUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		770851FB176F6B8100570BDE /* MYURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851E0176F6B8100570BDE /* MYURLHandler.m */; };
+		770851FC176F6B8100570BDE /* MYURLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851E2176F6B8100570BDE /* MYURLUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		770851FD176F6B8100570BDE /* MYUtilities.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 770851E3176F6B8100570BDE /* MYUtilities.xcconfig */; };
+		770851FE176F6B8100570BDE /* MYUtilities_Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 770851E4176F6B8100570BDE /* MYUtilities_Debug.xcconfig */; };
+		770851FF176F6B8100570BDE /* MYUtilities_Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 770851E6176F6B8100570BDE /* MYUtilities_Release.xcconfig */; };
+		77085200176F6B8100570BDE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 770851E7176F6B8100570BDE /* README.md */; };
+		77085201176F6B8100570BDE /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851E9176F6B8100570BDE /* Target.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085202176F6B8100570BDE /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851EB176F6B8100570BDE /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085203176F6B8100570BDE /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 770851F0176F6B8100570BDE /* GTMNSData+zlib.m */; };
+		77085204176F6B8100570BDE /* README in Resources */ = {isa = PBXBuildFile; fileRef = 770851F1176F6B8100570BDE /* README */; };
 		772F312A1741543A009807FD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 772F31241741543A009807FD /* Credits.rtf */; };
 		772F312C1741543A009807FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F31281741543A009807FD /* MainMenu.xib */; };
 		772F31351741545A009807FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31331741545A009807FD /* main.m */; };
@@ -14,25 +33,6 @@
 		772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F312E1741544C009807FD /* EKNAppDelegate.m */; };
 		772F313B174154CC009807FD /* EKNConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31301741544C009807FD /* EKNConsoleWindowController.m */; };
 		772F313E174154E3009807FD /* EKNConsoleWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772F313C174154E3009807FD /* EKNConsoleWindowController.xib */; };
-		772F316617415682009807FD /* CollectionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314217415682009807FD /* CollectionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316717415682009807FD /* ConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314417415682009807FD /* ConcurrentOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316817415682009807FD /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314617415682009807FD /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316917415682009807FD /* Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314817415682009807FD /* Logging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316A17415682009807FD /* MYBlockUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314A17415682009807FD /* MYBlockUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316B17415682009807FD /* MYDynamicObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314C17415682009807FD /* MYDynamicObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316C17415682009807FD /* MYErrorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F314E17415682009807FD /* MYErrorUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
-		772F316D17415682009807FD /* MYRegexUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315017415682009807FD /* MYRegexUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316E17415682009807FD /* MYStreamUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315217415682009807FD /* MYStreamUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F316F17415682009807FD /* MYURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315417415682009807FD /* MYURLHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F317017415682009807FD /* MYURLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315617415682009807FD /* MYURLUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F317117415682009807FD /* MYUtilities.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 772F315717415682009807FD /* MYUtilities.xcconfig */; };
-		772F317217415682009807FD /* MYUtilities_Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 772F315817415682009807FD /* MYUtilities_Debug.xcconfig */; };
-		772F317317415682009807FD /* MYUtilities_Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 772F315A17415682009807FD /* MYUtilities_Release.xcconfig */; };
-		772F317417415682009807FD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 772F315B17415682009807FD /* README.md */; };
-		772F317517415682009807FD /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315D17415682009807FD /* Target.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F317617415682009807FD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F315F17415682009807FD /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F317717415682009807FD /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F316417415682009807FD /* GTMNSData+zlib.m */; };
-		772F317817415682009807FD /* README in Resources */ = {isa = PBXBuildFile; fileRef = 772F316517415682009807FD /* README */; };
 		772F317A174157E4009807FD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 772F3179174157E4009807FD /* libz.dylib */; };
 		7733F45517493FD90052158B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		7733F4651749420A0052158B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7733F4631749420A0052158B /* InfoPlist.strings */; };
@@ -160,6 +160,41 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		770851CD176F6B8100570BDE /* CollectionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionUtils.h; sourceTree = "<group>"; };
+		770851CE176F6B8100570BDE /* CollectionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionUtils.m; sourceTree = "<group>"; };
+		770851CF176F6B8100570BDE /* ConcurrentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperation.h; sourceTree = "<group>"; };
+		770851D0176F6B8100570BDE /* ConcurrentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcurrentOperation.m; sourceTree = "<group>"; };
+		770851D1176F6B8100570BDE /* ExceptionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExceptionUtils.h; sourceTree = "<group>"; };
+		770851D2176F6B8100570BDE /* ExceptionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExceptionUtils.m; sourceTree = "<group>"; };
+		770851D3176F6B8100570BDE /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
+		770851D4176F6B8100570BDE /* Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logging.m; sourceTree = "<group>"; };
+		770851D5176F6B8100570BDE /* MYBlockUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlockUtils.h; sourceTree = "<group>"; };
+		770851D6176F6B8100570BDE /* MYBlockUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlockUtils.m; sourceTree = "<group>"; };
+		770851D7176F6B8100570BDE /* MYDynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYDynamicObject.h; sourceTree = "<group>"; };
+		770851D8176F6B8100570BDE /* MYDynamicObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYDynamicObject.m; sourceTree = "<group>"; };
+		770851D9176F6B8100570BDE /* MYErrorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYErrorUtils.h; sourceTree = "<group>"; };
+		770851DA176F6B8100570BDE /* MYErrorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYErrorUtils.m; sourceTree = "<group>"; };
+		770851DB176F6B8100570BDE /* MYRegexUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYRegexUtils.h; sourceTree = "<group>"; };
+		770851DC176F6B8100570BDE /* MYRegexUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYRegexUtils.m; sourceTree = "<group>"; };
+		770851DD176F6B8100570BDE /* MYStreamUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYStreamUtils.h; sourceTree = "<group>"; };
+		770851DE176F6B8100570BDE /* MYStreamUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYStreamUtils.m; sourceTree = "<group>"; };
+		770851DF176F6B8100570BDE /* MYURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLHandler.h; sourceTree = "<group>"; };
+		770851E0176F6B8100570BDE /* MYURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLHandler.m; sourceTree = "<group>"; };
+		770851E1176F6B8100570BDE /* MYURLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLUtils.h; sourceTree = "<group>"; };
+		770851E2176F6B8100570BDE /* MYURLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLUtils.m; sourceTree = "<group>"; };
+		770851E3176F6B8100570BDE /* MYUtilities.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities.xcconfig; sourceTree = "<group>"; };
+		770851E4176F6B8100570BDE /* MYUtilities_Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Debug.xcconfig; sourceTree = "<group>"; };
+		770851E5176F6B8100570BDE /* MYUtilities_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYUtilities_Prefix.pch; sourceTree = "<group>"; };
+		770851E6176F6B8100570BDE /* MYUtilities_Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Release.xcconfig; sourceTree = "<group>"; };
+		770851E7176F6B8100570BDE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		770851E8176F6B8100570BDE /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		770851E9176F6B8100570BDE /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
+		770851EA176F6B8100570BDE /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		770851EB176F6B8100570BDE /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
+		770851EE176F6B8100570BDE /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		770851EF176F6B8100570BDE /* GTMNSData+zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSData+zlib.h"; sourceTree = "<group>"; };
+		770851F0176F6B8100570BDE /* GTMNSData+zlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSData+zlib.m"; sourceTree = "<group>"; };
+		770851F1176F6B8100570BDE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		772F31251741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = Desktop/en.lproj/Credits.rtf; sourceTree = SOURCE_ROOT; };
 		772F31271741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Desktop/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		772F31291741543A009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
@@ -171,41 +206,6 @@
 		772F31321741545A009807FD /* Knobs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-Prefix.pch"; path = "Desktop/Knobs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		772F31331741545A009807FD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Desktop/main.m; sourceTree = SOURCE_ROOT; };
 		772F313D174154E3009807FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNConsoleWindowController.xib; sourceTree = SOURCE_ROOT; };
-		772F314117415682009807FD /* CollectionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionUtils.h; sourceTree = "<group>"; };
-		772F314217415682009807FD /* CollectionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionUtils.m; sourceTree = "<group>"; };
-		772F314317415682009807FD /* ConcurrentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperation.h; sourceTree = "<group>"; };
-		772F314417415682009807FD /* ConcurrentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcurrentOperation.m; sourceTree = "<group>"; };
-		772F314517415682009807FD /* ExceptionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExceptionUtils.h; sourceTree = "<group>"; };
-		772F314617415682009807FD /* ExceptionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExceptionUtils.m; sourceTree = "<group>"; };
-		772F314717415682009807FD /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
-		772F314817415682009807FD /* Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logging.m; sourceTree = "<group>"; };
-		772F314917415682009807FD /* MYBlockUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlockUtils.h; sourceTree = "<group>"; };
-		772F314A17415682009807FD /* MYBlockUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlockUtils.m; sourceTree = "<group>"; };
-		772F314B17415682009807FD /* MYDynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYDynamicObject.h; sourceTree = "<group>"; };
-		772F314C17415682009807FD /* MYDynamicObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYDynamicObject.m; sourceTree = "<group>"; };
-		772F314D17415682009807FD /* MYErrorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYErrorUtils.h; sourceTree = "<group>"; };
-		772F314E17415682009807FD /* MYErrorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYErrorUtils.m; sourceTree = "<group>"; };
-		772F314F17415682009807FD /* MYRegexUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYRegexUtils.h; sourceTree = "<group>"; };
-		772F315017415682009807FD /* MYRegexUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYRegexUtils.m; sourceTree = "<group>"; };
-		772F315117415682009807FD /* MYStreamUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYStreamUtils.h; sourceTree = "<group>"; };
-		772F315217415682009807FD /* MYStreamUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYStreamUtils.m; sourceTree = "<group>"; };
-		772F315317415682009807FD /* MYURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLHandler.h; sourceTree = "<group>"; };
-		772F315417415682009807FD /* MYURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLHandler.m; sourceTree = "<group>"; };
-		772F315517415682009807FD /* MYURLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLUtils.h; sourceTree = "<group>"; };
-		772F315617415682009807FD /* MYURLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLUtils.m; sourceTree = "<group>"; };
-		772F315717415682009807FD /* MYUtilities.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities.xcconfig; sourceTree = "<group>"; };
-		772F315817415682009807FD /* MYUtilities_Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Debug.xcconfig; sourceTree = "<group>"; };
-		772F315917415682009807FD /* MYUtilities_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYUtilities_Prefix.pch; sourceTree = "<group>"; };
-		772F315A17415682009807FD /* MYUtilities_Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Release.xcconfig; sourceTree = "<group>"; };
-		772F315B17415682009807FD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		772F315C17415682009807FD /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
-		772F315D17415682009807FD /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
-		772F315E17415682009807FD /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		772F315F17415682009807FD /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
-		772F316217415682009807FD /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		772F316317415682009807FD /* GTMNSData+zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSData+zlib.h"; sourceTree = "<group>"; };
-		772F316417415682009807FD /* GTMNSData+zlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSData+zlib.m"; sourceTree = "<group>"; };
-		772F316517415682009807FD /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		772F3179174157E4009807FD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7733F45417493FD90052158B /* LiveKnobs.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveKnobs.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7733F460174942020052158B /* LiveKnobs-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "LiveKnobs-Info.plist"; path = "Desktop/LiveKnobs/LiveKnobs-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -401,6 +401,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		770851CC176F6B8100570BDE /* MYUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				770851CD176F6B8100570BDE /* CollectionUtils.h */,
+				770851CE176F6B8100570BDE /* CollectionUtils.m */,
+				770851CF176F6B8100570BDE /* ConcurrentOperation.h */,
+				770851D0176F6B8100570BDE /* ConcurrentOperation.m */,
+				770851D1176F6B8100570BDE /* ExceptionUtils.h */,
+				770851D2176F6B8100570BDE /* ExceptionUtils.m */,
+				770851D3176F6B8100570BDE /* Logging.h */,
+				770851D4176F6B8100570BDE /* Logging.m */,
+				770851D5176F6B8100570BDE /* MYBlockUtils.h */,
+				770851D6176F6B8100570BDE /* MYBlockUtils.m */,
+				770851D7176F6B8100570BDE /* MYDynamicObject.h */,
+				770851D8176F6B8100570BDE /* MYDynamicObject.m */,
+				770851D9176F6B8100570BDE /* MYErrorUtils.h */,
+				770851DA176F6B8100570BDE /* MYErrorUtils.m */,
+				770851DB176F6B8100570BDE /* MYRegexUtils.h */,
+				770851DC176F6B8100570BDE /* MYRegexUtils.m */,
+				770851DD176F6B8100570BDE /* MYStreamUtils.h */,
+				770851DE176F6B8100570BDE /* MYStreamUtils.m */,
+				770851DF176F6B8100570BDE /* MYURLHandler.h */,
+				770851E0176F6B8100570BDE /* MYURLHandler.m */,
+				770851E1176F6B8100570BDE /* MYURLUtils.h */,
+				770851E2176F6B8100570BDE /* MYURLUtils.m */,
+				770851E3176F6B8100570BDE /* MYUtilities.xcconfig */,
+				770851E4176F6B8100570BDE /* MYUtilities_Debug.xcconfig */,
+				770851E5176F6B8100570BDE /* MYUtilities_Prefix.pch */,
+				770851E6176F6B8100570BDE /* MYUtilities_Release.xcconfig */,
+				770851E7176F6B8100570BDE /* README.md */,
+				770851E8176F6B8100570BDE /* Target.h */,
+				770851E9176F6B8100570BDE /* Target.m */,
+				770851EA176F6B8100570BDE /* Test.h */,
+				770851EB176F6B8100570BDE /* Test.m */,
+				770851EC176F6B8100570BDE /* vendor */,
+			);
+			name = MYUtilities;
+			path = Libraries/MYNetwork/vendor/MYUtilities;
+			sourceTree = "<group>";
+		};
+		770851EC176F6B8100570BDE /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				770851ED176F6B8100570BDE /* google-toolbox-for-mac */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		770851ED176F6B8100570BDE /* google-toolbox-for-mac */ = {
+			isa = PBXGroup;
+			children = (
+				770851EE176F6B8100570BDE /* GTMDefines.h */,
+				770851EF176F6B8100570BDE /* GTMNSData+zlib.h */,
+				770851F0176F6B8100570BDE /* GTMNSData+zlib.m */,
+				770851F1176F6B8100570BDE /* README */,
+			);
+			path = "google-toolbox-for-mac";
+			sourceTree = "<group>";
+		};
 		772F313F174154ED009807FD /* XIB */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,65 +477,6 @@
 				77F70D51174450290064E665 /* EKNViewFrobViewController.xib */,
 			);
 			name = XIB;
-			sourceTree = "<group>";
-		};
-		772F314017415682009807FD /* MYUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				772F314117415682009807FD /* CollectionUtils.h */,
-				772F314217415682009807FD /* CollectionUtils.m */,
-				772F314317415682009807FD /* ConcurrentOperation.h */,
-				772F314417415682009807FD /* ConcurrentOperation.m */,
-				772F314517415682009807FD /* ExceptionUtils.h */,
-				772F314617415682009807FD /* ExceptionUtils.m */,
-				772F314717415682009807FD /* Logging.h */,
-				772F314817415682009807FD /* Logging.m */,
-				772F314917415682009807FD /* MYBlockUtils.h */,
-				772F314A17415682009807FD /* MYBlockUtils.m */,
-				772F314B17415682009807FD /* MYDynamicObject.h */,
-				772F314C17415682009807FD /* MYDynamicObject.m */,
-				772F314D17415682009807FD /* MYErrorUtils.h */,
-				772F314E17415682009807FD /* MYErrorUtils.m */,
-				772F314F17415682009807FD /* MYRegexUtils.h */,
-				772F315017415682009807FD /* MYRegexUtils.m */,
-				772F315117415682009807FD /* MYStreamUtils.h */,
-				772F315217415682009807FD /* MYStreamUtils.m */,
-				772F315317415682009807FD /* MYURLHandler.h */,
-				772F315417415682009807FD /* MYURLHandler.m */,
-				772F315517415682009807FD /* MYURLUtils.h */,
-				772F315617415682009807FD /* MYURLUtils.m */,
-				772F315717415682009807FD /* MYUtilities.xcconfig */,
-				772F315817415682009807FD /* MYUtilities_Debug.xcconfig */,
-				772F315917415682009807FD /* MYUtilities_Prefix.pch */,
-				772F315A17415682009807FD /* MYUtilities_Release.xcconfig */,
-				772F315B17415682009807FD /* README.md */,
-				772F315C17415682009807FD /* Target.h */,
-				772F315D17415682009807FD /* Target.m */,
-				772F315E17415682009807FD /* Test.h */,
-				772F315F17415682009807FD /* Test.m */,
-				772F316017415682009807FD /* vendor */,
-			);
-			name = MYUtilities;
-			path = Libraries/MYUtilities;
-			sourceTree = "<group>";
-		};
-		772F316017415682009807FD /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				772F316117415682009807FD /* google-toolbox-for-mac */,
-			);
-			path = vendor;
-			sourceTree = "<group>";
-		};
-		772F316117415682009807FD /* google-toolbox-for-mac */ = {
-			isa = PBXGroup;
-			children = (
-				772F316217415682009807FD /* GTMDefines.h */,
-				772F316317415682009807FD /* GTMNSData+zlib.h */,
-				772F316417415682009807FD /* GTMNSData+zlib.m */,
-				772F316517415682009807FD /* README */,
-			);
-			path = "google-toolbox-for-mac";
 			sourceTree = "<group>";
 		};
 		7733F45617493FD90052158B /* LiveKnobs */ = {
@@ -508,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				77B7970B174177A8008242D4 /* Vendor */,
+				770851CC176F6B8100570BDE /* MYUtilities */,
 				77873FC917413BEC00A47A27 /* Knobs */,
 				77F70CDF1743DF180064E665 /* Logger */,
 				77F70D3217444B370064E665 /* ViewFrob */,
@@ -717,7 +718,6 @@
 			children = (
 				77F70D1417441C4E0064E665 /* NSData+Base64 */,
 				77B7966C17417755008242D4 /* MYNetwork */,
-				772F314017415682009807FD /* MYUtilities */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -921,22 +921,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				772F312A1741543A009807FD /* Credits.rtf in Resources */,
+				770851FE176F6B8100570BDE /* MYUtilities_Debug.xcconfig in Resources */,
 				772F312C1741543A009807FD /* MainMenu.xib in Resources */,
 				772F3139174154BF009807FD /* InfoPlist.strings in Resources */,
 				772F313E174154E3009807FD /* EKNConsoleWindowController.xib in Resources */,
-				772F317117415682009807FD /* MYUtilities.xcconfig in Resources */,
-				772F317217415682009807FD /* MYUtilities_Debug.xcconfig in Resources */,
-				772F317317415682009807FD /* MYUtilities_Release.xcconfig in Resources */,
-				772F317417415682009807FD /* README.md in Resources */,
-				772F317817415682009807FD /* README in Resources */,
 				77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */,
+				77085200176F6B8100570BDE /* README.md in Resources */,
+				770851FF176F6B8100570BDE /* MYUtilities_Release.xcconfig in Resources */,
 				773C3B781746992500D6A805 /* icon_knob.icns in Resources */,
 				773C3B8117469D9400D6A805 /* EKNKnobGeneratorView.xib in Resources */,
 				778E54A71746A35B009D1BA1 /* EKNKnobColorEditor.xib in Resources */,
 				778E54BA1746B332009D1BA1 /* EKNKnobToggleEditor.xib in Resources */,
 				778E54C01746B95A009D1BA1 /* EKNKnobSliderEditor.xib in Resources */,
 				778E54C61746C662009D1BA1 /* EKNKnobImageEditor.xib in Resources */,
+				77085204176F6B8100570BDE /* README in Resources */,
 				778E54CC1746CDB7009D1BA1 /* EKNKnobRectEditor.xib in Resources */,
+				770851FD176F6B8100570BDE /* MYUtilities.xcconfig in Resources */,
 				778E54D21746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib in Resources */,
 				77A51B1E1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib in Resources */,
 			);
@@ -980,20 +980,6 @@
 				772F31351741545A009807FD /* main.m in Sources */,
 				772F313A174154C9009807FD /* EKNAppDelegate.m in Sources */,
 				772F313B174154CC009807FD /* EKNConsoleWindowController.m in Sources */,
-				772F316617415682009807FD /* CollectionUtils.m in Sources */,
-				772F316717415682009807FD /* ConcurrentOperation.m in Sources */,
-				772F316817415682009807FD /* ExceptionUtils.m in Sources */,
-				772F316917415682009807FD /* Logging.m in Sources */,
-				772F316A17415682009807FD /* MYBlockUtils.m in Sources */,
-				772F316B17415682009807FD /* MYDynamicObject.m in Sources */,
-				772F316C17415682009807FD /* MYErrorUtils.m in Sources */,
-				772F316D17415682009807FD /* MYRegexUtils.m in Sources */,
-				772F316E17415682009807FD /* MYStreamUtils.m in Sources */,
-				772F316F17415682009807FD /* MYURLHandler.m in Sources */,
-				772F317017415682009807FD /* MYURLUtils.m in Sources */,
-				772F317517415682009807FD /* Target.m in Sources */,
-				772F317617415682009807FD /* Test.m in Sources */,
-				772F317717415682009807FD /* GTMNSData+zlib.m in Sources */,
 				77B796CD17417755008242D4 /* BLIPConnection.m in Sources */,
 				77B796CE17417755008242D4 /* BLIPDispatcher.m in Sources */,
 				77B796CF17417755008242D4 /* BLIPMessage.m in Sources */,
@@ -1001,31 +987,41 @@
 				77B796D117417755008242D4 /* BLIPReader.m in Sources */,
 				77B796D217417755008242D4 /* BLIPRequest.m in Sources */,
 				77B796D417417755008242D4 /* BLIPWriter.m in Sources */,
+				77085203176F6B8100570BDE /* GTMNSData+zlib.m in Sources */,
 				77B796DB17417755008242D4 /* MYAddressLookup.m in Sources */,
 				77B796DC17417755008242D4 /* MYBonjourBrowser.m in Sources */,
+				770851F8176F6B8100570BDE /* MYErrorUtils.m in Sources */,
 				77B796DD17417755008242D4 /* MYBonjourQuery.m in Sources */,
+				77085201176F6B8100570BDE /* Target.m in Sources */,
 				77B796DE17417755008242D4 /* MYBonjourRegistration.m in Sources */,
 				77B796DF17417755008242D4 /* MYBonjourService.m in Sources */,
 				77B796E017417755008242D4 /* IPAddress.m in Sources */,
+				770851F3176F6B8100570BDE /* ConcurrentOperation.m in Sources */,
 				77B796E917417755008242D4 /* MYDNSService.m in Sources */,
 				77B796EA17417755008242D4 /* MYPortMapper.m in Sources */,
 				77B796EB17417755008242D4 /* PortMapperTest.m in Sources */,
 				77B796F217417755008242D4 /* TCPConnection.m in Sources */,
 				77B796F317417755008242D4 /* TCPEndpoint+Certs.m in Sources */,
 				77B796F417417755008242D4 /* TCPEndpoint.m in Sources */,
+				770851FB176F6B8100570BDE /* MYURLHandler.m in Sources */,
 				77B796F517417755008242D4 /* TCPListener.m in Sources */,
 				77B796F617417755008242D4 /* TCPStream.m in Sources */,
 				77B796F717417755008242D4 /* TCPWriter.m in Sources */,
 				77B7973117418374008242D4 /* EKNDeviceFinder.m in Sources */,
 				77B797391741889D008242D4 /* EKNSharedConstants.m in Sources */,
 				77B7973C17418C27008242D4 /* EKNDevice.m in Sources */,
+				770851F5176F6B8100570BDE /* Logging.m in Sources */,
+				770851F7176F6B8100570BDE /* MYDynamicObject.m in Sources */,
 				77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */,
 				77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */,
 				77B797621742F6D1008242D4 /* EKNDeviceFinderView.m in Sources */,
 				77B7976817430A89008242D4 /* EKNNamedChannel.m in Sources */,
+				770851FA176F6B8100570BDE /* MYStreamUtils.m in Sources */,
+				77085202176F6B8100570BDE /* Test.m in Sources */,
 				77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */,
 				77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */,
 				77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */,
+				770851F9176F6B8100570BDE /* MYRegexUtils.m in Sources */,
 				77F70D1017441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m in Sources */,
 				77F70D1717442DC30064E665 /* EKNWireColor.m in Sources */,
 				77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */,
@@ -1034,13 +1030,17 @@
 				778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */,
 				778E54BD1746B7F8009D1BA1 /* EKNKnobSliderEditor.m in Sources */,
 				778E54C31746C577009D1BA1 /* EKNKnobImageEditor.m in Sources */,
+				770851F6176F6B8100570BDE /* MYBlockUtils.m in Sources */,
 				778E54C91746CB5D009D1BA1 /* EKNKnobRectEditor.m in Sources */,
 				778E54CF1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m in Sources */,
 				77A51B181747F44300A66451 /* EKNKnobAffineTransformEditor.m in Sources */,
+				770851F2176F6B8100570BDE /* CollectionUtils.m in Sources */,
 				77A51B1B1747F75700A66451 /* NSValue+EKNAffineTransform.m in Sources */,
 				7733F47F174957460052158B /* EKNKnobInfo.m in Sources */,
 				7733F480174957DB0052158B /* EKNPropertyInfo.m in Sources */,
+				770851FC176F6B8100570BDE /* MYURLUtils.m in Sources */,
 				7733F489174960A90052158B /* EKNPropertyDescription.m in Sources */,
+				770851F4176F6B8100570BDE /* ExceptionUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,6 +1416,7 @@
 				7733F45E17493FD90052158B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		77873FBB17413BEC00A47A27 /* Build configuration list for PBXProject "Knobs" */ = {
 			isa = XCConfigurationList;

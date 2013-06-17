@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77085230176F89EA00570BDE /* CollectionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708520B176F89EA00570BDE /* CollectionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085231176F89EA00570BDE /* ConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708520D176F89EA00570BDE /* ConcurrentOperation.m */; };
+		77085232176F89EA00570BDE /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708520F176F89EA00570BDE /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085233176F89EA00570BDE /* Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085211176F89EA00570BDE /* Logging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085234176F89EA00570BDE /* MYBlockUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085213176F89EA00570BDE /* MYBlockUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085235176F89EA00570BDE /* MYDynamicObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085215176F89EA00570BDE /* MYDynamicObject.m */; };
+		77085236176F89EA00570BDE /* MYErrorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085217176F89EA00570BDE /* MYErrorUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77085237176F89EA00570BDE /* MYRegexUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085219176F89EA00570BDE /* MYRegexUtils.m */; };
+		77085238176F89EA00570BDE /* MYStreamUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708521B176F89EA00570BDE /* MYStreamUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7708523A176F89EA00570BDE /* MYURLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708521F176F89EA00570BDE /* MYURLUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7708523B176F89EA00570BDE /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085227176F89EA00570BDE /* Target.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7708523C176F89EA00570BDE /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 77085229176F89EA00570BDE /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7708523D176F89EA00570BDE /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708522E176F89EA00570BDE /* GTMNSData+zlib.m */; };
 		772F31E617417286009807FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FF1174147E700A47A27 /* Foundation.framework */; };
 		772F31F117417297009807FD /* EKNKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F3120174149C6009807FD /* EKNKnobs.m */; };
-		772F31F2174172A7009807FD /* CollectionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31AF174162BB009807FD /* CollectionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31F3174172A7009807FD /* ConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31B1174162BB009807FD /* ConcurrentOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31F5174172A7009807FD /* Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31B5174162BB009807FD /* Logging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31F7174172A7009807FD /* MYDynamicObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31B9174162BB009807FD /* MYDynamicObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31F8174172A7009807FD /* MYErrorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31BB174162BB009807FD /* MYErrorUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31F9174172A7009807FD /* MYRegexUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31BD174162BB009807FD /* MYRegexUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31FA174172A7009807FD /* MYStreamUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31BF174162BB009807FD /* MYStreamUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31FC174172A7009807FD /* MYURLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31C3174162BB009807FD /* MYURLUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31FD174172A7009807FD /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31CA174162BB009807FD /* Target.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		772F31FE174172A7009807FD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31CC174162BB009807FD /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F44E17493F480052158B /* EKNLiveKnobs.m */; };
 		7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F48517495FAE0052158B /* EKNPropertyDescription.m */; };
 		77547AF41755518900566AF0 /* EKNUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77547AF31755518900566AF0 /* EKNUUID.m */; };
@@ -48,7 +51,6 @@
 		77B79661174174B9008242D4 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B79660174174B9008242D4 /* IPAddress.m */; };
 		77B7966917417504008242D4 /* MYDNSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7966517417504008242D4 /* MYDNSService.m */; };
 		77B7966A17417504008242D4 /* MYPortMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7966717417504008242D4 /* MYPortMapper.m */; };
-		77B7972A17417AD2008242D4 /* ExceptionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F31B3174162BB009807FD /* ExceptionUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77B7972E174180A6008242D4 /* EKNSharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7972D174180A6008242D4 /* EKNSharedConstants.m */; };
 		77B797521742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797511742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m */; };
 		77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797581742C76C008242D4 /* EKNLoggerPlugin.m */; };
@@ -74,43 +76,44 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7708520A176F89EA00570BDE /* CollectionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionUtils.h; sourceTree = "<group>"; };
+		7708520B176F89EA00570BDE /* CollectionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionUtils.m; sourceTree = "<group>"; };
+		7708520C176F89EA00570BDE /* ConcurrentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperation.h; sourceTree = "<group>"; };
+		7708520D176F89EA00570BDE /* ConcurrentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcurrentOperation.m; sourceTree = "<group>"; };
+		7708520E176F89EA00570BDE /* ExceptionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExceptionUtils.h; sourceTree = "<group>"; };
+		7708520F176F89EA00570BDE /* ExceptionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExceptionUtils.m; sourceTree = "<group>"; };
+		77085210176F89EA00570BDE /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
+		77085211176F89EA00570BDE /* Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logging.m; sourceTree = "<group>"; };
+		77085212176F89EA00570BDE /* MYBlockUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlockUtils.h; sourceTree = "<group>"; };
+		77085213176F89EA00570BDE /* MYBlockUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlockUtils.m; sourceTree = "<group>"; };
+		77085214176F89EA00570BDE /* MYDynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYDynamicObject.h; sourceTree = "<group>"; };
+		77085215176F89EA00570BDE /* MYDynamicObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYDynamicObject.m; sourceTree = "<group>"; };
+		77085216176F89EA00570BDE /* MYErrorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYErrorUtils.h; sourceTree = "<group>"; };
+		77085217176F89EA00570BDE /* MYErrorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYErrorUtils.m; sourceTree = "<group>"; };
+		77085218176F89EA00570BDE /* MYRegexUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYRegexUtils.h; sourceTree = "<group>"; };
+		77085219176F89EA00570BDE /* MYRegexUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYRegexUtils.m; sourceTree = "<group>"; };
+		7708521A176F89EA00570BDE /* MYStreamUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYStreamUtils.h; sourceTree = "<group>"; };
+		7708521B176F89EA00570BDE /* MYStreamUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYStreamUtils.m; sourceTree = "<group>"; };
+		7708521C176F89EA00570BDE /* MYURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLHandler.h; sourceTree = "<group>"; };
+		7708521D176F89EA00570BDE /* MYURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLHandler.m; sourceTree = "<group>"; };
+		7708521E176F89EA00570BDE /* MYURLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLUtils.h; sourceTree = "<group>"; };
+		7708521F176F89EA00570BDE /* MYURLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLUtils.m; sourceTree = "<group>"; };
+		77085220176F89EA00570BDE /* MYUtilities.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities.xcconfig; sourceTree = "<group>"; };
+		77085221176F89EA00570BDE /* MYUtilities_Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Debug.xcconfig; sourceTree = "<group>"; };
+		77085222176F89EA00570BDE /* MYUtilities_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYUtilities_Prefix.pch; sourceTree = "<group>"; };
+		77085223176F89EA00570BDE /* MYUtilities_Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Release.xcconfig; sourceTree = "<group>"; };
+		77085224176F89EA00570BDE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		77085225176F89EA00570BDE /* setObjToARC.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = setObjToARC.rb; sourceTree = "<group>"; };
+		77085226176F89EA00570BDE /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		77085227176F89EA00570BDE /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
+		77085228176F89EA00570BDE /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		77085229176F89EA00570BDE /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
+		7708522C176F89EA00570BDE /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		7708522D176F89EA00570BDE /* GTMNSData+zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSData+zlib.h"; sourceTree = "<group>"; };
+		7708522E176F89EA00570BDE /* GTMNSData+zlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSData+zlib.m"; sourceTree = "<group>"; };
+		7708522F176F89EA00570BDE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		772F3120174149C6009807FD /* EKNKnobs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNKnobs.m; path = iOS/EKNKnobs.m; sourceTree = SOURCE_ROOT; };
 		772F3123174149F9009807FD /* Knobs-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-iOS-Prefix.pch"; path = "iOS/Knobs-iOS-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		772F31AE174162BB009807FD /* CollectionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionUtils.h; sourceTree = "<group>"; };
-		772F31AF174162BB009807FD /* CollectionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionUtils.m; sourceTree = "<group>"; };
-		772F31B0174162BB009807FD /* ConcurrentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperation.h; sourceTree = "<group>"; };
-		772F31B1174162BB009807FD /* ConcurrentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcurrentOperation.m; sourceTree = "<group>"; };
-		772F31B2174162BB009807FD /* ExceptionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExceptionUtils.h; sourceTree = "<group>"; };
-		772F31B3174162BB009807FD /* ExceptionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExceptionUtils.m; sourceTree = "<group>"; };
-		772F31B4174162BB009807FD /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
-		772F31B5174162BB009807FD /* Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logging.m; sourceTree = "<group>"; };
-		772F31B6174162BB009807FD /* MYBlockUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlockUtils.h; sourceTree = "<group>"; };
-		772F31B7174162BB009807FD /* MYBlockUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlockUtils.m; sourceTree = "<group>"; };
-		772F31B8174162BB009807FD /* MYDynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYDynamicObject.h; sourceTree = "<group>"; };
-		772F31B9174162BB009807FD /* MYDynamicObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYDynamicObject.m; sourceTree = "<group>"; };
-		772F31BA174162BB009807FD /* MYErrorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYErrorUtils.h; sourceTree = "<group>"; };
-		772F31BB174162BB009807FD /* MYErrorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYErrorUtils.m; sourceTree = "<group>"; };
-		772F31BC174162BB009807FD /* MYRegexUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYRegexUtils.h; sourceTree = "<group>"; };
-		772F31BD174162BB009807FD /* MYRegexUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYRegexUtils.m; sourceTree = "<group>"; };
-		772F31BE174162BB009807FD /* MYStreamUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYStreamUtils.h; sourceTree = "<group>"; };
-		772F31BF174162BB009807FD /* MYStreamUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYStreamUtils.m; sourceTree = "<group>"; };
-		772F31C0174162BB009807FD /* MYURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLHandler.h; sourceTree = "<group>"; };
-		772F31C1174162BB009807FD /* MYURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLHandler.m; sourceTree = "<group>"; };
-		772F31C2174162BB009807FD /* MYURLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYURLUtils.h; sourceTree = "<group>"; };
-		772F31C3174162BB009807FD /* MYURLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYURLUtils.m; sourceTree = "<group>"; };
-		772F31C4174162BB009807FD /* MYUtilities.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities.xcconfig; sourceTree = "<group>"; };
-		772F31C5174162BB009807FD /* MYUtilities_Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Debug.xcconfig; sourceTree = "<group>"; };
-		772F31C6174162BB009807FD /* MYUtilities_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYUtilities_Prefix.pch; sourceTree = "<group>"; };
-		772F31C7174162BB009807FD /* MYUtilities_Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MYUtilities_Release.xcconfig; sourceTree = "<group>"; };
-		772F31C8174162BB009807FD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		772F31C9174162BB009807FD /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
-		772F31CA174162BB009807FD /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
-		772F31CB174162BB009807FD /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		772F31CC174162BB009807FD /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
-		772F31CF174162BB009807FD /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		772F31D0174162BB009807FD /* GTMNSData+zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSData+zlib.h"; sourceTree = "<group>"; };
-		772F31D1174162BB009807FD /* GTMNSData+zlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSData+zlib.m"; sourceTree = "<group>"; };
-		772F31D2174162BB009807FD /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		772F31E517417285009807FD /* libKnobs-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libKnobs-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7733F44E17493F480052158B /* EKNLiveKnobs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLiveKnobs.m; path = Shared/LiveKnobs/EKNLiveKnobs.m; sourceTree = SOURCE_ROOT; };
 		7733F48417495FA60052158B /* EKNPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNPropertyDescription.h; path = Shared/Include/EKNPropertyDescription.h; sourceTree = SOURCE_ROOT; };
@@ -211,61 +214,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		772F31AD174162BB009807FD /* MYUtilities */ = {
+		77085209176F89EA00570BDE /* MYUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				772F31AE174162BB009807FD /* CollectionUtils.h */,
-				772F31AF174162BB009807FD /* CollectionUtils.m */,
-				772F31B0174162BB009807FD /* ConcurrentOperation.h */,
-				772F31B1174162BB009807FD /* ConcurrentOperation.m */,
-				772F31B2174162BB009807FD /* ExceptionUtils.h */,
-				772F31B3174162BB009807FD /* ExceptionUtils.m */,
-				772F31B4174162BB009807FD /* Logging.h */,
-				772F31B5174162BB009807FD /* Logging.m */,
-				772F31B6174162BB009807FD /* MYBlockUtils.h */,
-				772F31B7174162BB009807FD /* MYBlockUtils.m */,
-				772F31B8174162BB009807FD /* MYDynamicObject.h */,
-				772F31B9174162BB009807FD /* MYDynamicObject.m */,
-				772F31BA174162BB009807FD /* MYErrorUtils.h */,
-				772F31BB174162BB009807FD /* MYErrorUtils.m */,
-				772F31BC174162BB009807FD /* MYRegexUtils.h */,
-				772F31BD174162BB009807FD /* MYRegexUtils.m */,
-				772F31BE174162BB009807FD /* MYStreamUtils.h */,
-				772F31BF174162BB009807FD /* MYStreamUtils.m */,
-				772F31C0174162BB009807FD /* MYURLHandler.h */,
-				772F31C1174162BB009807FD /* MYURLHandler.m */,
-				772F31C2174162BB009807FD /* MYURLUtils.h */,
-				772F31C3174162BB009807FD /* MYURLUtils.m */,
-				772F31C4174162BB009807FD /* MYUtilities.xcconfig */,
-				772F31C5174162BB009807FD /* MYUtilities_Debug.xcconfig */,
-				772F31C6174162BB009807FD /* MYUtilities_Prefix.pch */,
-				772F31C7174162BB009807FD /* MYUtilities_Release.xcconfig */,
-				772F31C8174162BB009807FD /* README.md */,
-				772F31C9174162BB009807FD /* Target.h */,
-				772F31CA174162BB009807FD /* Target.m */,
-				772F31CB174162BB009807FD /* Test.h */,
-				772F31CC174162BB009807FD /* Test.m */,
-				772F31CD174162BB009807FD /* vendor */,
+				7708520A176F89EA00570BDE /* CollectionUtils.h */,
+				7708520B176F89EA00570BDE /* CollectionUtils.m */,
+				7708520C176F89EA00570BDE /* ConcurrentOperation.h */,
+				7708520D176F89EA00570BDE /* ConcurrentOperation.m */,
+				7708520E176F89EA00570BDE /* ExceptionUtils.h */,
+				7708520F176F89EA00570BDE /* ExceptionUtils.m */,
+				77085210176F89EA00570BDE /* Logging.h */,
+				77085211176F89EA00570BDE /* Logging.m */,
+				77085212176F89EA00570BDE /* MYBlockUtils.h */,
+				77085213176F89EA00570BDE /* MYBlockUtils.m */,
+				77085214176F89EA00570BDE /* MYDynamicObject.h */,
+				77085215176F89EA00570BDE /* MYDynamicObject.m */,
+				77085216176F89EA00570BDE /* MYErrorUtils.h */,
+				77085217176F89EA00570BDE /* MYErrorUtils.m */,
+				77085218176F89EA00570BDE /* MYRegexUtils.h */,
+				77085219176F89EA00570BDE /* MYRegexUtils.m */,
+				7708521A176F89EA00570BDE /* MYStreamUtils.h */,
+				7708521B176F89EA00570BDE /* MYStreamUtils.m */,
+				7708521C176F89EA00570BDE /* MYURLHandler.h */,
+				7708521D176F89EA00570BDE /* MYURLHandler.m */,
+				7708521E176F89EA00570BDE /* MYURLUtils.h */,
+				7708521F176F89EA00570BDE /* MYURLUtils.m */,
+				77085220176F89EA00570BDE /* MYUtilities.xcconfig */,
+				77085221176F89EA00570BDE /* MYUtilities_Debug.xcconfig */,
+				77085222176F89EA00570BDE /* MYUtilities_Prefix.pch */,
+				77085223176F89EA00570BDE /* MYUtilities_Release.xcconfig */,
+				77085224176F89EA00570BDE /* README.md */,
+				77085225176F89EA00570BDE /* setObjToARC.rb */,
+				77085226176F89EA00570BDE /* Target.h */,
+				77085227176F89EA00570BDE /* Target.m */,
+				77085228176F89EA00570BDE /* Test.h */,
+				77085229176F89EA00570BDE /* Test.m */,
+				7708522A176F89EA00570BDE /* vendor */,
 			);
 			name = MYUtilities;
-			path = Libraries/MYUtilities;
+			path = Libraries/MYNetwork/vendor/MYUtilities;
 			sourceTree = SOURCE_ROOT;
 		};
-		772F31CD174162BB009807FD /* vendor */ = {
+		7708522A176F89EA00570BDE /* vendor */ = {
 			isa = PBXGroup;
 			children = (
-				772F31CE174162BB009807FD /* google-toolbox-for-mac */,
+				7708522B176F89EA00570BDE /* google-toolbox-for-mac */,
 			);
 			path = vendor;
 			sourceTree = "<group>";
 		};
-		772F31CE174162BB009807FD /* google-toolbox-for-mac */ = {
+		7708522B176F89EA00570BDE /* google-toolbox-for-mac */ = {
 			isa = PBXGroup;
 			children = (
-				772F31CF174162BB009807FD /* GTMDefines.h */,
-				772F31D0174162BB009807FD /* GTMNSData+zlib.h */,
-				772F31D1174162BB009807FD /* GTMNSData+zlib.m */,
-				772F31D2174162BB009807FD /* README */,
+				7708522C176F89EA00570BDE /* GTMDefines.h */,
+				7708522D176F89EA00570BDE /* GTMNSData+zlib.h */,
+				7708522E176F89EA00570BDE /* GTMNSData+zlib.m */,
+				7708522F176F89EA00570BDE /* README */,
 			);
 			path = "google-toolbox-for-mac";
 			sourceTree = "<group>";
@@ -444,7 +448,7 @@
 		77B7970C174177B4008242D4 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				772F31AD174162BB009807FD /* MYUtilities */,
+				77085209176F89EA00570BDE /* MYUtilities */,
 				77B79662174174BF008242D4 /* MYNetwork */,
 			);
 			name = Libraries;
@@ -503,29 +507,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				772F31F117417297009807FD /* EKNKnobs.m in Sources */,
-				772F31F2174172A7009807FD /* CollectionUtils.m in Sources */,
-				772F31F3174172A7009807FD /* ConcurrentOperation.m in Sources */,
-				77B7972A17417AD2008242D4 /* ExceptionUtils.m in Sources */,
-				772F31F5174172A7009807FD /* Logging.m in Sources */,
-				772F31F7174172A7009807FD /* MYDynamicObject.m in Sources */,
-				772F31F8174172A7009807FD /* MYErrorUtils.m in Sources */,
-				772F31F9174172A7009807FD /* MYRegexUtils.m in Sources */,
-				772F31FA174172A7009807FD /* MYStreamUtils.m in Sources */,
-				772F31FC174172A7009807FD /* MYURLUtils.m in Sources */,
-				772F31FD174172A7009807FD /* Target.m in Sources */,
-				772F31FE174172A7009807FD /* Test.m in Sources */,
 				77B7963D17417439008242D4 /* BLIPConnection.m in Sources */,
+				77085232176F89EA00570BDE /* ExceptionUtils.m in Sources */,
 				77B7963E17417439008242D4 /* BLIPDispatcher.m in Sources */,
+				77085236176F89EA00570BDE /* MYErrorUtils.m in Sources */,
 				77B7963F17417439008242D4 /* BLIPMessage.m in Sources */,
 				77B7964017417439008242D4 /* BLIPProperties.m in Sources */,
 				77B7964117417439008242D4 /* BLIPReader.m in Sources */,
 				77B7964217417439008242D4 /* BLIPRequest.m in Sources */,
 				77B7964417417439008242D4 /* BLIPWriter.m in Sources */,
 				77B7964717417439008242D4 /* MYAddressLookup.m in Sources */,
+				77085230176F89EA00570BDE /* CollectionUtils.m in Sources */,
+				7708523C176F89EA00570BDE /* Test.m in Sources */,
+				7708523A176F89EA00570BDE /* MYURLUtils.m in Sources */,
 				77B7964817417439008242D4 /* MYBonjourBrowser.m in Sources */,
 				77B7964917417439008242D4 /* MYBonjourQuery.m in Sources */,
 				77B7964A17417439008242D4 /* MYBonjourRegistration.m in Sources */,
 				77B7964B17417439008242D4 /* MYBonjourService.m in Sources */,
+				77085234176F89EA00570BDE /* MYBlockUtils.m in Sources */,
 				77B7965917417460008242D4 /* TCPConnection.m in Sources */,
 				77B7965A17417460008242D4 /* TCPEndpoint+Certs.m in Sources */,
 				77B7965B17417460008242D4 /* TCPEndpoint.m in Sources */,
@@ -534,21 +533,28 @@
 				77B7965E17417460008242D4 /* TCPWriter.m in Sources */,
 				77B79661174174B9008242D4 /* IPAddress.m in Sources */,
 				77B7966917417504008242D4 /* MYDNSService.m in Sources */,
+				77085233176F89EA00570BDE /* Logging.m in Sources */,
 				77B7966A17417504008242D4 /* MYPortMapper.m in Sources */,
 				77B7972E174180A6008242D4 /* EKNSharedConstants.m in Sources */,
 				77B797521742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m in Sources */,
+				77085238176F89EA00570BDE /* MYStreamUtils.m in Sources */,
 				77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */,
+				77085231176F89EA00570BDE /* ConcurrentOperation.m in Sources */,
 				77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */,
 				77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */,
 				77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */,
 				77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */,
 				77F70D5617452C2D0064E665 /* UIView+EKNFrobInfo.m in Sources */,
+				7708523B176F89EA00570BDE /* Target.m in Sources */,
+				7708523D176F89EA00570BDE /* GTMNSData+zlib.m in Sources */,
 				77F70D59174540EE0064E665 /* EKNViewFrobInfo.m in Sources */,
 				77F70D62174685420064E665 /* EKNPropertyInfo.m in Sources */,
 				778E54D51746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m in Sources */,
+				77085235176F89EA00570BDE /* MYDynamicObject.m in Sources */,
 				77A51B211747FF8700A66451 /* UIImageView+EKNFrobInfo.m in Sources */,
 				77A51B2617480BF600A66451 /* EKNLiveKnobsPlugin.m in Sources */,
 				77A51B2917480E7B00A66451 /* EKNWireColor.m in Sources */,
+				77085237176F89EA00570BDE /* MYRegexUtils.m in Sources */,
 				77A51B2F17481C5600A66451 /* EKNKnobListenerInfo.m in Sources */,
 				7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */,
 				7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */,
