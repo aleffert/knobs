@@ -65,6 +65,7 @@ static NSMapTable* gFrobViewTable = nil;
           [EKNPropertyDescription togglePropertyWithName:@"hidden"],
           [EKNPropertyDescription pointPropertyWithName:@"center"],
           [EKNPropertyDescription togglePropertyWithName:@"clipsToBounds"],
+          [EKNPropertyDescription togglePropertyWithName:@"userInteractionEnabled"],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"alpha" min:0 max:1],
           [EKNPropertyDescription rectPropertyWithName:@"frame"],
           [EKNPropertyDescription rectPropertyWithName:@"bounds"],
