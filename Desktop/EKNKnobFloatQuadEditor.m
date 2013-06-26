@@ -52,6 +52,14 @@
             field.floatValue = rectFields[idx];
         }
     }];
+    
+    NSArray* names = [self.info.propertyDescription.parameters objectForKey:@(EKNPropertyFloatQuadFieldNames)];
+    [self.namesLabels enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
+        if(field.currentEditor == nil) {
+            field.stringValue = names[idx];
+        }
+    }];
+    
     self.fieldName.stringValue = self.info.propertyDescription.name;
 }
 
