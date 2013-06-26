@@ -34,7 +34,7 @@
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:EKNPropertyTypeSlider];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:EKNPropertyTypeImage];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobRectEditor" bundle:nil] forIdentifier:EKNPropertyTypeRect];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatQuad];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
         self.scrollView.frame = self.bounds;
@@ -99,7 +99,7 @@
                             EKNPropertyTypeToggle : @57,
                             EKNPropertyTypeSlider : @71,
                             EKNPropertyTypeImage : @236,
-                            EKNPropertyTypeRect : @122,
+                            EKNPropertyTypeFloatQuad : @122,
                             EKNPropertyTypeFloatPair : @90,
                             EKNPropertyTypeAffineTransform : @154,
                             };

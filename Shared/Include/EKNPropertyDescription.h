@@ -28,13 +28,17 @@ enum {
     EKNPropertyImageWrapCG
 };
 
-extern NSString* EKNPropertyTypeRect;
-extern NSString* EKNPropertyTypeFloatPair;
-extern NSString* EKNPropertyTypeAffineTransform;
+extern NSString* EKNPropertyTypeFloatQuad;
+enum {
+    EKNPropertyFloatQuadFieldNames
+};
 
+extern NSString* EKNPropertyTypeFloatPair;
 enum {
     EKNPropertyFloatPairFieldNames
 };
+
+extern NSString* EKNPropertyTypeAffineTransform;
 
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
@@ -45,6 +49,7 @@ enum {
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
 + (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;

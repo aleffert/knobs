@@ -55,7 +55,7 @@ static NSMapTable* gFrobViewTable = nil;
     return [gFrobViewTable objectForKey:viewID];
 }
 
-+ (NSArray*)frob_propertyInfos {
+- (NSArray*)frob_propertyInfos {
     static NSArray* viewProperties = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -114,7 +114,7 @@ static NSMapTable* gFrobViewTable = nil;
 
 - (NSArray*)frob_properties {
     NSMutableArray* properties = [NSMutableArray array];
-    for(EKNPropertyDescription* description in [[self class] frob_propertyInfos]) {
+    for(EKNPropertyDescription* description in [self frob_propertyInfos]) {
         id value = [description wrappedValueFromSource:self];
         EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:description value:value];
         [properties addObject:info];

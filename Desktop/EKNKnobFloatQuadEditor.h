@@ -1,5 +1,5 @@
 //
-//  EKNKnobRectEditor.h
+//  EKNKnobFloatQuadEditor.h
 //  Knobs
 //
 //  Created by Akiva Leffert on 5/17/13.
@@ -10,6 +10,6 @@
 
 #import "EKNPropertyEditor.h"
 
-@interface EKNKnobRectEditor : NSView <EKNPropertyEditor>
+@interface EKNKnobFloatQuadEditor : NSView <EKNPropertyEditor>
 
 @end

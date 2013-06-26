@@ -56,8 +56,8 @@
 		778E54C01746B95A009D1BA1 /* EKNKnobSliderEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54BE1746B95A009D1BA1 /* EKNKnobSliderEditor.xib */; };
 		778E54C31746C577009D1BA1 /* EKNKnobImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54C21746C576009D1BA1 /* EKNKnobImageEditor.m */; };
 		778E54C61746C662009D1BA1 /* EKNKnobImageEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54C41746C662009D1BA1 /* EKNKnobImageEditor.xib */; };
-		778E54C91746CB5D009D1BA1 /* EKNKnobRectEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54C81746CB5D009D1BA1 /* EKNKnobRectEditor.m */; };
-		778E54CC1746CDB7009D1BA1 /* EKNKnobRectEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54CA1746CDB7009D1BA1 /* EKNKnobRectEditor.xib */; };
+		778E54C91746CB5D009D1BA1 /* EKNKnobFloatQuadEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54C81746CB5D009D1BA1 /* EKNKnobFloatQuadEditor.m */; };
+		778E54CC1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54CA1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib */; };
 		778E54CF1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */; };
 		778E54D21746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54D01746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib */; };
 		77A51B181747F44300A66451 /* EKNKnobAffineTransformEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */; };
@@ -244,9 +244,9 @@
 		778E54C11746C576009D1BA1 /* EKNKnobImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobImageEditor.h; path = Desktop/EKNKnobImageEditor.h; sourceTree = SOURCE_ROOT; };
 		778E54C21746C576009D1BA1 /* EKNKnobImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobImageEditor.m; path = Desktop/EKNKnobImageEditor.m; sourceTree = SOURCE_ROOT; };
 		778E54C51746C662009D1BA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobImageEditor.xib; sourceTree = SOURCE_ROOT; };
-		778E54C71746CB5C009D1BA1 /* EKNKnobRectEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobRectEditor.h; path = Desktop/EKNKnobRectEditor.h; sourceTree = SOURCE_ROOT; };
-		778E54C81746CB5D009D1BA1 /* EKNKnobRectEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobRectEditor.m; path = Desktop/EKNKnobRectEditor.m; sourceTree = SOURCE_ROOT; };
-		778E54CB1746CDB7009D1BA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobRectEditor.xib; sourceTree = SOURCE_ROOT; };
+		778E54C71746CB5C009D1BA1 /* EKNKnobFloatQuadEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobFloatQuadEditor.h; path = Desktop/EKNKnobFloatQuadEditor.h; sourceTree = SOURCE_ROOT; };
+		778E54C81746CB5D009D1BA1 /* EKNKnobFloatQuadEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobFloatQuadEditor.m; path = Desktop/EKNKnobFloatQuadEditor.m; sourceTree = SOURCE_ROOT; };
+		778E54CB1746CDB7009D1BA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobFloatQuadEditor.xib; sourceTree = SOURCE_ROOT; };
 		778E54CD1746D33E009D1BA1 /* EKNKnobFloatPairEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobFloatPairEditor.h; path = Desktop/EKNKnobFloatPairEditor.h; sourceTree = SOURCE_ROOT; };
 		778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobFloatPairEditor.m; path = Desktop/EKNKnobFloatPairEditor.m; sourceTree = SOURCE_ROOT; };
 		778E54D11746D4B0009D1BA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobFloatPairEditor.xib; sourceTree = SOURCE_ROOT; };
@@ -465,7 +465,7 @@
 			children = (
 				77A51B1C1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib */,
 				778E54D01746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib */,
-				778E54CA1746CDB7009D1BA1 /* EKNKnobRectEditor.xib */,
+				778E54CA1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib */,
 				778E54C41746C662009D1BA1 /* EKNKnobImageEditor.xib */,
 				778E54BE1746B95A009D1BA1 /* EKNKnobSliderEditor.xib */,
 				778E54B81746B332009D1BA1 /* EKNKnobToggleEditor.xib */,
@@ -611,8 +611,8 @@
 				77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */,
 				778E54CD1746D33E009D1BA1 /* EKNKnobFloatPairEditor.h */,
 				778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */,
-				778E54C71746CB5C009D1BA1 /* EKNKnobRectEditor.h */,
-				778E54C81746CB5D009D1BA1 /* EKNKnobRectEditor.m */,
+				778E54C71746CB5C009D1BA1 /* EKNKnobFloatQuadEditor.h */,
+				778E54C81746CB5D009D1BA1 /* EKNKnobFloatQuadEditor.m */,
 				778E54C11746C576009D1BA1 /* EKNKnobImageEditor.h */,
 				778E54C21746C576009D1BA1 /* EKNKnobImageEditor.m */,
 				778E54BB1746B7F8009D1BA1 /* EKNKnobSliderEditor.h */,
@@ -935,7 +935,7 @@
 				778E54C01746B95A009D1BA1 /* EKNKnobSliderEditor.xib in Resources */,
 				778E54C61746C662009D1BA1 /* EKNKnobImageEditor.xib in Resources */,
 				77085204176F6B8100570BDE /* README in Resources */,
-				778E54CC1746CDB7009D1BA1 /* EKNKnobRectEditor.xib in Resources */,
+				778E54CC1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib in Resources */,
 				770851FD176F6B8100570BDE /* MYUtilities.xcconfig in Resources */,
 				778E54D21746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib in Resources */,
 				77A51B1E1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib in Resources */,
@@ -1031,7 +1031,7 @@
 				778E54BD1746B7F8009D1BA1 /* EKNKnobSliderEditor.m in Sources */,
 				778E54C31746C577009D1BA1 /* EKNKnobImageEditor.m in Sources */,
 				770851F6176F6B8100570BDE /* MYBlockUtils.m in Sources */,
-				778E54C91746CB5D009D1BA1 /* EKNKnobRectEditor.m in Sources */,
+				778E54C91746CB5D009D1BA1 /* EKNKnobFloatQuadEditor.m in Sources */,
 				778E54CF1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m in Sources */,
 				77A51B181747F44300A66451 /* EKNKnobAffineTransformEditor.m in Sources */,
 				770851F2176F6B8100570BDE /* CollectionUtils.m in Sources */,
@@ -1175,12 +1175,12 @@
 			name = EKNKnobImageEditor.xib;
 			sourceTree = "<group>";
 		};
-		778E54CA1746CDB7009D1BA1 /* EKNKnobRectEditor.xib */ = {
+		778E54CA1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				778E54CB1746CDB7009D1BA1 /* en */,
 			);
-			name = EKNKnobRectEditor.xib;
+			name = EKNKnobFloatQuadEditor.xib;
 			sourceTree = "<group>";
 		};
 		778E54D01746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib */ = {

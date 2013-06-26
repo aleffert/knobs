@@ -14,7 +14,7 @@ NSString* EKNPropertyTypeColor = @"color";
 NSString* EKNPropertyTypeToggle = @"toggle";
 NSString* EKNPropertyTypeSlider = @"slider";
 NSString* EKNPropertyTypeImage = @"image";
-NSString* EKNPropertyTypeRect = @"rect";
+NSString* EKNPropertyTypeFloatQuad = @"floatQuad";
 NSString* EKNPropertyTypeFloatPair = @"floatPair";
 NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 
@@ -61,7 +61,11 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 }
 
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
-    return [self propertyWithName:name type:EKNPropertyTypeRect parameters:@{}];
+    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"]}];
+}
+
++ (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"top", @"left", @"bottom", @"right"]}];
 }
 
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString *)name {

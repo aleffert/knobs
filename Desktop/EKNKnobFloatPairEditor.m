@@ -30,6 +30,7 @@
 
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
+    // A point *should* have the same structure as any other float pair
     NSPoint point = [info.value pointValue];
     if(!self.left.currentEditor) {
         self.left.floatValue = point.x;

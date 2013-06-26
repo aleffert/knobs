@@ -13,7 +13,7 @@
 
 @implementation UIImageView (EKNFrobInfo)
 
-+ (NSArray*)frob_propertyInfos {
+- (NSArray*)frob_propertyInfos {
     NSArray* infos = [super frob_propertyInfos];
     return [@[
             [EKNPropertyDescription imagePropertyWithName:@"image" wrapCG:NO],

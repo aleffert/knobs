@@ -13,11 +13,12 @@
 
 @implementation UIScrollView (EKNViewFrobInfo)
 
-+ (NSArray*)frob_propertyInfos {
+- (NSArray*)frob_propertyInfos {
     NSArray* infos = [super frob_propertyInfos];
     return [@[
             [EKNPropertyDescription pointPropertyWithName:@"contentOffset"],
             [EKNPropertyDescription sizePropertyWithName:@"contentSize"],
+            [EKNPropertyDescription edgeInsetsPropertyWithName:@"contentInset"],
             ] arrayByAddingObjectsFromArray:infos];
 }
 
