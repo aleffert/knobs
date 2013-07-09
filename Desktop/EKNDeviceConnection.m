@@ -11,6 +11,7 @@
 #import "EKNDevice.h"
 #import "EKNNamedChannel.h"
 
+#import "MYAddressLookup.h"
 #import "MYBonjourService.h"
 #import "BLIP.h"
 
@@ -26,7 +27,7 @@
 - (void)connectToDevice:(EKNDevice *)device {
     if(![self.activeDevice isEqual:device]) {
         self.activeDevice = device;
-        self.connection = [[BLIPConnection alloc] initToBonjourService:device.service];
+        self.connection = [[BLIPConnection alloc] initToAddress:device.service.addressLookup.addresses.anyObject];
         self.connection.delegate = self;
         [self.connection open];
     }
