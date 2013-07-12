@@ -107,7 +107,6 @@
 }
 
 - (void)connectionDidClose:(TCPConnection *)connection {
-    self.connection = nil;
     NSLog(@"CLOSING KNOBS CONNECTION");
     for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
         [plugin endedConnection];
@@ -115,6 +114,7 @@
     if(self.enabled) {
         [self start];
     }
+    self.connection = nil;
 }
 
 - (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {
