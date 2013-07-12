@@ -124,13 +124,13 @@
 }
 
 - (void)processRemovedViewMessage:(NSDictionary*)message {
-    NSString* removedID = [message objectForKey:EKNViewFrobRemovedViewID];
+    NSString* removedID = [self canonicalize:[message objectForKey:EKNViewFrobRemovedViewID]];
     EKNViewFrobInfo* removedInfo = [self.viewInfos objectForKey:removedID];
     EKNViewFrobInfo* parent = [self.viewInfos objectForKey:removedInfo.parentID];
     parent.children = [parent.children filter:^BOOL(NSString* childID) {
         return ![childID isEqualToString:removedID];
     }];
-    [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
+    [self.outline reloadItem:removedID reloadChildren:YES];
 }
 
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
@@ -141,6 +141,23 @@
     if([updatedID isEqual:[self selectedInfo].viewID]) {
         [self showKnobsForInfo:info];
     }
+}
+
+- (void)processSelectViewMessage:(NSDictionary*)message {
+    NSString* viewID = [message objectForKey:EKNViewFrobSelectedViewID];
+    EKNViewFrobInfo* info = [self.viewInfos objectForKey:viewID];
+    [self selectInfo:info];
+    NSString* item = [self canonicalize:viewID];
+    
+    NSMutableArray* items = [NSMutableArray array];
+    
+    for(; info != nil; info = [self.viewInfos objectForKey:info.parentID]) {
+        [items addObject:info.viewID];
+    }
+    for(NSString* item in items.reverseObjectEnumerator) {
+        [self.outline expandItem:item];
+    }
+    [self.outline selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.outline rowForItem:item]] byExtendingSelection:NO];
 }
 
 - (void)processMessage:(NSDictionary*)message {
@@ -167,6 +184,9 @@
             [self processMessage:childMessage];
         }
     }
+    else if([messageType isEqualToString:EKNViewFrobMessageSelect]) {
+        [self processSelectViewMessage:message];
+    }
     else {
         NSLog(@"unknown view frobber message type: %@", messageType);
     }
@@ -182,6 +202,12 @@
 }
 
 #pragma mark Outline View
+
+- (void)selectInfo:(EKNViewFrobInfo*)info {
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
+    [self.context sendMessage:archive onChannel:self.channel];
+    [self showKnobsForInfo:info];
+}
 
 - (EKNViewFrobInfo*)selectedInfo {
     NSInteger selectedRow = [self.outline selectedRow];
@@ -253,11 +279,14 @@
         [self.context sendMessage:archive onChannel:self.channel];
     }
     else {
-        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
-        [self.context sendMessage:archive onChannel:self.channel];
-        [self showKnobsForInfo:info];
+        [self selectInfo:info];
     }
 
+}
+
+- (IBAction)chooseFromDevice:(id)sender {
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageActivateTapSelection}];
+    [self.context sendMessage:archive onChannel:self.channel];
 }
 
 #pragma Knob Editor

@@ -21,6 +21,7 @@
 @interface EKNViewFrobPlugin ()
 
 @property (strong, nonatomic) UIWindow* focusOverlayWindow;
+@property (strong, nonatomic) UIView* tapSelectionView;
 
 @property (strong, nonatomic) id <EKNDevicePluginContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
@@ -150,7 +151,41 @@
         EKNPropertyInfo* info = [message objectForKey:EKNViewFrobChangedPropertyInfo];
         [info.propertyDescription setWrappedValue:info.value ofSource:view];
     }
+    else if([messageType isEqualToString:EKNViewFrobMessageActivateTapSelection]) {
+        [self showSelectionView];
+    }
+    else {
+        NSLog(@"Unknown knobs message type %@", messageType);
+    }
 }
+
+#pragma mark Tap To Select
+
+- (void)makeSelectionViewIfNecessary {
+    if(self.tapSelectionView == nil) {
+        self.tapSelectionView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        self.tapSelectionView.backgroundColor = [UIColor colorWithRed:0 green:.3 blue:.9 alpha:.3];
+        UIGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choseView:)];
+        [self.tapSelectionView addGestureRecognizer:tapGesture];
+    }
+}
+
+- (void)showSelectionView {
+    [self makeSelectionViewIfNecessary];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.tapSelectionView];
+}
+
+- (void)choseView:(UIGestureRecognizer*)gesture {
+    UIWindow* window = self.tapSelectionView.window;
+    CGPoint location = [window convertPoint:[gesture locationInView:self.tapSelectionView] toView:window];
+    [self.tapSelectionView removeFromSuperview];
+    UIView* tappedView = [window hitTest:location withEvent:nil];
+    if(tappedView != nil) {
+        NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageSelect, EKNViewFrobSelectedViewID : tappedView.frob_viewID};
+        [self enqueueMessage:message];
+    }
+}
+
 
 #pragma mark View Operations
 

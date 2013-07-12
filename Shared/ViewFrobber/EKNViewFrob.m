@@ -35,6 +35,11 @@ NSString* EKNViewFrobRemovedViewID = @"viewID";
 NSString* EKNViewFrobMessageFocusView = @"FocusView";
 NSString* EKNViewFrobFocusViewID = @"viewID";
 
+NSString* EKNViewFrobMessageActivateTapSelection = @"ActiveSelection";
+
+NSString* EKNViewFrobMessageSelect = @"Select";
+NSString* EKNViewFrobSelectedViewID = @"viewID";
+
 NSString* EKNViewFrobMessageUpdateProperties = @"UpdatedProperties";
 NSString* EKNViewFrobUpdatedProperties = @"properties";
 NSString* EKNViewFrobUpdatedViewID = @"viewID";

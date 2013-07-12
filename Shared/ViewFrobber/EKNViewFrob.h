@@ -33,6 +33,11 @@ extern NSString* EKNViewFrobRemovedViewID;
 extern NSString* EKNViewFrobMessageFocusView;
 extern NSString* EKNViewFrobFocusViewID;
 
+extern NSString* EKNViewFrobMessageActivateTapSelection;
+
+extern NSString* EKNViewFrobMessageSelect;
+extern NSString* EKNViewFrobSelectedViewID;
+
 extern NSString* EKNViewFrobMessageUpdateProperties;
 extern NSString* EKNViewFrobUpdatedProperties;
 extern NSString* EKNViewFrobUpdatedViewID;
