@@ -46,9 +46,12 @@ static NSMapTable* gFrobViewTable = nil;
 }
 
 + (void)frob_enable {
-    gFrobViewTable = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
-    [self frob_swapMethodWithSelector:@selector(didMoveToSuperview) withSelector:@selector(frob_didMoveToSuperview)];
-    [self frob_swapMethodWithSelector:@selector(didMoveToWindow) withSelector:@selector(frob_didMoveToWindow)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        gFrobViewTable = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
+        [self frob_swapMethodWithSelector:@selector(didMoveToSuperview) withSelector:@selector(frob_didMoveToSuperview)];
+        [self frob_swapMethodWithSelector:@selector(didMoveToWindow) withSelector:@selector(frob_didMoveToWindow)];
+    });
 }
 
 + (UIView*)frob_viewWithID:(NSString*)viewID {

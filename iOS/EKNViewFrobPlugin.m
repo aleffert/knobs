@@ -44,13 +44,6 @@
     static EKNViewFrobPlugin* frobber = nil;
     dispatch_once(&onceToken, ^{
         frobber = [[EKNViewFrobPlugin alloc] init];
-        [UIView frob_enable];
-        frobber.focusOverlayWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        frobber.focusOverlayWindow.layer.borderWidth = 3;
-        frobber.focusOverlayWindow.layer.borderColor = [UIColor colorWithRed:0 green:.5 blue:1. alpha:1.].CGColor;
-        frobber.focusOverlayWindow.userInteractionEnabled = NO;
-        frobber.focusOverlayWindow.windowLevel = UIWindowLevelAlert;
-        frobber.focusOverlayWindow.hidden = YES;
     });
     return frobber;
 }
@@ -75,6 +68,7 @@
 }
 
 - (void)beganConnection {
+    [UIView frob_enable];
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageBegin}];
     [self.context sendMessage:data onChannel:self.channel];
 }
@@ -109,7 +103,19 @@
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
+- (void)makeFocusWindowIfNecessary {
+    if(self.focusOverlayWindow == nil) {
+        self.focusOverlayWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        self.focusOverlayWindow.layer.borderWidth = 3;
+        self.focusOverlayWindow.layer.borderColor = [UIColor colorWithRed:0 green:.5 blue:1. alpha:1.].CGColor;
+        self.focusOverlayWindow.userInteractionEnabled = NO;
+        self.focusOverlayWindow.windowLevel = UIWindowLevelAlert;
+        self.focusOverlayWindow.hidden = YES;
+    }
+}
+
 - (void)pushFocusedView:(NSTimer*)timer {
+    [self makeFocusWindowIfNecessary];
     UIView* focusedView = [UIView frob_viewWithID:self.focusedViewID];
     if(focusedView == nil) {
         [timer invalidate];
