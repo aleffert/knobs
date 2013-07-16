@@ -13,13 +13,14 @@
 
 @implementation UIImageView (EKNFrobInfo)
 
-- (NSArray*)frob_propertyInfos {
-    NSArray* infos = [super frob_propertyInfos];
-    return [@[
-            [EKNPropertyDescription imagePropertyWithName:@"image" wrapCG:NO],
-            ] arrayByAddingObjectsFromArray:infos];
-
-}
+// Bring back once we only send property infos for focused object
+//- (NSArray*)frob_propertyInfos {
+//    NSArray* infos = [super frob_propertyInfos];
+//    return [@[
+//            [EKNPropertyDescription imagePropertyWithName:@"image" wrapCG:NO],
+//            ] arrayByAddingObjectsFromArray:infos];
+//
+//}
 
 
 @end

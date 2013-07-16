@@ -12,18 +12,8 @@
 @class EKNDeviceConnection;
 @class EKNDeviceFinder;
 
-@protocol EKNConsoleWindowControllerDelegate;
-
 @interface EKNConsoleWindowController : NSWindowController <NSWindowDelegate>
 
 - (id)initWithPluginRegistry:(EKNConsolePluginRegistry*)pluginRegistry;
-
-@property (weak, nonatomic) id <EKNConsoleWindowControllerDelegate> delegate;
-
-@end
-
-@protocol EKNConsoleWindowControllerDelegate <NSObject>
-
-- (void)willCloseWindowWithController:(EKNConsoleWindowController*)windowController;
 
 @end

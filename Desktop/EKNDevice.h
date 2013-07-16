@@ -14,11 +14,14 @@
 
 - (id)initWithService:(MYBonjourService*)service;
 
-@property (readonly, strong, nonatomic) NSString* hostname;
+@property (readonly, strong, nonatomic) NSString* hostName;
 @property (readonly, assign, nonatomic) NSUInteger port;
-@property (readonly, strong, nonatomic) NSString* name;
+@property (readonly, strong, nonatomic) NSString* serviceName;
+@property (readonly, strong, nonatomic) NSString* displayName;
 
 @property (readonly, strong, nonatomic) MYBonjourService* service;
+
+- (BOOL)isEqualToDevice:(EKNDevice*)device;
 
 @end
 

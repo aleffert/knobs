@@ -10,6 +10,4 @@
 
 @interface EKNAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
-
 @end

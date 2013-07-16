@@ -25,6 +25,7 @@
 - (void)addKnob:(EKNKnobInfo*)knob;
 - (void)updateKnobWithID:(NSString*)knobID toValue:(id)value;
 - (void)removeKnobWithID:(NSString*)knobID;
+- (void)clear;
 
 @end
 

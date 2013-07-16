@@ -198,7 +198,11 @@
 }
 
 - (void)disconnectedFromDevice {
-    // TODO. Show something useful
+    [self.viewInfos removeAllObjects];
+    self.rootID = nil;
+    [self.canonicalKeys removeAllObjects];
+    [self.outline reloadData];
+    [self.knobEditor clear];
 }
 
 #pragma mark Outline View

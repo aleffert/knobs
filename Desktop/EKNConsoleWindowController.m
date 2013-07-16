@@ -17,19 +17,20 @@
 #import "EKNDeviceFinderView.h"
 #import "EKNNamedChannel.h"
 
-@interface EKNConsoleWindowController () <EKNDeviceFinderViewDelegate, EKNDeviceConnectionDelegate, EKNConsoleControllerContext>
+static NSString* const EKNLastUsedDeviceServiceName = @"EKNLastUsedDeviceServiceName";
+static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
+
+@interface EKNConsoleWindowController () <EKNDeviceConnectionDelegate, EKNConsoleControllerContext>
 
 @property (strong, nonatomic) EKNDevice* activeDevice;
-@property (assign, nonatomic) BOOL showingDeviceFinder;
 @property (strong, nonatomic) EKNDeviceFinder* deviceFinder;
 @property (strong, nonatomic) EKNDeviceConnection* deviceConnection;
 
 @property (strong, nonatomic) EKNConsolePluginRegistry* pluginRegistry;
 @property (strong, nonatomic) EKNConsoleControllerContextDispatcher* pluginContext;
 
-@property (strong, nonatomic) IBOutlet NSPanel* devicePickerSheet;
-@property (strong, nonatomic) IBOutlet EKNDeviceFinderView* finderView;
 @property (strong, nonatomic) IBOutlet NSTabView* tabs;
+@property (strong, nonatomic) IBOutlet NSPopUpButton* popup;
 
 @property (strong, nonatomic) NSMutableDictionary* activeChannels;
 
@@ -43,6 +44,8 @@
         self.pluginRegistry = pluginRegistry;
         self.pluginContext = [[EKNConsoleControllerContextDispatcher alloc] init];
         self.pluginContext.delegate = self;
+        
+        self.deviceFinder = [[EKNDeviceFinder alloc] init];
     }
     return self;
 }
@@ -57,38 +60,99 @@
 
 - (void)windowDidLoad
 {
+    self.deviceConnection = [[EKNDeviceConnection alloc] init];
+    self.deviceConnection.delegate = self;
+    
     self.activeChannels = [[NSMutableDictionary alloc] init];
     [super windowDidLoad];
     self.window.delegate = self;
-    [self showDevicePicker];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceListChanged) name:EKNActiveDeviceListChangedNotification object:nil];
+    
+    self.deviceFinder = [[EKNDeviceFinder alloc] init];
+    [self.deviceFinder start];
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
     [self.deviceConnection close];
-    [self.delegate willCloseWindowWithController:self];
 }
 
-- (void)showDevicePicker {
-    NSAssert([NSThread isMainThread], @"Not on main thread");
-    self.showingDeviceFinder = YES;
-    [[NSBundle mainBundle] loadNibNamed:@"EKNDeviceFinderSheet" owner:self topLevelObjects:nil];
-    [NSApp beginSheet:self.devicePickerSheet modalForWindow:self.window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+- (IBAction)close:(id)sender {
+    [self close];
 }
 
-- (void)deviceFinderViewCancelled:(EKNDeviceFinderView *)view {
-    [NSApp endSheet:self.devicePickerSheet];
-    [self.window orderOut:nil];
-    [self.delegate willCloseWindowWithController:self];
+#pragma mark Device Popup
+
+- (BOOL)isLastSeenDevice:(EKNDevice*)device {
+    NSString* lastDeviceName = [[NSUserDefaults standardUserDefaults] objectForKey:EKNLastUsedDeviceServiceName];
+    NSString* lastDeviceHost = [[NSUserDefaults standardUserDefaults] objectForKey:EKNLastUsedDeviceHostName];
+    
+    return [device.serviceName isEqualToString:lastDeviceName] && [device.hostName isEqualToString:lastDeviceHost];
 }
 
-- (void)deviceFinderView:(EKNDeviceFinderView *)view choseDevice:(EKNDevice *)device {
-    self.deviceConnection = [[EKNDeviceConnection alloc] init];
-    self.deviceConnection.delegate = self;
-    [self.deviceConnection connectToDevice:device];
-    [NSApp endSheet:self.devicePickerSheet];
-    [self.devicePickerSheet orderOut:nil];
+- (void)saveLastSeenDevice:(EKNDevice*)device {
+    [[NSUserDefaults standardUserDefaults] setObject:device.serviceName forKey:EKNLastUsedDeviceServiceName];
+    [[NSUserDefaults standardUserDefaults] setObject:device.hostName forKey:EKNLastUsedDeviceHostName];
 }
 
+- (void)rebuildPopupWithDevices:(NSArray*)devices {
+    [self.popup.menu removeAllItems];
+    
+    [self.popup.menu addItemWithTitle:@"None" action:@selector(choseDeviceItem:) keyEquivalent:@""];
+    
+    for(EKNDevice* device in devices) {
+        NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:device.displayName action:@selector(choseDeviceItem:) keyEquivalent:@""];
+        item.representedObject = device;
+        item.target = self;
+        [self.popup.menu addItem:item];
+        if([device isEqualToDevice:self.deviceConnection.activeDevice]) {
+            item.state = NSOnState;
+            [self.popup selectItem:item];
+        }
+    }
+
+}
+
+- (void)switchToDevice:(EKNDevice*)device {
+    if(![self.deviceConnection.activeDevice isEqualToDevice:device]) {
+        [self.deviceConnection connectToDevice:device];
+        [self rebuildPopupWithDevices:[self devices]];
+    }
+}
+
+- (void)choseDeviceItem:(NSMenuItem*)item {
+    EKNDevice* device = item.representedObject;
+    [self switchToDevice:device];
+    [self saveLastSeenDevice:device];
+}
+
+#pragma mark Device Finder
+
+- (NSArray*)devices {
+    NSArray* devices = self.deviceFinder.activeDevices;
+    if(self.deviceConnection.activeDevice != nil) {
+        return [@[self.deviceConnection.activeDevice] arrayByAddingObjectsFromArray:devices];
+    }
+    else {
+        return devices;
+    }
+}
+
+- (void)deviceListChanged {
+    NSArray* devices = [self devices];
+    [self rebuildPopupWithDevices:devices];
+    
+    if(self.deviceConnection.activeDevice == nil) {
+        NSUInteger index = [devices indexOfObjectPassingTest:^BOOL(EKNDevice* device, NSUInteger idx, BOOL *stop) {
+            return [self isLastSeenDevice:device];
+        }];
+        if(index != NSNotFound) {
+            [self switchToDevice:devices[index]];
+        }
+    }
+}
+
+#pragma mark Device Connection
 - (void)addController:(NSViewController<EKNConsoleController>*)controller onChannel:(EKNNamedChannel*)channel {
     [self.activeChannels setObject:controller forKey:channel];
     NSTabViewItem* item = [[NSTabViewItem alloc] initWithIdentifier:channel];
@@ -113,6 +177,7 @@
         NSViewController<EKNConsoleController>* controller = [self.activeChannels objectForKey:channel];
         [controller disconnectedFromDevice];
     }
+    [self deviceListChanged];
 }
 
 - (void)sendMessage:(NSData *)data onChannel:(EKNNamedChannel*)channel {
@@ -123,8 +188,5 @@
     // TODO. Mark tab as unread
 }
 
-- (IBAction)close:(id)sender {
-    [self close];
-}
 
 @end

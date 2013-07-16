@@ -111,10 +111,12 @@
     for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
         [plugin endedConnection];
     }
-    if(self.enabled) {
-        [self start];
-    }
-    self.connection = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(self.enabled) {
+            [self start];
+        }
+        self.connection = nil;
+    });
 }
 
 - (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {

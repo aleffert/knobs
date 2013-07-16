@@ -55,12 +55,16 @@ NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
     return (__bridge void*)[EKNDevice class];
 }
 
-- (NSString*)hostname {
+- (NSString*)hostName {
     return self.service.hostname;
 }
 
-- (NSString*)name {
+- (NSString*)serviceName {
     return self.service.name;
+}
+
+- (NSString*)displayName {
+    return [NSString stringWithFormat:@"%@ - %@", self.serviceName, self.hostName];
 }
 
 - (NSUInteger)port {
@@ -68,20 +72,19 @@ NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
 }
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"<%@: %p name=%@, hostname=%@, port=%ld", [self class], self, self.name, self.hostname, self.port];
+    return [NSString stringWithFormat:@"<%@: %p serviceName=%@, hostName=%@, port=%ld", [self class], self, self.serviceName, self.hostName, self.port];
 }
 
 - (NSUInteger)hash {
-    return self.name.hash;
+    return self.serviceName.hash;
 }
 
-- (BOOL)isEqual:(EKNDevice*)device {
-    if([device isKindOfClass:[EKNDevice class]]) {
-        return [self.hostname isEqual:device.hostname] && [self.name isEqual:device.name];
-    }
-    else {
-        return NO;
-    }
+- (BOOL)isEqual:(id)device {
+    return [device isKindOfClass:[EKNDevice class]] && [self isEqualToDevice:device];
+}
+
+- (BOOL)isEqualToDevice:(EKNDevice*)device {
+    return [self.hostName isEqual:device.hostName] && [self.serviceName isEqual:device.serviceName];
 }
 
 @end

@@ -25,11 +25,15 @@
 @implementation EKNDeviceConnection
 
 - (void)connectToDevice:(EKNDevice *)device {
-    if(![self.activeDevice isEqual:device]) {
+    if(![self.activeDevice isEqualToDevice:device]) {
+        [self.connection close];
+        
         self.activeDevice = device;
-        self.connection = [[BLIPConnection alloc] initToAddress:device.service.addressLookup.addresses.anyObject];
-        self.connection.delegate = self;
-        [self.connection open];
+        if(device != nil) {
+            self.connection = [[BLIPConnection alloc] initToAddress:device.service.addressLookup.addresses.anyObject];
+            self.connection.delegate = self;
+            [self.connection open];
+        }
     }
 }
 
@@ -42,6 +46,7 @@
         NSLog(@"closed connection");
         self.activeDevice = nil;
         [self.delegate deviceConnectionClosed:self];
+        self.connection = nil;
     }
 }
 
@@ -49,11 +54,13 @@
     if(connection == self.connection) {
         NSLog(@"connection failed to open");
         self.activeDevice = nil;
+        self.connection = nil;
     }
 }
 
 - (void)close {
     [self.connection close];
+    self.connection = nil;
 }
 
 - (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {

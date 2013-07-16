@@ -86,6 +86,12 @@
     [self.knobTable removeRowsAtIndexes:set withAnimation:NSTableViewAnimationEffectGap];
 }
 
+- (void)clear {
+    self.knobs  = [NSArray array];
+    self.representedObject = nil;
+    [self.knobTable reloadData];
+}
+
 #pragma mark Table View
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
@@ -93,17 +99,24 @@
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-    NSDictionary* sizes = @{
-                            EKNPropertyTypeColor : @57,
-                            EKNPropertyTypeToggle : @57,
-                            EKNPropertyTypeSlider : @71,
-                            EKNPropertyTypeImage : @236,
-                            EKNPropertyTypeFloatQuad : @122,
-                            EKNPropertyTypeFloatPair : @90,
-                            EKNPropertyTypeAffineTransform : @154,
-                            };
-    return [[sizes objectForKey:info.propertyDescription.type] floatValue];
+    if(row < self.knobs.count) {
+        EKNKnobInfo* info = [self.knobs objectAtIndex:row];
+        NSDictionary* sizes = @{
+                                EKNPropertyTypeColor : @57,
+                                EKNPropertyTypeToggle : @57,
+                                EKNPropertyTypeSlider : @71,
+                                EKNPropertyTypeImage : @236,
+                                EKNPropertyTypeFloatQuad : @122,
+                                EKNPropertyTypeFloatPair : @90,
+                                EKNPropertyTypeAffineTransform : @154,
+                                };
+        return [[sizes objectForKey:info.propertyDescription.type] floatValue];
+    }
+    else {
+        // AppKit seems to request this even when the table is empty with row = 0
+        // And it also doesn't support zero height cells
+        return 1;
+    }
 }
 
 - (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {

@@ -75,7 +75,7 @@
 }
 
 - (void)disconnectedFromDevice {
-    // TODO
+    [self.knobsView clear];
 }
 
 - (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
