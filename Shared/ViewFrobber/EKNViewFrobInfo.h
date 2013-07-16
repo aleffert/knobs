@@ -18,6 +18,5 @@
 @property (copy, nonatomic) NSString* parentID;
 @property (copy, nonatomic) NSString* address;
 @property (copy, nonatomic) NSArray* children;
-@property (strong, nonatomic) NSArray* properties;
 
 @end

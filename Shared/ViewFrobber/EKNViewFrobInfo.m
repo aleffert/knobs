@@ -17,7 +17,6 @@
         self.className = [aDecoder decodeObjectForKey:@"className"];
         self.viewID = [aDecoder decodeObjectForKey:@"viewID"];
         self.children = [aDecoder decodeObjectForKey:@"children"];
-        self.properties = [aDecoder decodeObjectForKey:@"properties"];
         self.parentID = [aDecoder decodeObjectForKey:@"parentID"];
         self.address = [aDecoder decodeObjectForKey:@"address"];
         self.nextResponderAddress = [aDecoder decodeObjectForKey:@"nextResponderAddress"];
@@ -31,7 +30,6 @@
     [aCoder encodeObject:self.className forKey:@"className"];
     [aCoder encodeObject:self.viewID forKey:@"viewID"];
     [aCoder encodeObject:self.children forKey:@"children"];
-    [aCoder encodeObject:self.properties forKey:@"properties"];
     [aCoder encodeObject:self.parentID forKey:@"parentID"];
     [aCoder encodeObject:self.address forKey:@"address"];
     [aCoder encodeObject:self.nextResponderAddress forKey:@"nextResponderAddress"];

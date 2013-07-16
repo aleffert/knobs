@@ -108,7 +108,6 @@ static NSMapTable* gFrobViewTable = nil;
     info.layerClassName = NSStringFromClass([self.layer class]);
     info.parentID = [UIView frob_IDForView:self.superview];
     info.children = children;
-    info.properties = [self frob_properties];
     info.address = [NSString stringWithFormat:@"%p", self];
     info.nextResponderAddress = [NSString stringWithFormat:@"%p", self.nextResponder];
     info.nextResponderClassName = [NSString stringWithFormat:@"%@", [self.nextResponder class]];

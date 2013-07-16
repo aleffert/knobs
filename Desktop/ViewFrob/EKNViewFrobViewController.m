@@ -75,8 +75,8 @@
     return existingCanon;
 }
 
-- (void)showKnobsForInfo:(EKNViewFrobInfo*)info {
-    NSArray* knobs = [info.properties map:^id(EKNPropertyInfo* info) {
+- (void)showKnobsForInfo:(EKNViewFrobInfo*)info withProperties:(NSArray*)properties {
+    NSArray* knobs = [properties map:^id(EKNPropertyInfo* info) {
         //Reference lazily since this is part of the app itself
         EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
         knob.propertyDescription = info.propertyDescription;
@@ -137,9 +137,8 @@
     NSString* updatedID = [message objectForKey:EKNViewFrobUpdatedViewID];
     NSArray* properties = [message objectForKey:EKNViewFrobUpdatedProperties];
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:updatedID];
-    info.properties = properties;
     if([updatedID isEqual:[self selectedInfo].viewID]) {
-        [self showKnobsForInfo:info];
+        [self showKnobsForInfo:info withProperties:properties];
     }
 }
 
@@ -210,7 +209,7 @@
 - (void)selectInfo:(EKNViewFrobInfo*)info {
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
     [self.context sendMessage:archive onChannel:self.channel];
-    [self showKnobsForInfo:info];
+    [self showKnobsForInfo:info withProperties:[NSArray array]];
 }
 
 - (EKNViewFrobInfo*)selectedInfo {

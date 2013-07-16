@@ -112,10 +112,10 @@
         [plugin endedConnection];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.connection = nil;
         if(self.enabled) {
             [self start];
         }
-        self.connection = nil;
     });
 }
 
