@@ -93,7 +93,9 @@
     if(self.bonjourBroadcast.isRunning) {
         [self.bonjourBroadcast stop];
     }
-    // TODO: Fix deadlock and reenable self.listener stop;
+    if(self.listener.isOpen) {
+        [self.listener close];
+    }
 }
 
 - (void)listener:(TCPListener *)listener didAcceptConnection:(BLIPConnection *)connection {
@@ -101,17 +103,19 @@
     connection.delegate = self;
     [self stopBroadcasting];
     NSLog(@"OPENING KNOBS CONNECTION");
-    for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
-        [plugin beganConnection];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
+            [plugin beganConnection];
+        }
+    });
 }
 
 - (void)connectionDidClose:(TCPConnection *)connection {
     NSLog(@"CLOSING KNOBS CONNECTION");
-    for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
-        [plugin endedConnection];
-    }
     dispatch_async(dispatch_get_main_queue(), ^{
+        for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
+            [plugin endedConnection];
+        }
         self.connection = nil;
         if(self.enabled) {
             [self start];

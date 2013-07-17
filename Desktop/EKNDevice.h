@@ -21,6 +21,8 @@
 
 @property (readonly, strong, nonatomic) MYBonjourService* service;
 
+@property (readonly, assign, nonatomic) BOOL hasAddress;
+
 - (BOOL)isEqualToDevice:(EKNDevice*)device;
 
 @end

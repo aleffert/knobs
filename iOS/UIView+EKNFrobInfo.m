@@ -20,7 +20,8 @@
 
 static NSString* EKNFrobViewIDKey = @"EKNFrobViewIDKey";
 
-static NSMapTable* gFrobViewTable = nil;
+static NSMapTable* gEKNViewFrobViewTable = nil;
+static BOOL gEKNViewFrobEnabled = NO;
 
 @implementation UIView (EKNFrob)
 
@@ -32,7 +33,7 @@ static NSMapTable* gFrobViewTable = nil;
         NSString* frobID = objc_getAssociatedObject(view, &EKNFrobViewIDKey);
         if(frobID == nil) {
             frobID = [EKNUUID UUIDString];
-            [gFrobViewTable setObject:view forKey:frobID];
+            [gEKNViewFrobViewTable setObject:view forKey:frobID];
             objc_setAssociatedObject(view, &EKNFrobViewIDKey, frobID, OBJC_ASSOCIATION_COPY_NONATOMIC);
         }
         return frobID;
@@ -46,16 +47,26 @@ static NSMapTable* gFrobViewTable = nil;
 }
 
 + (void)frob_enable {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        gFrobViewTable = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
+    if(!gEKNViewFrobEnabled) {
+        NSAssert([NSThread isMainThread], @"Must be called from main thread");
+        gEKNViewFrobEnabled = YES;
+        gEKNViewFrobViewTable = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
         [self frob_swapMethodWithSelector:@selector(didMoveToSuperview) withSelector:@selector(frob_didMoveToSuperview)];
         [self frob_swapMethodWithSelector:@selector(didMoveToWindow) withSelector:@selector(frob_didMoveToWindow)];
-    });
+    }
+}
+
++ (void)frob_disable {
+    if(gEKNViewFrobEnabled) {
+        NSAssert([NSThread isMainThread], @"Must be called from main thread");
+        gEKNViewFrobEnabled = YES;
+        [self frob_swapMethodWithSelector:@selector(didMoveToSuperview) withSelector:@selector(frob_didMoveToSuperview)];
+        [self frob_swapMethodWithSelector:@selector(didMoveToWindow) withSelector:@selector(frob_didMoveToWindow)];
+    }
 }
 
 + (UIView*)frob_viewWithID:(NSString*)viewID {
-    return [gFrobViewTable objectForKey:viewID];
+    return [gEKNViewFrobViewTable objectForKey:viewID];
 }
 
 - (NSArray*)frob_propertyInfos {

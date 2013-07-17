@@ -40,6 +40,10 @@ NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
     }
 }
 
+- (BOOL)hasAddress {
+    return self.service.addressLookup.addresses.count > 0;
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if(context == [self kvoContext]) {
         if([keyPath isEqualToString:@"addresses"]) {

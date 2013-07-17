@@ -74,6 +74,7 @@
 }
 
 - (void)endedConnection {
+    [UIView frob_disable];
     self.focusedViewID = nil;
     self.focusOverlayWindow.hidden = YES;
     [self.pushViewTimer invalidate];

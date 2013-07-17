@@ -70,7 +70,7 @@ NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedN
     return [[NSSet setWithArray:[self.foundDevices filter:^BOOL(EKNDevice* device) {
         // Strip out the iCloud WAN connections from back to my mac.
         // These cause the same device to show up twice and probably aren't what you want.
-        return device.hostName != nil && NSMaxRange([device.hostName rangeOfString:@"icloud.com."]) != device.hostName.length;
+        return device.hasAddress && device.hostName != nil && NSMaxRange([device.hostName rangeOfString:@"icloud.com."]) != device.hostName.length;
     }]] allObjects];
 }
 

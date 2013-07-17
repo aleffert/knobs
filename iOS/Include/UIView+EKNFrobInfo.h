@@ -23,8 +23,8 @@
 @interface UIView (EKNFrob) <EKNViewFrobPropertyInfo>
 
 + (void)frob_enable;
++ (void)frob_disable;
 + (UIView*)frob_viewWithID:(NSString*)viewID;
-
 
 - (EKNViewFrobInfo*)frob_info;
 - (NSArray*)frob_properties;

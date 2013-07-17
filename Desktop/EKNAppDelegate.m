@@ -35,6 +35,10 @@
     [self.mainWindow showWindow:self];
 }
 
+- (void)applicationWillBecomeActive:(NSNotification *)notification {
+    [self.mainWindow showWindow:self];
+}
+
 - (void)makeMainWindow {
     self.mainWindow = [[EKNConsoleWindowController alloc] initWithPluginRegistry:self.pluginRegistry];
     [self.mainWindow showWindow:self];
