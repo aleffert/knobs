@@ -98,7 +98,12 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
 - (void)rebuildPopupWithDevices:(NSArray*)devices {
     [self.popup.menu removeAllItems];
     
-    [self.popup.menu addItemWithTitle:@"None" action:@selector(choseDeviceItem:) keyEquivalent:@""];
+    if(devices.count == 0) {
+        [self.popup.menu addItemWithTitle:@"No Devices Found" action:@selector(choseDeviceItem:) keyEquivalent:@""];
+    }
+    else {
+        [self.popup.menu addItemWithTitle:@"None" action:@selector(choseDeviceItem:) keyEquivalent:@""];
+    }
     
     for(EKNDevice* device in devices) {
         NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:device.displayName action:@selector(choseDeviceItem:) keyEquivalent:@""];
@@ -130,7 +135,7 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
 
 - (NSArray*)devices {
     NSArray* devices = self.deviceFinder.activeDevices;
-    if(self.deviceConnection.activeDevice != nil) {
+    if(self.deviceConnection.activeDevice != nil && ![devices containsObject:self.deviceConnection.activeDevice]) {
         return [@[self.deviceConnection.activeDevice] arrayByAddingObjectsFromArray:devices];
     }
     else {

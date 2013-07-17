@@ -25,8 +25,12 @@
 @implementation EKNDeviceConnection
 
 - (void)connectToDevice:(EKNDevice *)device {
-    if(![self.activeDevice isEqualToDevice:device]) {
-        [self.connection close];
+    if(![self.activeDevice isEqualToDevice:device] && (self.activeDevice != device)) {
+        if(self.connection != nil) {
+            [self.connection close];
+            [self.delegate deviceConnectionClosed:self];
+            self.connection = nil;
+        }
         
         self.activeDevice = device;
         if(device != nil) {
