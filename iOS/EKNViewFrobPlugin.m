@@ -107,7 +107,7 @@
 - (void)makeFocusWindowIfNecessary {
     if(self.focusOverlayWindow == nil) {
         self.focusOverlayWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        self.focusOverlayWindow.layer.borderWidth = 3;
+        self.focusOverlayWindow.layer.borderWidth = 2;
         self.focusOverlayWindow.layer.borderColor = [UIColor colorWithRed:0 green:.5 blue:1. alpha:1.].CGColor;
         self.focusOverlayWindow.userInteractionEnabled = NO;
         self.focusOverlayWindow.windowLevel = UIWindowLevelAlert;

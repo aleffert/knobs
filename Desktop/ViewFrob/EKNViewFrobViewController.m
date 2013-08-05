@@ -180,7 +180,12 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
         return ![childID isEqualToString:removedID];
     }];
     if(parent.viewID != nil) {
+        NSInteger selectedIndex = [self.outline selectedRow];
+        id selectedItem = [self.outline itemAtRow:selectedIndex];
         [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
+        NSInteger index = [self.outline rowForItem:selectedItem];
+        [self.outline selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+        [self.outline scrollRowToVisible:index];
     }
 }
 
@@ -211,9 +216,9 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
         }
         [self.outline reloadItem:item reloadChildren:YES];
     }
-    
     NSInteger index = [self.outline rowForItem:item];
     [self.outline selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+    [self.outline scrollRowToVisible:index];
 }
 
 - (void)processMessage:(NSDictionary*)message {
