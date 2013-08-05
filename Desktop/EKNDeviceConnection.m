@@ -44,6 +44,9 @@
 
 - (void) connectionDidOpen: (TCPConnection*)connection {
     NSLog(@"opened connection");
+    if(connection == self.connection) {
+        [self.delegate deviceConnectionOpened:self];
+    }
 }
 
 - (void)connectionDidClose:(TCPConnection *)connection {

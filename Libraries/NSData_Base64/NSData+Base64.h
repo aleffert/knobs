@@ -21,22 +21,13 @@
 //     distribution.
 //
 
+// Modified by Akiva Leffert to add a namespacing prefix so as to make it safe to include in a shared library
+
 #import <Foundation/Foundation.h>
 
-void *NewBase64Decode(
-	const char *inputBuffer,
-	size_t length,
-	size_t *outputLength);
+@interface NSData (EKNBase64)
 
-char *NewBase64Encode(
-	const void *inputBuffer,
-	size_t length,
-	bool separateLines,
-	size_t *outputLength);
-
-@interface NSData (Base64)
-
-+ (NSData *)dataFromBase64String:(NSString *)aString;
-- (NSString *)base64EncodedString;
++ (NSData *)ekn_dataFromBase64String:(NSString *)aString;
+- (NSString *)ekn_base64EncodedString;
 
 @end

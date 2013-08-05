@@ -2,43 +2,45 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>74E3C770-6782-4638-8B1B-5902296DF415</string>
+	<string>A678D5DC-CCEF-46E0-A5E7-F9755F48D69F</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Knobs</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>181581C5-AEA0-44A3-97B8-B506679EA8FE</key>
-		<string>ssh://github.com/aleffert/knobs.git</string>
-		<key>B5D99857-49C0-43AD-B897-6697477F5ED3</key>
-		<string>git://github.com/snej/MYUtilities.git</string>
-		<key>E3ABD8CF-105F-4AF9-B063-C8F5976809FD</key>
+		<key>47C8F0C9-C563-4D47-AC9A-9FEDA6617222</key>
 		<string>ssh://github.com/snej/MYNetwork.git</string>
+		<key>88AD87FF-F679-4D81-8F48-A2B7DEF78A27</key>
+		<string>ssh://github.com/aleffert/knobs.git</string>
+		<key>B261570E-AC71-4479-A029-C707CBF4631C</key>
+		<string>git://github.com/snej/MYUtilities.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Knobs.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>181581C5-AEA0-44A3-97B8-B506679EA8FE</key>
-		<string>../..</string>
-		<key>B5D99857-49C0-43AD-B897-6697477F5ED3</key>
-		<string>../../Libraries/MYNetwork/vendor/MYUtilities</string>
-		<key>E3ABD8CF-105F-4AF9-B063-C8F5976809FD</key>
+		<key>47C8F0C9-C563-4D47-AC9A-9FEDA6617222</key>
 		<string>../../Libraries/MYNetwork</string>
+		<key>88AD87FF-F679-4D81-8F48-A2B7DEF78A27</key>
+		<string>../..</string>
+		<key>B261570E-AC71-4479-A029-C707CBF4631C</key>
+		<string>../../Libraries/MYNetwork/vendor/MYUtilities</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/aleffert/knobs.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>181581C5-AEA0-44A3-97B8-B506679EA8FE</string>
+	<string>88AD87FF-F679-4D81-8F48-A2B7DEF78A27</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>181581C5-AEA0-44A3-97B8-B506679EA8FE</string>
+			<string>88AD87FF-F679-4D81-8F48-A2B7DEF78A27</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Knobs</string>
 		</dict>
@@ -46,7 +48,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E3ABD8CF-105F-4AF9-B063-C8F5976809FD</string>
+			<string>47C8F0C9-C563-4D47-AC9A-9FEDA6617222</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MYNetwork</string>
 		</dict>
@@ -54,7 +56,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B5D99857-49C0-43AD-B897-6697477F5ED3</string>
+			<string>B261570E-AC71-4479-A029-C707CBF4631C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MYUtilities</string>
 		</dict>

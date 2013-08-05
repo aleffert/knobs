@@ -10,6 +10,7 @@
                 <action selector="chooseFromDevice:" destination="IOA-g9-ujM" id="kqd-SH-hDA"/>
                 <outlet property="knobEditor" destination="35" id="64"/>
                 <outlet property="outline" destination="43" id="51"/>
+                <outlet property="selectFromDeviceButton" destination="IOA-g9-ujM" id="OaS-Zv-qyk"/>
                 <outlet property="view" destination="1" id="2"/>
             </connections>
         </customObject>
@@ -102,7 +103,7 @@
                                                     </tableCellView>
                                                 </prototypeCellViews>
                                             </tableColumn>
-                                            <tableColumn identifier="Address" editable="NO" width="119.5546875" minWidth="16" maxWidth="1000" id="47">
+                                            <tableColumn identifier="Address" editable="NO" width="120.0546875" minWidth="16" maxWidth="1000" id="47">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Address">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -148,7 +149,7 @@
                                 <rect key="frame" x="1" y="521" width="320" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" id="46">
+                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="46">
                                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>

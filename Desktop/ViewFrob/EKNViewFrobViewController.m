@@ -17,14 +17,19 @@
 #import "EKNViewFrob.h"
 #import "EKNViewFrobInfo.h"
 
-
 #import "NSArray+EKNFunctional.h"
+
+typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
+    EKNViewFrobSelectButtonStateSelect,
+    EKNViewFrobSelectButtonStateCancel
+};
 
 @interface EKNViewFrobViewController () <EKNKnobGeneratorViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
 
+@property (strong, nonatomic) IBOutlet NSButton* selectFromDeviceButton;
 @property (strong, nonatomic) IBOutlet NSOutlineView* outline;
 @property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobEditor;
 
@@ -58,9 +63,36 @@
     [self.outline setAllowsMultipleSelection:NO];
 }
 
+- (void)setSelectButtonState:(EKNViewFrobSelectButtonState)state {
+    switch(state) {
+        case EKNViewFrobSelectButtonStateSelect:
+            [self.selectFromDeviceButton setTitle:@"Select From Device"];
+            break;
+        case EKNViewFrobSelectButtonStateCancel:
+            [self.selectFromDeviceButton setTitle:@"Cancel"];
+            break;
+    }
+    self.selectFromDeviceButton.tag = state;
+}
+
 - (void)connectedToDeviceWithContext:(id<EKNConsoleControllerContext>)context onChannel:(id<EKNChannel>)channel {
     self.channel = channel;
     self.context = context;
+    
+    
+    [self.selectFromDeviceButton setEnabled:YES];
+    [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
+}
+
+- (void)disconnectedFromDevice {
+    [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
+    [self.selectFromDeviceButton setEnabled:NO];
+    
+    [self.viewInfos removeAllObjects];
+    self.rootID = nil;
+    [self.canonicalKeys removeAllObjects];
+    [self.outline reloadData];
+    [self.knobEditor clear];
 }
 
 - (NSString*)canonicalize:(NSString*)key {
@@ -86,6 +118,21 @@
     }];
     [self.knobEditor representObject:info.viewID withKnobs:knobs];
 }
+
+- (IBAction)chooseFromDevice:(id)sender {
+    if(self.selectFromDeviceButton.tag == EKNViewFrobSelectButtonStateSelect) {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageActivateTapSelection}];
+        [self.context sendMessage:archive onChannel:self.channel];
+        [self setSelectButtonState:EKNViewFrobSelectButtonStateCancel];
+    }
+    else if(self.selectFromDeviceButton.tag == EKNViewFrobSelectButtonStateCancel) {
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageActivateTapSelectionCancel}];
+        [self.context sendMessage:archive onChannel:self.channel];
+        [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
+    }
+}
+
+
 #pragma mark Message Processing
 
 - (void)processBeginMessage:(NSDictionary*)message {
@@ -120,7 +167,9 @@
     BOOL childrenChanged = ![updatedViewInfo.children isEqualToArray:oldViewInfo.children];
     
     [self.outline reloadItem:[self canonicalize:updatedViewInfo.viewID] reloadChildren:childrenChanged];
-    [self.outline reloadItem:[self canonicalize:oldParentID] reloadChildren:YES];
+    if(oldParentID != nil) {
+        [self.outline reloadItem:[self canonicalize:oldParentID] reloadChildren:YES];
+    }
 }
 
 - (void)processRemovedViewMessage:(NSDictionary*)message {
@@ -130,7 +179,9 @@
     parent.children = [parent.children filter:^BOOL(NSString* childID) {
         return ![childID isEqualToString:removedID];
     }];
-    [self.outline reloadItem:removedID reloadChildren:YES];
+    if(parent.viewID != nil) {
+        [self.outline reloadItem:[self canonicalize:parent.viewID] reloadChildren:YES];
+    }
 }
 
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
@@ -143,6 +194,7 @@
 }
 
 - (void)processSelectViewMessage:(NSDictionary*)message {
+    [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
     NSString* viewID = [message objectForKey:EKNViewFrobSelectedViewID];
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:viewID];
     [self selectInfo:info];
@@ -151,12 +203,17 @@
     NSMutableArray* items = [NSMutableArray array];
     
     for(; info != nil; info = [self.viewInfos objectForKey:info.parentID]) {
-        [items addObject:info.viewID];
+        [items addObject:[self canonicalize:info.viewID]];
     }
     for(NSString* item in items.reverseObjectEnumerator) {
-        [self.outline expandItem:item];
+        if(![item isEqualToString:viewID]) {
+            [self.outline expandItem:item];
+        }
+        [self.outline reloadItem:item reloadChildren:YES];
     }
-    [self.outline selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.outline rowForItem:item]] byExtendingSelection:NO];
+    
+    NSInteger index = [self.outline rowForItem:item];
+    [self.outline selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
 }
 
 - (void)processMessage:(NSDictionary*)message {
@@ -194,14 +251,6 @@
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
     NSDictionary* message = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [self processMessage:message];
-}
-
-- (void)disconnectedFromDevice {
-    [self.viewInfos removeAllObjects];
-    self.rootID = nil;
-    [self.canonicalKeys removeAllObjects];
-    [self.outline reloadData];
-    [self.knobEditor clear];
 }
 
 #pragma mark Outline View
@@ -287,19 +336,16 @@
 
 }
 
-- (IBAction)chooseFromDevice:(id)sender {
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageActivateTapSelection}];
-    [self.context sendMessage:archive onChannel:self.channel];
-}
-
 #pragma Knob Editor
 
 - (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
-    //Reference lazily since this is part of the app itself
-    EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.propertyDescription value:knob.value];
-    NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageChangedProperty, EKNViewFrobChangedPropertyInfo : info, EKNViewFrobChangedPropertyViewID : self.selectedInfo.viewID};
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
-    [self.context sendMessage:archive onChannel:self.channel];
+    if(self.selectedInfo != nil) {
+        //Reference lazily since this is part of the app itself
+        EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.propertyDescription value:knob.value];
+        NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageChangedProperty, EKNViewFrobChangedPropertyInfo : info, EKNViewFrobChangedPropertyViewID : self.selectedInfo.viewID};
+        NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
+        [self.context sendMessage:archive onChannel:self.channel];
+    }
 }
 
 @end

@@ -36,6 +36,7 @@ NSString* EKNViewFrobMessageFocusView = @"FocusView";
 NSString* EKNViewFrobFocusViewID = @"viewID";
 
 NSString* EKNViewFrobMessageActivateTapSelection = @"ActiveSelection";
+NSString* EKNViewFrobMessageActivateTapSelectionCancel = @"CancelActiveSelection";
 
 NSString* EKNViewFrobMessageSelect = @"Select";
 NSString* EKNViewFrobSelectedViewID = @"viewID";

@@ -10,7 +10,6 @@
 
 #import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
-#import "EKNWireColor.h"
 
 @interface EKNKnobColorEditor ()
 

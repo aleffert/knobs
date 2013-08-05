@@ -173,8 +173,16 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
         controller = [plugin viewControllerWithChannel:channel];
         [controller connectedToDeviceWithContext:self.pluginContext onChannel:channel];
         [self addController:controller onChannel:channel];
+        (void)controller.view;
     }
     [controller receivedMessage:data onChannel:channel];
+}
+
+- (void)deviceConnectionOpened:(EKNDeviceConnection *)connection {
+    for(id <EKNChannel> channel in self.activeChannels.allKeys) {
+        NSViewController<EKNConsoleController>* controller = [self.activeChannels objectForKey:channel];
+        [controller connectedToDeviceWithContext:self.pluginContext onChannel:channel];
+    }
 }
 
 - (void)deviceConnectionClosed:(EKNDeviceConnection *)connection {

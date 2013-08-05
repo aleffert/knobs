@@ -14,13 +14,33 @@
 
 + (EKNLoggerPlugin*)sharedPlugin;
 
-// These are currently not thread safe. Should only be called from the main thread
-// params can be anything that implements NSCoding, but be careful about Desktop vs Device mismatches.
-// Only use things in foundation. There is a special exception for UIImage and UIColor which are handled specially
-- (void)logToChannel:(NSString*)channelName withRows:(NSArray*)params;
+
+- (void)logToChannel:(NSString*)channelName withString:(NSString*)string;
+- (void)logToChannel:(NSString*)channelName withHTMLString:(NSString*)string;
 - (void)logToChannel:(NSString*)channelName withImage:(UIImage*)image;
 - (void)logToChannel:(NSString*)channelName withColor:(UIColor*)color;
 
-//TODO: Convenience functions. Default channel name these can go to
+// Channel to use if channelName is nil
+// Defaults to @"Log"
+@property (strong, nonatomic) NSString* defaultChannelName;
 
 @end
+
+void EKNLogChannel(NSString* channel, NSString* formatHTML, ...);
+void EKNLogChannelImage(NSString* channel, UIImage* image);
+void EKNLogChannelColor(NSString* channel, UIColor* color);
+
+// These variants use the defaultChannelName
+void EKNLog(NSString* formatHTML, ...);
+void EKNLogImage(UIImage* image);
+void EKNLogColor(UIColor* color);
+
+@interface NSObject (EKNLogger)
+
+// Convenient way to generate HTML from an object
+// Default is just an html-encoded version of -[NSObject description]
+// Currently there are custom ones for UIImage and UIColor that generate visual representations
+- (NSString*)ekn_html;
+
+@end
+

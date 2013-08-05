@@ -161,6 +161,9 @@
     else if([messageType isEqualToString:EKNViewFrobMessageActivateTapSelection]) {
         [self showSelectionView];
     }
+    else if([messageType isEqualToString:EKNViewFrobMessageActivateTapSelectionCancel]) {
+        [self hideSelectionView];
+    }
     else {
         NSLog(@"Unknown knobs message type %@", messageType);
     }
@@ -182,14 +185,19 @@
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.tapSelectionView];
 }
 
+- (void)hideSelectionView {
+    [self.tapSelectionView removeFromSuperview];
+}
+
 - (void)choseView:(UIGestureRecognizer*)gesture {
     UIWindow* window = self.tapSelectionView.window;
     CGPoint location = [window convertPoint:[gesture locationInView:self.tapSelectionView] toView:window];
-    [self.tapSelectionView removeFromSuperview];
+    [self hideSelectionView];
     UIView* tappedView = [window hitTest:location withEvent:nil];
     if(tappedView != nil) {
         NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageSelect, EKNViewFrobSelectedViewID : tappedView.frob_viewID};
         [self enqueueMessage:message];
+        [self flushMessages];
     }
 }
 
@@ -239,16 +247,19 @@
 @implementation EKNViewFrobPlugin (EKNPrivate)
 
 - (void)markViewUpdated:(UIView *)view {
-    if(self.updatedViewIDs.count == 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self processUpdatedViews];
-        });
-    }
-    [self.updatedViews addObject:view];
-    [self.updatedViewIDs addObject:view.frob_viewID];
-    if(view.superview) {
-        [self.updatedViews addObject:view.superview];
-        [self.updatedViewIDs addObject:view.superview.frob_viewID];
+    if(![view isKindOfClass:[UIWindow class]] || view == [[UIApplication sharedApplication] keyWindow]) {
+        
+        if(self.updatedViewIDs.count == 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self processUpdatedViews];
+            });
+        }
+        [self.updatedViews addObject:view];
+        [self.updatedViewIDs addObject:view.frob_viewID];
+        if(view.superview) {
+            [self.updatedViews addObject:view.superview];
+            [self.updatedViewIDs addObject:view.superview.frob_viewID];
+        }
     }
 }
 

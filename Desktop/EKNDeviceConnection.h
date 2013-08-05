@@ -26,7 +26,7 @@
 
 
 @protocol EKNDeviceConnectionDelegate <NSObject>
-
+- (void)deviceConnectionOpened:(EKNDeviceConnection*)connection;
 - (void)deviceConnection:(EKNDeviceConnection*)connection receivedMessage:(NSData*)data onChannel:(EKNNamedChannel*)channel;
 - (void)deviceConnectionClosed:(EKNDeviceConnection *)connection;
 

@@ -103,11 +103,6 @@
 		77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70CFB1743E3CB0064E665 /* EKNLoggerViewController.m */; };
 		77F70D0417440CB00064E665 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F70D0317440CB00064E665 /* WebKit.framework */; };
 		77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0617440DA30064E665 /* EKNWireImage.m */; };
-		77F70D0D174418530064E665 /* EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0C174418530064E665 /* EKNDOMRepresentation.m */; };
-		77F70D1017441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D0F17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m */; };
-		77F70D1317441C4A0064E665 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1217441C4A0064E665 /* NSData+Base64.m */; };
-		77F70D1717442DC30064E665 /* EKNWireColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1617442DC30064E665 /* EKNWireColor.m */; };
-		77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */; };
 		77F70D2B17444B1E0064E665 /* EKNLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D2917444B1E0064E665 /* EKNLoggerViewController.xib */; };
 		77F70D3117444B370064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		77F70D4117444B8B0064E665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77F70D3F17444B8B0064E665 /* InfoPlist.strings */; };
@@ -334,16 +329,6 @@
 		77F70D0317440CB00064E665 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		77F70D0517440DA30064E665 /* EKNWireImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNWireImage.h; sourceTree = "<group>"; };
 		77F70D0617440DA30064E665 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNWireImage.m; sourceTree = "<group>"; };
-		77F70D0B174418530064E665 /* EKNDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDOMRepresentation.h; path = Desktop/EKNDOMRepresentation.h; sourceTree = SOURCE_ROOT; };
-		77F70D0C174418530064E665 /* EKNDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDOMRepresentation.m; path = Desktop/EKNDOMRepresentation.m; sourceTree = SOURCE_ROOT; };
-		77F70D0E17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EKNWireImage+EKNDOMRepresentation.h"; path = "Desktop/EKNWireImage+EKNDOMRepresentation.h"; sourceTree = SOURCE_ROOT; };
-		77F70D0F17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EKNWireImage+EKNDOMRepresentation.m"; path = "Desktop/EKNWireImage+EKNDOMRepresentation.m"; sourceTree = SOURCE_ROOT; };
-		77F70D1117441C4A0064E665 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Libraries/NSData_Base64/NSData+Base64.h"; sourceTree = "<group>"; };
-		77F70D1217441C4A0064E665 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Libraries/NSData_Base64/NSData+Base64.m"; sourceTree = "<group>"; };
-		77F70D1517442DC30064E665 /* EKNWireColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKNWireColor.h; sourceTree = "<group>"; };
-		77F70D1617442DC30064E665 /* EKNWireColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNWireColor.m; sourceTree = "<group>"; };
-		77F70D1B1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EKNWireColor+EKNDOMRepresentation.h"; path = "Desktop/EKNWireColor+EKNDOMRepresentation.h"; sourceTree = SOURCE_ROOT; };
-		77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EKNWireColor+EKNDOMRepresentation.m"; path = "Desktop/EKNWireColor+EKNDOMRepresentation.m"; sourceTree = SOURCE_ROOT; };
 		77F70D2A17444B1E0064E665 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/Logger/en.lproj/EKNLoggerViewController.xib; sourceTree = SOURCE_ROOT; };
 		77F70D3017444B370064E665 /* ViewFrob.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewFrob.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F70D3C17444B5B0064E665 /* ViewFrob-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ViewFrob-Info.plist"; path = "Desktop/ViewFrob/ViewFrob-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -508,7 +493,6 @@
 			isa = PBXGroup;
 			children = (
 				77B7970B174177A8008242D4 /* Vendor */,
-				770851CC176F6B8100570BDE /* MYUtilities */,
 				77873FC917413BEC00A47A27 /* Knobs */,
 				77F70CDF1743DF180064E665 /* Logger */,
 				77F70D3217444B370064E665 /* ViewFrob */,
@@ -559,12 +543,6 @@
 				77A51B191747F75700A66451 /* NSValue+EKNAffineTransform.h */,
 				77A51B1A1747F75700A66451 /* NSValue+EKNAffineTransform.m */,
 				778E54A41746A0C2009D1BA1 /* EKNPropertyEditor.h */,
-				77F70D0B174418530064E665 /* EKNDOMRepresentation.h */,
-				77F70D1B1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.h */,
-				77F70D1C1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m */,
-				77F70D0E17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.h */,
-				77F70D0F17441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m */,
-				77F70D0C174418530064E665 /* EKNDOMRepresentation.m */,
 				7733F4871749609E0052158B /* EKNPropertyDescription.h */,
 				7733F488174960A90052158B /* EKNPropertyDescription.m */,
 				77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */,
@@ -716,7 +694,7 @@
 		77B7970B174177A8008242D4 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				77F70D1417441C4E0064E665 /* NSData+Base64 */,
+				770851CC176F6B8100570BDE /* MYUtilities */,
 				77B7966C17417755008242D4 /* MYNetwork */,
 			);
 			name = Vendor;
@@ -725,8 +703,6 @@
 		77B797361741889D008242D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				77F70D1517442DC30064E665 /* EKNWireColor.h */,
-				77F70D1617442DC30064E665 /* EKNWireColor.m */,
 				77F70D0517440DA30064E665 /* EKNWireImage.h */,
 				77F70D0617440DA30064E665 /* EKNWireImage.m */,
 				77B7976917430B88008242D4 /* EKNChannel.h */,
@@ -761,15 +737,6 @@
 				77F70CF01743DF920064E665 /* Logger-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		77F70D1417441C4E0064E665 /* NSData+Base64 */ = {
-			isa = PBXGroup;
-			children = (
-				77F70D1117441C4A0064E665 /* NSData+Base64.h */,
-				77F70D1217441C4A0064E665 /* NSData+Base64.m */,
-			);
-			name = "NSData+Base64";
 			sourceTree = "<group>";
 		};
 		77F70D3217444B370064E665 /* ViewFrob */ = {
@@ -1022,9 +989,6 @@
 				77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */,
 				77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */,
 				770851F9176F6B8100570BDE /* MYRegexUtils.m in Sources */,
-				77F70D1017441A310064E665 /* EKNWireImage+EKNDOMRepresentation.m in Sources */,
-				77F70D1717442DC30064E665 /* EKNWireColor.m in Sources */,
-				77F70D1D1744318E0064E665 /* EKNWireColor+EKNDOMRepresentation.m in Sources */,
 				773C3B7B17469D4800D6A805 /* EKNKnobGeneratorView.m in Sources */,
 				778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */,
 				778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */,
@@ -1050,8 +1014,6 @@
 			files = (
 				77F70CF91743E34A0064E665 /* EKNLoggerPlugin.m in Sources */,
 				77F70CFC1743E3CB0064E665 /* EKNLoggerViewController.m in Sources */,
-				77F70D0D174418530064E665 /* EKNDOMRepresentation.m in Sources */,
-				77F70D1317441C4A0064E665 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

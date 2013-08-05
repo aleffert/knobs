@@ -25,4 +25,8 @@
     return [channel isKindOfClass:[EKNNamedChannel class]] && [self.ownerName isEqualToString:channel.ownerName] && [self.name isEqualToString:channel.name];
 }
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"<%@: %p name = %@, ownerName = %@>", [self class], self, self.name, self.ownerName];
+}
+
 @end

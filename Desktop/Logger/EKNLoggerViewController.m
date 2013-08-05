@@ -8,7 +8,6 @@
 
 #import "EKNLoggerViewController.h"
 #import "EKNWireImage.h"
-#import "EKNDOMRepresentation.h"
 
 #import <WebKit/WebKit.h>
 
@@ -38,27 +37,25 @@
 
 - (void)loadView {
     [super loadView];
-    [self.webView.mainFrame loadHTMLString:@"<html><head></head><body><table id=\"mainTable\"></table></body></html>" baseURL:nil];
+    DOMDocument* document = self.webView.mainFrame.DOMDocument;
+    document.body.innerHTML = @"<style type=\"text/css\"> tr:nth-child(even) { background-color: #D2E7FF }</style><table id=\"mainTable\" style=\"width:100%; font-family: Menlo;\"></table>";
 }
 
-- (void)addRowToLog:(NSArray*)row {
+- (void)addRowToLog:(NSString*)row {
     DOMDocument* document = self.webView.mainFrame.DOMDocument;
     DOMNode *table = [document getElementById:@"mainTable"];
     
     // Create a new element, with a tag name
     DOMHTMLElement *tr = (DOMHTMLElement*)[document createElement:@"tr"];
-    for(id <EKNDOMRepresentation> item in row) {
-        DOMHTMLElement* td = (DOMHTMLElement*)[document createElement:@"td"];
-        [td appendChild:[item DOMRepresentationInDocument:document]];
-        [tr appendChild:td];
-    }
+    DOMHTMLElement* td = (DOMHTMLElement*)[document createElement:@"td"];
+    td.innerHTML = row;
+    [tr appendChild:td];
     [table appendChild:tr];
     [tr scrollIntoView:YES];
 }
 
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
-    NSKeyedUnarchiver* unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    NSArray* row = [unarchiver decodeObjectForKey:@"root"];
+    NSString* row = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [self addRowToLog:row];
 }
 
