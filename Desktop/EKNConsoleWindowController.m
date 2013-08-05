@@ -202,4 +202,21 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
 }
 
 
+- (IBAction)nextTab:(id)sender {
+    [self.tabs selectNextTabViewItem:sender];
+}
+
+- (IBAction)previousTab:(id)sender {
+    [self.tabs selectPreviousTabViewItem:sender];
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+    if(menuItem.action == @selector(nextTab:) || menuItem.action == @selector(previousTab:)) {
+        return self.activeChannels.count > 1;
+    }
+    else {
+        return [super validateMenuItem:menuItem];
+    }
+}
+
 @end
