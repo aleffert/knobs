@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-//TODO decide whether it's actually a good idea to use int keys
+extern NSString* EKNPropertyTypeString;
+
 extern NSString* EKNPropertyTypeColor;
 enum {
     EKNPropertyColorWrapCG
@@ -43,6 +44,7 @@ extern NSString* EKNPropertyTypeAffineTransform;
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters;
++ (EKNPropertyDescription*)stringPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name;

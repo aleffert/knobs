@@ -96,6 +96,8 @@
 		77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976B1743D0B9008242D4 /* EKNConsolePluginRegistry.m */; };
 		77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B7976E1743D4E8008242D4 /* EKNDeviceFinderSheet.xib */; };
 		77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */; };
+		77CDDB1A17B172480072194C /* EKNKnobStringEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB1917B172480072194C /* EKNKnobStringEditor.m */; };
+		77CDDB1D17B174760072194C /* EKNKnobStringEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CDDB1B17B174760072194C /* EKNKnobStringEditor.xib */; };
 		77F70CDE1743DF180064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		77F70CF41743DF970064E665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77F70CF21743DF970064E665 /* InfoPlist.strings */; };
 		77F70CF81743DFDC0064E665 /* Logger.bundle in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 77F70CDD1743DF180064E665 /* Logger.bundle */; };
@@ -318,6 +320,9 @@
 		77B7976F1743D4E8008242D4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNDeviceFinderSheet.xib; sourceTree = SOURCE_ROOT; };
 		77B797711743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConsoleControllerContextDispatcher.h; path = Desktop/EKNConsoleControllerContextDispatcher.h; sourceTree = SOURCE_ROOT; };
 		77B797721743D7F3008242D4 /* EKNConsoleControllerContextDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNConsoleControllerContextDispatcher.m; path = Desktop/EKNConsoleControllerContextDispatcher.m; sourceTree = SOURCE_ROOT; };
+		77CDDB1817B172480072194C /* EKNKnobStringEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobStringEditor.h; path = Desktop/EKNKnobStringEditor.h; sourceTree = SOURCE_ROOT; };
+		77CDDB1917B172480072194C /* EKNKnobStringEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobStringEditor.m; path = Desktop/EKNKnobStringEditor.m; sourceTree = SOURCE_ROOT; };
+		77CDDB1C17B174760072194C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobStringEditor.xib; sourceTree = SOURCE_ROOT; };
 		77F70CDD1743DF180064E665 /* Logger.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Logger.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F70CEC1743DF840064E665 /* EKNLoggerPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLoggerPlugin.h; path = Desktop/Logger/EKNLoggerPlugin.h; sourceTree = SOURCE_ROOT; };
 		77F70CED1743DF840064E665 /* EKNLoggerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNLoggerPlugin.m; path = Desktop/Logger/EKNLoggerPlugin.m; sourceTree = SOURCE_ROOT; };
@@ -585,10 +590,13 @@
 		778E54AB1746A3DE009D1BA1 /* Knob Generator */ = {
 			isa = PBXGroup;
 			children = (
+				77CDDB1817B172480072194C /* EKNKnobStringEditor.h */,
+				77CDDB1917B172480072194C /* EKNKnobStringEditor.m */,
 				77A51B161747F44300A66451 /* EKNKnobAffineTransformEditor.h */,
 				77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */,
 				778E54CD1746D33E009D1BA1 /* EKNKnobFloatPairEditor.h */,
 				778E54CE1746D33E009D1BA1 /* EKNKnobFloatPairEditor.m */,
+				77CDDB1B17B174760072194C /* EKNKnobStringEditor.xib */,
 				778E54C71746CB5C009D1BA1 /* EKNKnobFloatQuadEditor.h */,
 				778E54C81746CB5D009D1BA1 /* EKNKnobFloatQuadEditor.m */,
 				778E54C11746C576009D1BA1 /* EKNKnobImageEditor.h */,
@@ -905,6 +913,7 @@
 				778E54CC1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib in Resources */,
 				770851FD176F6B8100570BDE /* MYUtilities.xcconfig in Resources */,
 				778E54D21746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib in Resources */,
+				77CDDB1D17B174760072194C /* EKNKnobStringEditor.xib in Resources */,
 				77A51B1E1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -974,6 +983,7 @@
 				77B796F517417755008242D4 /* TCPListener.m in Sources */,
 				77B796F617417755008242D4 /* TCPStream.m in Sources */,
 				77B796F717417755008242D4 /* TCPWriter.m in Sources */,
+				77CDDB1A17B172480072194C /* EKNKnobStringEditor.m in Sources */,
 				77B7973117418374008242D4 /* EKNDeviceFinder.m in Sources */,
 				77B797391741889D008242D4 /* EKNSharedConstants.m in Sources */,
 				77B7973C17418C27008242D4 /* EKNDevice.m in Sources */,
@@ -1167,6 +1177,14 @@
 				77B7976F1743D4E8008242D4 /* en */,
 			);
 			name = EKNDeviceFinderSheet.xib;
+			sourceTree = "<group>";
+		};
+		77CDDB1B17B174760072194C /* EKNKnobStringEditor.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77CDDB1C17B174760072194C /* en */,
+			);
+			name = EKNKnobStringEditor.xib;
 			sourceTree = "<group>";
 		};
 		77F70CF21743DF970064E665 /* InfoPlist.strings */ = {

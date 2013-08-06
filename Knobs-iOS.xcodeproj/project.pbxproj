@@ -25,7 +25,7 @@
 		7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F44E17493F480052158B /* EKNLiveKnobs.m */; };
 		7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F48517495FAE0052158B /* EKNPropertyDescription.m */; };
 		77547AF41755518900566AF0 /* EKNUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77547AF31755518900566AF0 /* EKNUUID.m */; };
-		778E54D51746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */; };
+		778E54D51746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54D41746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m */; };
 		77A51B211747FF8700A66451 /* UIImageView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */; };
 		77A51B2617480BF600A66451 /* EKNLiveKnobsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B2517480BF600A66451 /* EKNLiveKnobsPlugin.m */; };
 		77A51B2F17481C5600A66451 /* EKNKnobListenerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B2E17481C5500A66451 /* EKNKnobListenerInfo.m */; };
@@ -56,6 +56,7 @@
 		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
 		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
 		77CDDB0E17B144BD0072194C /* EKNViewFrobFocusOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */; };
+		77CDDB2017B1769F0072194C /* UILabel+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB1F17B1769F0072194C /* UILabel+EKNFrobInfo.m */; };
 		77E26DDE17A05A2B0087CE6C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E26DDD17A05A2B0087CE6C /* NSData+Base64.m */; };
 		77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D21174443530064E665 /* EKNViewFrobPlugin.m */; };
 		77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D2717444AE40064E665 /* EKNViewFrob.m */; };
@@ -122,8 +123,8 @@
 		77547AF21755518900566AF0 /* EKNUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNUUID.h; path = iOS/EKNUUID.h; sourceTree = SOURCE_ROOT; };
 		77547AF31755518900566AF0 /* EKNUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNUUID.m; path = iOS/EKNUUID.m; sourceTree = SOURCE_ROOT; };
 		77873FF1174147E700A47A27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		778E54D31746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EKNViewFrobInfo.h"; path = "iOS/UIScrollView+EKNViewFrobInfo.h"; sourceTree = SOURCE_ROOT; };
-		778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EKNViewFrobInfo.m"; path = "iOS/UIScrollView+EKNViewFrobInfo.m"; sourceTree = SOURCE_ROOT; };
+		778E54D31746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EKNFrobInfo.h"; path = "iOS/UIScrollView+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
+		778E54D41746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EKNFrobInfo.m"; path = "iOS/UIScrollView+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
 		77A51B1F1747FF8700A66451 /* UIImageView+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+EKNFrobInfo.h"; path = "iOS/UIImageView+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
 		77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+EKNFrobInfo.m"; path = "iOS/UIImageView+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
 		77A51B2217480BCD00A66451 /* EKNLiveKnobsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNLiveKnobsPlugin.h; path = iOS/Include/EKNLiveKnobsPlugin.h; sourceTree = SOURCE_ROOT; };
@@ -191,6 +192,8 @@
 		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
 		77CDDB0C17B144BD0072194C /* EKNViewFrobFocusOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobFocusOverlay.h; path = iOS/EKNViewFrobFocusOverlay.h; sourceTree = SOURCE_ROOT; };
 		77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobFocusOverlay.m; path = iOS/EKNViewFrobFocusOverlay.m; sourceTree = SOURCE_ROOT; };
+		77CDDB1E17B1769F0072194C /* UILabel+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+EKNFrobInfo.h"; path = "iOS/UILabel+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
+		77CDDB1F17B1769F0072194C /* UILabel+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+EKNFrobInfo.m"; path = "iOS/UILabel+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
 		77E26DDC17A05A2B0087CE6C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Libraries/NSData_Base64/NSData+Base64.h"; sourceTree = SOURCE_ROOT; };
 		77E26DDD17A05A2B0087CE6C /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Libraries/NSData_Base64/NSData+Base64.m"; sourceTree = SOURCE_ROOT; };
 		77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobPlugin.h; path = iOS/Include/EKNViewFrobPlugin.h; sourceTree = SOURCE_ROOT; };
@@ -459,8 +462,10 @@
 				77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */,
 				77CDDB0C17B144BD0072194C /* EKNViewFrobFocusOverlay.h */,
 				77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */,
-				778E54D31746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.h */,
-				778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */,
+				778E54D31746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.h */,
+				778E54D41746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m */,
+				77CDDB1E17B1769F0072194C /* UILabel+EKNFrobInfo.h */,
+				77CDDB1F17B1769F0072194C /* UILabel+EKNFrobInfo.m */,
 				77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */,
 				77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */,
 			);
@@ -524,6 +529,7 @@
 				77085232176F89EA00570BDE /* ExceptionUtils.m in Sources */,
 				77B7963E17417439008242D4 /* BLIPDispatcher.m in Sources */,
 				77085236176F89EA00570BDE /* MYErrorUtils.m in Sources */,
+				77CDDB2017B1769F0072194C /* UILabel+EKNFrobInfo.m in Sources */,
 				77B7963F17417439008242D4 /* BLIPMessage.m in Sources */,
 				77B7964017417439008242D4 /* BLIPProperties.m in Sources */,
 				77B7964117417439008242D4 /* BLIPReader.m in Sources */,
@@ -564,7 +570,7 @@
 				7708523D176F89EA00570BDE /* GTMNSData+zlib.m in Sources */,
 				77F70D59174540EE0064E665 /* EKNViewFrobInfo.m in Sources */,
 				77F70D62174685420064E665 /* EKNPropertyInfo.m in Sources */,
-				778E54D51746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m in Sources */,
+				778E54D51746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m in Sources */,
 				77085235176F89EA00570BDE /* MYDynamicObject.m in Sources */,
 				77A51B211747FF8700A66451 /* UIImageView+EKNFrobInfo.m in Sources */,
 				77A51B2617480BF600A66451 /* EKNLiveKnobsPlugin.m in Sources */,

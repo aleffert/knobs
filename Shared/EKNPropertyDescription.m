@@ -10,6 +10,7 @@
 
 #import "EKNWireImage.h"
 
+NSString* EKNPropertyTypeString = @"string";
 NSString* EKNPropertyTypeColor = @"color";
 NSString* EKNPropertyTypeToggle = @"toggle";
 NSString* EKNPropertyTypeSlider = @"slider";
@@ -34,6 +35,10 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
     result.type = type;
     result.parameters = parameters;
     return result;
+}
+
++ (EKNPropertyDescription*)stringPropertyWithName:(NSString *)name {
+    return [self propertyWithName:name type:EKNPropertyTypeString parameters:@{}];
 }
 
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name {

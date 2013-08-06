@@ -37,6 +37,7 @@
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatQuad];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:EKNPropertyTypeString];
         self.scrollView.frame = self.bounds;
         [self addSubview:self.scrollView];
     }
@@ -109,6 +110,7 @@
                                 EKNPropertyTypeFloatQuad : @122,
                                 EKNPropertyTypeFloatPair : @90,
                                 EKNPropertyTypeAffineTransform : @154,
+                                EKNPropertyTypeString : @68,
                                 };
         return [[sizes objectForKey:info.propertyDescription.type] floatValue];
     }

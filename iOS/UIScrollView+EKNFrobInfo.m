@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Akiva Leffert. All rights reserved.
 //
 
-#import "UIScrollView+EKNViewFrobInfo.h"
+#import "UIScrollView+EKNFrobInfo.h"
 
 #import "EKNPropertyDescription.h"
 #import "UIView+EKNFrobInfo.h"
