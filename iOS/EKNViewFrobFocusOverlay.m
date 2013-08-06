@@ -8,6 +8,8 @@
 
 #import "EKNViewFrobFocusOverlay.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface EKNViewFrobFocusOverlay ()
 
 @property (strong, nonatomic) CAShapeLayer* topMargin;
