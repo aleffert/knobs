@@ -37,7 +37,7 @@
 @property (strong, nonatomic) NSHashTable* updatedViews;
 @property (strong, nonatomic) NSMutableSet* updatedViewIDs;
 
-@property (assign, nonatomic) BOOL showMargins;
+@property (assign, nonatomic) BOOL showsMargins;
 
 @end
 
@@ -117,6 +117,7 @@
         
         self.focusOverlay = [[EKNViewFrobFocusOverlay alloc] initWithFrame:CGRectZero];
         [self.focusOverlayWindow addSubview:self.focusOverlay];
+        self.focusOverlay.showsMargins = self.showsMargins;
     }
 }
 
@@ -132,12 +133,15 @@
     else {
         self.focusOverlayWindow.hidden = NO;
         self.focusOverlayWindow.frame = focusedView.window.frame;
-        self.focusOverlayWindow.transform = focusedView.window.transform;
+        self.focusOverlay.bounds = focusedView.window.rootViewController.view.bounds;
+        self.focusOverlay.center = focusedView.window.rootViewController.view.center;
+        self.focusOverlay.transform = focusedView.window.rootViewController.view.transform;
+        
+        CGRect baseFrame = focusedView.frame;
+        CGRect parentFrame = focusedView.superview.frame;
         CGRect focusFrame = [focusedView convertRect:focusedView.bounds toView:nil];
-        if(![focusedView isKindOfClass:[UIWindow class]]) {
-            focusFrame = [focusedView.window convertRect:focusFrame toWindow:self.focusOverlayWindow];
-        }
         self.focusOverlay.frame = focusFrame;
+        self.focusOverlay.margins = UIEdgeInsetsMake(-baseFrame.origin.y, -baseFrame.origin.x, CGRectGetMaxY(baseFrame) - parentFrame.size.height, CGRectGetMaxX(baseFrame) - parentFrame.size.width);
         [self sendFullViewInfo:focusedView];
     }
 }
@@ -172,7 +176,8 @@
         [self hideSelectionView];
     }
     else if([messageType isEqualToString:EKNViewFrobMessageSetShowViewMargins]) {
-        self.showMargins = [[message objectForKey:EKNViewFrobSetShowViewMarginsState] boolValue];
+        self.showsMargins = [[message objectForKey:EKNViewFrobSetShowViewMarginsState] boolValue];
+        self.focusOverlay.showsMargins = self.showsMargins;
     }
     else {
         NSLog(@"Unknown knobs message type %@", messageType);
