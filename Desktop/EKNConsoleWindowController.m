@@ -171,9 +171,9 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
     if(controller == nil) {
         id <EKNConsolePlugin> plugin = [self.pluginRegistry pluginWithName:channel.ownerName];
         controller = [plugin viewControllerWithChannel:channel];
+        (void)controller.view;
         [controller connectedToDeviceWithContext:self.pluginContext onChannel:channel];
         [self addController:controller onChannel:channel];
-        (void)controller.view;
     }
     [controller receivedMessage:data onChannel:channel];
 }
@@ -203,11 +203,13 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
 
 
 - (IBAction)nextTab:(id)sender {
-    [self.tabs selectNextTabViewItem:sender];
+    NSInteger index = [self.tabs indexOfTabViewItem:self.tabs.selectedTabViewItem];
+    [self.tabs selectTabViewItemAtIndex:(index + 1) % self.tabs.numberOfTabViewItems];
 }
 
 - (IBAction)previousTab:(id)sender {
-    [self.tabs selectPreviousTabViewItem:sender];
+    NSInteger index = [self.tabs indexOfTabViewItem:self.tabs.selectedTabViewItem];
+    [self.tabs selectTabViewItemAtIndex:(index - 1 + self.tabs.numberOfTabViewItems) % self.tabs.numberOfTabViewItems];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
@@ -215,7 +217,7 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
         return self.activeChannels.count > 1;
     }
     else {
-        return [super validateMenuItem:menuItem];
+        return YES;
     }
 }
 

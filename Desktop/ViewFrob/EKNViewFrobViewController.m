@@ -151,7 +151,8 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
                          EKNViewFrobSetShowViewMarginsState : @(state)
                          }];
     [self.context sendMessage:archive onChannel:self.channel];
-
+    [[NSUserDefaults standardUserDefaults] setBool:state forKey:EKNViewFrobShowMarginsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)toggleShowMargins:(NSButton*)sender {
