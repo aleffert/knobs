@@ -24,11 +24,14 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
     EKNViewFrobSelectButtonStateCancel
 };
 
+static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
+
 @interface EKNViewFrobViewController () <EKNKnobGeneratorViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
 
+@property (strong, nonatomic) IBOutlet NSButton* showMarginsButton;
 @property (strong, nonatomic) IBOutlet NSButton* selectFromDeviceButton;
 @property (strong, nonatomic) IBOutlet NSOutlineView* outline;
 @property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobEditor;
@@ -39,6 +42,9 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
 // This SUCKS. NSOutlineView uses pointer comparisons instead of isEqual:
 // So canonicalize all of our ids.
 @property (strong, nonatomic) NSMapTable* canonicalKeys;
+
+- (IBAction)chooseFromDevice:(id)sender;
+- (IBAction)toggleShowMargins:(NSButton*)sender;
 
 @end
 
@@ -61,6 +67,8 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
     [super loadView];
     [self.outline setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
     [self.outline setAllowsMultipleSelection:NO];
+    
+    self.showMarginsButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:EKNViewFrobShowMarginsKey];
 }
 
 - (void)setSelectButtonState:(EKNViewFrobSelectButtonState)state {
@@ -79,14 +87,16 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
     self.channel = channel;
     self.context = context;
     
-    
     [self.selectFromDeviceButton setEnabled:YES];
+    [self.showMarginsButton setEnabled:YES];
     [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
+    [self sendMarginsState:self.showMarginsButton.state];
 }
 
 - (void)disconnectedFromDevice {
     [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
     [self.selectFromDeviceButton setEnabled:NO];
+    [self.showMarginsButton setEnabled:NO];
     
     [self.viewInfos removeAllObjects];
     self.rootID = nil;
@@ -119,6 +129,8 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
     [self.knobEditor representObject:info.viewID withKnobs:knobs];
 }
 
+#pragma mark Actions
+
 - (IBAction)chooseFromDevice:(id)sender {
     if(self.selectFromDeviceButton.tag == EKNViewFrobSelectButtonStateSelect) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageActivateTapSelection}];
@@ -130,6 +142,20 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
         [self.context sendMessage:archive onChannel:self.channel];
         [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
     }
+}
+
+- (void)sendMarginsState:(BOOL)state {
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:
+                       @{
+                         EKNViewFrobSentMessageKey : EKNViewFrobMessageSetShowViewMargins,
+                         EKNViewFrobSetShowViewMarginsState : @(state)
+                         }];
+    [self.context sendMessage:archive onChannel:self.channel];
+
+}
+
+- (IBAction)toggleShowMargins:(NSButton*)sender {
+    [self sendMarginsState:sender.state];
 }
 
 

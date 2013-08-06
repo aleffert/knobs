@@ -36,6 +36,9 @@ extern NSString* EKNViewFrobFocusViewID;
 extern NSString* EKNViewFrobMessageActivateTapSelection;
 extern NSString* EKNViewFrobMessageActivateTapSelectionCancel;
 
+extern NSString* EKNViewFrobMessageSetShowViewMargins;
+extern NSString* EKNViewFrobSetShowViewMarginsState;
+
 extern NSString* EKNViewFrobMessageSelect;
 extern NSString* EKNViewFrobSelectedViewID;
 

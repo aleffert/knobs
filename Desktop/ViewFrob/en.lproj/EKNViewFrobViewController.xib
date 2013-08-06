@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4471.1" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.1" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4471.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.1"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="EKNViewFrobViewController">
             <connections>
-                <action selector="chooseFromDevice:" destination="IOA-g9-ujM" id="kqd-SH-hDA"/>
                 <outlet property="knobEditor" destination="35" id="64"/>
                 <outlet property="outline" destination="43" id="51"/>
                 <outlet property="selectFromDeviceButton" destination="IOA-g9-ujM" id="OaS-Zv-qyk"/>
+                <outlet property="showMarginsButton" destination="D57-9v-KJx" id="jP9-qc-bR1"/>
                 <outlet property="view" destination="1" id="2"/>
             </connections>
         </customObject>
@@ -178,6 +178,20 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="chooseFromDevice:" target="-2" id="kqd-SH-hDA"/>
+                    </connections>
+                </button>
+                <button id="D57-9v-KJx">
+                    <rect key="frame" x="224" y="508" width="159" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Show Parent Margins" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FZq-xg-4HB">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleShowMargins:" target="-2" id="wM8-Ml-KEK"/>
+                    </connections>
                 </button>
             </subviews>
         </customView>

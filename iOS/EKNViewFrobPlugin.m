@@ -15,11 +15,13 @@
 #import "EKNPropertyDescription.h"
 #import "EKNViewFrob.h"
 #import "EKNViewFrobInfo.h"
+#import "EKNViewFrobFocusOverlay.h"
 
 #import "UIView+EKNFrobInfo.h"
 
 @interface EKNViewFrobPlugin ()
 
+@property (strong, nonatomic) EKNViewFrobFocusOverlay* focusOverlay;
 @property (strong, nonatomic) UIWindow* focusOverlayWindow;
 @property (strong, nonatomic) UIView* tapSelectionView;
 
@@ -34,6 +36,8 @@
 
 @property (strong, nonatomic) NSHashTable* updatedViews;
 @property (strong, nonatomic) NSMutableSet* updatedViewIDs;
+
+@property (assign, nonatomic) BOOL showMargins;
 
 @end
 
@@ -107,11 +111,12 @@
 - (void)makeFocusWindowIfNecessary {
     if(self.focusOverlayWindow == nil) {
         self.focusOverlayWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        self.focusOverlayWindow.layer.borderWidth = 2;
-        self.focusOverlayWindow.layer.borderColor = [UIColor colorWithRed:0 green:.5 blue:1. alpha:1.].CGColor;
         self.focusOverlayWindow.userInteractionEnabled = NO;
         self.focusOverlayWindow.windowLevel = UIWindowLevelAlert;
         self.focusOverlayWindow.hidden = YES;
+        
+        self.focusOverlay = [[EKNViewFrobFocusOverlay alloc] initWithFrame:CGRectZero];
+        [self.focusOverlayWindow addSubview:self.focusOverlay];
     }
 }
 
@@ -126,11 +131,13 @@
     }
     else {
         self.focusOverlayWindow.hidden = NO;
+        self.focusOverlayWindow.frame = focusedView.window.frame;
+        self.focusOverlayWindow.transform = focusedView.window.transform;
         CGRect focusFrame = [focusedView convertRect:focusedView.bounds toView:nil];
         if(![focusedView isKindOfClass:[UIWindow class]]) {
-            focusFrame = [focusedView.window convertRect:focusFrame toWindow:nil];
+            focusFrame = [focusedView.window convertRect:focusFrame toWindow:self.focusOverlayWindow];
         }
-        self.focusOverlayWindow.frame = focusFrame;
+        self.focusOverlay.frame = focusFrame;
         [self sendFullViewInfo:focusedView];
     }
 }
@@ -163,6 +170,9 @@
     }
     else if([messageType isEqualToString:EKNViewFrobMessageActivateTapSelectionCancel]) {
         [self hideSelectionView];
+    }
+    else if([messageType isEqualToString:EKNViewFrobMessageSetShowViewMargins]) {
+        self.showMargins = [[message objectForKey:EKNViewFrobSetShowViewMarginsState] boolValue];
     }
     else {
         NSLog(@"Unknown knobs message type %@", messageType);

@@ -55,6 +55,7 @@
 		77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797581742C76C008242D4 /* EKNLoggerPlugin.m */; };
 		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
 		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
+		77CDDB0E17B144BD0072194C /* EKNViewFrobFocusOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */; };
 		77E26DDE17A05A2B0087CE6C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E26DDD17A05A2B0087CE6C /* NSData+Base64.m */; };
 		77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D21174443530064E665 /* EKNViewFrobPlugin.m */; };
 		77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70D2717444AE40064E665 /* EKNViewFrob.m */; };
@@ -188,6 +189,8 @@
 		77B7975C1742E2A3008242D4 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireImage.m; path = Shared/EKNWireImage.m; sourceTree = SOURCE_ROOT; };
 		77B7976317430A4D008242D4 /* EKNNamedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNNamedChannel.h; path = Shared/EKNNamedChannel.h; sourceTree = SOURCE_ROOT; };
 		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
+		77CDDB0C17B144BD0072194C /* EKNViewFrobFocusOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobFocusOverlay.h; path = iOS/EKNViewFrobFocusOverlay.h; sourceTree = SOURCE_ROOT; };
+		77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobFocusOverlay.m; path = iOS/EKNViewFrobFocusOverlay.m; sourceTree = SOURCE_ROOT; };
 		77E26DDC17A05A2B0087CE6C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Libraries/NSData_Base64/NSData+Base64.h"; sourceTree = SOURCE_ROOT; };
 		77E26DDD17A05A2B0087CE6C /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Libraries/NSData_Base64/NSData+Base64.m"; sourceTree = SOURCE_ROOT; };
 		77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobPlugin.h; path = iOS/Include/EKNViewFrobPlugin.h; sourceTree = SOURCE_ROOT; };
@@ -309,24 +312,13 @@
 				77A51B2E17481C5500A66451 /* EKNKnobListenerInfo.m */,
 				77A51B2A17481AD100A66451 /* EKNLiveKnobs.h */,
 				7733F44E17493F480052158B /* EKNLiveKnobs.m */,
-				77A51B1F1747FF8700A66451 /* UIImageView+EKNFrobInfo.h */,
-				77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */,
+				77CDDB0F17B144CE0072194C /* View Frob */,
 				77A51B2217480BCD00A66451 /* EKNLiveKnobsPlugin.h */,
 				77A51B2517480BF600A66451 /* EKNLiveKnobsPlugin.m */,
-				778E54D31746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.h */,
-				778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */,
 				77F70D60174685400064E665 /* EKNPropertyInfo.h */,
 				77F70D61174685410064E665 /* EKNPropertyInfo.m */,
 				7733F48417495FA60052158B /* EKNPropertyDescription.h */,
 				7733F48517495FAE0052158B /* EKNPropertyDescription.m */,
-				77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */,
-				77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */,
-				77F70D57174540ED0064E665 /* EKNViewFrobInfo.h */,
-				77F70D58174540ED0064E665 /* EKNViewFrobInfo.m */,
-				77F70D2617444AE40064E665 /* EKNViewFrob.h */,
-				77F70D2717444AE40064E665 /* EKNViewFrob.m */,
-				77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */,
-				77F70D21174443530064E665 /* EKNViewFrobPlugin.m */,
 				77B7976317430A4D008242D4 /* EKNNamedChannel.h */,
 				77B7976417430A4E008242D4 /* EKNNamedChannel.m */,
 				77B7975B1742E2A2008242D4 /* EKNWireImage.h */,
@@ -454,6 +446,27 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		77CDDB0F17B144CE0072194C /* View Frob */ = {
+			isa = PBXGroup;
+			children = (
+				77F70D57174540ED0064E665 /* EKNViewFrobInfo.h */,
+				77F70D58174540ED0064E665 /* EKNViewFrobInfo.m */,
+				77F70D2617444AE40064E665 /* EKNViewFrob.h */,
+				77F70D2717444AE40064E665 /* EKNViewFrob.m */,
+				77F70D1E1744432F0064E665 /* EKNViewFrobPlugin.h */,
+				77F70D21174443530064E665 /* EKNViewFrobPlugin.m */,
+				77A51B1F1747FF8700A66451 /* UIImageView+EKNFrobInfo.h */,
+				77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */,
+				77CDDB0C17B144BD0072194C /* EKNViewFrobFocusOverlay.h */,
+				77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */,
+				778E54D31746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.h */,
+				778E54D41746D70A009D1BA1 /* UIScrollView+EKNViewFrobInfo.m */,
+				77F70D5417452C2C0064E665 /* UIView+EKNFrobInfo.h */,
+				77F70D5517452C2D0064E665 /* UIView+EKNFrobInfo.m */,
+			);
+			name = "View Frob";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -514,6 +527,7 @@
 				77B7963F17417439008242D4 /* BLIPMessage.m in Sources */,
 				77B7964017417439008242D4 /* BLIPProperties.m in Sources */,
 				77B7964117417439008242D4 /* BLIPReader.m in Sources */,
+				77CDDB0E17B144BD0072194C /* EKNViewFrobFocusOverlay.m in Sources */,
 				77B7964217417439008242D4 /* BLIPRequest.m in Sources */,
 				77B7964417417439008242D4 /* BLIPWriter.m in Sources */,
 				77B7964717417439008242D4 /* MYAddressLookup.m in Sources */,
