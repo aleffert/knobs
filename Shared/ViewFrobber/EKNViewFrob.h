@@ -18,11 +18,14 @@ extern NSString* EKNViewFrobBatchMessagesKey;
 
 extern NSString* EKNViewFrobMessageBegin;
 
+extern NSString* EKNViewFrobMessageChangedRoots;
+extern NSString* EKNViewFrobChangedRoots;
+
 extern NSString* EKNViewFrobMessageLoadAll;
 
 extern NSString* EKNViewFrobMessageUpdateAll;
 extern NSString* EKNViewFrobUpdateAllInfosKey;
-extern NSString* EKNViewFrobUpdateAllRootKey;
+extern NSString* EKNViewFrobUpdateAllRootsKey;
 
 extern NSString* EKNViewFrobMessageUpdatedView;
 extern NSString* EKNViewFrobUpdatedViewKey;

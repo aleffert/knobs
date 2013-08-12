@@ -16,6 +16,8 @@ NSString* EKNViewFrobSentMessageKey = @"message";
 NSString* EKNViewFrobMessageBatch = @"Batch";
 NSString* EKNViewFrobBatchMessagesKey = @"messages";
 
+NSString* EKNViewFrobMessageChangedRoots = @"Roots";
+NSString* EKNViewFrobChangedRoots = @"roots";
 
 // TODO: Consider replacing all these messages and strings with custom message classes
 NSString* EKNViewFrobMessageBegin = @"Begin";
@@ -23,7 +25,7 @@ NSString* EKNViewFrobMessageBegin = @"Begin";
 NSString* EKNViewFrobMessageLoadAll = @"LoadAll";
 
 NSString* EKNViewFrobMessageUpdateAll = @"UpdateAll";
-NSString* EKNViewFrobUpdateAllRootKey = @"root";
+NSString* EKNViewFrobUpdateAllRootsKey = @"roots";
 NSString* EKNViewFrobUpdateAllInfosKey = @"infos";
 
 NSString* EKNViewFrobMessageUpdatedView = @"UpdatedView";

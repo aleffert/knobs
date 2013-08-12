@@ -94,11 +94,14 @@
 
 - (void)sendInitialInfo {
     NSMutableArray* accumulation = [NSMutableArray array];
+    NSMutableArray* roots = [NSMutableArray array];
     
-    UIView* rootView = [[UIApplication sharedApplication] keyWindow];
-    [self recursivelyAccumulateInfoForView:rootView into:accumulation];
+    for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
+        [roots addObject:window.frob_viewID];
+        [self recursivelyAccumulateInfoForView:window into:accumulation];
+    }
     
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootKey : rootView.frob_viewID, EKNViewFrobUpdateAllInfosKey : accumulation}];
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey: EKNViewFrobMessageUpdateAll, EKNViewFrobUpdateAllRootsKey : roots, EKNViewFrobUpdateAllInfosKey : accumulation}];
     [self.context sendMessage:archive onChannel:self.channel];
 }
 
@@ -239,17 +242,29 @@
     return @{EKNViewFrobSentMessageKey : EKNViewFrobMessageRemovedView, EKNViewFrobRemovedViewID : viewID};
 }
 
+- (NSDictionary*)rootsChangedMessage {
+    NSMutableArray* roots = [[NSMutableArray alloc] init];
+    for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
+        [roots addObject:window.frob_viewID];
+    }
+    return @{EKNViewFrobSentMessageKey : EKNViewFrobMessageChangedRoots, EKNViewFrobChangedRoots : roots};
+}
+
 - (void)processUpdatedViews {
+    BOOL touchedRoots = NO;
     NSMutableSet* removedViewIDs = self.updatedViewIDs.mutableCopy;
     for(UIView* view in self.updatedViews) {
-        if(view.window == [UIApplication sharedApplication].keyWindow) {
-            [removedViewIDs removeObject:view.frob_viewID];
-            [self enqueueMessage:[self updatedViewMessage:view]];
-        }
+        [removedViewIDs removeObject:view.frob_viewID];
+        [self enqueueMessage:[self updatedViewMessage:view]];
+        touchedRoots = touchedRoots || [view isKindOfClass:[UIWindow class]];
     }
     
     for(NSString* removedViewID in removedViewIDs) {
         [self enqueueMessage:[self removedViewIDMessage:removedViewID]];
+    }
+    
+    if(touchedRoots) {
+        [self enqueueMessage:[self rootsChangedMessage]];
     }
     
     [self flushMessages];
@@ -262,17 +277,16 @@
 @implementation EKNViewFrobPlugin (EKNPrivate)
 
 - (void)markViewUpdated:(UIView *)view {
-    if(![view isKindOfClass:[UIWindow class]] || view == [[UIApplication sharedApplication] keyWindow]) {
-        
-        if(self.updatedViewIDs.count == 0) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self processUpdatedViews];
-            });
-        }
-        [self.updatedViews addObject:view];
-        [self.updatedViewIDs addObject:view.frob_viewID];
+    if(self.updatedViewIDs.count == 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self processUpdatedViews];
+        });
+    }
+    [self.updatedViews addObject:view];
+    [self.updatedViewIDs addObject:view.frob_viewID];
+    if(view.superview) {
+        [self.updatedViews addObject:view.superview];
         if(view.superview) {
-            [self.updatedViews addObject:view.superview];
             [self.updatedViewIDs addObject:view.superview.frob_viewID];
         }
     }

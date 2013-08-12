@@ -37,7 +37,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 @property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobEditor;
 
 @property (strong, nonatomic) NSMutableDictionary* viewInfos;
-@property (strong, nonatomic) NSString* rootID;
+@property (strong, nonatomic) NSArray* roots;
 
 // This SUCKS. NSOutlineView uses pointer comparisons instead of isEqual:
 // So canonicalize all of our ids.
@@ -99,7 +99,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     [self.showMarginsButton setEnabled:NO];
     
     [self.viewInfos removeAllObjects];
-    self.rootID = nil;
+    self.roots = [NSArray array];
     [self.canonicalKeys removeAllObjects];
     [self.outline reloadData];
     [self.knobEditor clear];
@@ -168,7 +168,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 }
 
 - (void)processUpdateAllMessage:(NSDictionary*)message {
-    self.rootID = [message objectForKey:EKNViewFrobUpdateAllRootKey];
+    self.roots = [message objectForKey:EKNViewFrobUpdateAllRootsKey];
     [self.viewInfos removeAllObjects];
     NSArray* infos = [message objectForKey:EKNViewFrobUpdateAllInfosKey];
     
@@ -248,6 +248,11 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     [self.outline scrollRowToVisible:index];
 }
 
+- (void)processRootsChangedMessage:(NSDictionary*)message {
+    self.roots = [message objectForKey:EKNViewFrobChangedRoots];
+    [self.outline reloadItem:nil];
+}
+
 - (void)processMessage:(NSDictionary*)message {
     NSString* messageType = [message objectForKey:EKNViewFrobSentMessageKey];
 
@@ -266,14 +271,17 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     else if([messageType isEqualToString:EKNViewFrobMessageUpdateProperties]) {
         [self processUpdatedViewProperties:message];
     }
+    else if([messageType isEqualToString:EKNViewFrobMessageSelect]) {
+        [self processSelectViewMessage:message];
+    }
+    else if([messageType isEqualToString:EKNViewFrobMessageChangedRoots]) {
+        [self processRootsChangedMessage:message];
+    }
     else if([messageType isEqualToString:EKNViewFrobMessageBatch]) {
         NSArray* messages = [message objectForKey:EKNViewFrobBatchMessagesKey];
         for(NSDictionary* childMessage in messages) {
             [self processMessage:childMessage];
         }
-    }
-    else if([messageType isEqualToString:EKNViewFrobMessageSelect]) {
-        [self processSelectViewMessage:message];
     }
     else {
         NSLog(@"unknown view frobber message type: %@", messageType);
@@ -311,7 +319,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(NSString*)itemID {
     if(itemID == nil) {
-        return self.rootID == nil ? 0 : 1;
+        return self.roots.count;
     }
     else {
         EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
@@ -328,7 +336,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(NSString*)itemID {
     if(itemID == nil) {
-        return [self canonicalize:self.rootID];
+        return [self canonicalize:self.roots[index]];
     }
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
     NSArray* children = [self childrenOfInfo:info];
