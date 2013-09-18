@@ -229,7 +229,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     [self setSelectButtonState:EKNViewFrobSelectButtonStateSelect];
     NSString* viewID = [message objectForKey:EKNViewFrobSelectedViewID];
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:viewID];
-    [self selectInfo:info];
+    [self selectInfoOnDevice:info];
     NSString* item = [self canonicalize:viewID];
     
     NSMutableArray* items = [NSMutableArray array];
@@ -250,7 +250,9 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (void)processRootsChangedMessage:(NSDictionary*)message {
     self.roots = [message objectForKey:EKNViewFrobChangedRoots];
-    [self.outline reloadItem:nil];
+    EKNViewFrobInfo* info = [self selectedInfo];
+    [self.outline reloadItem:nil reloadChildren:YES];
+    [self selectItemInOutlineView:info];
 }
 
 - (void)processMessage:(NSDictionary*)message {
@@ -295,7 +297,12 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 #pragma mark Outline View
 
-- (void)selectInfo:(EKNViewFrobInfo*)info {
+- (void)selectItemInOutlineView:(EKNViewFrobInfo*)info {
+    NSInteger index = [self.outline rowForItem:[self canonicalize:info.viewID]];
+    [self.outline selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+}
+
+- (void)selectInfoOnDevice:(EKNViewFrobInfo*)info {
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
     [self.context sendMessage:archive onChannel:self.channel];
     [self showKnobsForInfo:info withProperties:[NSArray array]];
@@ -371,7 +378,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
         [self.context sendMessage:archive onChannel:self.channel];
     }
     else {
-        [self selectInfo:info];
+        [self selectInfoOnDevice:info];
     }
 
 }
