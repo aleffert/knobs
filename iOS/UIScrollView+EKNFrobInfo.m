@@ -19,6 +19,7 @@
             [EKNPropertyDescription pointPropertyWithName:@"contentOffset"],
             [EKNPropertyDescription sizePropertyWithName:@"contentSize"],
             [EKNPropertyDescription edgeInsetsPropertyWithName:@"contentInset"],
+            [EKNPropertyDescription edgeInsetsPropertyWithName:@"scrollIndicatorInsets"],
             ] arrayByAddingObjectsFromArray:infos];
 }
 
