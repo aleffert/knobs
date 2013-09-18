@@ -53,6 +53,7 @@
         for(UILabel* label in self.marginLabels) {
             label.textColor = [self lineColor];
             label.font = [UIFont systemFontOfSize:12.];
+            label.backgroundColor = [UIColor clearColor];
             [self addSubview:label];
         }
     }
