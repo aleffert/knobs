@@ -20,6 +20,7 @@
             [EKNPropertyDescription sizePropertyWithName:@"contentSize"],
             [EKNPropertyDescription edgeInsetsPropertyWithName:@"contentInset"],
             [EKNPropertyDescription edgeInsetsPropertyWithName:@"scrollIndicatorInsets"],
+            [EKNPropertyDescription togglePropertyWithName:@"scrollEnabled"],
             ] arrayByAddingObjectsFromArray:infos];
 }
 
