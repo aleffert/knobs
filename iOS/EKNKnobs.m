@@ -8,9 +8,7 @@
 
 #import "EKNKnobs.h"
 
-#import "BLIP.h"
-#import "MYBonjourRegistration.h"
-
+#import "EKNChunkConnection.h"
 #import "EKNDevicePluginContextDispatcher.h"
 #import "EKNLoggerPlugin.h"
 #import "EKNLiveKnobsPlugin.h"
@@ -18,13 +16,12 @@
 #import "EKNNamedChannel.h"
 #import "EKNSharedConstants.h"
 
-@interface EKNKnobs () <TCPListenerDelegate, EKNDevicePluginContextDispatcherDelegate, BLIPConnectionDelegate>
+@interface EKNKnobs () <EKNDevicePluginContextDispatcherDelegate, EKNChunkConnectionDelegate, NSNetServiceDelegate>
 
 + (EKNKnobs*)sharedController;
 
-@property (strong, nonatomic) BLIPListener* listener;
-@property (strong, nonatomic) BLIPConnection* connection;
-@property (strong, nonatomic) MYBonjourRegistration* bonjourBroadcast;
+@property (strong, nonatomic) EKNChunkConnection* connection;
+@property (strong, nonatomic) NSNetService* bonjourBroadcast;
 @property (strong, nonatomic) NSMutableDictionary* pluginRegistry;
 @property (strong, nonatomic) EKNDevicePluginContextDispatcher* pluginContext;
 
@@ -46,10 +43,6 @@
 
 - (id)init {
     if(self = [super init]) {
-        self.listener = [[BLIPListener alloc] initWithPort:0];
-        self.listener.delegate = self;
-        self.bonjourBroadcast = [[MYBonjourRegistration alloc] initWithServiceType:@"_knobs._tcp" port:0];
-        self.bonjourBroadcast.name = [NSString stringWithFormat:@"%@ - %@", [[UIDevice currentDevice] name], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]];
         self.pluginRegistry = [[NSMutableDictionary alloc] init];
         self.pluginContext = [[EKNDevicePluginContextDispatcher alloc] init];
         self.pluginContext.delegate = self;
@@ -75,14 +68,7 @@
 
 - (void)start {
     self.enabled = YES;
-    
-    if(!self.listener.isOpen) {
-        [self.listener open];
-    }
-    if(!self.bonjourBroadcast.isRunning) {
-        self.bonjourBroadcast.port = self.listener.port;
-        [self.bonjourBroadcast start];
-    }
+    [self startBroadcasting];
 }
 
 - (void)stop {
@@ -91,28 +77,20 @@
     [self.connection close];
 }
 
+- (void)startBroadcasting {
+    NSString* name = [NSString stringWithFormat:@"%@ - %@", [[UIDevice currentDevice] name], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]];
+    self.bonjourBroadcast = [[NSNetService alloc] initWithDomain:@"" type:EKNBonjourServiceType name:name];
+    self.bonjourBroadcast.delegate = self;
+    [self.bonjourBroadcast publishWithOptions:NSNetServiceListenForConnections];
+}
+
 - (void)stopBroadcasting {
-    if(self.bonjourBroadcast.isRunning) {
-        [self.bonjourBroadcast stop];
-    }
-    if(self.listener.isOpen) {
-        [self.listener close];
-    }
+    [self.bonjourBroadcast publishWithOptions:NSNetServiceListenForConnections];
+    [self.bonjourBroadcast stop];
+    self.bonjourBroadcast = nil;
 }
 
-- (void)listener:(TCPListener *)listener didAcceptConnection:(BLIPConnection *)connection {
-    self.connection = connection;
-    connection.delegate = self;
-    [self stopBroadcasting];
-    NSLog(@"OPENING KNOBS CONNECTION");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
-            [plugin beganConnection];
-        }
-    });
-}
-
-- (void)connectionDidClose:(TCPConnection *)connection {
+- (void)connectionClosed:(EKNChunkConnection *)connection {
     NSLog(@"CLOSING KNOBS CONNECTION");
     dispatch_async(dispatch_get_main_queue(), ^{
         for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
@@ -125,14 +103,33 @@
     });
 }
 
-- (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {
+- (void)connection:(EKNChunkConnection *)connection receivedData:(NSData *)data withHeader:(NSDictionary *)header {
     EKNNamedChannel* channel = [[EKNNamedChannel alloc] init];
-    channel.name = [request.properties valueOfProperty:@"channelName"];
-    channel.ownerName = [request.properties valueOfProperty:@"ownerName"];
+    channel.name = header[@"channelName"];
+    channel.ownerName = header[@"ownerName"];
     
     id <EKNDevicePlugin> plugin = [self.pluginRegistry objectForKey:channel.ownerName];
-    [plugin receivedMessage:request.body onChannel:channel];
-    return YES;
+    [plugin receivedMessage:data onChannel:channel];
+}
+
+#pragma mark NetServices
+
+- (void)netService:(NSNetService *)sender didAcceptConnectionWithInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream {
+    
+    EKNChunkConnection* connection = [[EKNChunkConnection alloc] initWithInputStream:inputStream outputStream:outputStream];
+    
+    self.connection = connection;
+    connection.delegate = self;
+    
+    [connection open];
+    
+    [self stopBroadcasting];
+    NSLog(@"OPENING KNOBS CONNECTION");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for(id <EKNDevicePlugin> plugin in self.pluginRegistry.allValues) {
+            [plugin beganConnection];
+        }
+    });
 }
 
 #pragma mark Plugin Context
@@ -150,8 +147,8 @@
 }
 
 - (void)sendMessage:(NSData *)message onChannel:(EKNNamedChannel*)channel {
-    BLIPRequest* request = [BLIPRequest requestWithBody:message properties:@{@"channelName": channel.name, @"ownerName" : channel.ownerName}];
-    [self.connection sendRequest:request];
+    NSDictionary* header = @{@"channelName": channel.name, @"ownerName" : channel.ownerName};
+    [self.connection sendData:message withHeader:header];
 }
 
 @end

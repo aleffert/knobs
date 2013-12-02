@@ -17,10 +17,12 @@
 
 NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedNotification";
 
-@interface EKNDeviceFinder ()
+@interface EKNDeviceFinder () <NSNetServiceBrowserDelegate>
 
-@property (strong, nonatomic) MYBonjourBrowser* browser;
-@property (copy, nonatomic) NSArray* foundDevices;
+@property (strong, nonatomic) NSMutableArray* foundDevices;
+@property (strong, nonatomic) NSNetServiceBrowser* browser;
+
+@property (assign, nonatomic) BOOL isRunning;
 
 @end
 
@@ -28,8 +30,9 @@ NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedN
 
 - (id)init {
     if(self = [super init]) {
-        self.browser = [[MYBonjourBrowser alloc] initWithServiceType:EKNBonjourServiceType];
-        self.browser.continuous = YES;
+        self.browser = [[NSNetServiceBrowser alloc] init];
+        self.browser.delegate = self;
+        self.foundDevices = [NSMutableArray array];
     }
     
     return self;
@@ -44,20 +47,20 @@ NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedN
 }
 
 - (void)start {
-    if(!self.browser.isRunning) {
-        [self.browser addObserver:self forKeyPath:@"services" options:0 context:(__bridge void*)[EKNDeviceFinder class]];
+    if(!self.isRunning) {
+        self.isRunning = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceUpdated:) name:EKNDeviceResolvedAddresses object:nil];
-        [self.browser start];
-        self.foundDevices = self.browser.services.allObjects;
+        [self.browser searchForServicesOfType:EKNBonjourServiceType inDomain:@"local."];
     }
 }
 
 - (void)stop {
-    if(self.browser.isRunning) {
+    if(self.isRunning) {
+        self.isRunning = NO;
         [self.browser removeObserver:self forKeyPath:@"services" context:[self kvoContext]];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EKNDeviceResolvedAddresses object:nil];
         [self.browser stop];
-        self.foundDevices = [NSArray array];
+        [self.foundDevices removeAllObjects];
     }
 }
 
@@ -66,30 +69,28 @@ NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedN
 }
 
 - (NSArray*)activeDevices {
-    // Bring into an NSSet so we don't end up with duplicates on different ports
-    return [[NSSet setWithArray:[self.foundDevices filter:^BOOL(EKNDevice* device) {
-        // Strip out the iCloud WAN connections from back to my mac.
-        // These cause the same device to show up twice and probably aren't what you want.
-        return device.hasAddress && device.hostName != nil && NSMaxRange([device.hostName rangeOfString:@"icloud.com."]) != device.hostName.length;
-    }]] allObjects];
+    return self.foundDevices.copy;
 }
 
 - (void)updateAvailableServices {
-    self.foundDevices = [self.browser.services.allObjects map:^id(MYBonjourService* service) {
-        EKNDevice* device = [[EKNDevice alloc] initWithService:service];
-        return device;
-    }];
     [[NSNotificationCenter defaultCenter] postNotificationName:EKNActiveDeviceListChangedNotification object:nil];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if(context == [self kvoContext]) {
-        if([keyPath isEqualToString:@"services"]) {
-            [self updateAvailableServices];
-        }
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
+    EKNDevice* device = [[EKNDevice alloc] initWithService:aNetService];
+    [self.foundDevices addObject:device];
+    if(!moreComing) {
+        [self updateAvailableServices];
     }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
+    NSIndexSet* indexes = [self.foundDevices indexesOfObjectsPassingTest:^BOOL(EKNDevice* device, NSUInteger idx, BOOL *stop) {
+        return [device isBackedByService:aNetService];
+    }];
+    [self.foundDevices removeObjectsAtIndexes:indexes];
+    if(!moreComing) {
+        [self updateAvailableServices];
     }
 }
 

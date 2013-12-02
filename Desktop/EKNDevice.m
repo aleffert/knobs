@@ -8,51 +8,32 @@
 
 #import "EKNDevice.h"
 
-#import "MYAddressLookup.h"
-#import "MYBonjourService.h"
+#import "EKNChunkConnection.h"
 
 NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
 
-@interface EKNDevice ()
+@interface EKNDevice () <NSNetServiceDelegate>
 
-@property (strong, nonatomic) MYBonjourService* service;
+@property (strong, nonatomic) NSNetService* service;
 @property (assign, nonatomic) BOOL isObserving;
 
 @end
 
 @implementation EKNDevice
 
-- (id)initWithService:(MYBonjourService *)service {
+- (id)initWithService:(NSNetService *)service {
     if(self = [super init]) {
         self.service = service;
-        if(self.service.hostname == nil) {
-            [self.service.addressLookup addObserver:self forKeyPath:@"addresses" options:0 context:[self kvoContext]];
-            [self.service.addressLookup start];
-            self.isObserving = YES;
+        self.service.delegate = self;
+        if(self.service.hostName == nil) {
+            [self.service resolveWithTimeout:60];
         }
     }
     return self;
 }
 
-- (void)dealloc {
-    if(self.isObserving) {
-        [self.service.addressLookup removeObserver:self forKeyPath:@"addresses" context:[self kvoContext]];
-    }
-}
-
 - (BOOL)hasAddress {
-    return self.service.addressLookup.addresses.count > 0;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if(context == [self kvoContext]) {
-        if([keyPath isEqualToString:@"addresses"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:EKNDeviceResolvedAddresses object:self];
-        }
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
+    return self.service.addresses.count > 0;
 }
 
 - (void*)kvoContext {
@@ -60,7 +41,7 @@ NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
 }
 
 - (NSString*)hostName {
-    return self.service.hostname;
+    return self.service.hostName;
 }
 
 - (NSString*)serviceName {
@@ -73,6 +54,10 @@ NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
 
 - (NSUInteger)port {
     return self.service.port;
+}
+
+- (NSData*)addressData {
+    return [self.service.addresses firstObject];
 }
 
 - (NSString*)description {
@@ -89,6 +74,19 @@ NSString* EKNDeviceResolvedAddresses = @"EKNDeviceResolvedAddresses";
 
 - (BOOL)isEqualToDevice:(EKNDevice*)device {
     return [self.hostName isEqual:device.hostName] && [self.serviceName isEqual:device.serviceName];
+}
+
+- (BOOL)isBackedByService:(NSNetService *)service {
+    return [self.service isEqual:service];
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EKNDeviceResolvedAddresses object:self];
+}
+
+- (EKNChunkConnection*)makeConnection {
+    EKNChunkConnection* connection = [[EKNChunkConnection alloc] initWithNetService:self.service];
+    return connection;
 }
 
 @end

@@ -8,21 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@class MYBonjourService;
+@class EKNChunkConnection;
 
 @interface EKNDevice : NSObject
 
-- (id)initWithService:(MYBonjourService*)service;
+- (id)initWithService:(NSNetService*)service;
 
 @property (readonly, strong, nonatomic) NSString* hostName;
 @property (readonly, assign, nonatomic) NSUInteger port;
 @property (readonly, strong, nonatomic) NSString* serviceName;
 @property (readonly, strong, nonatomic) NSString* displayName;
 
-@property (readonly, strong, nonatomic) MYBonjourService* service;
-
 @property (readonly, assign, nonatomic) BOOL hasAddress;
+@property (readonly, assign, nonatomic) NSData* addressData;
 
+- (EKNChunkConnection*)makeConnection;
+- (BOOL)isBackedByService:(NSNetService*)service;
 - (BOOL)isEqualToDevice:(EKNDevice*)device;
 
 @end

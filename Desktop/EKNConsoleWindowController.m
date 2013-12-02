@@ -68,6 +68,8 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
     self.window.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceListChanged) name:EKNActiveDeviceListChangedNotification object:nil];
+
+    [self rebuildPopupWithDevices:@[]];
     
     self.deviceFinder = [[EKNDeviceFinder alloc] init];
     [self.deviceFinder start];

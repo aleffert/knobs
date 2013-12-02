@@ -47,6 +47,9 @@
 		773C3B781746992500D6A805 /* icon_knob.icns in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B771746992500D6A805 /* icon_knob.icns */; };
 		773C3B7B17469D4800D6A805 /* EKNKnobGeneratorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */; };
 		773C3B8117469D9400D6A805 /* EKNKnobGeneratorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B7F17469D9400D6A805 /* EKNKnobGeneratorView.xib */; };
+		778588AE18450DF1006913A6 /* EKNChunkWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588AD18450DF1006913A6 /* EKNChunkWriter.m */; };
+		778588B51845305C006913A6 /* EKNChunkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588B41845305C006913A6 /* EKNChunkConnection.m */; };
+		778588B818453071006913A6 /* EKNChunkReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588B718453071006913A6 /* EKNChunkReader.m */; };
 		77873FC417413BEC00A47A27 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
 		778E54A71746A35B009D1BA1 /* EKNKnobColorEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778E54A51746A35B009D1BA1 /* EKNKnobColorEditor.xib */; };
 		778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54A91746A3D7009D1BA1 /* EKNKnobColorEditor.m */; };
@@ -223,6 +226,12 @@
 		773C3B7917469D4800D6A805 /* EKNKnobGeneratorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobGeneratorView.h; path = Desktop/EKNKnobGeneratorView.h; sourceTree = SOURCE_ROOT; };
 		773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobGeneratorView.m; path = Desktop/EKNKnobGeneratorView.m; sourceTree = SOURCE_ROOT; };
 		773C3B8017469D9400D6A805 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobGeneratorView.xib; sourceTree = SOURCE_ROOT; };
+		778588AC18450DF1006913A6 /* EKNChunkWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkWriter.h; path = Shared/EKNChunkWriter.h; sourceTree = SOURCE_ROOT; };
+		778588AD18450DF1006913A6 /* EKNChunkWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkWriter.m; path = Shared/EKNChunkWriter.m; sourceTree = SOURCE_ROOT; };
+		778588B31845305C006913A6 /* EKNChunkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkConnection.h; path = Shared/EKNChunkConnection.h; sourceTree = SOURCE_ROOT; };
+		778588B41845305C006913A6 /* EKNChunkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkConnection.m; path = Shared/EKNChunkConnection.m; sourceTree = SOURCE_ROOT; };
+		778588B618453071006913A6 /* EKNChunkReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkReader.h; path = Shared/EKNChunkReader.h; sourceTree = SOURCE_ROOT; };
+		778588B718453071006913A6 /* EKNChunkReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkReader.m; path = Shared/EKNChunkReader.m; sourceTree = SOURCE_ROOT; };
 		77873FC017413BEC00A47A27 /* Knobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77873FC317413BEC00A47A27 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		77873FC617413BEC00A47A27 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -494,6 +503,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		778588AF18450DF7006913A6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				778588B31845305C006913A6 /* EKNChunkConnection.h */,
+				778588B41845305C006913A6 /* EKNChunkConnection.m */,
+				778588B618453071006913A6 /* EKNChunkReader.h */,
+				778588B718453071006913A6 /* EKNChunkReader.m */,
+				778588AC18450DF1006913A6 /* EKNChunkWriter.h */,
+				778588AD18450DF1006913A6 /* EKNChunkWriter.m */,
+				77B797411741AE36008242D4 /* EKNDeviceConnection.h */,
+				77B797421741AE36008242D4 /* EKNDeviceConnection.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		77873FB717413BEC00A47A27 = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +567,7 @@
 		77873FC917413BEC00A47A27 /* Knobs */ = {
 			isa = PBXGroup;
 			children = (
+				778588AF18450DF7006913A6 /* Networking */,
 				7733F475174954C80052158B /* EKNKnobInfo.h */,
 				7733F476174954C80052158B /* EKNKnobInfo.m */,
 				77A51B191747F75700A66451 /* NSValue+EKNAffineTransform.h */,
@@ -555,8 +580,6 @@
 				77B7976A1743D0B8008242D4 /* EKNConsolePluginRegistry.h */,
 				77B7976B1743D0B9008242D4 /* EKNConsolePluginRegistry.m */,
 				77B7976D1743D16F008242D4 /* EKNConsolePlugin.h */,
-				77B797411741AE36008242D4 /* EKNDeviceConnection.h */,
-				77B797421741AE36008242D4 /* EKNDeviceConnection.m */,
 				77B797601742F6D0008242D4 /* EKNDeviceFinderView.h */,
 				77B797611742F6D0008242D4 /* EKNDeviceFinderView.m */,
 				778E54AB1746A3DE009D1BA1 /* Knob Generator */,
@@ -988,6 +1011,7 @@
 				77B797391741889D008242D4 /* EKNSharedConstants.m in Sources */,
 				77B7973C17418C27008242D4 /* EKNDevice.m in Sources */,
 				770851F5176F6B8100570BDE /* Logging.m in Sources */,
+				778588AE18450DF1006913A6 /* EKNChunkWriter.m in Sources */,
 				770851F7176F6B8100570BDE /* MYDynamicObject.m in Sources */,
 				77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */,
 				77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */,
@@ -1002,6 +1026,7 @@
 				773C3B7B17469D4800D6A805 /* EKNKnobGeneratorView.m in Sources */,
 				778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */,
 				778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */,
+				778588B51845305C006913A6 /* EKNChunkConnection.m in Sources */,
 				778E54BD1746B7F8009D1BA1 /* EKNKnobSliderEditor.m in Sources */,
 				778E54C31746C577009D1BA1 /* EKNKnobImageEditor.m in Sources */,
 				770851F6176F6B8100570BDE /* MYBlockUtils.m in Sources */,
@@ -1014,6 +1039,7 @@
 				7733F480174957DB0052158B /* EKNPropertyInfo.m in Sources */,
 				770851FC176F6B8100570BDE /* MYURLUtils.m in Sources */,
 				7733F489174960A90052158B /* EKNPropertyDescription.m in Sources */,
+				778588B818453071006913A6 /* EKNChunkReader.m in Sources */,
 				770851F4176F6B8100570BDE /* ExceptionUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

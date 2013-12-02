@@ -10,14 +10,11 @@
 
 #import "EKNDevice.h"
 #import "EKNNamedChannel.h"
+#import "EKNChunkConnection.h"
 
-#import "MYAddressLookup.h"
-#import "MYBonjourService.h"
-#import "BLIP.h"
+@interface EKNDeviceConnection ()  <EKNChunkConnectionDelegate>
 
-@interface EKNDeviceConnection ()  <BLIPConnectionDelegate>
-
-@property (strong, nonatomic) BLIPConnection* connection;
+@property (strong, nonatomic) EKNChunkConnection* connection;
 @property (strong, nonatomic) EKNDevice* activeDevice;
 
 @end
@@ -35,33 +32,20 @@
         }
         
         if(device != nil) {
-            self.connection = [[BLIPConnection alloc] initToAddress:device.service.addressLookup.addresses.anyObject];
+            self.connection = [device makeConnection];
             self.connection.delegate = self;
             [self.connection open];
+            NSLog(@"opened connection");
+            [self.delegate deviceConnectionOpened:self];
         }
     }
 }
 
-- (void) connectionDidOpen: (TCPConnection*)connection {
-    NSLog(@"opened connection");
-    if(connection == self.connection) {
-        [self.delegate deviceConnectionOpened:self];
-    }
-}
-
-- (void)connectionDidClose:(TCPConnection *)connection {
+- (void)connectionClosed:(EKNChunkConnection *)connection {
     if(connection == self.connection) {
         NSLog(@"closed connection");
         self.activeDevice = nil;
         [self.delegate deviceConnectionClosed:self];
-        self.connection = nil;
-    }
-}
-
-- (void)connection:(TCPConnection *)connection failedToOpen:(NSError *)error {
-    if(connection == self.connection) {
-        NSLog(@"connection failed to open");
-        self.activeDevice = nil;
         self.connection = nil;
     }
 }
@@ -71,17 +55,16 @@
     self.connection = nil;
 }
 
-- (BOOL)connection:(BLIPConnection *)connection receivedRequest:(BLIPRequest *)request {
+- (void)connection:(EKNChunkConnection *)connection receivedData:(NSData *)data withHeader:(NSDictionary *)header {
     EKNNamedChannel* channel = [[EKNNamedChannel alloc] init];
-    channel.name = [request.properties valueOfProperty:@"channelName"];
-    channel.ownerName = [request.properties valueOfProperty:@"ownerName"];
-    [self.delegate deviceConnection:self receivedMessage:request.body onChannel:channel];
-    return YES;
+    channel.name = header[@"channelName"];
+    channel.ownerName = header[@"ownerName"];
+    [self.delegate deviceConnection:self receivedMessage:data onChannel:channel];
 }
 
 - (void)sendMessage:(NSData*)data onChannel:(EKNNamedChannel*)channel {
-    BLIPRequest* request = [BLIPRequest requestWithBody:data properties:@{@"channelName": channel.name, @"ownerName" : channel.ownerName}];
-    [self.connection sendRequest:request];
+    NSDictionary* header = @{@"channelName": channel.name, @"ownerName" : channel.ownerName};
+    [self.connection sendData:data withHeader:header];
 }
 
 @end

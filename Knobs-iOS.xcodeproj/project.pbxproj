@@ -25,6 +25,9 @@
 		7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F44E17493F480052158B /* EKNLiveKnobs.m */; };
 		7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F48517495FAE0052158B /* EKNPropertyDescription.m */; };
 		77547AF41755518900566AF0 /* EKNUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77547AF31755518900566AF0 /* EKNUUID.m */; };
+		778588BF184553C7006913A6 /* EKNChunkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588BA184553C7006913A6 /* EKNChunkConnection.m */; };
+		778588C0184553C7006913A6 /* EKNChunkReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588BC184553C7006913A6 /* EKNChunkReader.m */; };
+		778588C1184553C7006913A6 /* EKNChunkWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588BE184553C7006913A6 /* EKNChunkWriter.m */; };
 		778E54D51746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 778E54D41746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m */; };
 		77A51B211747FF8700A66451 /* UIImageView+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B201747FF8700A66451 /* UIImageView+EKNFrobInfo.m */; };
 		77A51B2617480BF600A66451 /* EKNLiveKnobsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A51B2517480BF600A66451 /* EKNLiveKnobsPlugin.m */; };
@@ -123,6 +126,12 @@
 		7733F48517495FAE0052158B /* EKNPropertyDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyDescription.m; path = Shared/EKNPropertyDescription.m; sourceTree = SOURCE_ROOT; };
 		77547AF21755518900566AF0 /* EKNUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNUUID.h; path = iOS/EKNUUID.h; sourceTree = SOURCE_ROOT; };
 		77547AF31755518900566AF0 /* EKNUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNUUID.m; path = iOS/EKNUUID.m; sourceTree = SOURCE_ROOT; };
+		778588B9184553C7006913A6 /* EKNChunkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkConnection.h; path = Shared/EKNChunkConnection.h; sourceTree = SOURCE_ROOT; };
+		778588BA184553C7006913A6 /* EKNChunkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkConnection.m; path = Shared/EKNChunkConnection.m; sourceTree = SOURCE_ROOT; };
+		778588BB184553C7006913A6 /* EKNChunkReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkReader.h; path = Shared/EKNChunkReader.h; sourceTree = SOURCE_ROOT; };
+		778588BC184553C7006913A6 /* EKNChunkReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkReader.m; path = Shared/EKNChunkReader.m; sourceTree = SOURCE_ROOT; };
+		778588BD184553C7006913A6 /* EKNChunkWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkWriter.h; path = Shared/EKNChunkWriter.h; sourceTree = SOURCE_ROOT; };
+		778588BE184553C7006913A6 /* EKNChunkWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkWriter.m; path = Shared/EKNChunkWriter.m; sourceTree = SOURCE_ROOT; };
 		77873FF1174147E700A47A27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		778E54D31746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EKNFrobInfo.h"; path = "iOS/UIScrollView+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
 		778E54D41746D70A009D1BA1 /* UIScrollView+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EKNFrobInfo.m"; path = "iOS/UIScrollView+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
@@ -283,6 +292,19 @@
 			path = "google-toolbox-for-mac";
 			sourceTree = "<group>";
 		};
+		778588C2184553E6006913A6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				778588B9184553C7006913A6 /* EKNChunkConnection.h */,
+				778588BA184553C7006913A6 /* EKNChunkConnection.m */,
+				778588BB184553C7006913A6 /* EKNChunkReader.h */,
+				778588BC184553C7006913A6 /* EKNChunkReader.m */,
+				778588BD184553C7006913A6 /* EKNChunkWriter.h */,
+				778588BE184553C7006913A6 /* EKNChunkWriter.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		77873FE5174147E700A47A27 = {
 			isa = PBXGroup;
 			children = (
@@ -320,12 +342,15 @@
 				77A51B2A17481AD100A66451 /* EKNLiveKnobs.h */,
 				7733F44E17493F480052158B /* EKNLiveKnobs.m */,
 				77CDDB0F17B144CE0072194C /* View Frob */,
+				778588C2184553E6006913A6 /* Networking */,
 				77A51B2217480BCD00A66451 /* EKNLiveKnobsPlugin.h */,
 				77A51B2517480BF600A66451 /* EKNLiveKnobsPlugin.m */,
 				77F70D60174685400064E665 /* EKNPropertyInfo.h */,
 				77F70D61174685410064E665 /* EKNPropertyInfo.m */,
 				7733F48417495FA60052158B /* EKNPropertyDescription.h */,
 				7733F48517495FAE0052158B /* EKNPropertyDescription.m */,
+				77E26DDC17A05A2B0087CE6C /* NSData+Base64.h */,
+				77E26DDD17A05A2B0087CE6C /* NSData+Base64.m */,
 				77B7976317430A4D008242D4 /* EKNNamedChannel.h */,
 				77B7976417430A4E008242D4 /* EKNNamedChannel.m */,
 				77B7975B1742E2A2008242D4 /* EKNWireImage.h */,
@@ -445,8 +470,6 @@
 		77B7970C174177B4008242D4 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				77E26DDC17A05A2B0087CE6C /* NSData+Base64.h */,
-				77E26DDD17A05A2B0087CE6C /* NSData+Base64.m */,
 				77085209176F89EA00570BDE /* MYUtilities */,
 				77B79662174174BF008242D4 /* MYNetwork */,
 			);
@@ -534,6 +557,7 @@
 				77B7963E17417439008242D4 /* BLIPDispatcher.m in Sources */,
 				77085236176F89EA00570BDE /* MYErrorUtils.m in Sources */,
 				77CDDB2017B1769F0072194C /* UILabel+EKNFrobInfo.m in Sources */,
+				778588BF184553C7006913A6 /* EKNChunkConnection.m in Sources */,
 				77B7963F17417439008242D4 /* BLIPMessage.m in Sources */,
 				77B7964017417439008242D4 /* BLIPProperties.m in Sources */,
 				77B7964117417439008242D4 /* BLIPReader.m in Sources */,
@@ -561,6 +585,7 @@
 				77085233176F89EA00570BDE /* Logging.m in Sources */,
 				77B7966A17417504008242D4 /* MYPortMapper.m in Sources */,
 				77B7972E174180A6008242D4 /* EKNSharedConstants.m in Sources */,
+				778588C0184553C7006913A6 /* EKNChunkReader.m in Sources */,
 				77B797521742BCC0008242D4 /* EKNDevicePluginContextDispatcher.m in Sources */,
 				77085238176F89EA00570BDE /* MYStreamUtils.m in Sources */,
 				77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */,
@@ -583,6 +608,7 @@
 				7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */,
 				7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */,
 				77547AF41755518900566AF0 /* EKNUUID.m in Sources */,
+				778588C1184553C7006913A6 /* EKNChunkWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
