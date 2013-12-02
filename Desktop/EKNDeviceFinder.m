@@ -11,8 +11,6 @@
 #import "EKNDevice.h"
 #import "EKNSharedConstants.h"
 
-#import "MYBonjourBrowser.h"
-#import "MYBonjourService.h"
 #import "NSArray+EKNFunctional.h"
 
 NSString* EKNActiveDeviceListChangedNotification = @"EKNActiveDeviceListChangedNotification";
