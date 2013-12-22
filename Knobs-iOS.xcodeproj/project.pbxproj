@@ -24,6 +24,7 @@
 		77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797581742C76C008242D4 /* EKNLoggerPlugin.m */; };
 		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
 		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
+		77C365D51866858C00B4D9D7 /* EKNConnectionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C365D41866858C00B4D9D7 /* EKNConnectionListener.m */; };
 		77CDDB0E17B144BD0072194C /* EKNViewFrobFocusOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */; };
 		77CDDB2017B1769F0072194C /* UILabel+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB1F17B1769F0072194C /* UILabel+EKNFrobInfo.m */; };
 		77E1C53D17B1A8CE00A5FA1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E1C53C17B1A8CE00A5FA1B /* QuartzCore.framework */; };
@@ -86,6 +87,8 @@
 		77B7975C1742E2A3008242D4 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireImage.m; path = Shared/EKNWireImage.m; sourceTree = SOURCE_ROOT; };
 		77B7976317430A4D008242D4 /* EKNNamedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNNamedChannel.h; path = Shared/EKNNamedChannel.h; sourceTree = SOURCE_ROOT; };
 		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
+		77C365D31866858C00B4D9D7 /* EKNConnectionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConnectionListener.h; path = iOS/EKNConnectionListener.h; sourceTree = SOURCE_ROOT; };
+		77C365D41866858C00B4D9D7 /* EKNConnectionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNConnectionListener.m; path = iOS/EKNConnectionListener.m; sourceTree = SOURCE_ROOT; };
 		77CDDB0C17B144BD0072194C /* EKNViewFrobFocusOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNViewFrobFocusOverlay.h; path = iOS/EKNViewFrobFocusOverlay.h; sourceTree = SOURCE_ROOT; };
 		77CDDB0D17B144BD0072194C /* EKNViewFrobFocusOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNViewFrobFocusOverlay.m; path = iOS/EKNViewFrobFocusOverlay.m; sourceTree = SOURCE_ROOT; };
 		77CDDB1E17B1769F0072194C /* UILabel+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+EKNFrobInfo.h"; path = "iOS/UILabel+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
@@ -121,6 +124,8 @@
 		778588C2184553E6006913A6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				77C365D31866858C00B4D9D7 /* EKNConnectionListener.h */,
+				77C365D41866858C00B4D9D7 /* EKNConnectionListener.m */,
 				778588B9184553C7006913A6 /* EKNChunkConnection.h */,
 				778588BA184553C7006913A6 /* EKNChunkConnection.m */,
 				778588BB184553C7006913A6 /* EKNChunkReader.h */,
@@ -283,6 +288,7 @@
 				772F31F117417297009807FD /* EKNKnobs.m in Sources */,
 				77CDDB2017B1769F0072194C /* UILabel+EKNFrobInfo.m in Sources */,
 				778588BF184553C7006913A6 /* EKNChunkConnection.m in Sources */,
+				77C365D51866858C00B4D9D7 /* EKNConnectionListener.m in Sources */,
 				77CDDB0E17B144BD0072194C /* EKNViewFrobFocusOverlay.m in Sources */,
 				77E26DDE17A05A2B0087CE6C /* NSData+Base64.m in Sources */,
 				77B7972E174180A6008242D4 /* EKNSharedConstants.m in Sources */,

@@ -9,6 +9,7 @@
 #import "EKNKnobs.h"
 
 #import "EKNChunkConnection.h"
+#import "EKNConnectionListener.h"
 #import "EKNDevicePluginContextDispatcher.h"
 #import "EKNLoggerPlugin.h"
 #import "EKNLiveKnobsPlugin.h"
@@ -16,10 +17,11 @@
 #import "EKNNamedChannel.h"
 #import "EKNSharedConstants.h"
 
-@interface EKNKnobs () <EKNDevicePluginContextDispatcherDelegate, EKNChunkConnectionDelegate, NSNetServiceDelegate>
+@interface EKNKnobs () <EKNDevicePluginContextDispatcherDelegate, EKNChunkConnectionDelegate, NSNetServiceDelegate, EKNConnectionListenerDelegate>
 
 + (EKNKnobs*)sharedController;
 
+@property (strong, nonatomic) EKNConnectionListener* listener;
 @property (strong, nonatomic) EKNChunkConnection* connection;
 @property (strong, nonatomic) NSNetService* bonjourBroadcast;
 @property (strong, nonatomic) NSMutableDictionary* pluginRegistry;
@@ -79,15 +81,21 @@
 
 - (void)startBroadcasting {
     NSString* name = [NSString stringWithFormat:@"%@ - %@", [[UIDevice currentDevice] name], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]];
-    self.bonjourBroadcast = [[NSNetService alloc] initWithDomain:@"" type:EKNBonjourServiceType name:name];
+    
+    self.listener = [[EKNConnectionListener alloc] init];
+    self.listener.delegate = self;
+    [self.listener start];
+    
+    self.bonjourBroadcast = [[NSNetService alloc] initWithDomain:@"" type:EKNBonjourServiceType name:name port:self.listener.port];
     self.bonjourBroadcast.delegate = self;
-    [self.bonjourBroadcast publishWithOptions:NSNetServiceListenForConnections];
+    [self.bonjourBroadcast publishWithOptions:0];
 }
 
 - (void)stopBroadcasting {
-    [self.bonjourBroadcast publishWithOptions:NSNetServiceListenForConnections];
     [self.bonjourBroadcast stop];
     self.bonjourBroadcast = nil;
+    [self.listener stop];
+    self.listener = nil;
 }
 
 - (void)connectionClosed:(EKNChunkConnection *)connection {
@@ -112,10 +120,8 @@
     [plugin receivedMessage:data onChannel:channel];
 }
 
-#pragma mark NetServices
+- (void)connectionListener:(EKNConnectionListener*)listener didAcceptConnectionWithInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream {
 
-- (void)netService:(NSNetService *)sender didAcceptConnectionWithInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream {
-    
     EKNChunkConnection* connection = [[EKNChunkConnection alloc] initWithInputStream:inputStream outputStream:outputStream];
     
     self.connection = connection;
