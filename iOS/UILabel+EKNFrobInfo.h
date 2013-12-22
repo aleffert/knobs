@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UILabel (EKNFrobInfo)
+#import "UIView+EKNFrobInfo.h"
+
+@interface UILabel (EKNFrobInfo) <EKNViewFrobPropertyInfo>
 
 @end

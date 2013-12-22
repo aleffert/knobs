@@ -10,6 +10,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "EKNNamedGroup.h"
+#import "EKNPropertyGroupAccumulator.h"
 #import "EKNPropertyDescription.h"
 #import "EKNPropertyInfo.h"
 #import "EKNUUID.h"
@@ -69,8 +71,9 @@ static BOOL gEKNViewFrobEnabled = NO;
     return [gEKNViewFrobViewTable objectForKey:viewID];
 }
 
-- (NSArray*)frob_propertyInfos {
+- (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
     static NSArray* viewProperties = nil;
+    static NSArray* layerProperties = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         viewProperties =
@@ -84,14 +87,19 @@ static BOOL gEKNViewFrobEnabled = NO;
           [EKNPropertyDescription rectPropertyWithName:@"frame"],
           [EKNPropertyDescription rectPropertyWithName:@"bounds"],
           [EKNPropertyDescription affineTransformPropertyWithName:@"transform"],
+          ];
+        layerProperties =
+        @[
           [EKNPropertyDescription colorPropertyWithName:@"layer.borderColor" wrapCG:YES],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.borderWidth" min:0 max:20],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.cornerRadius" min:0 max:20],
           [EKNPropertyDescription rectPropertyWithName:@"layer.contentsRect"],
           [EKNPropertyDescription rectPropertyWithName:@"layer.contentsCenter"],
+          
           ];
     });
-    return viewProperties;
+    [context addGroup:@"CALayer" withProperties:layerProperties];
+    [context addGroup:@"UIView" withProperties:viewProperties];
 }
 
 - (NSString*)frob_viewID {
@@ -125,15 +133,25 @@ static BOOL gEKNViewFrobEnabled = NO;
     return info;
 }
 
-- (NSArray*)frob_properties {
-    NSMutableArray* properties = [NSMutableArray array];
-    for(EKNPropertyDescription* description in [self frob_propertyInfos]) {
-        id value = [description wrappedValueFromSource:self];
-        EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:description value:value];
-        [properties addObject:info];
-    }
+- (NSArray*)frob_groups {
+    EKNPropertyGroupAccumulator* accumulator = [[EKNPropertyGroupAccumulator alloc] init];
+    [self frob_accumulatePropertiesInto:accumulator];
     
-    return properties;
+    NSMutableArray* valuedGroups = [NSMutableArray array];
+    [accumulator enumerateGroups:^(NSString *groupName, NSArray *properties) {
+        EKNNamedGroup* group = [[EKNNamedGroup alloc] init];
+        NSMutableArray* groupItems = [NSMutableArray array];
+        for(EKNPropertyDescription* description in properties) {
+            id value = [description wrappedValueFromSource:self];
+            EKNPropertyInfo* info = [EKNPropertyInfo infoWithDescription:description value:value];
+            [groupItems addObject:info];
+        }
+        group.name = groupName;
+        group.items = groupItems;
+        [valuedGroups addObject:group];
+    }];
+    
+    return valuedGroups;
 }
 
 @end

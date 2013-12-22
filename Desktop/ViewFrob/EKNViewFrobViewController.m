@@ -9,11 +9,10 @@
 #import "EKNViewFrobViewController.h"
 
 #import "EKNKnobGeneratorView.h"
-
 #import "EKNKnobInfo.h"
+#import "EKNNamedGroup.h"
 #import "EKNPropertyDescription.h"
 #import "EKNPropertyInfo.h"
-
 #import "EKNViewFrob.h"
 #import "EKNViewFrobInfo.h"
 
@@ -218,7 +217,16 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (void)processUpdatedViewProperties:(NSDictionary*)message {
     NSString* updatedID = [message objectForKey:EKNViewFrobUpdatedViewID];
-    NSArray* properties = [message objectForKey:EKNViewFrobUpdatedProperties];
+    NSArray* groups = [message objectForKey:EKNViewFrobUpdatedGroups];
+    
+    NSMutableArray* properties = [NSMutableArray array];
+    
+    for(EKNNamedGroup* group in groups) {
+        for(EKNPropertyInfo* info in group.items) {
+            [properties addObject:info];
+        }
+    }
+    
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:updatedID];
     if([updatedID isEqual:[self selectedInfo].viewID]) {
         [self showKnobsForInfo:info withProperties:properties];
@@ -354,19 +362,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(NSString*)itemID {
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
     NSTableCellView *view = [outlineView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    if([tableColumn.identifier isEqualToString:@"Class"]) {
-        view.textField.stringValue = info.className;
-    }
-    else if([tableColumn.identifier isEqualToString:@"Address"]) {
-        view.textField.stringValue = info.address;
-    }
-    else if([tableColumn.identifier isEqualToString:@"NextResponderClass"]) {
-        view.textField.stringValue = info.nextResponderClassName;
-    }
-    else {
-        NSAssert(NO, @"Unexpected table column %@", tableColumn.identifier);
-        return nil;
-    }
+    view.textField.stringValue = [NSString stringWithFormat:@"<%@>: %@ -> %@", info.address, info.className, info.nextResponderClassName];
     return view;
 }
 

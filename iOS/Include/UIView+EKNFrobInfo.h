@@ -10,12 +10,20 @@
 
 @class EKNViewFrobInfo;
 
-// Implement this to return additional properties that can be viewed and edited
-// Should call super and merge the results from there.
+@protocol EKNViewFrobPropertyContext <NSObject>
+
+/// Adds an array of EKNViewFrobPropertyInfo* to a group with the given name
+/// Group is typically the class name or an easy to read version thereof
+- (void)addGroup:(NSString*)group withProperties:(NSArray*)properties;
+
+@end
+
+/// Implement this to return additional properties that can be viewed and edited
 @protocol EKNViewFrobPropertyInfo <NSObject>
 
-// Array of EKNViewFrobPropertyInfo*
-- (NSArray*)frob_propertyInfos;
+/// Array of EKNViewFrobPropertyInfo*
+/// Should call super
+- (void)frob_accumulatePropertiesInto:(id <EKNViewFrobPropertyContext>)context;
 
 @end
 
@@ -27,7 +35,11 @@
 + (UIView*)frob_viewWithID:(NSString*)viewID;
 
 - (EKNViewFrobInfo*)frob_info;
-- (NSArray*)frob_properties;
+
+/// Unique id for this view
 - (NSString*)frob_viewID;
+
+/// Array of EKNNamedGroup* whose items are of type EKNPropertyInfo*
+- (NSArray*)frob_groups;
 
 @end

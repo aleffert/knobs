@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageView (EKNFrobInfo)
+#import "UIView+EKNFrobInfo.h"
+
+@interface UIImageView (EKNFrobInfo) <EKNViewFrobPropertyInfo>
 
 @end

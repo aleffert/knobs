@@ -13,13 +13,13 @@
 
 @implementation UILabel (EKNFrobInfo)
 
-- (NSArray*)frob_propertyInfos {
-    NSArray* infos = [super frob_propertyInfos];
-    return [@[
+- (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
+    [super frob_accumulatePropertiesInto:context];
+    [context addGroup:@"UILabel" withProperties:@[
               [EKNPropertyDescription stringPropertyWithName:@"text"],
               [EKNPropertyDescription colorPropertyWithName:@"textColor"],
               [EKNPropertyDescription colorPropertyWithName:@"shadowColor"]
-              ] arrayByAddingObjectsFromArray:infos];
+              ]];
 }
 
 @end

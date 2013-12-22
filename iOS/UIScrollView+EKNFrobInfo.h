@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIScrollView (EKNViewFrobInfo)
+#import "UIView+EKNFrobInfo.h"
+
+@interface UIScrollView (EKNViewFrobInfo) <EKNViewFrobPropertyInfo>
 
 @end

@@ -13,15 +13,16 @@
 
 @implementation UIScrollView (EKNViewFrobInfo)
 
-- (NSArray*)frob_propertyInfos {
-    NSArray* infos = [super frob_propertyInfos];
-    return [@[
-            [EKNPropertyDescription pointPropertyWithName:@"contentOffset"],
-            [EKNPropertyDescription sizePropertyWithName:@"contentSize"],
-            [EKNPropertyDescription edgeInsetsPropertyWithName:@"contentInset"],
-            [EKNPropertyDescription edgeInsetsPropertyWithName:@"scrollIndicatorInsets"],
-            [EKNPropertyDescription togglePropertyWithName:@"scrollEnabled"],
-            ] arrayByAddingObjectsFromArray:infos];
+- (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
+    [super frob_accumulatePropertiesInto:context];
+    [context addGroup:@"UIScrollView" withProperties:
+     @[
+       [EKNPropertyDescription pointPropertyWithName:@"contentOffset"],
+       [EKNPropertyDescription sizePropertyWithName:@"contentSize"],
+       [EKNPropertyDescription edgeInsetsPropertyWithName:@"contentInset"],
+       [EKNPropertyDescription edgeInsetsPropertyWithName:@"scrollIndicatorInsets"],
+       [EKNPropertyDescription togglePropertyWithName:@"scrollEnabled"],
+       ]];
 }
 
 @end

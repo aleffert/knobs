@@ -47,7 +47,7 @@ NSString* EKNViewFrobMessageSelect = @"Select";
 NSString* EKNViewFrobSelectedViewID = @"viewID";
 
 NSString* EKNViewFrobMessageUpdateProperties = @"UpdatedProperties";
-NSString* EKNViewFrobUpdatedProperties = @"properties";
+NSString* EKNViewFrobUpdatedGroups = @"groups";
 NSString* EKNViewFrobUpdatedViewID = @"viewID";
 
 NSString* EKNViewFrobMessageChangedProperty = @"ChangedProperty";

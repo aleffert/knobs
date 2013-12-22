@@ -46,7 +46,7 @@ extern NSString* EKNViewFrobMessageSelect;
 extern NSString* EKNViewFrobSelectedViewID;
 
 extern NSString* EKNViewFrobMessageUpdateProperties;
-extern NSString* EKNViewFrobUpdatedProperties;
+extern NSString* EKNViewFrobUpdatedGroups;
 extern NSString* EKNViewFrobUpdatedViewID;
 
 extern NSString* EKNViewFrobMessageChangedProperty;

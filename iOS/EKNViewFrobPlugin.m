@@ -106,8 +106,8 @@
 }
 
 - (void)sendFullViewInfo:(UIView*)focusedView {
-    NSArray* properties = [focusedView frob_properties];
-    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdateProperties, EKNViewFrobUpdatedProperties : properties, EKNViewFrobUpdatedViewID : focusedView.frob_viewID}];
+    NSArray* groups = [focusedView frob_groups];
+    NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageUpdateProperties, EKNViewFrobUpdatedGroups : groups, EKNViewFrobUpdatedViewID : focusedView.frob_viewID}];
     [self.context sendMessage:archive onChannel:self.channel];
 }
 

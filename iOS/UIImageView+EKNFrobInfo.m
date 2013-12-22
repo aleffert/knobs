@@ -13,11 +13,10 @@
 
 @implementation UIImageView (EKNFrobInfo)
 
-- (NSArray*)frob_propertyInfos {
-    NSArray* infos = [super frob_propertyInfos];
-    return [@[
-            [EKNPropertyDescription imagePropertyWithName:@"image" wrapCG:NO],
-            ] arrayByAddingObjectsFromArray:infos];
+- (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
+    [context addGroup:@"UIImageView" withProperties:
+     @[[EKNPropertyDescription imagePropertyWithName:@"image" wrapCG:NO]]
+     ];
 
 }
 
