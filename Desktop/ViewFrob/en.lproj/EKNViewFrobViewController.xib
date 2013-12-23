@@ -93,7 +93,7 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </tableHeaderView>
                         </scrollView>
-                        <customView id="35" customClass="EKNKnobGeneratorView">
+                        <customView id="35" customClass="EKNKnobGroupsView">
                             <rect key="frame" x="366" y="0.0" width="332" height="496"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <connections>

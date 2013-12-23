@@ -1,5 +1,5 @@
 //
-//  EKNKnobGroupView.h
+//  EKNFlippedClipView.h
 //  Knobs
 //
 //  Created by Akiva Leffert on 12/22/13.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface EKNKnobGroupView : NSView
+@interface EKNFlippedClipView : NSClipView
 
 @end

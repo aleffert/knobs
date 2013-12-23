@@ -14,6 +14,7 @@
 
 @interface EKNLiveKnobsViewController () <EKNKnobGeneratorViewDelegate>
 
+@property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobsView;
 @property (strong, nonatomic) id <EKNChannel> channel;
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;

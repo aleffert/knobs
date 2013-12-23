@@ -8,7 +8,7 @@
 
 #import "EKNViewFrobViewController.h"
 
-#import "EKNKnobGeneratorView.h"
+#import "EKNKnobGroupsView.h"
 #import "EKNKnobInfo.h"
 #import "EKNNamedGroup.h"
 #import "EKNPropertyDescription.h"
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
 
 static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
-@interface EKNViewFrobViewController () <EKNKnobGeneratorViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface EKNViewFrobViewController () <NSOutlineViewDataSource, NSOutlineViewDelegate, EKNKnobsGroupViewDelegate>
 
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
@@ -33,7 +33,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 @property (strong, nonatomic) IBOutlet NSButton* showMarginsButton;
 @property (strong, nonatomic) IBOutlet NSButton* selectFromDeviceButton;
 @property (strong, nonatomic) IBOutlet NSOutlineView* outline;
-@property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobEditor;
+@property (strong, nonatomic) IBOutlet EKNKnobGroupsView* knobEditor;
 
 @property (strong, nonatomic) NSMutableDictionary* viewInfos;
 @property (strong, nonatomic) NSArray* roots;
@@ -68,6 +68,8 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     [self.outline setAllowsMultipleSelection:NO];
     
     self.showMarginsButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:EKNViewFrobShowMarginsKey];
+    
+    self.knobEditor.delegate = self;
 }
 
 - (void)setSelectButtonState:(EKNViewFrobSelectButtonState)state {
@@ -116,16 +118,21 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     return existingCanon;
 }
 
-- (void)showKnobsForInfo:(EKNViewFrobInfo*)info withProperties:(NSArray*)properties {
-    NSArray* knobs = [properties map:^id(EKNPropertyInfo* info) {
-        //Reference lazily since this is part of the app itself
-        EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
-        knob.propertyDescription = info.propertyDescription;
-        knob.value = info.value;
-        knob.knobID = knob.propertyDescription.name;
-        return knob;
+- (void)showKnobsForInfo:(EKNViewFrobInfo*)info withGroups:(NSArray*)groups {
+    NSArray* knobGroups = [groups map:^id(EKNNamedGroup* group) {
+        EKNNamedGroup* knobGroup = [[NSClassFromString(@"EKNNamedGroup") alloc] init];
+        knobGroup.name = group.name;
+        knobGroup.items = [group.items map:^id(EKNPropertyInfo* info) {
+            // Reference lazily since this is part of the app itself
+            EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
+            knob.propertyDescription = info.propertyDescription;
+            knob.value = info.value;
+            knob.knobID = knob.propertyDescription.name;
+            return knob;
+        }];
+        return knobGroup;
     }];
-    [self.knobEditor representObject:info.viewID withKnobs:knobs];
+    [self.knobEditor representObject:info.viewID withGroups:knobGroups];
 }
 
 #pragma mark Actions
@@ -219,17 +226,9 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     NSString* updatedID = [message objectForKey:EKNViewFrobUpdatedViewID];
     NSArray* groups = [message objectForKey:EKNViewFrobUpdatedGroups];
     
-    NSMutableArray* properties = [NSMutableArray array];
-    
-    for(EKNNamedGroup* group in groups) {
-        for(EKNPropertyInfo* info in group.items) {
-            [properties addObject:info];
-        }
-    }
-    
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:updatedID];
     if([updatedID isEqual:[self selectedInfo].viewID]) {
-        [self showKnobsForInfo:info withProperties:properties];
+        [self showKnobsForInfo:info withGroups:groups];
     }
 }
 
@@ -313,7 +312,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 - (void)selectInfoOnDevice:(EKNViewFrobInfo*)info {
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView, EKNViewFrobFocusViewID : info.viewID}];
     [self.context sendMessage:archive onChannel:self.channel];
-    [self showKnobsForInfo:info withProperties:[NSArray array]];
+    [self showKnobsForInfo:info withGroups:@[]];
 }
 
 - (EKNViewFrobInfo*)selectedInfo {
@@ -368,7 +367,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
     EKNViewFrobInfo* info = [self selectedInfo];
-    [self.knobEditor representObject:nil withKnobs:@[]];
+    [self.knobEditor representObject:nil withGroups:@[]];
     if(info == nil) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView}];
         [self.context sendMessage:archive onChannel:self.channel];
@@ -381,7 +380,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 #pragma Knob Editor
 
-- (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
+- (void)knobGroupsView:(EKNKnobGroupsView*)view changedKnob:(EKNKnobInfo*)knob {
     if(self.selectedInfo != nil) {
         //Reference lazily since this is part of the app itself
         EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.propertyDescription value:knob.value];

@@ -16,7 +16,6 @@
 
 @interface EKNKnobGeneratorView () <NSTableViewDataSource, NSTableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet NSTableView* knobTable;
 @property (strong, nonatomic) id representedObject;
 @property (copy, nonatomic) NSArray* knobs;
@@ -38,10 +37,20 @@
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:EKNPropertyTypeString];
-        self.scrollView.frame = self.bounds;
-        [self addSubview:self.scrollView];
+        
+        [self addSubview:self.knobTable];
+        
+        self.knobTable.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
+        
+        [self setContentHuggingPriority:NSLayoutPriorityDefaultHigh forOrientation:NSLayoutConstraintOrientationVertical];
     }
     return self;
+}
+
+- (BOOL)isFlipped {
+    return YES;
 }
 
 - (void)representObject:(id)object withKnobs:(NSArray *)knobs {
@@ -122,16 +131,23 @@
 }
 
 - (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-    NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
-    view.info = info;
-    return view;
+    if(row < self.knobs.count) {
+        EKNKnobInfo* info = [self.knobs objectAtIndex:row];
+        NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
+        view.info = info;
+        return view;
+    }
+    return nil;
 }
 
 #pragma mark Editor Delegate
 
 - (void)propertyEditor:(id<EKNPropertyEditor>)editor changedKnob:(EKNKnobInfo *)knob {
     [self.delegate generatorView:self changedKnob:knob];
+}
+
+- (NSSize)intrinsicContentSize {
+    return self.knobTable.bounds.size;
 }
 
 @end

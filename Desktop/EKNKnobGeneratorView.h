@@ -18,9 +18,8 @@
 
 @property (assign, nonatomic) IBOutlet id <EKNKnobGeneratorViewDelegate> delegate;
 
-// Array of EKNKnobInfo*
+/// properties is an array of EKNKnobInfo*
 - (void)representObject:(id)object withKnobs:(NSArray*)properties;
-@property (readonly, nonatomic) id representedObject;
 
 - (void)addKnob:(EKNKnobInfo*)knob;
 - (void)updateKnobWithID:(NSString*)knobID toValue:(id)value;
