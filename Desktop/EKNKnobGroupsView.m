@@ -8,10 +8,15 @@
 
 #import "EKNKnobGroupsView.h"
 
+#import "EKNDisclosureView.h"
 #import "EKNKnobGeneratorView.h"
 #import "EKNNamedGroup.h"
 
-@interface EKNKnobGroupsView () <EKNKnobGeneratorViewDelegate>
+static NSString* const EKNKnobGroupsClosedGroupsKey = @"EKNKnobGroupsClosedGroupsKey";
+
+@interface EKNKnobGroupsView () <EKNKnobGeneratorViewDelegate, EKNDisclosureViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray* closedGroupNames;
 
 @property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet NSStackView* stackView;
@@ -57,6 +62,8 @@
         
         viewsDict = NSDictionaryOfVariableBindings(_stackView);
         [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_stackView]-0-|" options:0 metrics:nil views:viewsDict]];
+        
+        self.closedGroupNames = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:EKNKnobGroupsClosedGroupsKey]];
     }
     return self;
 }
@@ -68,16 +75,21 @@
     if (fullUpdate) {
         [self clearViews];
         
-        for(EKNNamedGroup* group in groups) {
+        [groups enumerateObjectsUsingBlock:^(EKNNamedGroup* group, NSUInteger index, BOOL *stop) {
+            EKNDisclosureView* container = [[EKNDisclosureView alloc] initWithFrame:CGRectMake(0, 0, self.stackView.frame.size.width, 100)];
+            container.title = group.name;
+            container.showsTopDivider = index != 0;
+            container.delegate = self;
             EKNKnobGeneratorView* knobView = [[EKNKnobGeneratorView alloc] initWithFrame:CGRectMake(0, 0, self.stackView.frame.size.width, 100)];
-            knobView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+            container.disclosedView = knobView;
+            container.disclosed = ![self.closedGroupNames containsObject:group.name];
             knobView.delegate = self;
-            [self.stackView addView:knobView inGravity:NSStackViewGravityCenter];
+            [self.stackView addView:container inGravity:NSStackViewGravityCenter];
             self.groupNameMap[group.name] = knobView;
             [self.groupViews addObject:knobView];
             [knobView setTranslatesAutoresizingMaskIntoConstraints:NO];
             [knobView representObject:object withKnobs:group.items];
-        }
+        }];
     }
     else {
         for(EKNNamedGroup* group in groups) {
@@ -88,7 +100,8 @@
 }
 
 - (void)clearViews {
-    for (NSView* view in self.groupViews) {
+    NSArray* stackViews = self.stackView.views;
+    for (NSView* view in stackViews) {
         [view removeFromSuperview];
     }
     
@@ -103,6 +116,22 @@
 
 - (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
     [self.delegate knobGroupsView:self changedKnob:knob];
+}
+
+#pragma mark Disclosure Defaults
+
+- (void)saveDefaults {
+    [[NSUserDefaults standardUserDefaults] setObject:self.closedGroupNames forKey:EKNKnobGroupsClosedGroupsKey];
+}
+
+- (void)disclosureViewOpened:(EKNDisclosureView *)disclosureView {
+    [self.closedGroupNames removeObject:disclosureView.title];
+    [self saveDefaults];
+}
+
+- (void)disclosureViewClosed:(EKNDisclosureView *)disclosureView {
+    [self.closedGroupNames addObject:disclosureView.title];
+    [self saveDefaults];
 }
 
 @end
