@@ -64,6 +64,8 @@
 		77C365FB1868B88000B4D9D7 /* EKNDisclosureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C365F91868B88000B4D9D7 /* EKNDisclosureView.xib */; };
 		77C365FD1868BE5F00B4D9D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C365FC1868BE5F00B4D9D7 /* QuartzCore.framework */; };
 		77C36600186CA73D00B4D9D7 /* EKNEventTrampolineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C365FF186CA73D00B4D9D7 /* EKNEventTrampolineTableView.m */; };
+		77C36603186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C36602186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.m */; };
+		77C36606186CBEE400B4D9D7 /* EKNKnobPushButtonEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C36604186CBEE400B4D9D7 /* EKNKnobPushButtonEditor.xib */; };
 		77CDDB1A17B172480072194C /* EKNKnobStringEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDDB1917B172480072194C /* EKNKnobStringEditor.m */; };
 		77CDDB1D17B174760072194C /* EKNKnobStringEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CDDB1B17B174760072194C /* EKNKnobStringEditor.xib */; };
 		77F70CDE1743DF180064E665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FC317413BEC00A47A27 /* Cocoa.framework */; };
@@ -226,6 +228,9 @@
 		77C365FC1868BE5F00B4D9D7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		77C365FE186CA73D00B4D9D7 /* EKNEventTrampolineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNEventTrampolineTableView.h; path = Desktop/EKNEventTrampolineTableView.h; sourceTree = SOURCE_ROOT; };
 		77C365FF186CA73D00B4D9D7 /* EKNEventTrampolineTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNEventTrampolineTableView.m; path = Desktop/EKNEventTrampolineTableView.m; sourceTree = SOURCE_ROOT; };
+		77C36601186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobPushButtonEditor.h; path = Desktop/EKNKnobPushButtonEditor.h; sourceTree = SOURCE_ROOT; };
+		77C36602186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobPushButtonEditor.m; path = Desktop/EKNKnobPushButtonEditor.m; sourceTree = SOURCE_ROOT; };
+		77C36605186CBEE400B4D9D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobPushButtonEditor.xib; sourceTree = SOURCE_ROOT; };
 		77CDDB1817B172480072194C /* EKNKnobStringEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobStringEditor.h; path = Desktop/EKNKnobStringEditor.h; sourceTree = SOURCE_ROOT; };
 		77CDDB1917B172480072194C /* EKNKnobStringEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobStringEditor.m; path = Desktop/EKNKnobStringEditor.m; sourceTree = SOURCE_ROOT; };
 		77CDDB1C17B174760072194C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobStringEditor.xib; sourceTree = SOURCE_ROOT; };
@@ -299,13 +304,14 @@
 		772F313F174154ED009807FD /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				77C365F91868B88000B4D9D7 /* EKNDisclosureView.xib */,
 				77C365E91867A6D300B4D9D7 /* EKNKnobGroupsView.xib */,
+				77C365F91868B88000B4D9D7 /* EKNDisclosureView.xib */,
 				77A51B1C1747F9AC00A66451 /* EKNKnobAffineTransformEditor.xib */,
 				778E54D01746D4B0009D1BA1 /* EKNKnobFloatPairEditor.xib */,
 				778E54CA1746CDB7009D1BA1 /* EKNKnobFloatQuadEditor.xib */,
 				778E54C41746C662009D1BA1 /* EKNKnobImageEditor.xib */,
 				778E54BE1746B95A009D1BA1 /* EKNKnobSliderEditor.xib */,
+				77C36604186CBEE400B4D9D7 /* EKNKnobPushButtonEditor.xib */,
 				778E54B81746B332009D1BA1 /* EKNKnobToggleEditor.xib */,
 				778E54A51746A35B009D1BA1 /* EKNKnobColorEditor.xib */,
 				773C3B7F17469D9400D6A805 /* EKNKnobGeneratorView.xib */,
@@ -489,6 +495,8 @@
 		77C365EF1867A75B00B4D9D7 /* Editors */ = {
 			isa = PBXGroup;
 			children = (
+				77C36601186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.h */,
+				77C36602186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.m */,
 				77A51B161747F44300A66451 /* EKNKnobAffineTransformEditor.h */,
 				77A51B171747F44300A66451 /* EKNKnobAffineTransformEditor.m */,
 				778E54A81746A3D7009D1BA1 /* EKNKnobColorEditor.h */,
@@ -683,6 +691,7 @@
 				772F312A1741543A009807FD /* Credits.rtf in Resources */,
 				772F312C1741543A009807FD /* MainMenu.xib in Resources */,
 				772F3139174154BF009807FD /* InfoPlist.strings in Resources */,
+				77C36606186CBEE400B4D9D7 /* EKNKnobPushButtonEditor.xib in Resources */,
 				772F313E174154E3009807FD /* EKNConsoleWindowController.xib in Resources */,
 				77B797701743D4E8008242D4 /* EKNDeviceFinderSheet.xib in Resources */,
 				773C3B781746992500D6A805 /* icon_knob.icns in Resources */,
@@ -747,6 +756,7 @@
 				77C365EE1867A6EF00B4D9D7 /* EKNKnobGroupsView.m in Sources */,
 				77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */,
 				77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */,
+				77C36603186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.m in Sources */,
 				77B797621742F6D1008242D4 /* EKNDeviceFinderView.m in Sources */,
 				77B7976817430A89008242D4 /* EKNNamedChannel.m in Sources */,
 				77B7976C1743D0B9008242D4 /* EKNConsolePluginRegistry.m in Sources */,
@@ -947,6 +957,14 @@
 				77C365FA1868B88000B4D9D7 /* en */,
 			);
 			name = EKNDisclosureView.xib;
+			sourceTree = "<group>";
+		};
+		77C36604186CBEE400B4D9D7 /* EKNKnobPushButtonEditor.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77C36605186CBEE400B4D9D7 /* en */,
+			);
+			name = EKNKnobPushButtonEditor.xib;
 			sourceTree = "<group>";
 		};
 		77CDDB1B17B174760072194C /* EKNKnobStringEditor.xib */ = {

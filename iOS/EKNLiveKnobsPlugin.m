@@ -104,6 +104,12 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     [self.valuesByID setObject:value forKey:listenerInfo.uuid];
 }
 
+- (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback {
+    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] currentValue:@(0) callback:^(id owner, id value) {
+        callback(owner);
+    }];
+}
+
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
     NSDictionary* message = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSNumber* messageType = [message objectForKey:EKNLiveKnobsSentMessageKey];

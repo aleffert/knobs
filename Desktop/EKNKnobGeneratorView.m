@@ -37,6 +37,7 @@
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:EKNPropertyTypeString];
+        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobPushButtonEditor" bundle:nil] forIdentifier:EKNPropertyTypePushButton];
         
         [self addSubview:self.knobTable];
         
@@ -114,6 +115,7 @@
         NSDictionary* sizes = @{
                                 EKNPropertyTypeColor : @24,
                                 EKNPropertyTypeToggle : @24,
+                                EKNPropertyTypePushButton : @28,
                                 EKNPropertyTypeSlider : @58,
                                 EKNPropertyTypeImage : @236,
                                 EKNPropertyTypeFloatQuad : @103,

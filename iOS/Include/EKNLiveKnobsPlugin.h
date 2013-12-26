@@ -22,6 +22,8 @@
 // knob is removed automatically if owner gets deallocated
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback;
 
+- (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback;
+
 // Notify the listener that the value changed. Optional, but will make ensure the UI matches the actual value
 - (void)updateValueWithOwner:(id)owner name:(NSString*)name value:(id)value;
 

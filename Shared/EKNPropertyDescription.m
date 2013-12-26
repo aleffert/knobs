@@ -14,6 +14,7 @@ NSString* EKNPropertyTypeString = @"string";
 NSString* EKNPropertyTypeColor = @"color";
 NSString* EKNPropertyTypeToggle = @"toggle";
 NSString* EKNPropertyTypeSlider = @"slider";
+NSString* EKNPropertyTypePushButton = @"pushButton";
 NSString* EKNPropertyTypeImage = @"image";
 NSString* EKNPropertyTypeFloatQuad = @"floatQuad";
 NSString* EKNPropertyTypeFloatPair = @"floatPair";
@@ -35,6 +36,10 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
     result.type = type;
     result.parameters = parameters;
     return result;
+}
+
++ (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypePushButton parameters:@{}];
 }
 
 + (EKNPropertyDescription*)stringPropertyWithName:(NSString *)name {

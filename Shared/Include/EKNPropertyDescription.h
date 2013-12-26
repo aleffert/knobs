@@ -24,6 +24,8 @@ enum {
     EKNPropertySliderContinuous,
 };
 
+extern NSString* EKNPropertyTypePushButton;
+
 extern NSString* EKNPropertyTypeImage;
 enum {
     EKNPropertyImageWrapCG
@@ -50,6 +52,7 @@ extern NSString* EKNPropertyTypeAffineTransform;
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters;
++ (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)stringPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
