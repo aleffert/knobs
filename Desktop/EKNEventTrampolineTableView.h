@@ -11,7 +11,6 @@
 @protocol EKNEventTrampolineKeyHandler <NSObject>
 
 - (void)keyDown:(NSEvent*)theEvent;
-- (void)keyUp:(NSEvent*)theEvent;
 
 @end
 

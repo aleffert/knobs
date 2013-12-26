@@ -152,7 +152,6 @@
 }
 
 - (void)keyDown:(NSEvent *)theEvent {
-    
     NSInteger keyOrder = [self.info.propertyDescription.parameters[@(EKNPropertyFloatQuadKeyOrder)] integerValue];
     switch(keyOrder) {
         case EKNFloatQuadKeyOrderEdgeInsets:
@@ -162,10 +161,6 @@
             [self handleKeyEventForRect:theEvent];
             break;
     }
-}
-
-- (void)keyUp:(NSEvent *)theEvent {
-    // Do nothing
 }
 
 @end

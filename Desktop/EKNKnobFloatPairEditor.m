@@ -11,7 +11,9 @@
 #import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
 
-@interface EKNKnobFloatPairEditor ()
+#import "EKNEventTrampolineTableView.h"
+
+@interface EKNKnobFloatPairEditor () <EKNEventTrampolineKeyHandler>
 
 @property (strong, nonatomic) IBOutlet NSTextField* fieldName;
 
@@ -47,11 +49,46 @@
     self.fieldName.stringValue = info.propertyDescription.name;
 }
 
+- (void)incrementXBy:(CGFloat)amount {
+    NSPoint point = CGPointMake(self.left.floatValue, self.right.floatValue);
+    point.x += amount;
+    self.info.value = [NSValue valueWithPoint:point];
+    [self.delegate propertyEditor:self changedKnob:self.info];
+}
+
+- (void)incrementYBy:(CGFloat)amount {
+    NSPoint point = CGPointMake(self.left.floatValue, self.right.floatValue);
+    point.y += amount;
+    self.info.value = [NSValue valueWithPoint:point];
+    [self.delegate propertyEditor:self changedKnob:self.info];
+}
+
 - (IBAction)textFieldChanged:(id)sender {
     NSPoint point = NSMakePoint(self.left.floatValue, self.right.floatValue);
     NSValue* value = [NSValue valueWithPoint:point];
     self.info.value = value;
     [self.delegate propertyEditor:self changedKnob:self.info];
+}
+
+- (void)keyDown:(NSEvent *)theEvent {
+    NSString* character = [theEvent charactersIgnoringModifiers];
+    unichar code = [character characterAtIndex:0];
+    switch (code) {
+        case NSUpArrowFunctionKey:
+            [self incrementYBy:-1];
+            break;
+        case NSDownArrowFunctionKey:
+            [self incrementYBy:1];
+            break;
+        case NSLeftArrowFunctionKey:
+            [self incrementXBy:-1];
+            break;
+        case NSRightArrowFunctionKey:
+            [self incrementXBy:1];
+            break;
+        default:
+            break;
+    }
 }
 
 @end
