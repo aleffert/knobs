@@ -14,6 +14,7 @@
 @implementation UIImageView (EKNFrobInfo)
 
 - (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
+    [super frob_accumulatePropertiesInto:context];
     [context addGroup:@"UIImageView" withProperties:
      @[[EKNPropertyDescription imagePropertyWithName:@"image" wrapCG:NO]]
      ];

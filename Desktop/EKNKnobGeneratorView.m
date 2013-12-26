@@ -112,14 +112,14 @@
     if(row < self.knobs.count) {
         EKNKnobInfo* info = [self.knobs objectAtIndex:row];
         NSDictionary* sizes = @{
-                                EKNPropertyTypeColor : @57,
-                                EKNPropertyTypeToggle : @57,
-                                EKNPropertyTypeSlider : @71,
+                                EKNPropertyTypeColor : @24,
+                                EKNPropertyTypeToggle : @24,
+                                EKNPropertyTypeSlider : @58,
                                 EKNPropertyTypeImage : @236,
-                                EKNPropertyTypeFloatQuad : @122,
-                                EKNPropertyTypeFloatPair : @90,
-                                EKNPropertyTypeAffineTransform : @154,
-                                EKNPropertyTypeString : @68,
+                                EKNPropertyTypeFloatQuad : @103,
+                                EKNPropertyTypeFloatPair : @61,
+                                EKNPropertyTypeAffineTransform : @131,
+                                EKNPropertyTypeString : @46,
                                 };
         return [[sizes objectForKey:info.propertyDescription.type] floatValue];
     }

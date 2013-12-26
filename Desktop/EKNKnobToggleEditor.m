@@ -14,6 +14,7 @@
 @interface EKNKnobToggleEditor ()
 
 @property (strong, nonatomic) IBOutlet NSButton* checkbox;
+@property (strong, nonatomic) IBOutlet NSTextField* fieldName;
 
 @end
 
@@ -24,7 +25,7 @@
 
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
-    [self.checkbox setTitle:info.propertyDescription.name];
+    self.fieldName.stringValue = info.propertyDescription.name;
     [self.checkbox setState:[info.value boolValue]];
 }
 
