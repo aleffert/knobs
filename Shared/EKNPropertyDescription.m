@@ -66,11 +66,11 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 }
 
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
-    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"]}];
+    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderRect)}];
 }
 
 + (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name {
-    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"top", @"left", @"bottom", @"right"]}];
+    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"top", @"left", @"bottom", @"right"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderEdgeInsets)}];
 }
 
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString *)name {

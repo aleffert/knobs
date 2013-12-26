@@ -31,7 +31,13 @@ enum {
 
 extern NSString* EKNPropertyTypeFloatQuad;
 enum {
-    EKNPropertyFloatQuadFieldNames
+    EKNPropertyFloatQuadFieldNames,
+    EKNPropertyFloatQuadKeyOrder
+};
+
+enum {
+    EKNFloatQuadKeyOrderRect,
+    EKNFloatQuadKeyOrderEdgeInsets,
 };
 
 extern NSString* EKNPropertyTypeFloatPair;

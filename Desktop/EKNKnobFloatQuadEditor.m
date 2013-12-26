@@ -9,9 +9,10 @@
 #import "EKNKnobFloatQuadEditor.h"
 
 #import "EKNKnobInfo.h"
+#import "EKNEventTrampolineTableView.h"
 #import "EKNPropertyDescription.h"
 
-@interface EKNKnobFloatQuadEditor ()
+@interface EKNKnobFloatQuadEditor () <EKNEventTrampolineKeyHandler>
 
 @property (strong, nonatomic) IBOutlet NSTextField* fieldName;
 
@@ -53,7 +54,7 @@
         }
     }];
     
-    NSArray* names = [self.info.propertyDescription.parameters objectForKey:@(EKNPropertyFloatQuadFieldNames)];
+    NSArray* names = self.info.propertyDescription.parameters[@(EKNPropertyFloatQuadFieldNames)];
     [self.namesLabels enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
         if(field.currentEditor == nil) {
             field.stringValue = names[idx];
@@ -72,6 +73,99 @@
     
     self.info.value = [NSValue valueWithRect:rect];
     [self.delegate propertyEditor:self changedKnob:self.info];
+}
+
+- (void)incrementFieldAtIndex:(NSUInteger)index by:(CGFloat)amount {
+    NSRect rect;
+    CGFloat* rectFields = (CGFloat*)&rect;
+    [self.fields enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
+        rectFields[idx] = field.floatValue;
+    }];
+    rectFields[index] = rectFields[index] + amount;
+    
+    self.info.value = [NSValue valueWithRect:rect];
+    [self.delegate propertyEditor:self changedKnob:self.info];
+}
+
+- (void)handleKeyEventForRect:(NSEvent*)theEvent {
+    NSString* character = [theEvent charactersIgnoringModifiers];
+    unichar code = [character characterAtIndex:0];
+    
+    if(theEvent.modifierFlags & NSAlternateKeyMask) {
+        switch (code) {
+            case NSLeftArrowFunctionKey:
+                [self incrementFieldAtIndex:2 by:-1];
+                break;
+            case NSDownArrowFunctionKey:
+                [self incrementFieldAtIndex:3 by:1];
+                break;
+            case NSRightArrowFunctionKey:
+                [self incrementFieldAtIndex:2 by:1];
+                break;
+            case NSUpArrowFunctionKey:
+                [self incrementFieldAtIndex:3 by:-1];
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        switch (code) {
+            case NSLeftArrowFunctionKey:
+                [self incrementFieldAtIndex:0 by:-1];
+                break;
+            case NSDownArrowFunctionKey:
+                [self incrementFieldAtIndex:1 by:1];
+                break;
+            case NSRightArrowFunctionKey:
+                [self incrementFieldAtIndex:0 by:1];
+                break;
+            case NSUpArrowFunctionKey:
+                [self incrementFieldAtIndex:1 by:-1];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)handleKeyEventForEdgeInsets:(NSEvent*)theEvent {
+    NSString* character = [theEvent charactersIgnoringModifiers];
+    unichar code = [character characterAtIndex:0];
+    CGFloat delta = (theEvent.modifierFlags & NSAlternateKeyMask) ? -1 : 1;
+    switch (code) {
+        case NSLeftArrowFunctionKey:
+            [self incrementFieldAtIndex:1 by:delta];
+            break;
+        case NSDownArrowFunctionKey:
+            [self incrementFieldAtIndex:2 by:delta];
+            break;
+        case NSRightArrowFunctionKey:
+            [self incrementFieldAtIndex:3 by:delta];
+            break;
+        case NSUpArrowFunctionKey:
+            [self incrementFieldAtIndex:0 by:delta];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)keyDown:(NSEvent *)theEvent {
+    
+    NSInteger keyOrder = [self.info.propertyDescription.parameters[@(EKNPropertyFloatQuadKeyOrder)] integerValue];
+    switch(keyOrder) {
+        case EKNFloatQuadKeyOrderEdgeInsets:
+            [self handleKeyEventForEdgeInsets:theEvent];
+            break;
+        case EKNFloatQuadKeyOrderRect:
+            [self handleKeyEventForRect:theEvent];
+            break;
+    }
+}
+
+- (void)keyUp:(NSEvent *)theEvent {
+    // Do nothing
 }
 
 @end
