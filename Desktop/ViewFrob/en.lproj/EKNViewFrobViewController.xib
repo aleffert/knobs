@@ -112,7 +112,7 @@
                     </tableHeaderView>
                 </scrollView>
                 <customView id="35" customClass="EKNKnobGroupsView">
-                    <rect key="frame" x="378" y="0.0" width="320" height="496"/>
+                    <rect key="frame" x="369" y="0.0" width="329" height="496"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="65"/>
