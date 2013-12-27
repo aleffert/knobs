@@ -68,12 +68,15 @@
 }
 
 - (void)sendAddMessageWithInfo:(EKNKnobListenerInfo*)info value:(id)value {
-    NSDictionary* message = @{
+    NSMutableDictionary* message = @{
                               EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageAddKnob),
                               @(EKNLiveKnobsAddIDKey) : info.uuid,
                               @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
                               @(EKNLiveKnobsAddInitialValueKey) : value,
-                              };
+                              }.mutableCopy;
+    if(info.sourcePath) {
+        message[@(EKNLiveKnobsPathKey)] = info.sourcePath;
+    }
     
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
@@ -82,7 +85,7 @@
 
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback {
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback sourcePath:(NSString *)path {
     NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
         infos = [[NSMutableDictionary alloc] init];
@@ -95,6 +98,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     listenerInfo.callback = callback;
     listenerInfo.propertyDescription = description;
     listenerInfo.delegate = self;
+    listenerInfo.sourcePath = path;
     [self.listenersByID setObject:listenerInfo forKey:listenerInfo.uuid];
     
     [infos setObject:listenerInfo forKey:listenerInfo.propertyDescription.name];
@@ -106,8 +110,10 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback {
     [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] currentValue:@(0) callback:^(id owner, id value) {
-        callback(owner);
-    }];
+        if(callback != nil) {
+            callback(owner);
+        }
+    } sourcePath:nil];
 }
 
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {

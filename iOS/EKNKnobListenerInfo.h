@@ -19,6 +19,7 @@
 @property (copy, nonatomic) NSString* uuid;
 @property (copy, nonatomic) void (^callback)(id owner, id value);
 @property (strong, nonatomic) EKNPropertyDescription* propertyDescription;
+@property (copy, nonatomic) NSString* sourcePath;
 
 @end
 

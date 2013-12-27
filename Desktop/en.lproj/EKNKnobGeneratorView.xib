@@ -10,7 +10,7 @@
                 <outlet property="knobTable" destination="tMR-hO-wzM" id="Vdl-g2-HeE"/>
             </connections>
         </customObject>
-        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" id="tMR-hO-wzM" customClass="EKNEventTrampolineTableView">
+        <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" id="tMR-hO-wzM" customClass="EKNEventTrampolineTableView">
             <rect key="frame" x="0.0" y="0.0" width="310" height="19"/>
             <autoresizingMask key="autoresizingMask"/>
             <size key="intercellSpacing" width="3" height="2"/>

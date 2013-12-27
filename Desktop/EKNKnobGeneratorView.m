@@ -8,6 +8,7 @@
 
 #import "EKNKnobGeneratorView.h"
 
+#import "EKNKnobEditorManager.h"
 #import "EKNKnobInfo.h"
 #import "EKNPropertyEditor.h"
 #import "EKNPropertyDescription.h"
@@ -29,15 +30,7 @@
     self = [super initWithFrame:frameRect];
     if(self != nil) {
         [[NSBundle mainBundle] loadNibNamed:@"EKNKnobGeneratorView" owner:self topLevelObjects:NULL];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:EKNPropertyTypeColor];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:EKNPropertyTypeSlider];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:EKNPropertyTypeImage];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatQuad];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:EKNPropertyTypeString];
-        [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobPushButtonEditor" bundle:nil] forIdentifier:EKNPropertyTypePushButton];
+
         
         [self addSubview:self.knobTable];
         
@@ -46,6 +39,8 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
         
         [self setContentHuggingPriority:NSLayoutPriorityDefaultHigh forOrientation:NSLayoutConstraintOrientationVertical];
+        
+        [[EKNKnobEditorManager sharedManager] registerPropertyTypesInTableView:self.knobTable];
     }
     return self;
 }
@@ -112,18 +107,7 @@
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     if(row < self.knobs.count) {
         EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        NSDictionary* sizes = @{
-                                EKNPropertyTypeColor : @24,
-                                EKNPropertyTypeToggle : @24,
-                                EKNPropertyTypePushButton : @28,
-                                EKNPropertyTypeSlider : @58,
-                                EKNPropertyTypeImage : @236,
-                                EKNPropertyTypeFloatQuad : @103,
-                                EKNPropertyTypeFloatPair : @61,
-                                EKNPropertyTypeAffineTransform : @131,
-                                EKNPropertyTypeString : @46,
-                                };
-        return [[sizes objectForKey:info.propertyDescription.type] floatValue];
+        return [[EKNKnobEditorManager sharedManager] editorHeightOfType:info.propertyDescription.type];
     }
     else {
         // AppKit seems to request this even when the table is empty with row = 0

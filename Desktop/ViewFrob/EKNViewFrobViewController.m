@@ -64,7 +64,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (void)loadView {
     [super loadView];
-    [self.outline setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
+    [self.outline setColumnAutoresizingStyle:NSTableViewFirstColumnOnlyAutoresizingStyle];
     [self.outline setAllowsMultipleSelection:NO];
     
     self.showMarginsButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:EKNViewFrobShowMarginsKey];
@@ -361,7 +361,12 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(NSString*)itemID {
     EKNViewFrobInfo* info = [self.viewInfos objectForKey:itemID];
     NSTableCellView *view = [outlineView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    view.textField.stringValue = [NSString stringWithFormat:@"<%@>: %@ -> %@", info.address, info.className, info.nextResponderClassName];
+    if([tableColumn.identifier isEqualToString:@"Class"]) {
+        view.textField.stringValue = [NSString stringWithFormat:@"<%@>: %@", info.address, info.className];
+    }
+    else {
+        view.textField.stringValue = [NSString stringWithFormat:@"%@", info.nextResponderClassName];
+    }
     return view;
 }
 
