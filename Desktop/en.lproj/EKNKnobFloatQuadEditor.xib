@@ -22,7 +22,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="9">
-                    <rect key="frame" x="44" y="40" width="120" height="17"/>
+                    <rect key="frame" x="44" y="40" width="107" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="x" id="10">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -31,7 +31,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="11">
-                    <rect key="frame" x="44" y="2" width="120" height="17"/>
+                    <rect key="frame" x="44" y="2" width="107" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="width" id="12">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -40,7 +40,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="17">
-                    <rect key="frame" x="46" y="59" width="116" height="19"/>
+                    <rect key="frame" x="46" y="59" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="18">
                         <font key="font" metaFont="smallSystem"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="19">
-                    <rect key="frame" x="46" y="21" width="116" height="19"/>
+                    <rect key="frame" x="46" y="21" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="20">
                         <font key="font" metaFont="smallSystem"/>
@@ -66,7 +66,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="21">
-                    <rect key="frame" x="173" y="40" width="120" height="17"/>
+                    <rect key="frame" x="173" y="40" width="107" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="y" id="28">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -75,7 +75,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="22">
-                    <rect key="frame" x="173" y="2" width="120" height="17"/>
+                    <rect key="frame" x="173" y="2" width="107" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="height" id="27">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -84,7 +84,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="23">
-                    <rect key="frame" x="175" y="59" width="116" height="19"/>
+                    <rect key="frame" x="175" y="59" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="26">
                         <font key="font" metaFont="smallSystem"/>
@@ -97,7 +97,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="24">
-                    <rect key="frame" x="175" y="21" width="116" height="19"/>
+                    <rect key="frame" x="175" y="21" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="25">
                         <font key="font" metaFont="smallSystem"/>
@@ -108,6 +108,38 @@
                         <action selector="textFieldChanged:" target="1" id="39"/>
                     </connections>
                 </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="Omd-54-I2u">
+                    <rect key="frame" x="149" y="57" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="wAh-cf-BK9"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="1" id="PJ4-8y-q2i"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="2" id="QJG-uh-Cdj">
+                    <rect key="frame" x="149" y="18" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="c37-Mk-hv7"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="1" id="BH3-rg-8w7"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="3" id="CZa-8h-HPX">
+                    <rect key="frame" x="278" y="19" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="m9J-98-fwq"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="1" id="7yP-oB-MgQ"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="1" id="41v-na-TQS">
+                    <rect key="frame" x="278" y="57" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="8Xw-o5-67p"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="1" id="kDG-Vg-t40"/>
+                    </connections>
+                </stepper>
             </subviews>
             <connections>
                 <outlet property="delegate" destination="-2" id="7"/>

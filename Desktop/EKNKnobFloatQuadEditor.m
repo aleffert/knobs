@@ -79,9 +79,13 @@
     NSRect rect;
     CGFloat* rectFields = (CGFloat*)&rect;
     [self.fields enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
-        rectFields[idx] = field.floatValue;
+        CGFloat value = field.floatValue;
+        if(idx == index) {
+            value += amount;
+            field.floatValue = value;
+        }
+        rectFields[idx] = value;
     }];
-    rectFields[index] = rectFields[index] + amount;
     
     self.info.value = [NSValue valueWithRect:rect];
     [self.delegate propertyEditor:self changedKnob:self.info];
@@ -161,6 +165,11 @@
             [self handleKeyEventForRect:theEvent];
             break;
     }
+}
+
+- (IBAction)stepperPressed:(NSStepper*)stepper {
+    [self incrementFieldAtIndex:stepper.tag by:stepper.floatValue];
+    stepper.floatValue = 0;
 }
 
 @end

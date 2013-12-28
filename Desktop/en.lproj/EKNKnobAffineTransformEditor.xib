@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" id="69">
-                    <rect key="frame" x="42" y="112" width="235" height="17"/>
+                    <rect key="frame" x="44" y="112" width="235" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="70">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -22,7 +22,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="68">
-                    <rect key="frame" x="42" y="72" width="119" height="17"/>
+                    <rect key="frame" x="42" y="72" width="109" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="a" id="71">
                         <font key="font" metaFont="smallSystem"/>
@@ -31,7 +31,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="67">
-                    <rect key="frame" x="42" y="36" width="120" height="17"/>
+                    <rect key="frame" x="42" y="36" width="109" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="c" id="72">
                         <font key="font" metaFont="smallSystem"/>
@@ -40,7 +40,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="66">
-                    <rect key="frame" x="44" y="89" width="116" height="19"/>
+                    <rect key="frame" x="46" y="89" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="73">
                         <font key="font" metaFont="smallSystem"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="65">
-                    <rect key="frame" x="44" y="53" width="115" height="19"/>
+                    <rect key="frame" x="46" y="53" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="74">
                         <font key="font" metaFont="smallSystem"/>
@@ -66,7 +66,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="64">
-                    <rect key="frame" x="173" y="70" width="120" height="17"/>
+                    <rect key="frame" x="173" y="70" width="106" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="b" id="75">
                         <font key="font" metaFont="smallSystem"/>
@@ -75,7 +75,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="63">
-                    <rect key="frame" x="173" y="36" width="120" height="17"/>
+                    <rect key="frame" x="173" y="36" width="107" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="d" id="76">
                         <font key="font" metaFont="smallSystem"/>
@@ -84,7 +84,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="62">
-                    <rect key="frame" x="175" y="89" width="116" height="19"/>
+                    <rect key="frame" x="175" y="89" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="77">
                         <font key="font" metaFont="smallSystem"/>
@@ -97,7 +97,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="61">
-                    <rect key="frame" x="175" y="53" width="116" height="19"/>
+                    <rect key="frame" x="175" y="53" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="78">
                         <font key="font" metaFont="smallSystem"/>
@@ -109,7 +109,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="147">
-                    <rect key="frame" x="42" y="0.0" width="119" height="17"/>
+                    <rect key="frame" x="42" y="0.0" width="109" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="tx" id="154">
                         <font key="font" metaFont="smallSystem"/>
@@ -118,7 +118,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="148">
-                    <rect key="frame" x="44" y="17" width="115" height="19"/>
+                    <rect key="frame" x="46" y="17" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="153">
                         <font key="font" metaFont="smallSystem"/>
@@ -131,7 +131,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="149">
-                    <rect key="frame" x="173" y="0.0" width="120" height="17"/>
+                    <rect key="frame" x="173" y="0.0" width="107" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="ty" id="152">
                         <font key="font" metaFont="smallSystem"/>
@@ -140,7 +140,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="150">
-                    <rect key="frame" x="175" y="17" width="116" height="19"/>
+                    <rect key="frame" x="175" y="17" width="103" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="151">
                         <font key="font" metaFont="smallSystem"/>
@@ -151,6 +151,54 @@
                         <action selector="fieldChanged:" target="60" id="171"/>
                     </connections>
                 </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="1" id="83t-1G-jRI">
+                    <rect key="frame" x="278" y="87" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="aFe-Lk-szE"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="60" id="9Jk-kP-HLu"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="3" id="Fao-Ck-rS8">
+                    <rect key="frame" x="278" y="51" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="a3I-mx-zVh"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="60" id="Nj1-MU-r9b"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="5" id="bE2-5G-tsg">
+                    <rect key="frame" x="278" y="15" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="6ZY-Rt-6kN"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="60" id="SZp-jm-bWY"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="0gC-lV-l0M">
+                    <rect key="frame" x="148" y="87" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="JhO-8j-cnj"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="60" id="Xgo-IV-Ryk"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="2" id="Yas-60-h7L">
+                    <rect key="frame" x="148" y="51" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="yKc-kA-6Dj"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="60" id="eYj-PZ-dhK"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="4" id="NCq-fZ-Bh6">
+                    <rect key="frame" x="148" y="15" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-1" maxValue="1" id="jc5-Ki-scE"/>
+                    <connections>
+                        <action selector="stepperPressed:" target="60" id="MTp-z4-2B9"/>
+                    </connections>
+                </stepper>
             </subviews>
             <connections>
                 <outlet property="delegate" destination="-2" id="158"/>

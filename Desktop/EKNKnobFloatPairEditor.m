@@ -23,9 +23,6 @@
 @property (strong, nonatomic) IBOutlet NSTextField* leftName;
 @property (strong, nonatomic) IBOutlet NSTextField* rightName;
 
-@property (strong, nonatomic) IBOutlet NSStepper* leftStepper;
-@property (strong, nonatomic) IBOutlet NSStepper* rightStepper;
-
 @end
 
 @implementation EKNKnobFloatPairEditor
@@ -51,14 +48,6 @@
     self.rightName.stringValue = [names objectAtIndex:1];
     
     self.fieldName.stringValue = info.label;
-    
-    self.leftStepper.minValue = -1;
-    self.leftStepper.maxValue = 1;
-    self.rightStepper.minValue = -1;
-    self.rightStepper.maxValue = 1;
-    
-    self.leftStepper.floatValue = 0;
-    self.rightStepper.floatValue = 0;
 }
 
 - (void)valueChangedToPoint:(NSPoint)point {

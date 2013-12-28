@@ -57,15 +57,34 @@
     self.fieldName.stringValue = self.info.label;
 }
 
+- (void)changedToAffineTransform:(CGAffineTransform)transform {
+    self.info.value = [NSValue ekn_valueWithCGAffineTransform:transform];
+    [self.delegate propertyEditor:self changedKnob:self.info];
+}
+
 - (IBAction)fieldChanged:(id)sender {
     CGAffineTransform transform;
     CGFloat* transformFields = (CGFloat*)&transform;
     [self.fields enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
         transformFields[idx] = field.floatValue;
     }];
+    [self changedToAffineTransform:transform];
+}
+
+- (IBAction)stepperPressed:(NSStepper*)stepper {
+    CGAffineTransform transform;
+    CGFloat* transformFields = (CGFloat*)&transform;
+    [self.fields enumerateObjectsUsingBlock:^(NSTextField* field, NSUInteger idx, BOOL *stop) {
+        CGFloat value = field.floatValue;
+        if(stepper.tag == idx) {
+            value += stepper.floatValue;
+            field.floatValue = value;
+        }
+        transformFields[idx] = field.floatValue;
+    }];
     
-    self.info.value = [NSValue ekn_valueWithCGAffineTransform:transform];
-    [self.delegate propertyEditor:self changedKnob:self.info];
+    stepper.floatValue = 0;
+    [self changedToAffineTransform:transform];
 }
 
 @end
