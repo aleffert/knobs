@@ -170,7 +170,7 @@
         NSString* viewID = [message objectForKey:EKNViewFrobChangedPropertyViewID];
         UIView* view = [UIView frob_viewWithID:viewID];
         EKNPropertyInfo* info = [message objectForKey:EKNViewFrobChangedPropertyInfo];
-        [info.propertyDescription setWrappedValue:info.value ofSource:view];
+        [info.propertyDescription setWrappedValue:info.value onSource:view];
     }
     else if([messageType isEqualToString:EKNViewFrobMessageActivateTapSelection]) {
         [self showSelectionView];

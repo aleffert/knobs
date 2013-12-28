@@ -12,16 +12,21 @@
 
 @interface EKNLoggerPlugin : NSObject <EKNDevicePlugin>
 
-+ (EKNLoggerPlugin*)sharedPlugin;
+/// This class is not currently thread safe.
+/// This seems like a major disadvantage for a logging framework
+/// But it does make it easier to send stuff from the debugger console
+/// Without having to hit continue before it sends
+/// TODO: Fix this to be thread safe, but still send stuff when stopped in the debugger
 
++ (EKNLoggerPlugin*)sharedPlugin;
 
 - (void)logToChannel:(NSString*)channelName withString:(NSString*)string;
 - (void)logToChannel:(NSString*)channelName withHTMLString:(NSString*)string;
 - (void)logToChannel:(NSString*)channelName withImage:(UIImage*)image;
 - (void)logToChannel:(NSString*)channelName withColor:(UIColor*)color;
 
-// Channel to use if channelName is nil
-// Defaults to @"Log"
+/// Channel to use if channelName is nil
+/// Defaults to @"Log"
 @property (strong, nonatomic) NSString* defaultChannelName;
 
 @end
@@ -35,12 +40,23 @@ void EKNLog(NSString* formatHTML, ...);
 void EKNLogImage(UIImage* image);
 void EKNLogColor(UIColor* color);
 
-@interface NSObject (EKNLogger)
+@protocol EKNHTMLLogging <NSObject>
 
-// Convenient way to generate HTML from an object
-// Default is just an html-encoded version of -[NSObject description]
-// Currently there are custom ones for UIImage and UIColor that generate visual representations
+/// Convenient way to generate HTML from an object
 - (NSString*)ekn_html;
 
 @end
 
+/// Default implementation of ekn_html. Just an html-encoded version of -[NSObject description]
+@interface NSObject (EKNLogger) <EKNHTMLLogging>
+
+@end
+
+/// Customized implementation of HTML generation. Generates a swatch
+@interface UIColor (EKNLogger) <EKNHTMLLogging>
+@end
+
+/// Customized implementation of HTML generation.
+/// Converts to an img tag with the relevant data
+@interface UIImage (EKNLogger) <EKNHTMLLogging>
+@end

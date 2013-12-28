@@ -11,6 +11,7 @@
 @protocol EKNDevicePluginContext;
 @protocol EKNChannel;
 
+/// Protocol that all knobs plugins must implement
 @protocol EKNDevicePlugin <NSObject>
 
 /// Reverse DNS style unique ID

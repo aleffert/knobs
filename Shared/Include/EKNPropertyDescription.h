@@ -69,7 +69,9 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 /// Returns a string describing the type
 + (NSString*)nameForType:(EKNPropertyType)type;
 
+/// Description of the property
 @property (readonly, nonatomic, copy) NSString* name;
+/// Property type for editor
 @property (readonly, nonatomic, assign) EKNPropertyType type;
 /// Same as calling nameForType: on the object's type
 @property (readonly, nonatomic, strong) NSString* typeName;
@@ -78,10 +80,14 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 
 /// Converts property values to the right objective-c objects
 /// Primarily used to wrap up CG values
+/// Requires self's .name to be a keypath
 - (id)wrappedValueFromSource:(id)source;
 
-///
-- (void)setWrappedValue:(id)wrapped ofSource:(id)source;
+/// Unwraps the value and sets it on source
+/// Requires self's .name to be a valid keypath for source
+- (void)setWrappedValue:(id)wrapped onSource:(id)source;
+
+/// Unwraps the value into its original type
 - (id)valueWithWrappedValue:(id)wrappedValue;
 
 @end

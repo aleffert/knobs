@@ -187,7 +187,7 @@
 
 }
 
-- (void)setWrappedValue:(id)wrappedValue ofSource:(id)source {
+- (void)setWrappedValue:(id)wrappedValue onSource:(id)source {
     id value = [self valueWithWrappedValue:wrappedValue];
     [source setValue:value forKeyPath:self.name];
 }
