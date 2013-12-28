@@ -12,6 +12,21 @@
 
 #import "EKNPropertyDescription.h"
 
+@protocol EKNLiveKnobsCallback
+/// Will be called on the owner when a knob is updated
+- (void)ekn_knobChangedNamed:(NSString*)label withDescription:(EKNPropertyDescription*)description toValue:(id)value;
+
+@end
+
+/// Implementation calls [self setNeedsLayout]
+@interface UIView (EKNLiveKnobsCallback) <EKNLiveKnobsCallback>
+@end
+
+
+/// Implementation calls [self.view setNeedsLayout]
+@interface UIViewController (EKNLiveKnobsCallback) <EKNLiveKnobsCallback>
+@end
+
 @interface EKNLiveKnobsPlugin : NSObject <EKNDevicePlugin>
 
 + (EKNLiveKnobsPlugin*)sharedPlugin;
@@ -23,6 +38,8 @@
 /// knob is removed automatically if owner gets deallocated
 /// callback may be nil
 /// path is the path to the source file containing the registration. It may be nil.
+/// Live source updating won't work unless you go through the EKNMake macros below
+/// Even if you pass sourcePath
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value callback:(void(^)(id owner, id value))callback sourcePath:(NSString*)path;
 
 /// Registers a knob that is just a push button with the given name
@@ -39,18 +56,43 @@
 #define EKNSymbolName(symbol) @"" #symbol
 
 #define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, action) ({\
-[[EKNLiveKnobsPlugin sharedPlugin] registerOwner:owner info:propertyDescription label:labelText currentValue:wrappedValue callback:action sourcePath:@""__FILE__]; \
-    symbol = value;\
+    [[EKNLiveKnobsPlugin sharedPlugin] registerOwner:owner info:propertyDescription label:labelText currentValue:wrappedValue callback:^(id innerOwner, id changedValue) { \
+            if([innerOwner respondsToSelector:@selector(ekn_knobChangedNamed:withDescription:toValue:)]) { \
+                [innerOwner ekn_knobChangedNamed:labelText withDescription:propertyDescription toValue:changedValue];\
+            } \
+            action(innerOwner, changedValue); \
+        } \
+    sourcePath:@""__FILE__]; \
+    symbol = value; \
 })
 
-#define EKNMakeToggleKnob(symbol, value, owner, label) \
-EKNMakeKnob(owner, [EKNPropertyDescription togglePropertyWithName:EKNSymbolName(symbol)], label, value, @(value), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
+#define EKNMakeToggleKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
 
-#define EKNMakeContinuousSliderKnob(symbol, value, owner, label, minimum, maximum) ({\
-EKNMakeKnob(owner, [EKNPropertyDescription continuousSliderPropertyWithName:EKNSymbolName(symbol) min:minimum max:maximum], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];}); \
-    symbol = value;\
-})
+#define EKNMakeColorKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, UIColor* color){symbol = color;})
 
-/// Super sketchy delimiter so our regex based
-/// parser can find this
-#define EKNBreak ,
+#define EKNMakeContinuousSliderKnob(symbol, value, label, minimum, maximum) \
+EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNSymbolName(symbol) min:minimum max:maximum], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+
+#define EKNMakeStringKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, NSString* changedValue){symbol = changedValue;})
+
+#define EKNMakePointKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGPoint:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
+
+#define EKNMakeSizeKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
+
+#define EKNMakeRectKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
+
+#define EKNMakeEdgeInsetsKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithUIEdgeInsets:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
+
+#define EKNMakeAffineTransformKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGAffineTransform:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
+
+/// Delimiter so our regex based parser can find the right place to update
+/// This is pretty sketchy
+#define EKNMarker 

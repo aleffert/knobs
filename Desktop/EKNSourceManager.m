@@ -31,13 +31,13 @@
         return YES;
     }
     
-    NSString* pattern = [NSString stringWithFormat:@"EKNMake([a-zA-Z0-9_]+)\\(([ :a-zA-Z.0-9_]+),\\s(%@)\\sEKNBreak", name];
+    NSString* pattern = [NSString stringWithFormat:@"EKNMake([a-zA-Z0-9_]+)\\((\\s*(%@)\\s*),(.*)EKNMarker", name];
     
     NSRegularExpression* expression = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:error];
     if(error && *error) {
         return YES;
     }
-    NSString* template = [NSString stringWithFormat:@"EKNMake$1($2, %@ EKNBreak", code];
+    NSString* template = [NSString stringWithFormat:@"EKNMake$1($2, %@ EKNMarker", code];
     NSString* outContents = [expression stringByReplacingMatchesInString:fileContents options:0 range:NSMakeRange(0, fileContents.length) withTemplate:template];
     [outContents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:error];
     if(error && *error) {

@@ -180,3 +180,22 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 @end
+
+#pragma mark Default Callback Actions
+
+@implementation UIViewController (EKNLiveKnobsCallback)
+
+- (void)ekn_knobChangedNamed:(NSString *)label withDescription:(EKNPropertyDescription *)description toValue:(id)value {
+    [self.view setNeedsLayout];
+}
+
+@end
+
+
+@implementation UIView (EKNLiveKnobsCallback)
+
+- (void)ekn_knobChangedNamed:(NSString *)label withDescription:(EKNPropertyDescription *)description toValue:(id)value {
+    [self setNeedsLayout];
+}
+
+@end
