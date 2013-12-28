@@ -8,10 +8,11 @@
 
 #import "EKNKnobSliderEditor.h"
 
+#import "EKNEventTrampolineTableView.h"
 #import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
 
-@interface EKNKnobSliderEditor ()
+@interface EKNKnobSliderEditor () <EKNEventTrampolineKeyHandler>
 
 @property (strong, nonatomic) IBOutlet NSSlider* slider;
 @property (strong, nonatomic) IBOutlet NSTextField* fieldName;
@@ -35,13 +36,45 @@
     self.minValue.floatValue = self.slider.minValue;
     self.maxValue.floatValue = self.slider.maxValue;
     self.fieldName.stringValue = info.label;
-    self.currentValue.floatValue = self.slider.floatValue;
+    self.currentValue.stringValue = [NSString stringWithFormat:@"%.2f", self.slider.floatValue];
 }
 
 - (IBAction)changedSlider:(id)sender {
     self.info.value = @(self.slider.floatValue);
     [self.delegate propertyEditor:self changedKnob:self.info];
-    self.currentValue.floatValue = self.slider.floatValue;
+    self.currentValue.stringValue = [NSString stringWithFormat:@"%.2f", self.slider.floatValue];
+}
+
+- (CGFloat)incrementAmount {
+    // This is totally made up, but seems reasonable
+    if(self.slider.maxValue - self.slider.minValue <= 5) {
+        return .1;
+    }
+    else {
+        return 1;
+    }
+}
+
+- (void)offsetValueByAmount:(CGFloat)amount {
+    CGFloat finalValue = MIN(self.slider.maxValue, MAX(self.slider.minValue, self.slider.floatValue + amount));
+    self.slider.floatValue = finalValue;
+    [self changedSlider:nil];
+}
+
+- (void)keyDown:(NSEvent *)theEvent {
+    NSString* character = [theEvent charactersIgnoringModifiers];
+    unichar code = [character characterAtIndex:0];
+    switch (code) {
+        case NSUpArrowFunctionKey:
+        case NSLeftArrowFunctionKey:
+            [self offsetValueByAmount:-1 * [self incrementAmount]];
+            break;
+        case NSDownArrowFunctionKey:
+        case NSRightArrowFunctionKey:
+            [self offsetValueByAmount:[self incrementAmount]];
+        default:
+            break;
+    }
 }
 
 @end

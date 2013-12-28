@@ -10,22 +10,10 @@
 
 @implementation EKNEventTrampolineTableView
 
-- (void)keyUp:(NSEvent *)theEvent {
-    NSInteger row = [self selectedRow];
-    if(row != -1) {
-        NSView* view = [self viewAtColumn:0 row:row makeIfNecessary:NO];
-        if([view conformsToProtocol:@protocol(EKNEventTrampolineKeyHandler)]) {
-            [view keyUp:theEvent];
-        }
-    }
-    else {
-        [super keyUp:theEvent];
-    }
-}
-
 - (void)keyDown:(NSEvent *)theEvent {
     NSInteger row = [self selectedRow];
     if(row != -1) {
+        // TODO use a less sketch way of getting the column index
         NSView* view = [self viewAtColumn:0 row:row makeIfNecessary:NO];
         if([view conformsToProtocol:@protocol(EKNEventTrampolineKeyHandler)]) {
             [view keyDown:theEvent];
