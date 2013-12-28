@@ -25,6 +25,7 @@
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeAffineTransform]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeColor]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeImage]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloat]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatPair]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatQuad]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobPushButtonEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypePushButton]];
@@ -37,6 +38,7 @@
     switch (type) {
         case EKNPropertyTypeAffineTransform: return 131;
         case EKNPropertyTypeColor: return 24;
+        case EKNPropertyTypeFloat: return 43;
         case EKNPropertyTypeFloatPair: return 61;
         case EKNPropertyTypeFloatQuad: return 103;
         case EKNPropertyTypeImage: return 236;

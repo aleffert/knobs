@@ -95,8 +95,8 @@ static BOOL gEKNViewFrobEnabled = NO;
         @[
           [EKNPropertyDescription stringPropertyWithName:@"layer.name"],
           [EKNPropertyDescription colorPropertyWithName:@"layer.borderColor" wrapCG:YES],
-          [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.borderWidth" min:0 max:20],
-          [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.cornerRadius" min:0 max:20],
+          [EKNPropertyDescription floatPropertyWithName:@"layer.borderWidth"],
+          [EKNPropertyDescription floatPropertyWithName:@"layer.cornerRadius"],
           [EKNPropertyDescription rectPropertyWithName:@"layer.contentsRect"],
           [EKNPropertyDescription rectPropertyWithName:@"layer.contentsCenter"],
           

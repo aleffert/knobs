@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, EKNPropertyType) {
     EKNPropertyTypeAffineTransform,
     EKNPropertyTypeColor,
     EKNPropertyTypeImage,
+    EKNPropertyTypeFloat,
     EKNPropertyTypeFloatPair,
     EKNPropertyTypeFloatQuad,
     EKNPropertyTypePushButton,
@@ -53,18 +54,20 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(EKNPropertyType)type parameters:(NSDictionary*)parameters;
-+ (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name;
-+ (EKNPropertyDescription*)stringPropertyWithName:(NSString*)name;
+
++ (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
-+ (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
-+ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
-+ (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)floatPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString*)name;
-+ (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)stringPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name;
 
 /// Returns a string describing the type
 + (NSString*)nameForType:(EKNPropertyType)type;

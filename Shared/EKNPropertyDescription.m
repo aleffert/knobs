@@ -28,12 +28,8 @@
     return result;
 }
 
-+ (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name {
-    return [self propertyWithName:name type:EKNPropertyTypePushButton parameters:@{}];
-}
-
-+ (EKNPropertyDescription*)stringPropertyWithName:(NSString *)name {
-    return [self propertyWithName:name type:EKNPropertyTypeString parameters:@{}];
++ (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypeAffineTransform parameters:@{}];
 }
 
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name {
@@ -44,28 +40,8 @@
     return [self propertyWithName:name type:EKNPropertyTypeColor parameters:@{@(EKNPropertyColorWrapCG) : @(wrapCG)}];
 }
 
-+ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name {
-    return [self imagePropertyWithName:name wrapCG:NO];
-}
-
-+ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG {
-    return [self propertyWithName:name type:EKNPropertyTypeImage parameters:@{@(EKNPropertyImageWrapCG) : @(wrapCG)}];
-}
-
-+ (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name {
-    return [self propertyWithName:name type:EKNPropertyTypeToggle parameters:@{}];
-}
-
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max {
     return [self propertyWithName:name type:EKNPropertyTypeSlider parameters:@{@(EKNPropertySliderMin): @(min),@(EKNPropertySliderMax) : @(max), @(EKNPropertySliderContinuous) : @YES}];
-}
-
-+ (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
-    return [self propertyWithName:name
-                             type:EKNPropertyTypeFloatQuad
-                       parameters:@{
-                                    @(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderRect), @(EKNPropertyFloatQuadConstructorPrefix) : @"CGRectMake"
-                                    }];
 }
 
 + (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name {
@@ -76,22 +52,52 @@
                                     }];
 }
 
++ (EKNPropertyDescription*)floatPropertyWithName:(NSString *)name {
+    return [self propertyWithName:name type:EKNPropertyTypeFloat parameters:@{}];
+}
+
++ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name {
+    return [self imagePropertyWithName:name wrapCG:NO];
+}
+
++ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG {
+    return [self propertyWithName:name type:EKNPropertyTypeImage parameters:@{@(EKNPropertyImageWrapCG) : @(wrapCG)}];
+}
+
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString *)name {
     return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"x", @"y"], @(EKNPropertyFloatPairConstructorPrefix) : @"CGPointMake"}];
+}
+
++ (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypePushButton parameters:@{}];
+}
+
++ (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
+    return [self propertyWithName:name
+                             type:EKNPropertyTypeFloatQuad
+                       parameters:@{
+                                    @(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderRect), @(EKNPropertyFloatQuadConstructorPrefix) : @"CGRectMake"
+                                    }];
 }
 
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString *)name {
     return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"width", @"height"], @(EKNPropertyFloatPairConstructorPrefix) : @"CGSizeMake"}];
 }
 
-+ (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name {
-    return [self propertyWithName:name type:EKNPropertyTypeAffineTransform parameters:@{}];
++ (EKNPropertyDescription*)stringPropertyWithName:(NSString *)name {
+    return [self propertyWithName:name type:EKNPropertyTypeString parameters:@{}];
 }
+
++ (EKNPropertyDescription*)togglePropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypeToggle parameters:@{}];
+}
+
 
 + (NSString*)nameForType:(EKNPropertyType)type {
     switch (type) {
         case EKNPropertyTypeAffineTransform: return @"EKNPropertyTypeAffineTransform";
         case EKNPropertyTypeColor: return @"EKNPropertyTypeColor";
+        case EKNPropertyTypeFloat: return @"EKNPropertyTypeFloat";
         case EKNPropertyTypeFloatPair: return @"EKNPropertyTypeFloatPair";
         case EKNPropertyTypeFloatQuad: return @"EKNPropertyTypeFloatQuad";
         case EKNPropertyTypeImage: return @"EKPropertyTypeImage";

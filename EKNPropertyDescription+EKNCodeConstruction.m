@@ -11,14 +11,20 @@
 @implementation EKNPropertyDescription (EKNCodeConstruction)
 
 
+- (NSString*)constructorCodeForAffineTransform:(NSValue*)value {
+    CGAffineTransform transform;
+    [value getValue:&transform];
+    return [NSString stringWithFormat:@"CGAffineTransformMake(%.2f, %.2f, %.2f, %.2f, %.2f, %2.f)", transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty];
+}
+
 - (NSString*)constructorCodeForColor:(NSColor*)color {
     CGFloat r, g, b, a;
     [color getRed:&r green:&g blue:&b alpha:&a];
     return [NSString stringWithFormat:@"[UIColor colorWithRed:%.2f green:%.2f blue:%.2f alpha:%.2f]", r, g, b, a];
 }
 
-- (NSString*)constructorCodeForSlider:(NSNumber*)value {
-    return [NSString stringWithFormat:@"%.2f", value.floatValue];
+- (NSString*)constructorCodeForFloat:(NSNumber*)floatValue {
+    return [NSString stringWithFormat:@"%.2f", [floatValue floatValue]];
 }
 
 - (NSString*)constructorCodeForFloatPair:(NSValue*)pair {
@@ -35,10 +41,8 @@
     return [NSString stringWithFormat:@"%@(%.2f, %.2f, %.2f, %2.f)", prefix, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
 }
 
-- (NSString*)constructorCodeForAffineTransform:(NSValue*)value {
-    CGAffineTransform transform;
-    [value getValue:&transform];
-    return [NSString stringWithFormat:@"CGAffineTransformMake(%.2f, %.2f, %.2f, %.2f, %.2f, %2.f)", transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty];
+- (NSString*)constructorCodeForSlider:(NSNumber*)value {
+    return [NSString stringWithFormat:@"%.2f", value.floatValue];
 }
 
 - (NSString*)constructorCodeForToggle:(NSNumber*)toggle {
@@ -48,6 +52,7 @@
 - (NSString*)constructorCodeForValue:(id)value {
     switch (self.type) {
         case EKNPropertyTypeColor: return [self constructorCodeForColor:value];
+        case EKNPropertyTypeFloat: return [self constructorCodeForFloat:value];
         case EKNPropertyTypeFloatPair: return [self constructorCodeForFloatPair:value];
         case EKNPropertyTypeFloatQuad: return [self constructorCodeForFloatQuad:value];
         case EKNPropertyTypeToggle: return [self constructorCodeForToggle:value];
