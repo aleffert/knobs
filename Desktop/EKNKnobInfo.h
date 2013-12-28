@@ -17,5 +17,11 @@
 @property (strong, nonatomic) id value;
 @property (strong, nonatomic) EKNPropertyDescription* propertyDescription;
 @property (strong, nonatomic) NSString* knobID;
+/// sourcePath can be nil, indicating the source path is unknown
+@property (strong, nonatomic) NSString* sourcePath;
+/// user visible string to display with the knob. Optional
+/// The propertyDescription.name property needs to be unique within a given source file
+/// So this is the right way to customize the display
+@property (strong, nonatomic) NSString* label;
 
 @end

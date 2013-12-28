@@ -33,7 +33,7 @@
     else {
         [self.imageView setImage:image.image];
     }
-    self.fieldName.stringValue = info.propertyDescription.name;
+    self.fieldName.stringValue = info.label;
 }
 
 - (IBAction)changedImage:(id)sender {

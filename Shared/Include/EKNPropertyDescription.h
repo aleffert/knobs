@@ -34,7 +34,8 @@ enum {
 extern NSString* EKNPropertyTypeFloatQuad;
 enum {
     EKNPropertyFloatQuadFieldNames,
-    EKNPropertyFloatQuadKeyOrder
+    EKNPropertyFloatQuadKeyOrder,
+    EKNPropertyFloatQuadConstructorPrefix
 };
 
 enum {
@@ -44,7 +45,8 @@ enum {
 
 extern NSString* EKNPropertyTypeFloatPair;
 enum {
-    EKNPropertyFloatPairFieldNames
+    EKNPropertyFloatPairFieldNames,
+    EKNPropertyFloatPairConstructorPrefix
 };
 
 extern NSString* EKNPropertyTypeAffineTransform;
@@ -68,6 +70,7 @@ extern NSString* EKNPropertyTypeAffineTransform;
 @property (readonly, copy) NSString* name;
 @property (readonly, copy) NSString* type;
 @property (readonly, copy) NSDictionary* parameters;
+@property (readonly, nonatomic, assign) BOOL supportsSourceUpdate;
 
 - (id)wrappedValueFromSource:(id)source;
 - (void)setWrappedValue:(id)wrapped ofSource:(id)source;

@@ -30,7 +30,6 @@
     self = [super initWithFrame:frameRect];
     if(self != nil) {
         [[NSBundle mainBundle] loadNibNamed:@"EKNKnobGeneratorView" owner:self topLevelObjects:NULL];
-
         
         [self addSubview:self.knobTable];
         
@@ -63,39 +62,6 @@
             editor.info = info;
         }];
     }
-}
-
-- (void)addKnob:(EKNKnobInfo *)knob {
-    self.knobs = [@[knob] arrayByAddingObjectsFromArray:self.knobs];
-    [self.knobTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationEffectGap];
-}
-
-- (void)updateKnobWithID:(NSString*)knobID toValue:(id)value {
-    [self.knobs enumerateObjectsUsingBlock:^(EKNKnobInfo* knob, NSUInteger idx, BOOL *stop) {
-        if([knob.knobID isEqualToString:knobID]) {
-            knob.value = value;
-            id <EKNPropertyEditor> editor = [self.knobTable viewAtColumn:0 row:idx makeIfNecessary:NO];
-            editor.info = knob;
-        }
-    }];
-}
-
-- (void)removeKnobWithID:(NSString *)knobID {
-    NSMutableIndexSet* set = [[NSMutableIndexSet alloc] init];
-    [self.knobs filterWithIndex:^BOOL(EKNKnobInfo* knob, NSUInteger index) {
-        if([knob.knobID isEqualToString:knobID]) {
-            [set addIndex:index];
-            return NO;
-        }
-        return YES;
-    }];
-    [self.knobTable removeRowsAtIndexes:set withAnimation:NSTableViewAnimationEffectGap];
-}
-
-- (void)clear {
-    self.knobs  = [NSArray array];
-    self.representedObject = nil;
-    [self.knobTable reloadData];
 }
 
 #pragma mark Table View

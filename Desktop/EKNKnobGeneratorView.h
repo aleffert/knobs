@@ -21,11 +21,6 @@
 /// properties is an array of EKNKnobInfo*
 - (void)representObject:(id)object withKnobs:(NSArray*)properties;
 
-- (void)addKnob:(EKNKnobInfo*)knob;
-- (void)updateKnobWithID:(NSString*)knobID toValue:(id)value;
-- (void)removeKnobWithID:(NSString*)knobID;
-- (void)clear;
-
 @end
 
 @protocol EKNKnobGeneratorViewDelegate <NSObject>

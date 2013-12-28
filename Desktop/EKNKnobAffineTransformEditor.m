@@ -54,7 +54,7 @@
             field.floatValue = transformFields[idx];
         }
     }];
-    self.fieldName.stringValue = self.info.propertyDescription.name;
+    self.fieldName.stringValue = self.info.label;
 }
 
 - (IBAction)fieldChanged:(id)sender {

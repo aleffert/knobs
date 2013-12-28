@@ -77,6 +77,12 @@
     if(info.sourcePath) {
         message[@(EKNLiveKnobsPathKey)] = info.sourcePath;
     }
+    if(info.label) {
+        message[@(EKNLiveKnobsLabelKey)] = info.label;
+    }
+    else {
+        message[@(EKNLiveKnobsLabelKey)] = info.propertyDescription.name;
+    }
     
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
@@ -85,7 +91,7 @@
 
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description currentValue:(id)value callback:(void(^)(id owner, id value))callback sourcePath:(NSString *)path {
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString *)label currentValue:(id)value callback:(void (^)(id, id))callback sourcePath:(NSString *)path {
     NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
         infos = [[NSMutableDictionary alloc] init];
@@ -99,6 +105,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     listenerInfo.propertyDescription = description;
     listenerInfo.delegate = self;
     listenerInfo.sourcePath = path;
+    listenerInfo.label = label;
     [self.listenersByID setObject:listenerInfo forKey:listenerInfo.uuid];
     
     [infos setObject:listenerInfo forKey:listenerInfo.propertyDescription.name];
@@ -109,7 +116,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 - (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback {
-    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] currentValue:@(0) callback:^(id owner, id value) {
+    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] label:name currentValue:@(0) callback:^(id owner, id value) {
         if(callback != nil) {
             callback(owner);
         }

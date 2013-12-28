@@ -46,7 +46,7 @@
     self.leftName.stringValue = [names objectAtIndex:0];
     self.rightName.stringValue = [names objectAtIndex:1];
     
-    self.fieldName.stringValue = info.propertyDescription.name;
+    self.fieldName.stringValue = info.label;
 }
 
 - (void)incrementXBy:(CGFloat)amount {

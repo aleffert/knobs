@@ -90,6 +90,7 @@ static BOOL gEKNViewFrobEnabled = NO;
           ];
         layerProperties =
         @[
+          [EKNPropertyDescription stringPropertyWithName:@"layer.name"],
           [EKNPropertyDescription colorPropertyWithName:@"layer.borderColor" wrapCG:YES],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.borderWidth" min:0 max:20],
           [EKNPropertyDescription continuousSliderPropertyWithName:@"layer.cornerRadius" min:0 max:20],

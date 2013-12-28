@@ -8,11 +8,16 @@
 
 #import "EKNKnobInfo.h"
 
+#import "EKNPropertyDescription.h"
 
 @implementation EKNKnobInfo
 
 + (EKNKnobInfo*)knob {
     return [[EKNKnobInfo alloc] init];
+}
+
+- (NSString*)displayName {
+    return self.label ?: self.propertyDescription.name;
 }
 
 @end

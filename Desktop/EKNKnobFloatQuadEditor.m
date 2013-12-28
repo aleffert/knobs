@@ -61,7 +61,7 @@
         }
     }];
     
-    self.fieldName.stringValue = self.info.propertyDescription.name;
+    self.fieldName.stringValue = self.info.label;
 }
 
 - (IBAction)textFieldChanged:(id)sender {

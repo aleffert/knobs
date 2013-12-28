@@ -20,6 +20,7 @@
 @property (copy, nonatomic) void (^callback)(id owner, id value);
 @property (strong, nonatomic) EKNPropertyDescription* propertyDescription;
 @property (copy, nonatomic) NSString* sourcePath;
+@property (copy, nonatomic) NSString* label;
 
 @end
 

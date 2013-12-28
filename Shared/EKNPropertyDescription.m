@@ -71,19 +71,27 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 }
 
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString *)name {
-    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderRect)}];
+    return [self propertyWithName:name
+                             type:EKNPropertyTypeFloatQuad
+                       parameters:@{
+                                    @(EKNPropertyFloatQuadFieldNames) : @[@"x", @"y", @"width", @"height"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderRect), @(EKNPropertyFloatQuadConstructorPrefix) : @"CGRectMake"
+                                    }];
 }
 
 + (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name {
-    return [self propertyWithName:name type:EKNPropertyTypeFloatQuad parameters:@{@(EKNPropertyFloatQuadFieldNames) : @[@"top", @"left", @"bottom", @"right"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderEdgeInsets)}];
+    return [self propertyWithName:name
+                             type:EKNPropertyTypeFloatQuad
+                       parameters:@{
+                                    @(EKNPropertyFloatQuadFieldNames) : @[@"top", @"left", @"bottom", @"right"], @(EKNPropertyFloatQuadKeyOrder) : @(EKNFloatQuadKeyOrderEdgeInsets), @(EKNPropertyFloatQuadConstructorPrefix) : @"UIEdgeInsetsMake"
+                                    }];
 }
 
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString *)name {
-    return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"x", @"y"]}];
+    return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"x", @"y"], @(EKNPropertyFloatPairConstructorPrefix) : @"CGPointMake"}];
 }
 
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString *)name {
-    return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"width", @"height"]}];
+    return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"width", @"height"], @(EKNPropertyFloatPairConstructorPrefix) : @"CGSizeMake"}];
 }
 
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name {
@@ -181,4 +189,7 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
     return [NSString stringWithFormat:@"<%@: %p name = %@, type = %@, parameters = %@> ", [self class], self, self.name, self.type, self.parameters];
 }
 
+- (BOOL)supportsSourceUpdate {
+    return ![@[EKNPropertyTypeImage, EKNPropertyTypePushButton] containsObject:self.type];
+}
 @end

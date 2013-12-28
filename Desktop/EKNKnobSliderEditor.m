@@ -34,7 +34,7 @@
     self.slider.floatValue = [info.value floatValue];
     self.minValue.floatValue = self.slider.minValue;
     self.maxValue.floatValue = self.slider.maxValue;
-    self.fieldName.stringValue = info.propertyDescription.name;
+    self.fieldName.stringValue = info.label;
     self.currentValue.floatValue = self.slider.floatValue;
 }
 

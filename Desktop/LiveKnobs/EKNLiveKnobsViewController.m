@@ -9,13 +9,14 @@
 #import "EKNLiveKnobsViewController.h"
 
 #import "EKNLiveKnobs.h"
-#import "EKNKnobGeneratorView.h"
+#import "EKNPropertyDescription.h"
+#import "EKNSourcedKnobTable.h"
 #import "EKNKnobInfo.h"
 
-@interface EKNLiveKnobsViewController () <EKNKnobGeneratorViewDelegate>
+@interface EKNLiveKnobsViewController () <EKNSourcedKnobTableDelegate>
 
 @property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
-@property (strong, nonatomic) IBOutlet EKNKnobGeneratorView* knobsView;
+@property (strong, nonatomic) IBOutlet EKNSourcedKnobTable* knobsView;
 @property (strong, nonatomic) id <EKNChannel> channel;
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
 
@@ -36,14 +37,16 @@
 }
 
 - (void)processAddKnobMessage:(NSDictionary*)message {
-    NSString* uuid = [message objectForKey:@(EKNLiveKnobsAddIDKey)];
-    id value = [message objectForKey:@(EKNLiveKnobsAddInitialValueKey)];
+    NSString* uuid = message[@(EKNLiveKnobsAddIDKey)];
+    id value = message[@(EKNLiveKnobsAddInitialValueKey)];
     EKNPropertyDescription* propertyDescription = [message objectForKey:@(EKNLiveKnobsAddDescriptionKey)];
     // References lazily since it's added by the app itself
     EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
     knob.knobID = uuid;
     knob.value = value;
     knob.propertyDescription = propertyDescription;
+    knob.sourcePath = message[@(EKNLiveKnobsPathKey)];
+    knob.label = message[@(EKNLiveKnobsLabelKey)] ?: knob.propertyDescription.name;
     
     [self.knobsView addKnob:knob];
 }
@@ -79,7 +82,7 @@
     [self.knobsView clear];
 }
 
-- (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
+- (void)knobTable:(EKNSourcedKnobTable *)table changedKnob:(EKNKnobInfo *)knob {
     NSString* uuid = knob.knobID;
     NSDictionary* message = @{EKNLiveKnobsSentMessageKey: @(EKNLiveKnobsMessageUpdateKnob),
                               @(EKNLiveKnobsUpdateCurrentValueKey) : knob.value,

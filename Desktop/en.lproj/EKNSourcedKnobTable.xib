@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="EKNSourcedKnobTable">
+            <connections>
+                <outlet property="knobTable" destination="Iju-LA-5zh" id="mlB-7y-yU5"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" id="Iju-LA-5zh" customClass="EKNEventTrampolineTableView">
+            <rect key="frame" x="0.0" y="0.0" width="665" height="19"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <size key="intercellSpacing" width="3" height="2"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+            <tableColumns>
+                <tableColumn identifier="Editor" width="274" minWidth="40" maxWidth="1000" id="N6f-l8-DFu">
+                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableHeaderCell>
+                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="0sr-T4-hvY">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                </tableColumn>
+                <tableColumn identifier="Source" width="385" minWidth="10" maxWidth="3.4028234663852886e+38" id="9Ii-RO-Jgc">
+                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                    </tableHeaderCell>
+                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="h2V-sA-eyv">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                </tableColumn>
+            </tableColumns>
+            <connections>
+                <outlet property="dataSource" destination="-2" id="Yxk-cZ-RjS"/>
+                <outlet property="delegate" destination="-2" id="4MB-9E-N6S"/>
+            </connections>
+        </tableView>
+    </objects>
+</document>

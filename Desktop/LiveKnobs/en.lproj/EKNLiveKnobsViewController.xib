@@ -25,7 +25,7 @@
                         <rect key="frame" x="1" y="1" width="777" height="412"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <customView id="2" customClass="EKNKnobGeneratorView">
+                            <customView id="2" customClass="EKNSourcedKnobTable">
                                 <rect key="frame" x="0.0" y="0.0" width="777" height="412"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bnu-MW-lIS">
-                        <rect key="frame" x="762" y="1" width="16" height="412"/>
+                        <rect key="frame" x="763" y="1" width="15" height="412"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

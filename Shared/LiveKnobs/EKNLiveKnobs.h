@@ -22,6 +22,7 @@ enum {
     EKNLiveKnobsAddDescriptionKey,
     EKNLiveKnobsAddInitialValueKey,
     EKNLiveKnobsPathKey,
+    EKNLiveKnobsLabelKey,
 };
 
 // EKNLiveKnobsMessageUpdateKnob

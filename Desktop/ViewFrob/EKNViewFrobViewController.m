@@ -128,6 +128,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
             knob.propertyDescription = info.propertyDescription;
             knob.value = info.value;
             knob.knobID = knob.propertyDescription.name;
+            knob.label = knob.propertyDescription.name;
             return knob;
         }];
         return knobGroup;
