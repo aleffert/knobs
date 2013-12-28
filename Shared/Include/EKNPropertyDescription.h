@@ -8,52 +8,51 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* EKNPropertyTypeString;
+typedef NS_ENUM(NSUInteger, EKNPropertyType) {
+    EKNPropertyTypeAffineTransform,
+    EKNPropertyTypeColor,
+    EKNPropertyTypeImage,
+    EKNPropertyTypeFloatPair,
+    EKNPropertyTypeFloatQuad,
+    EKNPropertyTypePushButton,
+    EKNPropertyTypeSlider,
+    EKNPropertyTypeString,
+    EKNPropertyTypeToggle,
+};
 
-extern NSString* EKNPropertyTypeColor;
-enum {
+typedef NS_ENUM(NSUInteger, EKPropertyColorOptions) {
     EKNPropertyColorWrapCG
 };
 
-extern NSString* EKNPropertyTypeToggle;
-extern NSString* EKNPropertyTypeSlider;
-
-enum {
-    EKNPropertySliderMin,
-    EKNPropertySliderMax,
-    EKNPropertySliderContinuous,
+typedef NS_ENUM (NSUInteger, EKNPropertyFloatPairOptions) {
+    EKNPropertyFloatPairFieldNames,
+    EKNPropertyFloatPairConstructorPrefix
 };
 
-extern NSString* EKNPropertyTypePushButton;
-
-extern NSString* EKNPropertyTypeImage;
-enum {
-    EKNPropertyImageWrapCG
-};
-
-extern NSString* EKNPropertyTypeFloatQuad;
-enum {
+typedef NS_ENUM(NSUInteger, EKNPropertyFloatQuadOptions) {
     EKNPropertyFloatQuadFieldNames,
     EKNPropertyFloatQuadKeyOrder,
     EKNPropertyFloatQuadConstructorPrefix
 };
 
-enum {
+typedef NS_ENUM(NSUInteger, EKNFloatQuadKeyOrder) {
     EKNFloatQuadKeyOrderRect,
     EKNFloatQuadKeyOrderEdgeInsets,
 };
 
-extern NSString* EKNPropertyTypeFloatPair;
-enum {
-    EKNPropertyFloatPairFieldNames,
-    EKNPropertyFloatPairConstructorPrefix
+typedef NS_ENUM (NSUInteger, EKPropertyImageOptions) {
+    EKNPropertyImageWrapCG
 };
 
-extern NSString* EKNPropertyTypeAffineTransform;
+typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
+    EKNPropertySliderMin,
+    EKNPropertySliderMax,
+    EKNPropertySliderContinuous,
+};
 
 @interface EKNPropertyDescription : NSObject <NSCoding>
 
-+ (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters;
++ (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(EKNPropertyType)type parameters:(NSDictionary*)parameters;
 + (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)stringPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
@@ -67,12 +66,21 @@ extern NSString* EKNPropertyTypeAffineTransform;
 + (EKNPropertyDescription*)sizePropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;
 
-@property (readonly, copy) NSString* name;
-@property (readonly, copy) NSString* type;
-@property (readonly, copy) NSDictionary* parameters;
-@property (readonly, nonatomic, assign) BOOL supportsSourceUpdate;
+/// Returns a string describing the type
++ (NSString*)nameForType:(EKNPropertyType)type;
 
+@property (readonly, nonatomic, copy) NSString* name;
+@property (readonly, nonatomic, assign) EKNPropertyType type;
+/// Same as calling nameForType: on the object's type
+@property (readonly, nonatomic, strong) NSString* typeName;
+/// Type specific parameters
+@property (readonly, nonatomic, copy) NSDictionary* parameters;
+
+/// Converts property values to the right objective-c objects
+/// Primarily used to wrap up CG values
 - (id)wrappedValueFromSource:(id)source;
+
+///
 - (void)setWrappedValue:(id)wrapped ofSource:(id)source;
 - (id)valueWithWrappedValue:(id)wrappedValue;
 

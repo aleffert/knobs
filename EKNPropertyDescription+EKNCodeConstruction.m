@@ -46,16 +46,21 @@
 }
 
 - (NSString*)constructorCodeForValue:(id)value {
-    NSString* (^action)(void) = @{EKNPropertyTypeColor : ^{return [self constructorCodeForColor:value];},
-                         EKNPropertyTypeFloatPair : ^{return [self constructorCodeForFloatPair:value];},
-                         EKNPropertyTypeToggle : ^{return [self constructorCodeForToggle:value];},
-                         EKNPropertyTypeFloatQuad : ^{return [self constructorCodeForFloatQuad:value];},
-                         EKNPropertyTypeSlider : ^{return [self constructorCodeForSlider:value];},
-                         EKNPropertyTypeAffineTransform : ^{return [self constructorCodeForAffineTransform:value];},
-                         }[self.type];
-    NSString* result = action();
-    NSAssert(result != nil, @"Trying to construct unexpected type %@", self.type);
-    return result;
+    switch (self.type) {
+        case EKNPropertyTypeColor: return [self constructorCodeForColor:value];
+        case EKNPropertyTypeFloatPair: return [self constructorCodeForFloatPair:value];
+        case EKNPropertyTypeFloatQuad: return [self constructorCodeForFloatQuad:value];
+        case EKNPropertyTypeToggle: return [self constructorCodeForToggle:value];
+        case EKNPropertyTypeSlider: return [self constructorCodeForSlider:value];
+        case EKNPropertyTypeString: return [self constructorCodeForAffineTransform:value];
+        default:
+            NSAssert(NO, @"Trying to construct unexpected type %@", self.typeName);
+            return @"";
+    }
+}
+
+- (BOOL)supportsCodeConstruction {
+    return self.type != EKNPropertyTypeImage && self.type != EKNPropertyTypePushButton;
 }
 
 @end

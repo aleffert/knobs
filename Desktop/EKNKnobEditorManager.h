@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "EKNPropertyDescription.h"
+
 @interface EKNKnobEditorManager : NSObject
 
 + (EKNKnobEditorManager*)sharedManager;
 
 - (void)registerPropertyTypesInTableView:(NSTableView*)tableView;
-- (CGFloat)editorHeightOfType:(NSString*)type;
+- (CGFloat)editorHeightOfType:(EKNPropertyType)type;
 
 @end

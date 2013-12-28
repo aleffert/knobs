@@ -10,27 +10,17 @@
 
 #import "EKNWireImage.h"
 
-NSString* EKNPropertyTypeString = @"string";
-NSString* EKNPropertyTypeColor = @"color";
-NSString* EKNPropertyTypeToggle = @"toggle";
-NSString* EKNPropertyTypeSlider = @"slider";
-NSString* EKNPropertyTypePushButton = @"pushButton";
-NSString* EKNPropertyTypeImage = @"image";
-NSString* EKNPropertyTypeFloatQuad = @"floatQuad";
-NSString* EKNPropertyTypeFloatPair = @"floatPair";
-NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
-
 @interface EKNPropertyDescription ()
 
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, copy) NSString* type;
+@property (nonatomic, assign) EKNPropertyType type;
 @property (nonatomic, copy) NSDictionary* parameters;
 
 @end
 
 @implementation EKNPropertyDescription
 
-+ (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(NSString*)type parameters:(NSDictionary*)parameters {
++ (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(EKNPropertyType)type parameters:(NSDictionary*)parameters {
     EKNPropertyDescription* result = [[EKNPropertyDescription alloc] init];
     result.name = name;
     result.type = type;
@@ -98,11 +88,25 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
     return [self propertyWithName:name type:EKNPropertyTypeAffineTransform parameters:@{}];
 }
 
++ (NSString*)nameForType:(EKNPropertyType)type {
+    switch (type) {
+        case EKNPropertyTypeAffineTransform: return @"EKNPropertyTypeAffineTransform";
+        case EKNPropertyTypeColor: return @"EKNPropertyTypeColor";
+        case EKNPropertyTypeFloatPair: return @"EKNPropertyTypeFloatPair";
+        case EKNPropertyTypeFloatQuad: return @"EKNPropertyTypeFloatQuad";
+        case EKNPropertyTypeImage: return @"EKPropertyTypeImage";
+        case EKNPropertyTypePushButton: return @"EKNPropertyTypePushButton";
+        case EKNPropertyTypeSlider: return @"EKNPropertyTypeSlider";
+        case EKNPropertyTypeString: return @"EKNPropertyTypeString";
+        case EKNPropertyTypeToggle: return @"EKNPropertyTypeToggle";
+    }
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
         self.name = [aDecoder decodeObjectForKey:@"name"];
-        self.type = [aDecoder decodeObjectForKey:@"type"];
+        self.type = [aDecoder decodeIntegerForKey:@"type"];
         self.parameters = [aDecoder decodeObjectForKey:@"parameters"];
     }
     return self;
@@ -110,8 +114,12 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.name forKey:@"name"];
-    [aCoder encodeObject:self.type forKey:@"type"];
+    [aCoder encodeInteger:self.type forKey:@"type"];
     [aCoder encodeObject:self.parameters forKey:@"parameters"];
+}
+
+- (NSString*)typeName {
+    return [EKNPropertyDescription nameForType:self.type];
 }
 
 - (id)wrappedValueFromSource:(id)source {
@@ -120,7 +128,7 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
         return [NSNull null];
     }
     else {
-        if([self.type isEqualToString:EKNPropertyTypeColor]) {
+        if(self.type == EKNPropertyTypeColor) {
 #if TARGET_OS_IPHONE
             if([[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
                 result = [UIColor colorWithCGColor:(CGColorRef)result];
@@ -135,7 +143,7 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
             result = [NSColor colorWithCGColor:(CGColorRef)result];
 #endif
         }
-        else if([self.type isEqualToString:EKNPropertyTypeImage]) {
+        else if(self.type == EKNPropertyTypeImage) {
             if([[self.parameters objectForKey:@(EKNPropertyImageWrapCG)] boolValue]) {
 #if TARGET_OS_IPHONE
                 result = [[EKNWireImage alloc] initWithImage:[[UIImage alloc] initWithCGImage:(CGImageRef)result]];
@@ -159,10 +167,10 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 }
 
 - (id)valueWithWrappedValue:(id)wrappedValue {
-    if([self.type isEqualToString:EKNPropertyTypeColor] && [[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
+    if(self.type == EKNPropertyTypeColor && [[self.parameters objectForKey:@(EKNPropertyColorWrapCG)] boolValue]) {
         return (id)[wrappedValue CGColor];
     }
-    else if([self.type isEqualToString:EKNPropertyTypeImage]) {
+    else if(self.type == EKNPropertyTypeImage) {
         if([wrappedValue isEqual:[NSNull null]]) {
             return nil;
         }
@@ -186,10 +194,7 @@ NSString* EKNPropertyTypeAffineTransform = @"affineTransform";
 
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"<%@: %p name = %@, type = %@, parameters = %@> ", [self class], self, self.name, self.type, self.parameters];
+    return [NSString stringWithFormat:@"<%@: %p name = %@, type = %@, parameters = %@> ", [self class], self, self.name, self.typeName, self.parameters];
 }
 
-- (BOOL)supportsSourceUpdate {
-    return ![@[EKNPropertyTypeImage, EKNPropertyTypePushButton] containsObject:self.type];
-}
 @end

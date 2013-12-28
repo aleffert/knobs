@@ -85,7 +85,7 @@
 - (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     if(row < self.knobs.count) {
         EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
+        NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.typeName owner:self];
         view.info = info;
         return view;
     }

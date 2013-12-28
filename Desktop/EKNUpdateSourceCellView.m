@@ -9,7 +9,7 @@
 #import "EKNUpdateSourceCellView.h"
 
 #import "EKNKnobInfo.h"
-#import "EKNPropertyDescription.h"
+#import "EKNPropertyDescription+EKNCodeConstruction.h"
 
 @interface EKNUpdateSourceCellView ()
 
@@ -26,7 +26,7 @@
     BOOL hasPath = self.info.sourcePath.length > 0;
     self.pathLabel.stringValue = hasPath ? self.info.sourcePath.lastPathComponent : @"<Unknown>";
     self.openButton.enabled = hasPath;
-    self.saveButton.enabled = hasPath && info.propertyDescription.supportsSourceUpdate;
+    self.saveButton.enabled = hasPath && info.propertyDescription.supportsCodeConstruction;
 }
 
 - (IBAction)open:(id)sender {

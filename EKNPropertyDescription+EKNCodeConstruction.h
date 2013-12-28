@@ -10,6 +10,10 @@
 
 @interface EKNPropertyDescription (EKNCodeConstruction)
 
+/// Returns Objective-C code that constructs the given value
 - (NSString*)constructorCodeForValue:(id)value;
+
+/// Can generate code of this type
+@property (readonly, nonatomic, assign) BOOL supportsCodeConstruction;
 
 @end

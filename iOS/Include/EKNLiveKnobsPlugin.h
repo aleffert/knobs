@@ -38,8 +38,15 @@
 
 @end
 
+
+/// Delimiter so our regex based parser can find the right place to update
+/// This is pretty sketchy
+#define EKNMarker
+
+/// Convert a bit of code into a string
 #define EKNSymbolName(symbol) @"" #symbol
 
+/// Create a knob pointing to the current file
 #define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, action) ({\
     [[EKNLiveKnobsPlugin sharedPlugin] registerOwner:owner info:propertyDescription label:labelText currentValue:wrappedValue callback:^(id innerOwner, id changedValue) { \
             if([innerOwner respondsToSelector:@selector(ekn_knobChangedNamed:withDescription:toValue:)]) { \
@@ -77,10 +84,6 @@ EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNSymbolNa
 
 #define EKNMakeAffineTransformKnob(symbol, value, label) \
 EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGAffineTransform:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
-
-/// Delimiter so our regex based parser can find the right place to update
-/// This is pretty sketchy
-#define EKNMarker 
 
 
 /// Simple interface for an owner to receive updates when a knob is changed

@@ -22,31 +22,29 @@
 }
 
 - (void)registerPropertyTypesInTableView:(NSTableView*)tableView {
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:EKNPropertyTypeColor];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:EKNPropertyTypeToggle];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:EKNPropertyTypeSlider];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:EKNPropertyTypeImage];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatQuad];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:EKNPropertyTypeFloatPair];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:EKNPropertyTypeAffineTransform];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:EKNPropertyTypeString];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobPushButtonEditor" bundle:nil] forIdentifier:EKNPropertyTypePushButton];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeAffineTransform]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeColor]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeImage]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatPair]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatQuad]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobPushButtonEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypePushButton]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeSlider]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeString]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeToggle]];
 }
 
-- (CGFloat)editorHeightOfType:(NSString*)type {
-    NSDictionary* sizes = @{
-                            EKNPropertyTypeColor : @24,
-                            EKNPropertyTypeToggle : @24,
-                            EKNPropertyTypePushButton : @28,
-                            EKNPropertyTypeSlider : @58,
-                            EKNPropertyTypeImage : @236,
-                            EKNPropertyTypeFloatQuad : @103,
-                            EKNPropertyTypeFloatPair : @61,
-                            EKNPropertyTypeAffineTransform : @131,
-                            EKNPropertyTypeString : @46,
-                            };
-    
-    return [sizes[type] floatValue];
+- (CGFloat)editorHeightOfType:(EKNPropertyType)type {
+    switch (type) {
+        case EKNPropertyTypeAffineTransform: return 131;
+        case EKNPropertyTypeColor: return 24;
+        case EKNPropertyTypeFloatPair: return 61;
+        case EKNPropertyTypeFloatQuad: return 103;
+        case EKNPropertyTypeImage: return 236;
+        case EKNPropertyTypePushButton: return 28;
+        case EKNPropertyTypeSlider: return 58;
+        case EKNPropertyTypeString: return 46;
+        case EKNPropertyTypeToggle: return 24;
+    }
 }
 
 @end

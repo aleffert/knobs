@@ -110,7 +110,7 @@
     if(row < self.knobs.count) {
         if([tableColumn.identifier isEqualToString:@"Editor"]) {
             EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-            NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.type owner:self];
+            NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.typeName owner:self];
             view.info = info;
             return view;
         }
