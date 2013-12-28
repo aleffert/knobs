@@ -18,7 +18,8 @@
 
 @end
 
-/// Implement this to return additional properties that can be viewed and edited
+/// Implement this on your custom UIView subclasses
+/// to return additional properties that can be viewed and edited
 @protocol EKNViewFrobPropertyInfo <NSObject>
 
 /// Array of EKNViewFrobPropertyInfo*
@@ -30,13 +31,19 @@
 
 @interface UIView (EKNFrob) <EKNViewFrobPropertyInfo>
 
+/// Swizzle in our custom methods to watch when certain view properties change
 + (void)frob_enable;
+/// Swizzle out our custom methods
 + (void)frob_disable;
+
+/// returns the view with this ID
+/// Returns the empty string if the view can't be found
 + (UIView*)frob_viewWithID:(NSString*)viewID;
 
+/// Fills out an EKNViewFrobInfo* for this view
 - (EKNViewFrobInfo*)frob_info;
 
-/// Unique id for this view
+/// Returns a unique id for this view
 - (NSString*)frob_viewID;
 
 /// Array of EKNNamedGroup* whose items are of type EKNPropertyInfo*

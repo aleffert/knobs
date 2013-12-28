@@ -101,6 +101,7 @@
 }
 
 - (void)logToChannel:(NSString *)channelName withHTMLString:(NSString *)string {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     if(channelName == nil) {
         channelName = self.defaultChannelName;
     }

@@ -92,6 +92,7 @@
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString *)label currentValue:(id)value callback:(void (^)(id, id))callback sourcePath:(NSString *)path {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
         infos = [[NSMutableDictionary alloc] init];
@@ -124,6 +125,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     NSDictionary* message = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSNumber* messageType = [message objectForKey:EKNLiveKnobsSentMessageKey];
     if([messageType isEqualToNumber:@(EKNLiveKnobsMessageUpdateKnob)]) {
@@ -140,6 +142,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 - (void)updateValueWithOwner:(id)owner name:(NSString*)name value:(id)value {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     NSMutableDictionary* listeners = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     EKNKnobListenerInfo* info = [listeners objectForKey:name];
     
@@ -155,6 +158,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 - (void)cancelCallbackWithOwner:(id)owner name:(NSString*)name {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     if(name == nil) {
         objc_setAssociatedObject(owner, &EKNObjectListenersKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
@@ -166,6 +170,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 - (void)listenerCancelled:(EKNKnobListenerInfo *)info {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     info.delegate = nil;
     [self.valuesByID removeObjectForKey:info.uuid];
     NSDictionary* message = @{

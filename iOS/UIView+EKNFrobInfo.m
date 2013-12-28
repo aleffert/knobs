@@ -28,6 +28,7 @@ static BOOL gEKNViewFrobEnabled = NO;
 @implementation UIView (EKNFrob)
 
 + (NSString*)frob_IDForView:(UIView*)view {
+    NSAssert([NSThread isMainThread], @"Fetching a view id off the main thread");
     if(view == nil) {
         return @""; // Use @"" because we sometimes use these as dictionary values
     }
@@ -68,10 +69,12 @@ static BOOL gEKNViewFrobEnabled = NO;
 }
 
 + (UIView*)frob_viewWithID:(NSString*)viewID {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     return [gEKNViewFrobViewTable objectForKey:viewID];
 }
 
 - (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     static NSArray* viewProperties = nil;
     static NSArray* layerProperties = nil;
     static dispatch_once_t onceToken;
@@ -118,6 +121,7 @@ static BOOL gEKNViewFrobEnabled = NO;
 }
 
 - (EKNViewFrobInfo*)frob_info {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     NSMutableArray* children = [NSMutableArray array];
     for(UIView* child in self.subviews) {
         [children addObject:[UIView frob_IDForView:child]];
@@ -135,6 +139,7 @@ static BOOL gEKNViewFrobEnabled = NO;
 }
 
 - (NSArray*)frob_groups {
+    NSAssert([NSThread isMainThread], @"Must be called from main thread");
     EKNPropertyGroupAccumulator* accumulator = [[EKNPropertyGroupAccumulator alloc] init];
     [self frob_accumulatePropertiesInto:accumulator];
     
