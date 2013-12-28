@@ -70,7 +70,7 @@
 EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
 
 #define EKNMakeColorKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, UIColor* color){symbol = color;})
+EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, UIColor* color){symbol = color;})
 
 #define EKNMakeContinuousSliderKnob(symbol, value, label, minimum, maximum) \
 EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNSymbolName(symbol) min:minimum max:maximum], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
