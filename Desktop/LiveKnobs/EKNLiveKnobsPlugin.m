@@ -16,10 +16,6 @@
     return @"com.knobs.live-knobs";
 }
 
-- (NSString*)displayName {
-    return @"Live Knobs";
-}
-
 - (NSViewController<EKNConsoleController>*)viewControllerWithChannel:(id<EKNChannel>)channel {
     return [[EKNLiveKnobsViewController alloc] init];
 }

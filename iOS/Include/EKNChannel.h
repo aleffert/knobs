@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+/// A channel is a way to allow the same plugin to show multiple tabs
+/// Each channel will get its own tab
 @protocol EKNChannel <NSObject>
 
 @property (readonly, nonatomic, copy) NSString* name;

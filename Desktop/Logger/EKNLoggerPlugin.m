@@ -16,10 +16,6 @@
     return @"com.knobs.logger";
 }
 
-- (NSString*)displayName {
-    return @"Logger";
-}
-
 - (NSViewController <EKNConsoleController>*)viewControllerWithChannel:(id<EKNChannel>)channel {
     EKNLoggerViewController* controller = [[EKNLoggerViewController alloc] initWithNibName:@"EKNLoggerViewController" bundle:[NSBundle bundleForClass:[self class]]];
     return controller;

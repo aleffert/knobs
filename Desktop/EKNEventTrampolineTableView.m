@@ -10,13 +10,19 @@
 
 @implementation EKNEventTrampolineTableView
 
+/// Needed so that NSSteppers can work inside table cell
+- (BOOL)validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event {
+    return YES;
+}
+
 - (void)keyDown:(NSEvent *)theEvent {
     NSInteger row = [self selectedRow];
     if(row != -1) {
-        // TODO use a less sketch way of getting the column index
-        NSView* view = [self viewAtColumn:0 row:row makeIfNecessary:NO];
-        if([view conformsToProtocol:@protocol(EKNEventTrampolineKeyHandler)]) {
-            [view keyDown:theEvent];
+        for(NSUInteger index = 0; index < self.tableColumns.count; index++) {
+            NSView* view = [self viewAtColumn:index row:row makeIfNecessary:NO];
+            if([view conformsToProtocol:@protocol(EKNEventTrampolineKeyHandler)]) {
+                [view keyDown:theEvent];
+            }
         }
     }
     else {

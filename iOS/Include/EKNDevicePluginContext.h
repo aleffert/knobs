@@ -13,8 +13,12 @@
 
 @protocol EKNDevicePluginContext <NSObject>
 
+/// Create a new channel. This will show up as a new tab in the desktop app
 - (id <EKNChannel>)channelWithName:(NSString*)name fromPlugin:(id <EKNDevicePlugin>)plugin;
+/// Send a message to the desktop plugin using this channel
 - (void)sendMessage:(NSData*)message onChannel:(id <EKNChannel>)channel;
+
+/// Is the connection active
 @property (readonly, nonatomic, getter = isConnected) BOOL connected;
 
 @end

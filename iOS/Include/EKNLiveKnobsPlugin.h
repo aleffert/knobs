@@ -12,21 +12,6 @@
 
 #import "EKNPropertyDescription.h"
 
-@protocol EKNLiveKnobsCallback
-/// Will be called on the owner when a knob is updated
-- (void)ekn_knobChangedNamed:(NSString*)label withDescription:(EKNPropertyDescription*)description toValue:(id)value;
-
-@end
-
-/// Implementation calls [self setNeedsLayout]
-@interface UIView (EKNLiveKnobsCallback) <EKNLiveKnobsCallback>
-@end
-
-
-/// Implementation calls [self.view setNeedsLayout]
-@interface UIViewController (EKNLiveKnobsCallback) <EKNLiveKnobsCallback>
-@end
-
 @interface EKNLiveKnobsPlugin : NSObject <EKNDevicePlugin>
 
 + (EKNLiveKnobsPlugin*)sharedPlugin;
@@ -96,3 +81,21 @@ EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNSym
 /// Delimiter so our regex based parser can find the right place to update
 /// This is pretty sketchy
 #define EKNMarker 
+
+
+/// Simple interface for an owner to receive updates when a knob is changed
+@protocol EKNLiveKnobsCallback
+
+/// Will be called on the owner when a knob is updated
+- (void)ekn_knobChangedNamed:(NSString*)label withDescription:(EKNPropertyDescription*)description toValue:(id)value;
+
+@end
+
+/// Implementation calls [self setNeedsLayout]
+@interface UIView (EKNLiveKnobsCallback) <EKNLiveKnobsCallback>
+@end
+
+
+/// Implementation calls [self.view setNeedsLayout]
+@interface UIViewController (EKNLiveKnobsCallback) <EKNLiveKnobsCallback>
+@end

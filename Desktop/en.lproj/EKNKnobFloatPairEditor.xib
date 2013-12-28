@@ -22,7 +22,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="9">
-                    <rect key="frame" x="44" y="19" width="116" height="19"/>
+                    <rect key="frame" x="44" y="19" width="109" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="10">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -43,7 +43,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" id="33">
-                    <rect key="frame" x="175" y="19" width="116" height="19"/>
+                    <rect key="frame" x="175" y="19" width="109" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="38">
                         <font key="font" size="11" name="LucidaGrande"/>
@@ -63,14 +63,32 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="5uw-ju-aKk">
+                    <rect key="frame" x="153" y="17" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="100" id="emF-kQ-bCM"/>
+                    <connections>
+                        <action selector="steppedX:" target="1" id="PhU-2B-FIU"/>
+                    </connections>
+                </stepper>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="YFR-IN-1o8">
+                    <rect key="frame" x="284" y="17" width="15" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="100" id="ThX-bP-qyG"/>
+                    <connections>
+                        <action selector="steppedY:" target="1" id="fMv-L2-w7l"/>
+                    </connections>
+                </stepper>
             </subviews>
             <connections>
                 <outlet property="delegate" destination="-2" id="7"/>
                 <outlet property="fieldName" destination="2" id="8"/>
                 <outlet property="left" destination="9" id="51"/>
                 <outlet property="leftName" destination="22" id="49"/>
+                <outlet property="leftStepper" destination="5uw-ju-aKk" id="mXo-B0-XgR"/>
                 <outlet property="right" destination="33" id="52"/>
                 <outlet property="rightName" destination="34" id="50"/>
+                <outlet property="rightStepper" destination="YFR-IN-1o8" id="DaC-Rr-f4M"/>
             </connections>
         </customView>
     </objects>

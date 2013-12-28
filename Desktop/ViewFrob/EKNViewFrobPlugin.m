@@ -17,10 +17,6 @@
     return EKNViewFrobName;
 }
 
-- (NSString*)displayName {
-    return @"View";
-}
-
 - (NSViewController<EKNConsoleController>*)viewControllerWithChannel:(id<EKNChannel>)channel {
     return [[EKNViewFrobViewController alloc] init];
 }
