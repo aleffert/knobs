@@ -12,7 +12,7 @@
 
 #import "EKNDevicePluginContext.h"
 #import "EKNPropertyInfo.h"
-#import "EKNPropertyDescription.h"
+#import "EKNPropertyDescription+EKNWrapping.h"
 #import "EKNViewFrob.h"
 #import "EKNViewFrobInfo.h"
 #import "EKNViewFrobFocusOverlay.h"

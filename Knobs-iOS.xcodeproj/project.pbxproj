@@ -24,6 +24,7 @@
 		77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797581742C76C008242D4 /* EKNLoggerPlugin.m */; };
 		77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7975C1742E2A3008242D4 /* EKNWireImage.m */; };
 		77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976417430A4E008242D4 /* EKNNamedChannel.m */; };
+		77BFC758186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC757186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.m */; };
 		77C365D51866858C00B4D9D7 /* EKNConnectionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C365D41866858C00B4D9D7 /* EKNConnectionListener.m */; };
 		77C365D81867814200B4D9D7 /* EKNPropertyGroupAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C365D71867814200B4D9D7 /* EKNPropertyGroupAccumulator.m */; };
 		77C365DB1867866C00B4D9D7 /* EKNNamedGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C365DA1867866C00B4D9D7 /* EKNNamedGroup.m */; };
@@ -89,6 +90,8 @@
 		77B7975C1742E2A3008242D4 /* EKNWireImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNWireImage.m; path = Shared/EKNWireImage.m; sourceTree = SOURCE_ROOT; };
 		77B7976317430A4D008242D4 /* EKNNamedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNNamedChannel.h; path = Shared/EKNNamedChannel.h; sourceTree = SOURCE_ROOT; };
 		77B7976417430A4E008242D4 /* EKNNamedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNNamedChannel.m; path = Shared/EKNNamedChannel.m; sourceTree = SOURCE_ROOT; };
+		77BFC756186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EKNPropertyDescription+EKNWrapping.h"; path = "iOS/EKNPropertyDescription+EKNWrapping.h"; sourceTree = SOURCE_ROOT; };
+		77BFC757186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EKNPropertyDescription+EKNWrapping.m"; path = "iOS/EKNPropertyDescription+EKNWrapping.m"; sourceTree = SOURCE_ROOT; };
 		77C365D31866858C00B4D9D7 /* EKNConnectionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNConnectionListener.h; path = iOS/EKNConnectionListener.h; sourceTree = SOURCE_ROOT; };
 		77C365D41866858C00B4D9D7 /* EKNConnectionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNConnectionListener.m; path = iOS/EKNConnectionListener.m; sourceTree = SOURCE_ROOT; };
 		77C365D61867814200B4D9D7 /* EKNPropertyGroupAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNPropertyGroupAccumulator.h; path = iOS/EKNPropertyGroupAccumulator.h; sourceTree = SOURCE_ROOT; };
@@ -171,6 +174,8 @@
 		77873FF3174147E700A47A27 /* Knobs-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				77BFC756186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.h */,
+				77BFC757186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.m */,
 				77C365D91867866C00B4D9D7 /* EKNNamedGroup.h */,
 				77C365DA1867866C00B4D9D7 /* EKNNamedGroup.m */,
 				77547AF21755518900566AF0 /* EKNUUID.h */,
@@ -298,6 +303,7 @@
 				772F31F117417297009807FD /* EKNKnobs.m in Sources */,
 				77CDDB2017B1769F0072194C /* UILabel+EKNFrobInfo.m in Sources */,
 				778588BF184553C7006913A6 /* EKNChunkConnection.m in Sources */,
+				77BFC758186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.m in Sources */,
 				77C365D51866858C00B4D9D7 /* EKNConnectionListener.m in Sources */,
 				77CDDB0E17B144BD0072194C /* EKNViewFrobFocusOverlay.m in Sources */,
 				77E26DDE17A05A2B0087CE6C /* NSData+Base64.m in Sources */,

@@ -12,7 +12,7 @@
 
 #import "EKNNamedGroup.h"
 #import "EKNPropertyGroupAccumulator.h"
-#import "EKNPropertyDescription.h"
+#import "EKNPropertyDescription+EKNWrapping.h"
 #import "EKNPropertyInfo.h"
 #import "EKNUUID.h"
 #import "EKNViewFrobInfo.h"
