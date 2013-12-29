@@ -37,8 +37,11 @@
     if(error && *error) {
         return YES;
     }
-    NSString* template = [NSString stringWithFormat:@"EKNMake$1($2, %@ EKNMarker", code];
+    // substitute in a sentinal so that we don't have to escape the code when it goes into the template string
+    NSString* template = [NSString stringWithFormat:@"EKNMake$1($2, %@ EKNMarker", @"***EKNCODE***"];
     NSString* outContents = [expression stringByReplacingMatchesInString:fileContents options:0 range:NSMakeRange(0, fileContents.length) withTemplate:template];
+    // now replace the sentinal with the raw string
+    outContents = [outContents stringByReplacingOccurrencesOfString:@"***EKNCODE***" withString:code];
     [outContents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:error];
     if(error && *error) {
         return YES;

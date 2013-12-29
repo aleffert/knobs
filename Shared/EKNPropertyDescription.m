@@ -62,6 +62,10 @@
     return [self propertyWithName:name type:EKNPropertyTypeImage parameters:@{@(EKNPropertyImageWrapCG) : @(wrapCG)}];
 }
 
++ (EKNPropertyDescription*)intPropertyWithName:(NSString*)name {
+    return [self propertyWithName:name type:EKNPropertyTypeInt parameters:@{}];
+}
+
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString *)name {
     return [self propertyWithName:name type:EKNPropertyTypeFloatPair parameters:@{@(EKNPropertyFloatPairFieldNames) : @[@"x", @"y"], @(EKNPropertyFloatPairConstructorPrefix) : @"CGPointMake"}];
 }
@@ -99,6 +103,7 @@
         case EKNPropertyTypeFloatPair: return @"EKNPropertyTypeFloatPair";
         case EKNPropertyTypeFloatQuad: return @"EKNPropertyTypeFloatQuad";
         case EKNPropertyTypeImage: return @"EKPropertyTypeImage";
+        case EKNPropertyTypeInt: return @"EKPropertyTypeInt";
         case EKNPropertyTypePushButton: return @"EKNPropertyTypePushButton";
         case EKNPropertyTypeSlider: return @"EKNPropertyTypeSlider";
         case EKNPropertyTypeString: return @"EKNPropertyTypeString";

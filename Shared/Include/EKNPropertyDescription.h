@@ -11,10 +11,11 @@
 typedef NS_ENUM(NSUInteger, EKNPropertyType) {
     EKNPropertyTypeAffineTransform,
     EKNPropertyTypeColor,
-    EKNPropertyTypeImage,
     EKNPropertyTypeFloat,
     EKNPropertyTypeFloatPair,
     EKNPropertyTypeFloatQuad,
+    EKNPropertyTypeImage,
+    EKNPropertyTypeInt,
     EKNPropertyTypePushButton,
     EKNPropertyTypeSlider,
     EKNPropertyTypeString,
@@ -59,9 +60,10 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
-+ (EKNPropertyDescription*)floatPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)floatPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
++ (EKNPropertyDescription*)intPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)pushButtonPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)rectPropertyWithName:(NSString*)name;

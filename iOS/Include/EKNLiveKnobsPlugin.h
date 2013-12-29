@@ -58,8 +58,8 @@
     symbol = value; \
 })
 
-#define EKNMakeToggleKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
+#define EKNMakeAffineTransformKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGAffineTransform:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
 
 #define EKNMakeColorKnob(symbol, value, label) \
 EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, UIColor* color){symbol = color;})
@@ -67,23 +67,29 @@ EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNSymbolName(sy
 #define EKNMakeContinuousSliderKnob(symbol, value, label, minimum, maximum) \
 EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNSymbolName(symbol) min:minimum max:maximum], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
 
-#define EKNMakeStringKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, NSString* changedValue){symbol = changedValue;})
+#define EKNMakeEdgeInsetsKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithUIEdgeInsets:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
+
+#define EKNMakeFloatKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription floatPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+
+#define EKNMakeIntKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription intPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue integerValue];})
 
 #define EKNMakePointKnob(symbol, value, label) \
 EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGPoint:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
 
-#define EKNMakeSizeKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
-
 #define EKNMakeRectKnob(symbol, value, label) \
 EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
 
-#define EKNMakeEdgeInsetsKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithUIEdgeInsets:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
+#define EKNMakeSizeKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
 
-#define EKNMakeAffineTransformKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGAffineTransform:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
+#define EKNMakeStringKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, NSString* changedValue){symbol = changedValue;})
+
+#define EKNMakeToggleKnob(symbol, value, label) \
+EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
 
 
 /// Simple interface for an owner to receive updates when a knob is changed

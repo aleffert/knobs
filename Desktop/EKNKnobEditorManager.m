@@ -25,6 +25,7 @@
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeAffineTransform]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeColor]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeImage]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobIntEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloat]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloat]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatPair]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatQuad]];
@@ -42,6 +43,7 @@
         case EKNPropertyTypeFloatPair: return 61;
         case EKNPropertyTypeFloatQuad: return 103;
         case EKNPropertyTypeImage: return 236;
+        case EKNPropertyTypeInt: return 43;
         case EKNPropertyTypePushButton: return 28;
         case EKNPropertyTypeSlider: return 58;
         case EKNPropertyTypeString: return 46;
