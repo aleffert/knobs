@@ -56,6 +56,7 @@
 - (NSString*)constructorCodeForString:(NSString*)string {
     NSMutableString *escapedString = [[NSMutableString alloc] init];
     for(NSUInteger i = 0; i < string.length; i++) {
+        // Does this have issues with strings outside of UCS-2?
         unichar c = [string characterAtIndex:i];
         switch (c) {
             case '\\':
