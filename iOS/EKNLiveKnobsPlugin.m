@@ -96,6 +96,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString *)label currentValue:(id)value externalCode:(NSString*)externalCode sourcePath:(NSString *)path callback:(void (^)(id, id))callback {
     NSAssert([NSThread isMainThread], @"Must be called from main thread");
+    NSAssert(owner != nil, @"Cannot register knob with nil owner");
     NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
         infos = [[NSMutableDictionary alloc] init];
@@ -120,8 +121,12 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     [self.valuesByID setObject:value forKey:listenerInfo.uuid];
 }
 
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription *)description label:(NSString *)label currentValue:(id)value callback:(void (^)(id, id))callback {
+    [self registerOwner:owner info:description label:label currentValue:value externalCode:nil sourcePath:nil callback:callback];
+}
+
 - (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback {
-    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] label:name currentValue:@(0) externalCode:nil sourcePath:nil callback:^(id owner, id value) {
+    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] label:name currentValue:@(0) callback:^(id owner, id value) {
         if(callback != nil) {
             callback(owner);
         }
@@ -147,6 +152,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)updateValueWithOwner:(id)owner name:(NSString*)name value:(id)value {
     NSAssert([NSThread isMainThread], @"Must be called from main thread");
+    NSAssert(owner != nil, @"Attempting to update knob with nil owner");
     NSMutableDictionary* listeners = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     EKNKnobListenerInfo* info = [listeners objectForKey:name];
     
@@ -163,6 +169,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)removeKnobWithOwner:(id)owner name:(NSString*)name {
     NSAssert([NSThread isMainThread], @"Must be called from main thread");
+    NSAssert(owner != nil, @"Attempting to remove knob with nil owner");
     if(name == nil) {
         objc_setAssociatedObject(owner, &EKNObjectListenersKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }

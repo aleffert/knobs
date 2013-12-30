@@ -5,14 +5,15 @@ Knobs has two parts: A desktop app and an iOS library. This walks you through ad
 
 ### Checking Out
 
-You can checkout knobs wherever you want, but normal practice would be as a submodule in your iOS app's repo. For the rest of this HOWTO we're going to assume it's at
+You can checkout knobs wherever you want, but normal practice would be as a submodule or subtree in your iOS app's repo. For the rest of this HOWTO we're going to assume it's at
+
     YOUR_PROJECT_DIR/Libraries/Knobs.
 
 So to check it out you'd do e.g.
 
     cd YOUR_PROJECT_DIRECTORY
     git submodule add KNOBS_GITHUB_URL Libraries/Knobs
-    git submodule update --init --recursive
+    git submodule update --init
 
 ### Adding As A Subproject
 Find Knobs/Knobs-iOS.xcodeproj and drag it into your XCode project as a subproject. It should look something like this:
@@ -49,8 +50,8 @@ Now you're ready to actually activate knobs in your app. We recommend you only e
 The default plugins include:
 - A simple logger that can log rich media (images and colors) in addition to text. See EKNLoggerPlugin.h.
 - A tool that lets you manipulate live manipulate properties of views from your mac. See EKNViewFrobPlugin.h.
-- A tool that lets you controls to the mac app that execute callbacks on the iOS side. See EKNLiveKnobsPlugin.h.
+- A tool that lets you add controls to the mac app that execute callbacks on the iOS side. This also allows you to update your code directly with the changes you've made. See EKNLiveKnobsPlugin.h.
 
 ### Running the Desktop App
-Now that knobs is enabled in your iOS app, you want to talk to it using the desktop app. Make sure your Mac and your iOS device are on the same network. Open up Knobs/Knobs.xcodeproj. Make sure the "Knobs" target is selected and hit Run. If your iOS app is running with Knobs enabled, it should show up in the device picker sheet that appears when you run Knobs on your Mac.
+Now that knobs is enabled in your iOS app, you want to talk to it using the desktop app. Make sure your Mac and your iOS device are on the same network. Open up Knobs/Knobs.xcodeproj. Make sure the "Knobs" target is selected and hit Run. If your iOS app is running with Knobs enabled, the device picker pop up menu will change from "No Device Selected" to "None". Just chose your device from that menu.
 

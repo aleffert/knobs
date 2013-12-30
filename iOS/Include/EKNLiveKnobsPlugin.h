@@ -20,14 +20,19 @@
 
 /// @discussion Adds a new knob
 /// @param owner The object owning the knob. When owner gets dealloced the knob will automatically be removed. Cannot be nil
-/// @param label Displayed name of the knob. Should be unique per owner Should be unique per file for live source updating to work properly.
+/// @param label Displayed name of the knob. Should be unique per owner. Should be unique per file for live source updating to work properly.
 /// @param currentValue The initial value of the knob
 /// @param sourcePath Source file this knob resides in. Live source updating won't work unless you go through the EKNMake macros below.
 /// @param externalCode Code that should be used by other knobs picking up the value of this one. Can be nil, in which case the value of the knob is used instead. Used to make things point at symbolic constants instead of raw values
 /// @param callback Action called when the knob changes. May be nil
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value externalCode:(NSString*)code sourcePath:(NSString*)path callback:(void(^)(id owner, id value))callback;
 
-/// Registers a knob that is just a push button with the given name
+/// Convenience for calling -[EKNLiveKnobsPlugin registerOwner:info:label:currentValue:externalCode:sourcePath:callback] where externalCode and sourcePath are nil
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value callback:(void(^)(id owner, id value))callback;
+
+/// @description Registers a knob that is just a push button with the given name
+/// @param owner The object owning the button. When owner gets dealloced the button will automatically be removed. Cannot be nil
+/// @param callback The action to execute when the button is pushed
 - (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback;
 
 /// @discussion Notify the listener that the value changed. Optional, but will make ensure the UI matches the actual value
@@ -42,14 +47,17 @@
 @end
 
 
-/// Delimiter so our regex based parser can find the right place to update
-/// This is pretty sketchy
+/// @discussion Delimiter so our regex based parser can find the right place to update
+/// Should be placed after the second argument to the EKNMake*Knob family of macros
+/// For example to make a float knob for the self.x property with an initial value of 3,
+/// You would do EKMakeFloatKnob(self.x, 3 EKNMarker, @"x", nil)
+/// In an ideal world, we'd actually parse your code and figure this out ourselves
 #define EKNMarker
 
 /// @discussion Convert a bit of code into a string
 #define EKNStringify(symbol) @"" #symbol
 
-/// Create a knob pointing to the current file
+/// @discussion Helper macro for creating a knob pointing to the current file
 #define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action) ({\
     [[EKNLiveKnobsPlugin sharedPlugin] \
             registerOwner:owner \
