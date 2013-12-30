@@ -48,10 +48,13 @@
     }
     return NO;
 }
+- (BOOL)saveCode:(NSString*)code withDescription:(EKNPropertyDescription*)description toFileAtPath:(NSString*)path error:(__autoreleasing NSError**)error {
+    return [self saveCode:code withKnobName:description.name toFileAtPath:path error:error];
+}
 
 - (BOOL)saveValue:(id)value withDescription:(EKNPropertyDescription*)description toFileAtPath:(NSString*)path error:(__autoreleasing NSError**)error {
     NSString* code = [description constructorCodeForValue:value];
-    return [self saveCode:code withKnobName:description.name toFileAtPath:path error:error];
+    return [self saveCode:code withDescription:description toFileAtPath:path error:error];
 }
 
 @end

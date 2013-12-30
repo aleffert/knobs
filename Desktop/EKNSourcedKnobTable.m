@@ -16,10 +16,13 @@
 #import "EKNUpdateSourceCellView.h"
 #import "NSArray+EKNFunctional.h"
 
+static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndexDragType";
+
 @interface EKNSourcedKnobTable () <NSTableViewDelegate, NSTableViewDataSource, EKNPropertyEditorDelegate, EKNUpdateSourceCellViewDelegate>
 
 @property (strong, nonatomic) IBOutlet NSTableView* knobTable;
 @property (strong, nonatomic) NSMutableArray* knobs;
+@property (strong, nonatomic) NSMutableDictionary* externalCodeMap;
 
 @end
 
@@ -35,6 +38,7 @@
         
         [self addSubview:self.knobTable];
         
+        [self.knobTable registerForDraggedTypes:@[EKNSourceTableRowIndexDragType]];
         self.knobTable.translatesAutoresizingMaskIntoConstraints = NO;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
@@ -43,6 +47,8 @@
         
         [[EKNKnobEditorManager sharedManager] registerPropertyTypesInTableView:self.knobTable];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNUpdateSourceCellView" bundle:Nil] forIdentifier:@"EKNUpdateSourceCellIdentifier"];
+        
+        self.externalCodeMap = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -65,6 +71,7 @@
             editor.info = knob;
         }
     }];
+    [self.externalCodeMap removeObjectForKey:knobID];
 }
 
 - (void)removeKnobWithID:(NSString *)knobID {
@@ -77,6 +84,7 @@
     }];
     [self.knobs removeObjectsAtIndexes:set];
     [self.knobTable removeRowsAtIndexes:set withAnimation:NSTableViewAnimationEffectGap];
+    [self.externalCodeMap removeObjectForKey:knobID];
 }
 
 - (void)clear {
@@ -127,10 +135,70 @@
 
 - (void)updateSourceCell:(EKNUpdateSourceCellView *)cell shouldSaveKnob:(EKNKnobInfo *)info {
     NSError* error = nil;
-    if([[EKNSourceManager sharedManager] saveValue:info.value withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
-        [[NSAlert alertWithError:error] runModal];
+    
+    NSString* externalCode = self.externalCodeMap[info.knobID];
+    
+    if(externalCode) {
+        if([[EKNSourceManager sharedManager] saveCode:externalCode withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
+            [[NSAlert alertWithError:error] runModal];
+        }
+    }
+    else {
+        if([[EKNSourceManager sharedManager] saveValue:info.value withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
+            [[NSAlert alertWithError:error] runModal];
+        }
     }
     
+}
+
+#pragma mark Drag and Drop
+
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    [pboard declareTypes:@[EKNSourceTableRowIndexDragType] owner:self];
+    [pboard setData:data forType:EKNSourceTableRowIndexDragType];
+    return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation {
+    if(dropOperation == NSTableViewDropOn) {
+        NSIndexSet* sourceIndices = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowIndexDragType]];
+        NSAssert(sourceIndices.count == 1, @"Only supports dragging exactly one row");
+        NSUInteger index = [sourceIndices firstIndex];
+        EKNKnobInfo* sourceKnob = self.knobs[index];
+        EKNPropertyType sourceType = sourceKnob.propertyDescription.type;
+        EKNKnobInfo* destKnob = self.knobs[row];
+        EKNPropertyType destType = destKnob.propertyDescription.type;
+        return sourceType == destType ? NSDragOperationCopy : NSDragOperationNone;
+    }
+    else {
+        // TODO: Support row reordering
+        return NSDragOperationNone;
+    }
+}
+- (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)destRow dropOperation:(NSTableViewDropOperation)op {
+    NSAssert(op == NSTableViewDropOn, @"TODO: Support row reordering");
+    NSIndexSet* sourceIndices = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowIndexDragType]];
+    NSAssert(sourceIndices.count == 1, @"Only supports dragging exactly one row");
+    NSUInteger sourceRow = [sourceIndices firstIndex];
+    EKNKnobInfo* sourceKnob = self.knobs[sourceRow];
+    EKNKnobInfo* destKnob = self.knobs[destRow];
+    
+    destKnob.value = sourceKnob.value;
+    
+    if(sourceKnob.externalCode != nil) {
+        self.externalCodeMap[destKnob.knobID] = sourceKnob.externalCode;
+    }
+    else {
+        [self.externalCodeMap removeObjectForKey:destKnob.knobID];
+    }
+    [self.delegate knobTable:self changedKnob:destKnob];
+    
+    NSInteger columnIndex = [self.knobTable columnWithIdentifier:@"Editor"];
+    id <EKNPropertyEditor> editor = [self.knobTable viewAtColumn:columnIndex row:destRow makeIfNecessary:NO];
+    editor.info = destKnob;
+
+    return YES;
 }
 
 @end

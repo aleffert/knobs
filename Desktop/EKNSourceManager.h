@@ -14,6 +14,8 @@
 
 + (EKNSourceManager*)sharedManager;
 
+- (BOOL)saveCode:(NSString*)code withDescription:(EKNPropertyDescription*)description toFileAtPath:(NSString*)path error:(__autoreleasing NSError**)error;
+
 /// Returns YES if the save failed
 - (BOOL)saveValue:(id)value withDescription:(EKNPropertyDescription*)description toFileAtPath:(NSString*)path error:(__autoreleasing NSError**)error;
 

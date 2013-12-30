@@ -23,5 +23,9 @@
 /// The propertyDescription.name property needs to be unique within a given source file
 /// So this is the right way to customize the display
 @property (strong, nonatomic) NSString* label;
+/// Code string to use when another knob takes the value of this knob
+/// Can be nil, in which case we use code for the value of this knob
+/// Used to make things point at symbolic constants instead of raw values
+@property (strong, nonatomic) NSString* externalCode;
 
 @end

@@ -74,14 +74,17 @@
                               @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
                               @(EKNLiveKnobsAddInitialValueKey) : value,
                               }.mutableCopy;
-    if(info.sourcePath) {
-        message[@(EKNLiveKnobsPathKey)] = info.sourcePath;
+    if(info.externalCode) {
+        message[@(EKNLiveKnobsExternalCodeKey)] = info.externalCode;
     }
     if(info.label) {
         message[@(EKNLiveKnobsLabelKey)] = info.label;
     }
     else {
         message[@(EKNLiveKnobsLabelKey)] = info.propertyDescription.name;
+    }
+    if(info.sourcePath) {
+        message[@(EKNLiveKnobsPathKey)] = info.sourcePath;
     }
     
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
@@ -91,7 +94,7 @@
 
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString *)label currentValue:(id)value callback:(void (^)(id, id))callback sourcePath:(NSString *)path {
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString *)label currentValue:(id)value externalCode:(NSString*)externalCode sourcePath:(NSString *)path callback:(void (^)(id, id))callback {
     NSAssert([NSThread isMainThread], @"Must be called from main thread");
     NSMutableDictionary* infos = objc_getAssociatedObject(owner, &EKNObjectListenersKey);
     if(infos == nil) {
@@ -103,6 +106,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     listenerInfo.uuid = [EKNUUID UUIDString];
     listenerInfo.owner = owner;
     listenerInfo.callback = callback;
+    listenerInfo.externalCode = externalCode;
     listenerInfo.propertyDescription = description;
     listenerInfo.delegate = self;
     listenerInfo.sourcePath = path;
@@ -117,11 +121,11 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 - (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback {
-    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] label:name currentValue:@(0) callback:^(id owner, id value) {
+    [self registerOwner:owner info:[EKNPropertyDescription pushButtonPropertyWithName:name] label:name currentValue:@(0) externalCode:nil sourcePath:nil callback:^(id owner, id value) {
         if(callback != nil) {
             callback(owner);
         }
-    } sourcePath:nil];
+    }];
 }
 
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
@@ -157,7 +161,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     [self.valuesByID setObject:value forKey:info.uuid];
 }
 
-- (void)cancelCallbackWithOwner:(id)owner name:(NSString*)name {
+- (void)removeKnobWithOwner:(id)owner name:(NSString*)name {
     NSAssert([NSThread isMainThread], @"Must be called from main thread");
     if(name == nil) {
         objc_setAssociatedObject(owner, &EKNObjectListenersKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

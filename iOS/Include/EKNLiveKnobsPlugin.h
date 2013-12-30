@@ -18,23 +18,26 @@
 
 // These are currently not thread safe. Should only be called from the main thread
 
-/// Add a knob owned by owner. owner shouldn't be nil
-/// owner is held weakly
-/// knob is removed automatically if owner gets deallocated
-/// callback may be nil
-/// path is the path to the source file containing the registration. It may be nil.
-/// Live source updating won't work unless you go through the EKNMake macros below
-/// Even if you pass sourcePath
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value callback:(void(^)(id owner, id value))callback sourcePath:(NSString*)path;
+/// @discussion Adds a new knob
+/// @param owner The object owning the knob. When owner gets dealloced the knob will automatically be removed. Cannot be nil
+/// @param label Displayed name of the knob. Should be unique per owner Should be unique per file for live source updating to work properly.
+/// @param currentValue The initial value of the knob
+/// @param sourcePath Source file this knob resides in. Live source updating won't work unless you go through the EKNMake macros below.
+/// @param externalCode Code that should be used by other knobs picking up the value of this one. Can be nil, in which case the value of the knob is used instead. Used to make things point at symbolic constants instead of raw values
+/// @param callback Action called when the knob changes. May be nil
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value externalCode:(NSString*)code sourcePath:(NSString*)path callback:(void(^)(id owner, id value))callback;
 
 /// Registers a knob that is just a push button with the given name
 - (void)registerPushButtonWithOwner:(id)owner name:(NSString*)name callback:(void(^)(id owner))callback;
 
-/// Notify the listener that the value changed. Optional, but will make ensure the UI matches the actual value
+/// @discussion Notify the listener that the value changed. Optional, but will make ensure the UI matches the actual value
+/// @param owner The owner of the knob
+/// @param value The updated value
 - (void)updateValueWithOwner:(id)owner name:(NSString*)name value:(id)value;
 
-/// cancel early. Pass nil as name to cancel everything from owner
-- (void)cancelCallbackWithOwner:(id)owner name:(NSString*)name;
+/// @discussion Remove a knob before owner gets dealloced
+/// @param owner The owner of the knob. Pass nil to remove all knobs with that owner
+- (void)removeKnobWithOwner:(id)owner name:(NSString*)name;
 
 @end
 
@@ -43,53 +46,62 @@
 /// This is pretty sketchy
 #define EKNMarker
 
-/// Convert a bit of code into a string
-#define EKNSymbolName(symbol) @"" #symbol
+/// @discussion Convert a bit of code into a string
+#define EKNStringify(symbol) @"" #symbol
 
 /// Create a knob pointing to the current file
-#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, action) ({\
-    [[EKNLiveKnobsPlugin sharedPlugin] registerOwner:owner info:propertyDescription label:labelText currentValue:wrappedValue callback:^(id innerOwner, id changedValue) { \
+#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action) ({\
+    [[EKNLiveKnobsPlugin sharedPlugin] \
+            registerOwner:owner \
+            info:propertyDescription \
+            label:labelText \
+            currentValue:wrappedValue \
+            externalCode:externalCodeText \
+            sourcePath:@""__FILE__ \
+            callback:^(id innerOwner, id changedValue) { \
             if([innerOwner respondsToSelector:@selector(ekn_knobChangedNamed:withDescription:toValue:)]) { \
                 [innerOwner ekn_knobChangedNamed:labelText withDescription:propertyDescription toValue:changedValue];\
             } \
             action(innerOwner, changedValue); \
-        } \
-    sourcePath:@""__FILE__]; \
+        }]; \
     symbol = value; \
 })
 
-#define EKNMakeAffineTransformKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGAffineTransform:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
+#define EKNMakeAffineTransformKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNStringify(symbol)], symbol, label, value, EKNStringify(externalCode), [NSValue valueWithCGAffineTransform:value], code, ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
 
-#define EKNMakeColorKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, UIColor* color){symbol = color;})
+#define EKNMakeColorKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNStringify(symbol)], symbol, label, value, value, EKNStringify(externalCode), ^(id owner, UIColor* color){symbol = color;})
 
-#define EKNMakeContinuousSliderKnob(symbol, value, label, minimum, maximum) \
-EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNSymbolName(symbol) min:minimum max:maximum], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+#define EKNMakeContinuousSliderKnob(symbol, value, label, externalCode, minimum, maximum) \
+EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNStringify(symbol) min:minimum max:maximum], symbol, label, value, @(value), EKNStringify(externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
 
-#define EKNMakeEdgeInsetsKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithUIEdgeInsets:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
+#define EKNMakeEdgeInsetsKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithUIEdgeInsets:value], EKNStringify(externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
 
-#define EKNMakeFloatKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription floatPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+#define EKNMakeFloatKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription floatPropertyWithName:EKNStringify(symbol)], symbol, label, value, @(value), EKNStringify(externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
 
-#define EKNMakeIntKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription intPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSNumber* changedValue){symbol = [changedValue integerValue];})
+#define EKNMakeIntKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription intPropertyWithName:EKNStringify(symbol)], symbol, label, value, @(value), EKNStringify(externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue integerValue];})
 
-#define EKNMakePointKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGPoint:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
+#define EKNMakePointKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(symbol)], symbol, label, value, externalCode, [NSValue valueWithCGPoint:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
 
-#define EKNMakeRectKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
+#define EKNMakePushButtonKnob(label, action) \
+[[EKNLiveKnobsPlugin sharedPlugin] registerPushButtonWithOwner:self name:label callback:action];
 
-#define EKNMakeSizeKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
+#define EKNMakeRectKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], EKNStringify(externalCode), ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
 
-#define EKNMakeStringKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNSymbolName(symbol)], symbol, label, value, value, ^(id owner, NSString* changedValue){symbol = changedValue;})
+#define EKNMakeSizeKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], EKNStringify(externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
 
-#define EKNMakeToggleKnob(symbol, value, label) \
-EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNSymbolName(symbol)], symbol, label, value, @(value), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
+#define EKNMakeStringKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNStringify(symbol)], symbol, label, value, value, EKNStringify(externalCode), ^(id owner, NSString* changedValue){symbol = changedValue;})
+
+#define EKNMakeToggleKnob(symbol, value, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNStringify(symbol)], symbol, label, value, @(value), EKNStringify(externalCode), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
 
 
 /// Simple interface for an owner to receive updates when a knob is changed

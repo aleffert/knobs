@@ -21,6 +21,7 @@
 @property (strong, nonatomic) EKNPropertyDescription* propertyDescription;
 @property (copy, nonatomic) NSString* sourcePath;
 @property (copy, nonatomic) NSString* label;
+@property (copy, nonatomic) NSString* externalCode;
 
 @end
 

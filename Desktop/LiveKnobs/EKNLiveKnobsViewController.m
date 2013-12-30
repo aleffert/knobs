@@ -46,6 +46,7 @@
     knob.value = value;
     knob.propertyDescription = propertyDescription;
     knob.sourcePath = message[@(EKNLiveKnobsPathKey)];
+    knob.externalCode = message[@(EKNLiveKnobsExternalCodeKey)];
     knob.label = message[@(EKNLiveKnobsLabelKey)] ?: knob.propertyDescription.name;
     
     [self.knobsView addKnob:knob];
@@ -89,6 +90,9 @@
                               @(EKNLiveKnobsUpdateIDKey) : uuid };
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
+}
+
+- (void)knobTable:(EKNSourcedKnobTable *)table changedKnob:(EKNKnobInfo *)knob toCode:(NSString *)code {
 }
 
 @end
