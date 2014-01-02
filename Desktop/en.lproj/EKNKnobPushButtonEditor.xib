@@ -26,6 +26,7 @@
             </subviews>
             <connections>
                 <outlet property="button" destination="2hJ-uZ-7sR" id="P9h-vf-d6W"/>
+                <outlet property="delegate" destination="-2" id="B6o-Lp-XBB"/>
             </connections>
         </customView>
     </objects>

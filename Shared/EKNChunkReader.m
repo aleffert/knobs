@@ -14,15 +14,15 @@ typedef NS_ENUM(NSUInteger, EKNChunkReaderState) {
 };
 
 typedef struct {
-    uint64_t headerLength;
-    uint64_t bodyLength;
+    int64_t headerLength;
+    int64_t bodyLength;
 } EKNChunkReaderFrame;
 
 @interface EKNChunkReader () <NSStreamDelegate>
 
 @property (strong, nonatomic) NSInputStream* inputStream;
 @property (strong, nonatomic) NSMutableData* accumulator;
-@property (assign, nonatomic) uint64_t bytesRemainingInChunk;
+@property (assign, nonatomic) int64_t bytesRemainingInChunk;
 
 @property (assign, nonatomic) EKNChunkReaderState readState;
 @property (assign, nonatomic) EKNChunkReaderFrame currentFrame;
@@ -51,7 +51,7 @@ typedef struct {
 }
 
 - (size_t)headerSize {
-    return 2 * sizeof(uint64_t);
+    return 2 * sizeof(int64_t);
 }
 
 - (void)readBytesIfPossible {
@@ -63,8 +63,9 @@ typedef struct {
                 self.bytesRemainingInChunk = self.bytesRemainingInChunk - readCount;
                 if(self.bytesRemainingInChunk == 0) {
                     EKNChunkReaderFrame frame = self.currentFrame;
-                    [self.accumulator getBytes:&frame.headerLength range:NSMakeRange(0, sizeof(uint64_t))];
-                    [self.accumulator getBytes:&frame.bodyLength range:NSMakeRange(sizeof(uint64_t), sizeof(uint64_t))];
+                    [self.accumulator getBytes:&frame.headerLength range:NSMakeRange(0, sizeof(int64_t))];
+                    [self.accumulator getBytes:&frame.bodyLength range:NSMakeRange(sizeof(int64_t), sizeof(int64_t))];
+                    
                     frame.headerLength = CFSwapInt64BigToHost(frame.headerLength);
                     frame.bodyLength = CFSwapInt64BigToHost(frame.bodyLength);
                     self.currentFrame = frame;
@@ -79,6 +80,7 @@ typedef struct {
                 NSInteger readCount = [self.inputStream read:bytes maxLength:self.bytesRemainingInChunk];
                 self.bytesRemainingInChunk = self.bytesRemainingInChunk - readCount;
                 if(self.bytesRemainingInChunk == 0) {
+                    // finished a frame
                     NSData* headerData = [NSData dataWithBytesNoCopy:self.accumulator.mutableBytes length:self.currentFrame.headerLength freeWhenDone:NO];
                     NSDictionary* header = [NSKeyedUnarchiver unarchiveObjectWithData:headerData];
                     
@@ -86,10 +88,12 @@ typedef struct {
                     NSData* bodyData = [NSData dataWithBytes:bytes length:self.currentFrame.bodyLength];
                     
                     [self.delegate chunkReader:self readChunkWithData:bodyData header:header];
+                    
+                    // reset
+                    self.readState = EKNChunkReaderStateWaiting;
+                    self.bytesRemainingInChunk = [self headerSize];
+                    self.accumulator = [[NSMutableData alloc] initWithLength:[self headerSize]];
                 }
-                self.readState = EKNChunkReaderStateWaiting;
-                self.bytesRemainingInChunk = [self headerSize];
-                self.accumulator = [[NSMutableData alloc] initWithLength:[self headerSize]];
                 break;
             }
             default:

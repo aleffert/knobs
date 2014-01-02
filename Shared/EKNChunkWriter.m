@@ -11,7 +11,7 @@
 @interface EKNQueuedChunk : NSObject
 
 @property (strong, nonatomic) NSData* data;
-@property (assign, nonatomic) uint64_t offset;
+@property (assign, nonatomic) int64_t offset;
 
 @end
 
@@ -68,15 +68,14 @@
 
 - (void)sendBodyData:(NSData *)data withHeader:(NSDictionary *)header {
     NSData* headerData = [NSKeyedArchiver archivedDataWithRootObject:header];
-    uint64_t headerLength = CFSwapInt64HostToBig(headerData.length);
-    uint64_t bodyLength = CFSwapInt64HostToBig(data.length);
+    int64_t headerLength = CFSwapInt64HostToBig(headerData.length);
+    int64_t bodyLength = CFSwapInt64HostToBig(data.length);
     
     NSMutableData* buffer = [[NSMutableData alloc] initWithCapacity:sizeof(headerLength) + sizeof(bodyLength) + headerData.length + data.length];
     [buffer appendBytes:&headerLength length:sizeof(headerLength)];
     [buffer appendBytes:&bodyLength length:sizeof(bodyLength)];
     [buffer appendData:headerData];
     [buffer appendData:data];
-//    [self.buffer appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
     EKNQueuedChunk* chunk = [[EKNQueuedChunk alloc] init];
     chunk.data = buffer;

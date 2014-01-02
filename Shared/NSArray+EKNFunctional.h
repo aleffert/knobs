@@ -10,7 +10,7 @@
 
 @interface NSArray (EKNFunctional)
 
-// Automatically filters out calls that return nil
+/// Automatically filters out nil objects 
 - (NSArray*)map:(id(^)(id o))f;
 - (NSArray*)filter:(BOOL(^)(id o))f;
 - (NSArray*)filterWithIndex:(BOOL(^)(id o, NSUInteger index))f;
