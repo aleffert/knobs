@@ -56,7 +56,7 @@
 
 /// @discussion Convert a bit of code into a string
 #define EKNStringify(symbol) @"" #symbol
-
+#if DEBUG
 /// @discussion Helper macro for creating a knob pointing to the current file
 #define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action) ({\
     [[EKNLiveKnobsPlugin sharedPlugin] \
@@ -74,6 +74,9 @@
         }]; \
     symbol = value; \
 })
+#else
+#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action)
+#endif
 
 #define EKNMakeAffineTransformKnob(symbol, value, label, externalCode) \
 EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNStringify(symbol)], symbol, label, value, EKNStringify(externalCode), [NSValue valueWithCGAffineTransform:value], code, ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
