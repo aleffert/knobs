@@ -22,6 +22,7 @@
 @property (copy, nonatomic) NSString* sourcePath;
 @property (copy, nonatomic) NSString* label;
 @property (copy, nonatomic) NSString* externalCode;
+@property (copy, nonatomic) NSString* groupName;
 
 @end
 

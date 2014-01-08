@@ -13,17 +13,14 @@
 
 @interface EKNKnobGroupsView : NSView
 
-@property (weak, nonatomic) id <EKNKnobsGroupViewDelegate> delegate;
+@property (strong, nonatomic) NSString* disclosureAutosaveName;
+
+- (void)addGroupNamed:(NSString*)groupName contentView:(NSView*)contentView;
+- (void)removeGroupWithContentView:(NSView*)view;
 
 /// groups is an array of EKNNamedGroup whose items are EKNPropertyInfos
-- (void)representObject:(id)object withGroups:(NSArray*)groups;
+//- (void)representObject:(id)object withGroups:(NSArray*)groups;
+
 - (void)clear;
-
-@end
-
-
-@protocol EKNKnobsGroupViewDelegate <NSObject>
-
-- (void)knobGroupsView:(EKNKnobGroupsView*)view changedKnob:(EKNKnobInfo*)knobInfo;
 
 @end

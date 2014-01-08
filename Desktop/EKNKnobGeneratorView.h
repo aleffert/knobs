@@ -10,11 +10,14 @@
 
 #import "EKNPropertyEditor.h"
 
+@class EKNKnobEditorManager;
 @class EKNPropertyDescription;
 
 @protocol EKNKnobGeneratorViewDelegate;
 
 @interface EKNKnobGeneratorView : NSView <EKNPropertyEditorDelegate>
+
+- (id)initWithFrame:(NSRect)frameRect editorManager:(EKNKnobEditorManager*)manager;
 
 @property (assign, nonatomic) IBOutlet id <EKNKnobGeneratorViewDelegate> delegate;
 

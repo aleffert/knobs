@@ -24,14 +24,18 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 @property (strong, nonatomic) NSMutableArray* knobs;
 @property (strong, nonatomic) NSMutableDictionary* externalCodeMap;
 
+@property (strong, nonatomic) EKNKnobEditorManager* editorManager;
+@property (strong, nonatomic) EKNSourceManager* sourceManager;
+
 @end
 
 @implementation EKNSourcedKnobTable
 
-
-- (id)initWithFrame:(NSRect)frameRect {
+- (id)initWithFrame:(NSRect)frameRect editorManager:(EKNKnobEditorManager*)editorManager sourceManager:(EKNSourceManager*)sourceManager {
     self = [super initWithFrame:frameRect];
     if(self != nil) {
+        self.editorManager = editorManager;
+        self.sourceManager = sourceManager;
         [[NSBundle mainBundle] loadNibNamed:@"EKNSourcedKnobTable" owner:self topLevelObjects:NULL];
         
         self.knobs = [[NSMutableArray alloc] init];
@@ -39,13 +43,14 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
         [self addSubview:self.knobTable];
         
         [self.knobTable registerForDraggedTypes:@[EKNSourceTableRowIndexDragType]];
+        
         self.knobTable.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_knobTable)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_knobTable)]];
         
         [self setContentHuggingPriority:NSLayoutPriorityDefaultHigh forOrientation:NSLayoutConstraintOrientationVertical];
         
-        [[EKNKnobEditorManager sharedManager] registerPropertyTypesInTableView:self.knobTable];
+        [self.editorManager registerPropertyTypesInTableView:self.knobTable];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNUpdateSourceCellView" bundle:Nil] forIdentifier:@"EKNUpdateSourceCellIdentifier"];
         
         self.externalCodeMap = [[NSMutableDictionary alloc] init];
@@ -57,10 +62,17 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
     return YES;
 }
 
+- (BOOL)isEmpty {
+    return self.knobs.count == 0;
+}
 
 - (void)addKnob:(EKNKnobInfo *)knob {
     [self.knobs insertObject:knob atIndex:0];
     [self.knobTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationEffectGap];
+    
+    // Force a relayout since just inserting doesn't seem to do that
+    [self.knobTable tile];
+    [self invalidateIntrinsicContentSize];
 }
 
 - (void)updateKnobWithID:(NSString*)knobID toValue:(id)value {
@@ -105,7 +117,7 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     if(row < self.knobs.count) {
         EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        return [[EKNKnobEditorManager sharedManager] editorHeightOfType:info.propertyDescription.type];
+        return [self.editorManager editorHeightOfType:info.propertyDescription.type];
     }
     else {
         // AppKit seems to request this even when the table is empty with row = 0
@@ -139,12 +151,12 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
     NSString* externalCode = self.externalCodeMap[info.knobID];
     
     if(externalCode) {
-        if([[EKNSourceManager sharedManager] saveCode:externalCode withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
+        if([self.sourceManager saveCode:externalCode withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
             [[NSAlert alertWithError:error] runModal];
         }
     }
     else {
-        if([[EKNSourceManager sharedManager] saveValue:info.value withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
+        if([self.sourceManager saveValue:info.value withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
             [[NSAlert alertWithError:error] runModal];
         }
     }
@@ -199,6 +211,10 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
     editor.info = destKnob;
 
     return YES;
+}
+
+- (NSSize)intrinsicContentSize {
+    return self.knobTable.bounds.size;
 }
 
 @end

@@ -17,6 +17,7 @@
 
 @interface EKNKnobGeneratorView () <NSTableViewDataSource, NSTableViewDelegate>
 
+@property (strong, nonatomic) EKNKnobEditorManager* editorManager;
 @property (strong, nonatomic) IBOutlet NSTableView* knobTable;
 @property (strong, nonatomic) id representedObject;
 @property (copy, nonatomic) NSArray* knobs;
@@ -26,20 +27,21 @@
 
 @implementation EKNKnobGeneratorView
 
-- (id)initWithFrame:(NSRect)frameRect {
+- (id)initWithFrame:(NSRect)frameRect editorManager:(EKNKnobEditorManager*)manager {
     self = [super initWithFrame:frameRect];
     if(self != nil) {
+        self.editorManager = manager;
         [[NSBundle mainBundle] loadNibNamed:@"EKNKnobGeneratorView" owner:self topLevelObjects:NULL];
         
         [self addSubview:self.knobTable];
         
         self.knobTable.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:Nil views:NSDictionaryOfVariableBindings(_knobTable)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_knobTable)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_knobTable]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_knobTable)]];
         
         [self setContentHuggingPriority:NSLayoutPriorityDefaultHigh forOrientation:NSLayoutConstraintOrientationVertical];
         
-        [[EKNKnobEditorManager sharedManager] registerPropertyTypesInTableView:self.knobTable];
+        [self.editorManager registerPropertyTypesInTableView:self.knobTable];
     }
     return self;
 }
@@ -73,7 +75,7 @@
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     if(row < self.knobs.count) {
         EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        return [[EKNKnobEditorManager sharedManager] editorHeightOfType:info.propertyDescription.type];
+        return [self.editorManager editorHeightOfType:info.propertyDescription.type];
     }
     else {
         // AppKit seems to request this even when the table is empty with row = 0

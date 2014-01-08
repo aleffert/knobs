@@ -12,8 +12,13 @@
 #import "EKNConsolePlugin.h"
 
 @protocol EKNConsoleController;
+@class EKNKnobEditorManager;
+@class EKNSourceManager;
 
 @protocol EKNConsoleControllerContext <NSObject>
+
+@property (readonly, strong, nonatomic) EKNKnobEditorManager* editorManager;
+@property (readonly, strong, nonatomic) EKNSourceManager* sourceManager;
 
 - (void)sendMessage:(NSData*)data onChannel:(id <EKNChannel>)channel;
 - (void)updatedView:(NSViewController <EKNConsoleController>*)controller ofChannel:(id <EKNChannel>)channel;

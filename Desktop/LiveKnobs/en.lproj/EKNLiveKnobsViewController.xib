@@ -7,8 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="EKNLiveKnobsViewController">
             <connections>
-                <outlet property="knobsView" destination="2" id="8"/>
-                <outlet property="scrollView" destination="jtc-Yi-Wz5" id="u9E-hq-ATh"/>
+                <outlet property="knobEditor" destination="BDZ-Jf-aHC" id="RLN-LI-UZA"/>
                 <outlet property="view" destination="1" id="7"/>
             </connections>
         </customObject>
@@ -18,31 +17,10 @@
             <rect key="frame" x="0.0" y="0.0" width="779" height="414"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="jtc-Yi-Wz5">
+                <customView id="BDZ-Jf-aHC" customClass="EKNKnobGroupsView">
                     <rect key="frame" x="0.0" y="0.0" width="779" height="414"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <clipView key="contentView" id="uyw-t8-0RL" customClass="EKNFlippedClipView">
-                        <rect key="frame" x="1" y="1" width="777" height="412"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <customView id="2" customClass="EKNSourcedKnobTable">
-                                <rect key="frame" x="0.0" y="0.0" width="777" height="412"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="-2" id="9"/>
-                                </connections>
-                            </customView>
-                        </subviews>
-                    </clipView>
-                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="2ou-7Y-1l4">
-                        <rect key="frame" x="1" y="397" width="777" height="16"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bnu-MW-lIS">
-                        <rect key="frame" x="763" y="1" width="15" height="412"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
+                </customView>
             </subviews>
         </customView>
     </objects>

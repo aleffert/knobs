@@ -65,11 +65,11 @@
     NSString* character = [theEvent charactersIgnoringModifiers];
     unichar code = [character characterAtIndex:0];
     switch (code) {
-        case NSUpArrowFunctionKey:
+        case NSDownArrowFunctionKey:
         case NSLeftArrowFunctionKey:
             [self offsetValueByAmount:-1 * [self incrementAmount]];
             break;
-        case NSDownArrowFunctionKey:
+        case NSUpArrowFunctionKey:
         case NSRightArrowFunctionKey:
             [self offsetValueByAmount:[self incrementAmount]];
         default:

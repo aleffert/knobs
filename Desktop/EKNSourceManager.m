@@ -12,15 +12,6 @@
 
 @implementation EKNSourceManager
 
-+ (EKNSourceManager*)sharedManager {
-    static dispatch_once_t onceToken;
-    static EKNSourceManager* manager;
-    dispatch_once(&onceToken, ^{
-        manager = [[EKNSourceManager alloc] init];
-    });
-    return manager;
-}
-
 // This code is dumb as bricks.
 // Long term we should consider picking up libclang
 // Or at least write a slightly less dumb lexer

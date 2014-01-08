@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class EKNKnobEditorManager;
 @class EKNKnobInfo;
+@class EKNSourceManager;
 @protocol EKNSourcedKnobTableDelegate;
 
 @interface EKNSourcedKnobTable : NSView
 
+- (id)initWithFrame:(NSRect)frameRect editorManager:(EKNKnobEditorManager*)editorManager sourceManager:(EKNSourceManager*)sourceManager;
+
 @property (weak, nonatomic) id <EKNSourcedKnobTableDelegate> delegate;
+@property (readonly, nonatomic) BOOL isEmpty;
 
 - (void)addKnob:(EKNKnobInfo*)knob;
 - (void)updateKnobWithID:(NSString*)knobID toValue:(id)value;

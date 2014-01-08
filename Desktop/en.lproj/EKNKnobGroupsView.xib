@@ -12,11 +12,11 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="PZQ-lT-hbA">
+        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="PZQ-lT-hbA">
             <rect key="frame" x="0.0" y="0.0" width="275" height="253"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <clipView key="contentView" id="C2B-Qa-LM1" customClass="EKNFlippedClipView">
-                <rect key="frame" x="1" y="1" width="273" height="251"/>
+                <rect key="frame" x="0.0" y="0.0" width="275" height="253"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <stackView orientation="vertical" alignment="centerX" spacing="0.0" horizontalHuggingPriority="249" verticalHuggingPriority="249" id="05c-qB-pH7">
@@ -26,11 +26,11 @@
                 </subviews>
             </clipView>
             <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="y7j-eR-0E7">
-                <rect key="frame" x="1" y="236" width="273" height="16"/>
+                <rect key="frame" x="0.0" y="237" width="275" height="16"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="K1J-u4-yPg">
-                <rect key="frame" x="258" y="1" width="16" height="251"/>
+                <rect key="frame" x="260" y="0.0" width="15" height="253"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
         </scrollView>

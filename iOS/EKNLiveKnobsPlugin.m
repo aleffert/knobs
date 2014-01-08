@@ -24,6 +24,8 @@
 @property (strong, nonatomic) NSMapTable* listenersByID;
 @property (strong, nonatomic) NSMapTable* valuesByID;
 
+@property (strong, nonatomic) NSMutableArray* groupNameStack;
+
 @end
 
 @implementation EKNLiveKnobsPlugin
@@ -42,12 +44,26 @@
     if(self != nil) {
         self.listenersByID = [NSMapTable strongToWeakObjectsMapTable];
         self.valuesByID = [NSMapTable strongToStrongObjectsMapTable];
+        self.groupNameStack = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (NSString*)name {
     return @"com.knobs.live-knobs";
+}
+
+- (NSString*)defaultGroupName {
+    return @"Global";
+}
+
+- (NSString*)currentGroupName {
+    if(self.groupNameStack.count > 0) {
+        return [self.groupNameStack objectAtIndex:0];
+    }
+    else {
+        return self.defaultGroupName;
+    }
 }
 
 - (void)useContext:(id<EKNDevicePluginContext>)context {
@@ -67,10 +83,35 @@
 - (void)endedConnection {
 }
 
+- (void)beginGroupWithName:(NSString *)groupName {
+    if(groupName == nil) {
+        NSLog(@"Knobs: Can't have a nil groupName. Ignoring");
+    }
+    else {
+        [self.groupNameStack addObject:groupName];
+    }
+}
+
+- (void)endGroup {
+    if(self.groupNameStack.count == 0) {
+        NSLog(@"Knobs: Can't have a nil groupName");
+    }
+    else {
+        [self.groupNameStack removeLastObject];
+    }
+}
+
+- (void)groupWithName:(NSString *)groupName action:(void (^)(void))action {
+    [self beginGroupWithName:groupName];
+    action();
+    [self endGroup];
+}
+
 - (void)sendAddMessageWithInfo:(EKNKnobListenerInfo*)info value:(id)value {
     NSMutableDictionary* message = @{
                               EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageAddKnob),
                               @(EKNLiveKnobsAddIDKey) : info.uuid,
+                              @(EKNLiveKnobsGroupKey) : info.groupName,
                               @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
                               @(EKNLiveKnobsAddInitialValueKey) : value,
                               }.mutableCopy;
@@ -112,6 +153,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     listenerInfo.delegate = self;
     listenerInfo.sourcePath = path;
     listenerInfo.label = label;
+    listenerInfo.groupName = self.currentGroupName;
     [self.listenersByID setObject:listenerInfo forKey:listenerInfo.uuid];
     
     [infos setObject:listenerInfo forKey:listenerInfo.propertyDescription.name];
@@ -212,6 +254,13 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 
 - (void)ekn_knobChangedNamed:(NSString *)label withDescription:(EKNPropertyDescription *)description toValue:(id)value {
     [self setNeedsLayout];
+    for(UIResponder* responder = self; responder != nil; responder = responder.nextResponder) {
+        UIViewController* controller = [responder isKindOfClass:[UIViewController class]] ? (UIViewController*)responder : nil;
+        if(controller && controller.isViewLoaded) {
+            [controller.view setNeedsLayout];
+            break;
+        }
+    }
 }
 
 @end

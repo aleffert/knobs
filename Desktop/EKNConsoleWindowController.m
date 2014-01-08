@@ -15,6 +15,8 @@
 #import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
 #import "EKNDeviceFinderView.h"
+#import "EKNKnobEditorManager.h"
+#import "EKNSourceManager.h"
 #import "EKNNamedChannel.h"
 
 static NSString* const EKNLastUsedDeviceServiceName = @"EKNLastUsedDeviceServiceName";
@@ -34,6 +36,9 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
 
 @property (strong, nonatomic) NSMutableDictionary* activeChannels;
 
+@property (strong, nonatomic) EKNKnobEditorManager* editorManager;
+@property (strong, nonatomic) EKNSourceManager* sourceManager;
+
 @end
 
 @implementation EKNConsoleWindowController
@@ -46,6 +51,8 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
         self.pluginContext.delegate = self;
         
         self.deviceFinder = [[EKNDeviceFinder alloc] init];
+        self.editorManager = [[EKNKnobEditorManager alloc] init];
+        self.sourceManager = [[EKNSourceManager alloc] init];
     }
     return self;
 }
@@ -202,7 +209,6 @@ static NSString* const EKNLastUsedDeviceHostName = @"EKNLastUsedDeviceHostName";
 - (void)updatedView:(NSViewController<EKNConsoleController> *)controller ofChannel:(id<EKNChannel>)channel {
     // TODO. Mark tab as unread
 }
-
 
 - (IBAction)nextTab:(id)sender {
     NSInteger index = [self.tabs indexOfTabViewItem:self.tabs.selectedTabViewItem];

@@ -12,15 +12,6 @@
 
 @implementation EKNKnobEditorManager
 
-+ (EKNKnobEditorManager*)sharedManager {
-    static dispatch_once_t onceToken;
-    static EKNKnobEditorManager* sharedManager = nil;
-    dispatch_once(&onceToken, ^{
-        sharedManager = [[EKNKnobEditorManager alloc] init];
-    });
-    return sharedManager;
-}
-
 - (void)registerPropertyTypesInTableView:(NSTableView*)tableView {
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeAffineTransform]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeColor]];

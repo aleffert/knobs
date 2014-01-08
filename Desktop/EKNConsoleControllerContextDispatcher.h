@@ -11,6 +11,7 @@
 #import "EKNConsolePlugin.h"
 
 // Simple bouncer to prevent a retain cycle
+// So plugins don't have to know that they should retain the context weakly
 
 @interface EKNConsoleControllerContextDispatcher : NSObject <EKNConsoleControllerContext>
 

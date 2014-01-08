@@ -8,7 +8,9 @@
 
 #import "EKNViewFrobViewController.h"
 
+#import "EKNKnobGeneratorView.h"
 #import "EKNKnobGroupsView.h"
+#import "EKNKnobEditorManager.h"
 #import "EKNKnobInfo.h"
 #import "EKNNamedGroup.h"
 #import "EKNPropertyDescription.h"
@@ -25,7 +27,7 @@ typedef NS_ENUM(NSUInteger, EKNViewFrobSelectButtonState) {
 
 static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
-@interface EKNViewFrobViewController () <NSOutlineViewDataSource, NSOutlineViewDelegate, EKNKnobsGroupViewDelegate>
+@interface EKNViewFrobViewController () <NSOutlineViewDataSource, NSOutlineViewDelegate, EKNKnobGeneratorViewDelegate>
 
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
 @property (strong, nonatomic) id <EKNChannel> channel;
@@ -38,7 +40,13 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 @property (strong, nonatomic) NSMutableDictionary* viewInfos;
 @property (strong, nonatomic) NSArray* roots;
 
-// This SUCKS. NSOutlineView uses pointer comparisons instead of isEqual:
+/// group views in order
+@property (strong, nonatomic) NSMutableArray* groupViews;
+
+/// map from group name to group view
+@property (strong, nonatomic) NSMutableDictionary* groupNameMap;
+
+// This STINKS. NSOutlineView uses pointer comparisons instead of isEqual:
 // So canonicalize all of our ids.
 @property (strong, nonatomic) NSMapTable* canonicalKeys;
 
@@ -54,6 +62,9 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     if(self != nil) {
         self.viewInfos = [[NSMutableDictionary alloc] init];
         self.canonicalKeys = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsObjectPersonality | NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsObjectPersonality | NSPointerFunctionsWeakMemory capacity:0];
+        
+        self.groupNameMap = [[NSMutableDictionary alloc] init];
+        self.groupViews = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -69,7 +80,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
     
     self.showMarginsButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:EKNViewFrobShowMarginsKey];
     
-    self.knobEditor.delegate = self;
+    self.knobEditor.disclosureAutosaveName = @"EKNViewFrobDisclosureGroupsKey";
 }
 
 - (void)setSelectButtonState:(EKNViewFrobSelectButtonState)state {
@@ -133,7 +144,42 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
         }];
         return knobGroup;
     }];
-    [self.knobEditor representObject:info.viewID withGroups:knobGroups];
+    [self representObject:info.viewID withGroups:knobGroups];
+}
+
+#pragma mark Update Groups
+
+
+- (void)representObject:(id)object withGroups:(NSArray *)groups {
+    BOOL fullUpdate = ![self.representedObject isEqual: object] || groups.count != self.groupViews.count;
+    
+    if (fullUpdate) {
+        [self.knobEditor clear];
+        [self.groupViews removeAllObjects];
+        [self.groupNameMap removeAllObjects];
+        
+        self.representedObject = object;
+        
+        [groups enumerateObjectsUsingBlock:^(EKNNamedGroup* group, NSUInteger index, BOOL *stop) {
+            NSView* knobView = [self makeContentViewWithInfos:group.items representingObject:object];
+            [self.knobEditor addGroupNamed:group.name contentView:knobView];
+            self.groupNameMap[group.name] = knobView;
+            [self.groupViews addObject:knobView];
+        }];
+    }
+    else {
+        for(EKNNamedGroup* group in groups) {
+            EKNKnobGeneratorView* knobView = self.groupNameMap[group.name];
+            [knobView representObject:object withKnobs:group.items];
+        }
+    }
+}
+
+- (NSView*)makeContentViewWithInfos:(NSArray*)knobs representingObject:(id)object {
+    EKNKnobGeneratorView* knobView = [[EKNKnobGeneratorView alloc] initWithFrame:CGRectMake(0, 0, self.knobEditor.frame.size.width, 100) editorManager:self.context.editorManager];
+    knobView.delegate = self;
+    [knobView representObject:object withKnobs:knobs];
+    return knobView;
 }
 
 #pragma mark Actions
@@ -373,7 +419,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
     EKNViewFrobInfo* info = [self selectedInfo];
-    [self.knobEditor representObject:nil withGroups:@[]];
+    [self representObject:nil withGroups:@[]];
     if(info == nil) {
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:@{EKNViewFrobSentMessageKey : EKNViewFrobMessageFocusView}];
         [self.context sendMessage:archive onChannel:self.channel];
@@ -386,7 +432,7 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 #pragma Knob Editor
 
-- (void)knobGroupsView:(EKNKnobGroupsView*)view changedKnob:(EKNKnobInfo*)knob {
+- (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
     if(self.selectedInfo != nil) {
         //Reference lazily since this is part of the app itself
         EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.propertyDescription value:knob.value];

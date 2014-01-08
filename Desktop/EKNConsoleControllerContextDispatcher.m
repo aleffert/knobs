@@ -18,4 +18,12 @@
     [self.delegate updatedView:controller ofChannel:channel];
 }
 
+- (EKNKnobEditorManager*)editorManager {
+    return self.delegate.editorManager;
+}
+
+- (EKNSourceManager*)sourceManager {
+    return self.delegate.sourceManager;
+}
+
 @end

@@ -12,8 +12,6 @@
 
 @interface EKNKnobEditorManager : NSObject
 
-+ (EKNKnobEditorManager*)sharedManager;
-
 - (void)registerPropertyTypesInTableView:(NSTableView*)tableView;
 - (CGFloat)editorHeightOfType:(EKNPropertyType)type;
 

@@ -27,7 +27,7 @@
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     self.field.integerValue = [info.value integerValue];
-    self.fieldName.stringValue = info.propertyDescription.name;
+    self.fieldName.stringValue = info.label;
 }
 
 - (IBAction)textFieldChanged:(id)sender {
@@ -49,11 +49,11 @@
     NSString* character = [theEvent charactersIgnoringModifiers];
     unichar code = [character characterAtIndex:0];
     switch (code) {
-        case NSUpArrowFunctionKey:
+        case NSDownArrowFunctionKey:
         case NSLeftArrowFunctionKey:
             [self incrementByAmount:-1];
             break;
-        case NSDownArrowFunctionKey:
+        case NSUpArrowFunctionKey:
         case NSRightArrowFunctionKey:
             [self incrementByAmount:1];
             break;

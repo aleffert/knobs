@@ -8,6 +8,7 @@
 
 #import "EKNLiveKnobsViewController.h"
 
+#import "EKNKnobGroupsView.h"
 #import "EKNLiveKnobs.h"
 #import "EKNPropertyDescription.h"
 #import "EKNSourcedKnobTable.h"
@@ -15,10 +16,12 @@
 
 @interface EKNLiveKnobsViewController () <EKNSourcedKnobTableDelegate>
 
-@property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
-@property (strong, nonatomic) IBOutlet EKNSourcedKnobTable* knobsView;
+@property (strong, nonatomic) IBOutlet EKNKnobGroupsView* knobEditor;
+
 @property (strong, nonatomic) id <EKNChannel> channel;
 @property (strong, nonatomic) id <EKNConsoleControllerContext> context;
+
+@property (strong, nonatomic) NSMutableDictionary* groupViews;
 
 @end
 
@@ -27,13 +30,33 @@
 - (id)init {
     if(self = [super initWithNibName:@"EKNLiveKnobsViewController" bundle:[NSBundle bundleForClass:[self class]]]) {
         self.title = @"Knobs";
+        self.groupViews = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
+- (void)loadView {
+    [super loadView];
+    self.knobEditor.disclosureAutosaveName = @"EKNLiveKnobsDisclosureGroupsKey";
 }
 
 - (void)connectedToDeviceWithContext:(id<EKNConsoleControllerContext>)context onChannel:(id<EKNChannel>)channel {
     self.context = context;
     self.channel = channel;
+    [self.groupViews removeAllObjects];
+}
+
+- (void)disconnectedFromDevice {
+    [self.knobEditor clear];
+    [self.groupViews removeAllObjects];
+}
+
+- (EKNSourcedKnobTable*)addGroupNamed:(NSString*)groupName {
+    EKNSourcedKnobTable* table = [[EKNSourcedKnobTable alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100) editorManager:self.context.editorManager sourceManager:self.context.sourceManager];
+    table.delegate = self;
+    [self.knobEditor addGroupNamed:groupName contentView:table];
+    self.groupViews[groupName] = table;
+    return table;
 }
 
 - (void)processAddKnobMessage:(NSDictionary*)message {
@@ -49,18 +72,36 @@
     knob.externalCode = message[@(EKNLiveKnobsExternalCodeKey)];
     knob.label = message[@(EKNLiveKnobsLabelKey)] ?: knob.propertyDescription.name;
     
-    [self.knobsView addKnob:knob];
+    NSString* groupName = message[@(EKNLiveKnobsGroupKey)];
+    EKNSourcedKnobTable* table = self.groupViews[groupName];
+    if(!table) {
+        table = [self addGroupNamed:groupName];
+    }
+    [table addKnob:knob];
 }
 
 - (void)processUpdateKnobMessage:(NSDictionary*)message {
     NSString* uuid = [message objectForKey:@(EKNLiveKnobsUpdateIDKey)];
     id value = [message objectForKey:@(EKNLiveKnobsUpdateCurrentValueKey)];
-    [self.knobsView updateKnobWithID:uuid toValue:value];
+    for(EKNSourcedKnobTable* table in self.groupViews) {
+        [table updateKnobWithID:uuid toValue:value];
+    }
 }
 
 - (void)processRemoveKnobMessage:(NSDictionary*)message {
     NSString* knobID = [message objectForKey:@(EKNLiveKnobsRemoveIDKey)];
-    [self.knobsView removeKnobWithID:knobID];
+    for(EKNSourcedKnobTable* table in self.groupViews.allValues) {
+        [table removeKnobWithID:knobID];
+    }
+    
+    NSArray* keys = self.groupViews.allKeys;
+    for(NSString* key in keys) {
+        EKNSourcedKnobTable* table = self.groupViews[key];
+        if(table.isEmpty) {
+            [self.knobEditor removeGroupWithContentView:table];
+            [self.groupViews removeObjectForKey:key];
+        }
+    }
 }
 
 - (void)receivedMessage:(NSData *)data onChannel:(id<EKNChannel>)channel {
@@ -79,10 +120,6 @@
     }
 }
 
-- (void)disconnectedFromDevice {
-    [self.knobsView clear];
-}
-
 - (void)knobTable:(EKNSourcedKnobTable *)table changedKnob:(EKNKnobInfo *)knob {
     NSString* uuid = knob.knobID;
     NSDictionary* message = @{EKNLiveKnobsSentMessageKey: @(EKNLiveKnobsMessageUpdateKnob),
@@ -90,9 +127,6 @@
                               @(EKNLiveKnobsUpdateIDKey) : uuid };
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
-}
-
-- (void)knobTable:(EKNSourcedKnobTable *)table changedKnob:(EKNKnobInfo *)knob toCode:(NSString *)code {
 }
 
 @end

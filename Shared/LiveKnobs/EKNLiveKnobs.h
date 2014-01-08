@@ -21,6 +21,7 @@ enum {
     EKNLiveKnobsAddIDKey,
     EKNLiveKnobsAddDescriptionKey,
     EKNLiveKnobsAddInitialValueKey,
+    EKNLiveKnobsGroupKey,
     EKNLiveKnobsExternalCodeKey,
     EKNLiveKnobsLabelKey,
     EKNLiveKnobsPathKey,

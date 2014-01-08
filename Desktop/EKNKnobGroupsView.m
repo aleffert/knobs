@@ -12,22 +12,12 @@
 #import "EKNKnobGeneratorView.h"
 #import "EKNNamedGroup.h"
 
-static NSString* const EKNKnobGroupsClosedGroupsKey = @"EKNKnobGroupsClosedGroupsKey";
-
-@interface EKNKnobGroupsView () <EKNKnobGeneratorViewDelegate, EKNDisclosureViewDelegate>
+@interface EKNKnobGroupsView () <EKNDisclosureViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray* closedGroupNames;
 
 @property (strong, nonatomic) IBOutlet NSScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet NSStackView* stackView;
-
-/// group views in order
-@property (strong, nonatomic) NSMutableArray* groupViews;
-
-/// map from group name to group view
-@property (strong, nonatomic) NSMutableDictionary* groupNameMap;
-
-@property (strong, nonatomic) id representedObject;
 
 @end
 
@@ -44,9 +34,6 @@ static NSString* const EKNKnobGroupsClosedGroupsKey = @"EKNKnobGroupsClosedGroup
         [self addSubview:self.scrollView];
         self.scrollView.frame = self.bounds;
         
-        self.groupNameMap = [[NSMutableDictionary alloc] init];
-        self.groupViews = [[NSMutableArray alloc] init];
-        
         self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
         self.stackView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -62,66 +49,65 @@ static NSString* const EKNKnobGroupsClosedGroupsKey = @"EKNKnobGroupsClosedGroup
         
         viewsDict = NSDictionaryOfVariableBindings(_stackView);
         [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_stackView]-0-|" options:0 metrics:nil views:viewsDict]];
-        
-        self.closedGroupNames = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:EKNKnobGroupsClosedGroupsKey]];
     }
     return self;
 }
 
-- (void)representObject:(id)object withGroups:(NSArray *)groups {
-    BOOL fullUpdate = ![self.representedObject isEqual: object] || groups.count != self.groupViews.count;
-    self.representedObject = object;
-    
-    if (fullUpdate) {
-        [self clearViews];
-        
-        [groups enumerateObjectsUsingBlock:^(EKNNamedGroup* group, NSUInteger index, BOOL *stop) {
-            EKNDisclosureView* container = [[EKNDisclosureView alloc] initWithFrame:CGRectMake(0, 0, self.stackView.frame.size.width, 100)];
-            container.title = group.name;
-            container.showsTopDivider = index != 0;
-            container.delegate = self;
-            EKNKnobGeneratorView* knobView = [[EKNKnobGeneratorView alloc] initWithFrame:CGRectMake(0, 0, self.stackView.frame.size.width, 100)];
-            container.disclosedView = knobView;
-            container.disclosed = ![self.closedGroupNames containsObject:group.name];
-            knobView.delegate = self;
-            [self.stackView addView:container inGravity:NSStackViewGravityCenter];
-            self.groupNameMap[group.name] = knobView;
-            [self.groupViews addObject:knobView];
-            [knobView setTranslatesAutoresizingMaskIntoConstraints:NO];
-            [knobView representObject:object withKnobs:group.items];
-        }];
-    }
-    else {
-        for(EKNNamedGroup* group in groups) {
-            EKNKnobGeneratorView* knobView = self.groupNameMap[group.name];
-            [knobView representObject:object withKnobs:group.items];
+- (void)loadClosedGroupsIfNecessary {
+    if(self.closedGroupNames == nil) {
+        self.closedGroupNames = [[NSMutableArray alloc] init];
+        if(self.disclosureAutosaveName != nil) {
+            [self.closedGroupNames addObjectsFromArray:[[NSUserDefaults standardUserDefaults] objectForKey:self.disclosureAutosaveName]];
         }
     }
 }
 
-- (void)clearViews {
-    NSArray* stackViews = self.stackView.views;
-    for (NSView* view in stackViews) {
-        [view removeFromSuperview];
-    }
+- (void)updateDividers {
+    [self.stackView.views enumerateObjectsUsingBlock:^(EKNDisclosureView* view, NSUInteger idx, BOOL *stop) {
+        view.showsTopDivider = idx != 0;
+    }];
+}
+
+- (void)addGroupNamed:(NSString*)groupName contentView:(NSView*)contentView {
+    [self loadClosedGroupsIfNecessary];
+    EKNDisclosureView* container = [[EKNDisclosureView alloc] initWithFrame:CGRectMake(0, 0, self.stackView.frame.size.width, 100)];
+    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    container.title = groupName;
+    container.delegate = self;
+    container.disclosedView = contentView;
+    container.disclosed = ![self.closedGroupNames containsObject:groupName];
+    [self.stackView addView:container inGravity:NSStackViewGravityCenter];
     
-    [self.groupViews removeAllObjects];
-    [self.groupNameMap removeAllObjects];
+    [self updateDividers];
+}
+
+- (void)removeGroupWithContentView:(NSView *)contentView {
+    EKNDisclosureView* parentView = nil;
+    for(EKNDisclosureView* view in self.stackView.views) {
+        if(view.disclosedView == contentView) {
+            parentView = view;
+            break;
+        }
+    }
+    if(parentView) {
+        [self.stackView removeView:parentView];
+    }
+    [self updateDividers];
 }
 
 - (void)clear {
-    [self clearViews];
-    self.representedObject = nil;
-}
-
-- (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
-    [self.delegate knobGroupsView:self changedKnob:knob];
+    NSArray* stackViews = self.stackView.views;
+    for (NSView* view in stackViews) {
+        [self.stackView removeView:view];
+    }
 }
 
 #pragma mark Disclosure Defaults
 
 - (void)saveDefaults {
-    [[NSUserDefaults standardUserDefaults] setObject:self.closedGroupNames forKey:EKNKnobGroupsClosedGroupsKey];
+    if(self.disclosureAutosaveName) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.closedGroupNames forKey:self.disclosureAutosaveName];
+    }
 }
 
 - (void)disclosureViewOpened:(EKNDisclosureView *)disclosureView {
