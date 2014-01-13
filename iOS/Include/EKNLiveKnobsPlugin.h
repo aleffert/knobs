@@ -91,7 +91,7 @@
     symbol = value; \
 })
 #else
-#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action)
+#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action) (symbol) = (value)
 #endif
 
 #define EKNMakeAffineTransformKnob(symbol, value, label, externalCode) \
