@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EKNPropertyDescription.h"
+
 @class EKNViewFrobInfo;
 
 @protocol EKNViewFrobPropertyContext <NSObject>

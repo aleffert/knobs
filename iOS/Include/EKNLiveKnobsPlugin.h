@@ -116,7 +116,7 @@ EKNMakeKnob(self, [EKNPropertyDescription intPropertyWithName:EKNStringify(symbo
 EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(symbol)], symbol, label, value, EKNCodify(#externalCode), [NSValue valueWithCGPoint:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
 
 #define EKNMakePushButtonKnob(label, action) \
-[[EKNLiveKnobsPlugin sharedPlugin] registerPushButtonWithOwner:self name:label callback:action];
+[[EKNLiveKnobsPlugin sharedPlugin] registerPushButtonWithOwner:self name:label callback:action]
 
 #define EKNMakeRectKnob(symbol, value, label, externalCode) \
 EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], EKNCodify(#externalCode), ^(id owner, NSValue* value) {symbol = [value CGRectValue];})

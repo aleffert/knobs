@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77166C58188096C800A51215 /* UIButton+EKNFrobInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77166C57188096C800A51215 /* UIButton+EKNFrobInfo.m */; };
 		772F31E617417286009807FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77873FF1174147E700A47A27 /* Foundation.framework */; };
 		772F31F117417297009807FD /* EKNKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F3120174149C6009807FD /* EKNKnobs.m */; };
 		7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F44E17493F480052158B /* EKNLiveKnobs.m */; };
@@ -52,6 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		77166C56188096C800A51215 /* UIButton+EKNFrobInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+EKNFrobInfo.h"; path = "iOS/UIButton+EKNFrobInfo.h"; sourceTree = SOURCE_ROOT; };
+		77166C57188096C800A51215 /* UIButton+EKNFrobInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+EKNFrobInfo.m"; path = "iOS/UIButton+EKNFrobInfo.m"; sourceTree = SOURCE_ROOT; };
 		772F3120174149C6009807FD /* EKNKnobs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EKNKnobs.m; path = iOS/EKNKnobs.m; sourceTree = SOURCE_ROOT; };
 		772F3123174149F9009807FD /* Knobs-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Knobs-iOS-Prefix.pch"; path = "iOS/Knobs-iOS-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		772F31E517417285009807FD /* libKnobs-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libKnobs-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +229,8 @@
 		77CDDB0F17B144CE0072194C /* View Frob */ = {
 			isa = PBXGroup;
 			children = (
+				77166C56188096C800A51215 /* UIButton+EKNFrobInfo.h */,
+				77166C57188096C800A51215 /* UIButton+EKNFrobInfo.m */,
 				77C365D61867814200B4D9D7 /* EKNPropertyGroupAccumulator.h */,
 				77C365D71867814200B4D9D7 /* EKNPropertyGroupAccumulator.m */,
 				77F70D57174540ED0064E665 /* EKNViewFrobInfo.h */,
@@ -313,6 +318,7 @@
 				77B797591742C76D008242D4 /* EKNLoggerPlugin.m in Sources */,
 				77B7975D1742E2A3008242D4 /* EKNWireImage.m in Sources */,
 				77B7976517430A4F008242D4 /* EKNNamedChannel.m in Sources */,
+				77166C58188096C800A51215 /* UIButton+EKNFrobInfo.m in Sources */,
 				77F70D22174443530064E665 /* EKNViewFrobPlugin.m in Sources */,
 				77F70D2817444AE40064E665 /* EKNViewFrob.m in Sources */,
 				77C365DB1867866C00B4D9D7 /* EKNNamedGroup.m in Sources */,
