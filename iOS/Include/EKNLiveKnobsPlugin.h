@@ -122,7 +122,7 @@ EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(sym
 EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], EKNCodify(#externalCode), ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
 
 #define EKNMakeSizeKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], EKNCodify(#externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
+EKNMakeKnob(self, [EKNPropertyDescription sizePropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], EKNCodify(#externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
 
 #define EKNMakeStringKnob(symbol, value, label, externalCode) \
 EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNStringify(symbol)], symbol, label, value, value, EKNCodify(#externalCode), ^(id owner, NSString* changedValue){symbol = changedValue;})
