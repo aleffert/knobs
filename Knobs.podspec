@@ -40,8 +40,8 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = 'MIT'
-  # s.license      = { :type => 'MIT', :file => 'FILE_LICENSE' }
+  #s.license      = 'MIT'
+  s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -76,7 +76,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://EXAMPLE/Knobs.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/aleffert/knobs.git", :branch => "master" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -87,8 +87,11 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
-  s.exclude_files = 'Classes/Exclude'
+  s.source_files  = 'iOS/*.[hm]', 'iOS/*/*.[hm]', 'Shared/*.[hm]', 'Shared/*/*.[hm]', 'Libraries/*/*.[hm]'
+  s.public_header_files = 'iOS/Include/*.h', 'Shared/Include/*.h'
+  s.exclude_files = 'Libraries/NSData_Base64/base64.m'
+  s.preserve_paths = 'Desktop/*', 'Knobs.xcodeproj'
+  #s.exclude_files = 'Classes/Exclude'
 
   # s.public_header_files = 'Classes/**/*.h'
 
@@ -113,7 +116,7 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
-   s.ios.framework  = 'CFNetwork'
+   s.ios.frameworks  = 'CFNetwork', 'Security'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -123,7 +126,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  # s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SRCROOT)/iOS/Include/' }
   # s.dependency 'JSONKit', '~> 1.4'
 
 end

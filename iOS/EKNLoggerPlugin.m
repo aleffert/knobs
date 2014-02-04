@@ -10,7 +10,7 @@
 
 #import "EKNDevicePluginContext.h"
 
-#import "NSData+Base64.h"
+#import "NSData+EKNBase64.h"
 
 @implementation NSObject (EKNLogger)
 

@@ -26,6 +26,7 @@
 		7733F489174960A90052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F488174960A90052158B /* EKNPropertyDescription.m */; };
 		773C3B781746992500D6A805 /* icon_knob.icns in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B771746992500D6A805 /* icon_knob.icns */; };
 		773C3B8117469D9400D6A805 /* EKNKnobGeneratorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C3B7F17469D9400D6A805 /* EKNKnobGeneratorView.xib */; };
+		775A829018A182EC00859BA6 /* NSArray+EKNFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 775A828F18A182EC00859BA6 /* NSArray+EKNFunctional.m */; };
 		77773F10186E10C600200128 /* EKNUpdateSourceCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77773F0F186E10C600200128 /* EKNUpdateSourceCellView.m */; };
 		77773F13186E11AF00200128 /* EKNUpdateSourceCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77773F11186E11AF00200128 /* EKNUpdateSourceCellView.xib */; };
 		77773F16186E286400200128 /* EKNSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77773F15186E286400200128 /* EKNSourceManager.m */; };
@@ -54,7 +55,6 @@
 		77B7973117418374008242D4 /* EKNDeviceFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973017418374008242D4 /* EKNDeviceFinder.m */; };
 		77B797391741889D008242D4 /* EKNSharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797381741889D008242D4 /* EKNSharedConstants.m */; };
 		77B7973C17418C27008242D4 /* EKNDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973B17418C27008242D4 /* EKNDevice.m */; };
-		77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */; };
 		77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797421741AE36008242D4 /* EKNDeviceConnection.m */; };
 		77B797621742F6D1008242D4 /* EKNDeviceFinderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B797611742F6D0008242D4 /* EKNDeviceFinderView.m */; };
 		77B7976817430A89008242D4 /* EKNNamedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7976717430A88008242D4 /* EKNNamedChannel.m */; };
@@ -169,6 +169,8 @@
 		773C3B7917469D4800D6A805 /* EKNKnobGeneratorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNKnobGeneratorView.h; path = Desktop/EKNKnobGeneratorView.h; sourceTree = SOURCE_ROOT; };
 		773C3B7A17469D4800D6A805 /* EKNKnobGeneratorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNKnobGeneratorView.m; path = Desktop/EKNKnobGeneratorView.m; sourceTree = SOURCE_ROOT; };
 		773C3B8017469D9400D6A805 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNKnobGeneratorView.xib; sourceTree = SOURCE_ROOT; };
+		775A828E18A182EC00859BA6 /* NSArray+EKNFunctional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+EKNFunctional.h"; path = "Desktop/NSArray+EKNFunctional.h"; sourceTree = SOURCE_ROOT; };
+		775A828F18A182EC00859BA6 /* NSArray+EKNFunctional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+EKNFunctional.m"; path = "Desktop/NSArray+EKNFunctional.m"; sourceTree = SOURCE_ROOT; };
 		77773F0E186E10C600200128 /* EKNUpdateSourceCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNUpdateSourceCellView.h; path = Desktop/EKNUpdateSourceCellView.h; sourceTree = SOURCE_ROOT; };
 		77773F0F186E10C600200128 /* EKNUpdateSourceCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNUpdateSourceCellView.m; path = Desktop/EKNUpdateSourceCellView.m; sourceTree = SOURCE_ROOT; };
 		77773F12186E11AF00200128 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Desktop/en.lproj/EKNUpdateSourceCellView.xib; sourceTree = SOURCE_ROOT; };
@@ -218,8 +220,6 @@
 		77B797381741889D008242D4 /* EKNSharedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKNSharedConstants.m; sourceTree = "<group>"; };
 		77B7973A17418C27008242D4 /* EKNDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDevice.h; path = Desktop/EKNDevice.h; sourceTree = SOURCE_ROOT; };
 		77B7973B17418C27008242D4 /* EKNDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDevice.m; path = Desktop/EKNDevice.m; sourceTree = SOURCE_ROOT; };
-		77B7973E17418CB5008242D4 /* NSArray+EKNFunctional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+EKNFunctional.h"; path = "Shared/NSArray+EKNFunctional.h"; sourceTree = SOURCE_ROOT; };
-		77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+EKNFunctional.m"; path = "Shared/NSArray+EKNFunctional.m"; sourceTree = SOURCE_ROOT; };
 		77B797411741AE36008242D4 /* EKNDeviceConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDeviceConnection.h; path = Desktop/EKNDeviceConnection.h; sourceTree = SOURCE_ROOT; };
 		77B797421741AE36008242D4 /* EKNDeviceConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNDeviceConnection.m; path = Desktop/EKNDeviceConnection.m; sourceTree = SOURCE_ROOT; };
 		77B797601742F6D0008242D4 /* EKNDeviceFinderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNDeviceFinderView.h; path = Desktop/EKNDeviceFinderView.h; sourceTree = SOURCE_ROOT; };
@@ -485,6 +485,8 @@
 				772F312E1741544C009807FD /* EKNAppDelegate.m */,
 				77B7973A17418C27008242D4 /* EKNDevice.h */,
 				77B7973B17418C27008242D4 /* EKNDevice.m */,
+				775A828E18A182EC00859BA6 /* NSArray+EKNFunctional.h */,
+				775A828F18A182EC00859BA6 /* NSArray+EKNFunctional.m */,
 				772F312F1741544C009807FD /* EKNConsoleWindowController.h */,
 				772F31301741544C009807FD /* EKNConsoleWindowController.m */,
 				772F31331741545A009807FD /* main.m */,
@@ -533,8 +535,6 @@
 				77B7976717430A88008242D4 /* EKNNamedChannel.m */,
 				77C365DC1867884900B4D9D7 /* EKNNamedGroup.h */,
 				77C365DD1867884900B4D9D7 /* EKNNamedGroup.m */,
-				77B7973E17418CB5008242D4 /* NSArray+EKNFunctional.h */,
-				77B7973F17418CB5008242D4 /* NSArray+EKNFunctional.m */,
 				77B797371741889D008242D4 /* EKNSharedConstants.h */,
 				77B797381741889D008242D4 /* EKNSharedConstants.m */,
 			);
@@ -815,7 +815,6 @@
 				77B7973C17418C27008242D4 /* EKNDevice.m in Sources */,
 				778588AE18450DF1006913A6 /* EKNChunkWriter.m in Sources */,
 				77C365EE1867A6EF00B4D9D7 /* EKNKnobGroupsView.m in Sources */,
-				77B7974017418CB5008242D4 /* NSArray+EKNFunctional.m in Sources */,
 				77B797431741AE36008242D4 /* EKNDeviceConnection.m in Sources */,
 				77C36603186CBDDC00B4D9D7 /* EKNKnobPushButtonEditor.m in Sources */,
 				77B797621742F6D1008242D4 /* EKNDeviceFinderView.m in Sources */,
@@ -827,6 +826,7 @@
 				77B797731743D7F4008242D4 /* EKNConsoleControllerContextDispatcher.m in Sources */,
 				77F70D0717440DA30064E665 /* EKNWireImage.m in Sources */,
 				778E54AA1746A3D7009D1BA1 /* EKNKnobColorEditor.m in Sources */,
+				775A829018A182EC00859BA6 /* NSArray+EKNFunctional.m in Sources */,
 				77773F16186E286400200128 /* EKNSourceManager.m in Sources */,
 				778E54B61746B286009D1BA1 /* EKNKnobToggleEditor.m in Sources */,
 				77C36609186DEFE800B4D9D7 /* EKNKnobEditorManager.m in Sources */,
