@@ -51,7 +51,7 @@
     while(self.outputStream.hasSpaceAvailable && self.messageQueue.count > 0) {
         EKNQueuedChunk* chunk = [self.messageQueue objectAtIndex:0];
         const uint8_t* bytes = chunk.data.bytes;
-        NSUInteger bytesWritten = [self.outputStream write:bytes + chunk.offset maxLength:chunk.data.length - chunk.offset];
+        NSUInteger bytesWritten = [self.outputStream write:bytes + chunk.offset maxLength:(NSUInteger)(chunk.data.length - chunk.offset)];
         chunk.offset += bytesWritten;
         if(chunk.offset == chunk.data.length) {
             [self.messageQueue removeObjectAtIndex:0];

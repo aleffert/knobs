@@ -393,6 +393,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-Wshorten-64-to-32";
 			};
 			name = Debug;
 		};
@@ -417,6 +418,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = "-Wshorten-64-to-32";
 			};
 			name = Release;
 		};

@@ -59,7 +59,7 @@ typedef struct {
         switch (self.readState) {
             case EKNChunkReaderStateWaiting: {
                 uint8_t* bytes = self.accumulator.mutableBytes;
-                NSInteger readCount = [self.inputStream read:bytes maxLength:self.bytesRemainingInChunk];
+                NSInteger readCount = [self.inputStream read:bytes maxLength:(NSUInteger)self.bytesRemainingInChunk];
                 self.bytesRemainingInChunk = self.bytesRemainingInChunk - readCount;
                 if(self.bytesRemainingInChunk == 0) {
                     EKNChunkReaderFrame frame = self.currentFrame;
@@ -77,15 +77,15 @@ typedef struct {
             }
             case EKNChunkReaderStateReadFrame: {
                 uint8_t* bytes = self.accumulator.mutableBytes + self.currentFrame.headerLength + self.currentFrame.bodyLength - self.bytesRemainingInChunk;
-                NSInteger readCount = [self.inputStream read:bytes maxLength:self.bytesRemainingInChunk];
+                NSInteger readCount = [self.inputStream read:bytes maxLength:(NSUInteger)self.bytesRemainingInChunk];
                 self.bytesRemainingInChunk = self.bytesRemainingInChunk - readCount;
                 if(self.bytesRemainingInChunk == 0) {
                     // finished a frame
-                    NSData* headerData = [NSData dataWithBytesNoCopy:self.accumulator.mutableBytes length:self.currentFrame.headerLength freeWhenDone:NO];
+                    NSData* headerData = [NSData dataWithBytesNoCopy:self.accumulator.mutableBytes length:(NSUInteger)self.currentFrame.headerLength freeWhenDone:NO];
                     NSDictionary* header = [NSKeyedUnarchiver unarchiveObjectWithData:headerData];
                     
                     uint8_t* bytes = self.accumulator.mutableBytes + self.currentFrame.headerLength;
-                    NSData* bodyData = [NSData dataWithBytes:bytes length:self.currentFrame.bodyLength];
+                    NSData* bodyData = [NSData dataWithBytes:bytes length:(NSUInteger)self.currentFrame.bodyLength];
                     
                     [self.delegate chunkReader:self readChunkWithData:bodyData header:header];
                     
