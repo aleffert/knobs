@@ -396,6 +396,7 @@
 				777C2CA418BAFD52006164B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

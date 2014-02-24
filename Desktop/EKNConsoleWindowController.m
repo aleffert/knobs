@@ -14,7 +14,6 @@
 #import "EKNDevice.h"
 #import "EKNDeviceConnection.h"
 #import "EKNDeviceFinder.h"
-#import "EKNDeviceFinderView.h"
 #import "EKNKnobEditorManager.h"
 #import "EKNSourceManager.h"
 #import "EKNNamedChannel.h"
