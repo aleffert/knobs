@@ -109,12 +109,12 @@
 
 - (void)sendAddMessageWithInfo:(EKNKnobListenerInfo*)info value:(id)value {
     NSMutableDictionary* message = @{
-                              EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageAddKnob),
-                              @(EKNLiveKnobsAddIDKey) : info.uuid,
-                              @(EKNLiveKnobsGroupKey) : info.groupName,
-                              @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
-                              @(EKNLiveKnobsAddInitialValueKey) : value,
-                              }.mutableCopy;
+                                     EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageAddKnob),
+                                     @(EKNLiveKnobsAddIDKey) : info.uuid,
+                                     @(EKNLiveKnobsGroupKey) : info.groupName,
+                                     @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
+                                     @(EKNLiveKnobsAddInitialValueKey) : value,
+                                     }.mutableCopy;
     if(info.externalCode) {
         message[@(EKNLiveKnobsExternalCodeKey)] = info.externalCode;
     }
@@ -130,7 +130,7 @@
     
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];
-
+    
 }
 
 static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
@@ -238,6 +238,11 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
 }
 
 @end
+
+NSString* EKNDescriptionFromSymbol(NSString* symbol) {
+    // TODO break apart camel casing, remove self. and capitalize, do clever things with underscore
+    return symbol;
+}
 
 #pragma mark Default Callback Actions
 

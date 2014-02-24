@@ -16,7 +16,7 @@
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeAffineTransform]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobColorEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeColor]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobImageEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeImage]];
-    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobIntEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloat]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobIntEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeInt]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloat]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatPairEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatPair]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobFloatQuadEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeFloatQuad]];

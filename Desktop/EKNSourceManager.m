@@ -22,17 +22,15 @@
         return YES;
     }
     
-    NSString* pattern = [NSString stringWithFormat:@"EKNMake([a-zA-Z0-9_]+)\\((\\s*(%@)\\s*),(.*)EKNMarker", name];
+    NSString* pattern = [NSString stringWithFormat:@"(%@)([ \n\t\r]*)=([ \n\t\r]*)([^;]*)([ \n\t\r]*);", [NSRegularExpression escapedPatternForString:name]];
     
     NSRegularExpression* expression = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:error];
     if(error && *error) {
         return YES;
     }
     // substitute in a sentinal so that we don't have to escape the code when it goes into the template string
-    NSString* template = [NSString stringWithFormat:@"EKNMake$1($2, %@ EKNMarker", @"***EKNCODE***"];
+    NSString* template = [NSString stringWithFormat:@"$1$2=$3%@$5;", [NSRegularExpression escapedTemplateForString:code]];
     NSString* outContents = [expression stringByReplacingMatchesInString:fileContents options:0 range:NSMakeRange(0, fileContents.length) withTemplate:template];
-    // now replace the sentinal with the raw string
-    outContents = [outContents stringByReplacingOccurrencesOfString:@"***EKNCODE***" withString:code];
     [outContents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:error];
     if(error && *error) {
         return YES;

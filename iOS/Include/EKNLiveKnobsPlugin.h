@@ -60,6 +60,8 @@
 
 @end
 
+NSString* EKNDescriptionFromSymbol(NSString* symbol);
+
 
 /// @discussion Delimiter so our regex based parser can find the right place to update
 /// Should be placed after the second argument to the EKNMake*Knob family of macros
@@ -71,64 +73,88 @@
 /// @discussion Convert a bit of code into a string
 #define EKNStringify(symbol) @"" #symbol
 
-#define EKNCodify(codeString) ([(@"" codeString) isEqualToString:@"nil"] ? nil : @"" codeString)
+#define EKNCodify(codeString) ([(@"" #codeString) isEqualToString:@"nil"] ? nil : @"" #codeString)
 #if DEBUG
 /// @discussion Helper macro for creating a knob pointing to the current file
-#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action) ({\
-    [[EKNLiveKnobsPlugin sharedPlugin] \
-            registerOwner:owner \
-            info:propertyDescription \
-            label:labelText \
-            currentValue:wrappedValue \
-            externalCode:externalCodeText \
-            sourcePath:@""__FILE__ \
-            callback:^(id innerOwner, id changedValue) { \
-            if([innerOwner respondsToSelector:@selector(ekn_knobChangedNamed:withDescription:toValue:)]) { \
-                [innerOwner ekn_knobChangedNamed:labelText withDescription:propertyDescription toValue:changedValue];\
-            } \
-            action(innerOwner, changedValue); \
-        }]; \
-    symbol = value; \
+#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, wrappedValue, externalCodeText, action) ({\
+[[EKNLiveKnobsPlugin sharedPlugin] \
+registerOwner:owner \
+info:propertyDescription \
+label:labelText \
+currentValue:wrappedValue \
+externalCode:externalCodeText \
+sourcePath:@""__FILE__ \
+callback:^(id innerOwner, id changedValue) { \
+if([innerOwner respondsToSelector:@selector(ekn_knobChangedNamed:withDescription:toValue:)]) { \
+[innerOwner ekn_knobChangedNamed:labelText withDescription:propertyDescription toValue:changedValue];\
+} \
+action(innerOwner, changedValue); \
+}]; \
 })
 #else
-#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, value, wrappedValue, externalCodeText, action) (symbol) = (value)
+#define EKNMakeKnob(owner, propertyDescription, symbol, labelText, wrappedValue, externalCodeText, action) 0
 #endif
 
-#define EKNMakeAffineTransformKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNStringify(symbol)], symbol, label, value, EKNCodify(#externalCode), [NSValue valueWithCGAffineTransform:value], code, ^(id owner, NSValue* changedValue) {symbol = [changedValue CGAffineTransformValue];})
+#define EKNMakeAffineTransformKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription affineTransformPropertyWithName:EKNStringify(symbol)], symbol, label, [NSValue valueWithCGAffineTransform:symbol], EKNCodify(externalCode), ^(id owner, NSValue* changedValue) { \
+symbol = [changedValue CGAffineTransformValue]; \
+})
+#define EKNMakeAffineTransformKnob(symbol) \
+EKNMakeAffineTransformKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
 
-#define EKNMakeColorKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNStringify(symbol)], symbol, label, value, value, EKNCodify(#externalCode), ^(id owner, UIColor* color){symbol = color;})
 
-#define EKNMakeContinuousSliderKnob(symbol, value, label, externalCode, minimum, maximum) \
-EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNStringify(symbol) min:minimum max:maximum], symbol, label, value, @(value), EKNCodify(#externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+#define EKNMakeColorKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription colorPropertyWithName:EKNStringify(symbol)], symbol, label, symbol, EKNCodify(externalCode), ^(id owner, UIColor* color){symbol = color;})
+#define EKNMakeColorKnob(symbol) \
+EKNMakeColorKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
 
-#define EKNMakeEdgeInsetsKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithUIEdgeInsets:value], EKNCodify(#externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
+#define EKNMakeContinuousSliderKnobWithOptions(symbol, label, externalCode, minimum, maximum) \
+EKNMakeKnob(self, [EKNPropertyDescription continuousSliderPropertyWithName:EKNStringify(symbol) min:minimum max:maximum], symbol, label, @(symbol), EKNCodify(#externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+#define EKNMakeContinuousSliderKnob(symbol, minimum, maximum) \
+EKNMakeContinuousSliderKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil, minimum, maximum)
 
-#define EKNMakeFloatKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription floatPropertyWithName:EKNStringify(symbol)], symbol, label, value, @(value), EKNCodify(#externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+#define EKNMakeEdgeInsetsKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription edgeInsetsPropertyWithName:EKNStringify(symbol)], symbol, label, [NSValue valueWithUIEdgeInsets:symbol], EKNCodify(externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue UIEdgeInsetsValue];})
+#define EKNMakeEdgeInsetsKnob(symbol) \
+EKNMakeEdgeInsetsKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
 
-#define EKNMakeIntKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription intPropertyWithName:EKNStringify(symbol)], symbol, label, value, @(value), EKNCodify(#externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue integerValue];})
+#define EKNMakeFloatKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription floatPropertyWithName:EKNStringify(symbol)], symbol, label, @(symbol), EKNCodify(externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue floatValue];})
+#define EKNMakeFloatKnob(symbol) \
+EKNMakeFloatKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
 
-#define EKNMakePointKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(symbol)], symbol, label, value, EKNCodify(#externalCode), [NSValue valueWithCGPoint:value], ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
+#define EKNMakeIntKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription intPropertyWithName:EKNStringify(symbol)], symbol, label, @(symbol), EKNCodify(externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue integerValue];})
+#define EKNMakeIntKnob(symbol) \
+EKNMakeIntKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
+
+#define EKNMakePointKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription pointPropertyWithName:EKNStringify(symbol)], symbol, label, [NSValue valueWithCGPoint:symbol], EKNCodify(externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue CGPointValue];})
+#define EKNMakePointKnob(symbol) \
+EKNMakePointKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
+
+#define EKNMakeRectKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNStringify(symbol)], symbol, label, [NSValue valueWithCGRect:symbol], EKNCodify(externalCode), ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
+#define EKNMakeRectKnob(symbol) \
+EKNMakeRectKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
+
+#define EKNMakeSizeKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription sizePropertyWithName:EKNStringify(symbol)], symbol, label, [NSValue valueWithCGSize:symbol], EKNCodify(externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
+#define EKNMakeSizeKnob(symbol) \
+EKNMakeSizeKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
+
+#define EKNMakeStringKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNStringify(symbol)], symbol, label, symbol, EKNCodify(externalCode), ^(id owner, NSString* changedValue){symbol = changedValue;})
+#define EKNMakeStringKnob(symbol) \
+EKNMakeStringKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
+
+#define EKNMakeToggleKnobWithOptions(symbol, label, externalCode) \
+EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNStringify(symbol)], symbol, label, @(symbol), EKNCodify(externalCode), ^(id owner, NSNumber* changedValue){symbol = [changedValue boolValue];})
+#define EKNMakeToggleKnob(symbol) \
+EKNMakeToggleKnobWithOptions(symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
 
 #define EKNMakePushButtonKnob(label, action) \
 [[EKNLiveKnobsPlugin sharedPlugin] registerPushButtonWithOwner:self name:label callback:action]
-
-#define EKNMakeRectKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription rectPropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGRect:value], EKNCodify(#externalCode), ^(id owner, NSValue* value) {symbol = [value CGRectValue];})
-
-#define EKNMakeSizeKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription sizePropertyWithName:EKNStringify(symbol)], symbol, label, value, [NSValue valueWithCGSize:value], EKNCodify(#externalCode), ^(id owner, NSValue* changedValue) {symbol = [changedValue CGSizeValue];})
-
-#define EKNMakeStringKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription stringPropertyWithName:EKNStringify(symbol)], symbol, label, value, value, EKNCodify(#externalCode), ^(id owner, NSString* changedValue){symbol = changedValue;})
-
-#define EKNMakeToggleKnob(symbol, value, label, externalCode) \
-EKNMakeKnob(self, [EKNPropertyDescription togglePropertyWithName:EKNStringify(symbol)], symbol, label, value, @(value), EKNCodify(#externalCode), ^(id owner, NSValue* changedValue){symbol = [changedValue boolValue];})
 
 
 /// Simple interface for an owner to receive updates when a knob is changed
