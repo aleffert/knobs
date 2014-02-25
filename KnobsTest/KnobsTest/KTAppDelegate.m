@@ -56,10 +56,6 @@
     self.textColor = textStyle.color;
 }
 
-- (KTTextStyle*)textStyle {
-    return _textStyle;
-}
-
 @end
 
 @interface KTAppDelegate () <EKNLiveKnobsCallback>
