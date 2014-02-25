@@ -74,9 +74,7 @@
 - (void)beganConnection {
     for(EKNKnobListenerInfo* info in self.listenersByID.objectEnumerator) {
         id value = [self.valuesByID objectForKey:info.uuid];
-        if(value != nil) {
-            [self sendAddMessageWithInfo:info value:value];
-        }
+        [self sendAddMessageWithInfo:info value:value];
     }
 }
 
@@ -113,8 +111,10 @@
                                      @(EKNLiveKnobsAddIDKey) : info.uuid,
                                      @(EKNLiveKnobsGroupKey) : info.groupName,
                                      @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
-                                     @(EKNLiveKnobsAddInitialValueKey) : value,
                                      }.mutableCopy;
+    if(value) {
+        message[@(EKNLiveKnobsAddInitialValueKey)] = value;
+    }
     if(info.externalCode) {
         message[@(EKNLiveKnobsExternalCodeKey)] = info.externalCode;
     }

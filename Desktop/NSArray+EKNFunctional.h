@@ -18,4 +18,6 @@
 - (NSArray*)arrayByInsertingObject:(id)object atIndex:(NSUInteger)index;
 - (NSArray*)arrayByReplacingObjectAtIndex:(NSUInteger)index withObject:(id)object;
 
+- (CGFloat)componentsSummedAsFloats;
+
 @end

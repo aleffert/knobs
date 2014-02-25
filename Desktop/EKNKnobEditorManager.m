@@ -8,9 +8,43 @@
 
 #import "EKNKnobEditorManager.h"
 
+#import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
+#import "NSArray+EKNFunctional.h"
+#import "NSString+EKNKeyPaths.h"
 
 @implementation EKNKnobEditorManager
+
+- (EKNKnobInfo*)knobInfo {
+    return [[EKNKnobInfo alloc] init];
+}
+
+- (EKNRootDerivedKnobInfo*)knobWithDescription:(EKNPropertyDescription*)description atPath:(NSString*)path ofRoot:(EKNKnobInfo*)root {
+    EKNRootDerivedKnobInfo* info = [[EKNRootDerivedKnobInfo alloc] init];
+    info.rootKnob = root;
+    info.parentKeyPath = path;
+    info.propertyDescription = description;
+    NSString* childPath = [path stringByAppendingKeyPath:description.name];
+    info.value = [root.value valueForKeyPath:childPath];
+    info.children = [self generateChildrenOfKnobRecursively:info atPath:childPath ofRoot:root];
+    
+    return info;
+}
+
+- (NSArray*)generateChildrenOfKnobRecursively:(EKNKnobInfo *)knobInfo atPath:(NSString*)path ofRoot:(EKNKnobInfo*)root {
+    if(knobInfo.propertyDescription.type == EKNPropertyTypeGroup) {
+        return [knobInfo.propertyDescription.parameters[@(EKNPropertyGroupChildren)] map:^id(EKNPropertyDescription* description) {
+            return [self knobWithDescription:description atPath:path ofRoot:root];
+        }];
+    }
+    else {
+        return [NSArray array];
+    }
+}
+
+- (NSArray*)generateChildrenOfKnobRecursively:(EKNKnobInfo*)knobInfo {
+    return [self generateChildrenOfKnobRecursively:knobInfo atPath:@"" ofRoot:knobInfo];
+}
 
 - (void)registerPropertyTypesInTableView:(NSTableView*)tableView {
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobAffineTransformEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeAffineTransform]];
@@ -24,10 +58,12 @@
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobSliderEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeSlider]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobStringEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeString]];
     [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobToggleEditor" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeToggle]];
+    [tableView registerNib:[[NSNib alloc] initWithNibNamed:@"EKNKnobGroupHeader" bundle:nil] forIdentifier:[EKNPropertyDescription nameForType:EKNPropertyTypeGroup]];
 }
 
-- (CGFloat)editorHeightOfType:(EKNPropertyType)type {
-    switch (type) {
+- (CGFloat)editorHeightWithDescription:(EKNPropertyDescription*)description {
+    switch (description.type) {
+        // TODO read these from the relevant classes
         case EKNPropertyTypeAffineTransform: return 131;
         case EKNPropertyTypeColor: return 24;
         case EKNPropertyTypeFloat: return 43;
@@ -39,6 +75,7 @@
         case EKNPropertyTypeSlider: return 58;
         case EKNPropertyTypeString: return 46;
         case EKNPropertyTypeToggle: return 24;
+        case EKNPropertyTypeGroup: return 30;
     }
 }
 

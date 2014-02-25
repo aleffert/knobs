@@ -16,13 +16,13 @@
 #import "EKNUpdateSourceCellView.h"
 #import "NSArray+EKNFunctional.h"
 
-static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndexDragType";
+static NSString* const EKNSourceTableKnobType = @"EKNSourceTableKnobType";
 
-@interface EKNSourcedKnobTable () <NSTableViewDelegate, NSTableViewDataSource, EKNPropertyEditorDelegate, EKNUpdateSourceCellViewDelegate>
+@interface EKNSourcedKnobTable () <NSOutlineViewDataSource, NSOutlineViewDelegate, EKNPropertyEditorDelegate, EKNUpdateSourceCellViewDelegate>
 
-@property (strong, nonatomic) IBOutlet NSTableView* knobTable;
+@property (strong, nonatomic) IBOutlet NSOutlineView* knobTable;
 @property (strong, nonatomic) NSMutableArray* knobs;
-@property (strong, nonatomic) NSMutableDictionary* externalCodeMap;
+@property (strong, nonatomic) NSMapTable* externalCodeMap;
 
 @property (strong, nonatomic) EKNKnobEditorManager* editorManager;
 @property (strong, nonatomic) EKNSourceManager* sourceManager;
@@ -42,7 +42,7 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
         
         [self addSubview:self.knobTable];
         
-        [self.knobTable registerForDraggedTypes:@[EKNSourceTableRowIndexDragType]];
+        [self.knobTable registerForDraggedTypes:@[EKNSourceTableKnobType]];
         
         self.knobTable.translatesAutoresizingMaskIntoConstraints = NO;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_knobTable)]];
@@ -53,7 +53,7 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
         [self.editorManager registerPropertyTypesInTableView:self.knobTable];
         [self.knobTable registerNib:[[NSNib alloc] initWithNibNamed:@"EKNUpdateSourceCellView" bundle:Nil] forIdentifier:@"EKNUpdateSourceCellIdentifier"];
         
-        self.externalCodeMap = [[NSMutableDictionary alloc] init];
+        self.externalCodeMap = [NSMapTable strongToStrongObjectsMapTable];
     }
     return self;
 }
@@ -68,7 +68,8 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 
 - (void)addKnob:(EKNKnobInfo *)knob {
     [self.knobs insertObject:knob atIndex:0];
-    [self.knobTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationEffectGap];
+    
+    [self.knobTable insertItemsAtIndexes:[NSIndexSet indexSetWithIndex:0] inParent:nil withAnimation:NSTableViewAnimationEffectGap];
     
     // Force a relayout since just inserting doesn't seem to do that
     [self.knobTable tile];
@@ -81,22 +82,22 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
             knob.value = value;
             id <EKNPropertyEditor> editor = [self.knobTable viewAtColumn:0 row:idx makeIfNecessary:NO];
             editor.info = knob;
+            [self.externalCodeMap removeObjectForKey:knob];
         }
     }];
-    [self.externalCodeMap removeObjectForKey:knobID];
 }
 
 - (void)removeKnobWithID:(NSString *)knobID {
     NSIndexSet* set = [self.knobs indexesOfObjectsPassingTest:^BOOL(EKNKnobInfo* knob, NSUInteger idx, BOOL *stop) {
         if([knob.knobID isEqualToString:knobID]) {
             *stop = YES;
+            [self.externalCodeMap removeObjectForKey:knob];
             return YES;
         }
         return NO;
     }];
     [self.knobs removeObjectsAtIndexes:set];
-    [self.knobTable removeRowsAtIndexes:set withAnimation:NSTableViewAnimationEffectGap];
-    [self.externalCodeMap removeObjectForKey:knobID];
+    [self.knobTable removeItemsAtIndexes:set inParent:nil withAnimation:NSTableViewAnimationEffectGap];
 }
 
 - (void)clear {
@@ -110,45 +111,59 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 
 #pragma mark Table View
 
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return self.knobs.count;
-}
-
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    if(row < self.knobs.count) {
-        EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        return [self.editorManager editorHeightOfType:info.propertyDescription.type];
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(EKNKnobInfo*)item {
+    if(item == nil) {
+        return self.knobs.count;
     }
     else {
-        // AppKit seems to request this even when the table is empty with row = 0
-        // And it also doesn't support zero height cells
-        return 1;
+        return item.children.count;
     }
 }
 
-- (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    if(row < self.knobs.count) {
-        if([tableColumn.identifier isEqualToString:@"Editor"]) {
-            EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-            NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.typeName owner:self];
-            view.info = info;
-            return view;
-        }
-        else if([tableColumn.identifier isEqualToString:@"Source"]) {
-            EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-            EKNUpdateSourceCellView* view = [tableView makeViewWithIdentifier:@"EKNUpdateSourceCellIdentifier" owner:self];
-            view.delegate = self;
-            view.info = info;
-            return view;
-        }
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(EKNKnobInfo*)info {
+    return [self.editorManager editorHeightWithDescription:info.propertyDescription];
+}
+
+- (NSView*)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(EKNKnobInfo*)info {
+    if([tableColumn.identifier isEqualToString:@"Editor"]) {
+        NSView <EKNPropertyEditor>* view = [self.knobTable makeViewWithIdentifier:info.propertyDescription.typeName owner:self];
+        view.info = info;
+        return view;
     }
-    return nil;
+    else if([tableColumn.identifier isEqualToString:@"Source"]) {
+        EKNUpdateSourceCellView* view = [self.knobTable makeViewWithIdentifier:@"EKNUpdateSourceCellIdentifier" owner:self];
+        view.delegate = self;
+        view.info = info;
+        return view;
+    }
+    else {
+        NSAssert(NO, @"Unkown column %@", tableColumn);
+        return nil;
+    }
+}
+
+- (NSArray*)childrenOfItem:(EKNKnobInfo*)item {
+    if(item == nil) {
+        return self.knobs;
+    }
+    else {
+        return item.children;
+    }
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(EKNKnobInfo*)item {
+    NSArray* children = [self childrenOfItem:item];
+    return children[index];
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+    return [self childrenOfItem:item].count > 0;
 }
 
 - (void)updateSourceCell:(EKNUpdateSourceCellView *)cell shouldSaveKnob:(EKNKnobInfo *)info {
     NSError* error = nil;
     
-    NSString* externalCode = self.externalCodeMap[info.knobID];
+    NSString* externalCode = [self.externalCodeMap objectForKey:info];
     
     if(externalCode) {
         if([self.sourceManager saveCode:externalCode withDescription:info.propertyDescription toFileAtPath:info.sourcePath error:&error]) {
@@ -165,52 +180,66 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 
 #pragma mark Drag and Drop
 
-- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-    [pboard declareTypes:@[EKNSourceTableRowIndexDragType] owner:self];
-    [pboard setData:data forType:EKNSourceTableRowIndexDragType];
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pasteboard {
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:items];
+    [pasteboard declareTypes:@[] owner:self];
+    [pasteboard setData:data forType:EKNSourceTableKnobType];
     return YES;
 }
 
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation {
-    if(dropOperation == NSTableViewDropOn) {
-        NSIndexSet* sourceIndices = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowIndexDragType]];
-        NSAssert(sourceIndices.count == 1, @"Only supports dragging exactly one row");
-        NSUInteger index = [sourceIndices firstIndex];
-        EKNKnobInfo* sourceKnob = self.knobs[index];
-        EKNPropertyType sourceType = sourceKnob.propertyDescription.type;
-        EKNKnobInfo* destKnob = self.knobs[row];
-        EKNPropertyType destType = destKnob.propertyDescription.type;
-        return sourceType == destType ? NSDragOperationCopy : NSDragOperationNone;
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id<NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
+    if(index == -1) {
+        NSArray* sourceItems = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableKnobType]];
+        NSAssert(sourceItems.count == 1, @"Only supports dragging exactly one row");
+        EKNKnobInfo* sourceKnob = [sourceItems firstObject];
+        EKNKnobInfo* destKnob = item;
+        [outlineView setDropItem:destKnob dropChildIndex:NSOutlineViewDropOnItemIndex];
+        return [sourceKnob.propertyDescription isTypeEquivalentToTypeOfDescription:destKnob.propertyDescription] ? NSDragOperationCopy : NSDragOperationNone;
     }
     else {
-        // TODO: Support row reordering
         return NSDragOperationNone;
     }
 }
-- (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)destRow dropOperation:(NSTableViewDropOperation)op {
-    NSAssert(op == NSTableViewDropOn, @"TODO: Support row reordering");
-    NSIndexSet* sourceIndices = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowIndexDragType]];
-    NSAssert(sourceIndices.count == 1, @"Only supports dragging exactly one row");
-    NSUInteger sourceRow = [sourceIndices firstIndex];
-    EKNKnobInfo* sourceKnob = self.knobs[sourceRow];
-    EKNKnobInfo* destKnob = self.knobs[destRow];
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id<NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index {
+
+    NSArray* sourceInfos = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableKnobType]];
+    NSAssert(sourceInfos.count == 1, @"Only supports dragging exactly one row");
+    EKNKnobInfo* sourceKnob = [sourceInfos firstObject];
+    EKNKnobInfo* destKnob = item;
     
     destKnob.value = sourceKnob.value;
     
     if(sourceKnob.externalCode != nil) {
-        self.externalCodeMap[destKnob.knobID] = sourceKnob.externalCode;
+        [self.externalCodeMap setObject:sourceKnob.externalCode forKey:destKnob];
     }
     else {
-        [self.externalCodeMap removeObjectForKey:destKnob.knobID];
+        [self.externalCodeMap removeObjectForKey:destKnob];
     }
     [self.delegate knobTable:self changedKnob:destKnob];
     
     NSInteger columnIndex = [self.knobTable columnWithIdentifier:@"Editor"];
+    NSInteger destRow = [self.knobTable rowForItem:destKnob];
     id <EKNPropertyEditor> editor = [self.knobTable viewAtColumn:columnIndex row:destRow makeIfNecessary:NO];
     editor.info = destKnob;
 
     return YES;
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification {
+    /// This is sort of crappy, but otherwise the table doesn't resize
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self knobTable] tile];
+        [self invalidateIntrinsicContentSize];
+    });
+}
+
+- (void)outlineViewItemDidCollapse:(NSNotification *)notification {
+    /// This is sort of crappy, but otherwise the table doesn't resize
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self knobTable] tile];
+        [self invalidateIntrinsicContentSize];
+    });
 }
 
 - (NSSize)intrinsicContentSize {

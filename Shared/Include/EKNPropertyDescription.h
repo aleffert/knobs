@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, EKNPropertyType) {
+    EKNPropertyTypeGroup,
     EKNPropertyTypeAffineTransform,
     EKNPropertyTypeColor,
     EKNPropertyTypeFloat,
@@ -20,6 +21,10 @@ typedef NS_ENUM(NSUInteger, EKNPropertyType) {
     EKNPropertyTypeSlider,
     EKNPropertyTypeString,
     EKNPropertyTypeToggle,
+};
+
+typedef NS_ENUM(NSUInteger, EKNPropertyGroupOptions) {
+    EKNPropertyGroupChildren
 };
 
 typedef NS_ENUM(NSUInteger, EKPropertyColorOptions) {
@@ -56,12 +61,17 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 
 + (EKNPropertyDescription*)propertyWithName:(NSString*)name type:(EKNPropertyType)type parameters:(NSDictionary*)parameters;
 
+/// Use this to make an aggregate property
+/// @param properties An array of EKNPropertyDescriptions
++ (EKNPropertyDescription*)groupPropertyWithName:(NSString*)name properties:(NSArray*)properties;
+
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)continuousSliderPropertyWithName:(NSString*)name min:(CGFloat)min max:(CGFloat)max;
 + (EKNPropertyDescription*)edgeInsetsPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)floatPropertyWithName:(NSString*)name;
++ (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)imagePropertyWithName:(NSString*)name wrapCG:(BOOL)wrapCG;
 + (EKNPropertyDescription*)intPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)pointPropertyWithName:(NSString*)name;
@@ -82,5 +92,7 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 @property (readonly, nonatomic, strong) NSString* typeName;
 /// Type specific parameters
 @property (readonly, nonatomic, copy) NSDictionary* parameters;
+
+- (BOOL)isTypeEquivalentToTypeOfDescription:(EKNPropertyDescription*)description;
 
 @end

@@ -8,11 +8,13 @@
 
 #import "EKNLiveKnobsViewController.h"
 
+#import "EKNKnobEditorManager.h"
 #import "EKNKnobGroupsView.h"
 #import "EKNLiveKnobs.h"
 #import "EKNPropertyDescription.h"
 #import "EKNSourcedKnobTable.h"
 #import "EKNKnobInfo.h"
+#import "NSArray+EKNFunctional.h"
 
 @interface EKNLiveKnobsViewController () <EKNSourcedKnobTableDelegate>
 
@@ -63,14 +65,14 @@
     NSString* uuid = message[@(EKNLiveKnobsAddIDKey)];
     id value = message[@(EKNLiveKnobsAddInitialValueKey)];
     EKNPropertyDescription* propertyDescription = [message objectForKey:@(EKNLiveKnobsAddDescriptionKey)];
-    // References lazily since it's added by the app itself
-    EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
+    EKNKnobInfo* knob = [self.context.editorManager knobInfo];
     knob.knobID = uuid;
     knob.value = value;
     knob.propertyDescription = propertyDescription;
     knob.sourcePath = message[@(EKNLiveKnobsPathKey)];
     knob.externalCode = message[@(EKNLiveKnobsExternalCodeKey)];
     knob.label = message[@(EKNLiveKnobsLabelKey)] ?: knob.propertyDescription.name;
+    knob.children = [self.context.editorManager generateChildrenOfKnobRecursively:knob];
     
     NSString* groupName = message[@(EKNLiveKnobsGroupKey)];
     EKNSourcedKnobTable* table = self.groupViews[groupName];
@@ -121,9 +123,10 @@
 }
 
 - (void)knobTable:(EKNSourcedKnobTable *)table changedKnob:(EKNKnobInfo *)knob {
-    NSString* uuid = knob.knobID;
+    [knob.rootKnob updateValueAfterChildChange];
+    NSString* uuid = knob.rootKnob.knobID;
     NSDictionary* message = @{EKNLiveKnobsSentMessageKey: @(EKNLiveKnobsMessageUpdateKnob),
-                              @(EKNLiveKnobsUpdateCurrentValueKey) : knob.value,
+                              @(EKNLiveKnobsUpdateCurrentValueKey) : knob.rootKnob.value,
                               @(EKNLiveKnobsUpdateIDKey) : uuid };
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];

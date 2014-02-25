@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import "EKNPropertyDescription.h"
+@class EKNRootDerivedKnobInfo;
+@class EKNKnobInfo;
+@class EKNPropertyDescription;
 
 @interface EKNKnobEditorManager : NSObject
 
+/// Factory to make a new knob info.
+- (EKNKnobInfo*)knobInfo;
+- (NSArray*)generateChildrenOfKnobRecursively:(EKNKnobInfo*)knobInfo;
+
 - (void)registerPropertyTypesInTableView:(NSTableView*)tableView;
-- (CGFloat)editorHeightOfType:(EKNPropertyType)type;
+- (CGFloat)editorHeightWithDescription:(EKNPropertyDescription*)description;
 
 @end

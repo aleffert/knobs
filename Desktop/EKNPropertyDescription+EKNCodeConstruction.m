@@ -89,6 +89,7 @@
         case EKNPropertyTypeToggle: return [self constructorCodeForToggle:value];
         case EKNPropertyTypeSlider: return [self constructorCodeForSlider:value];
         case EKNPropertyTypeString: return [self constructorCodeForString:value];
+        case EKNPropertyTypeGroup:
         case EKNPropertyTypeImage:
         case EKNPropertyTypePushButton:
             NSAssert(NO, @"Attempting to construct code of type %@, which is not possible", self.typeName);
@@ -97,6 +98,14 @@
 }
 
 - (BOOL)supportsCodeConstruction {
+    switch (self.type) {
+        case EKNPropertyTypeImage:
+        case EKNPropertyTypePushButton:
+        case EKNPropertyTypeGroup:
+            return NO;
+        default:
+            return YES;
+    }
     return self.type != EKNPropertyTypeImage && self.type != EKNPropertyTypePushButton;
 }
 

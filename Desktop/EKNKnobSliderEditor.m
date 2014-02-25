@@ -8,7 +8,7 @@
 
 #import "EKNKnobSliderEditor.h"
 
-#import "EKNEventTrampolineTableView.h"
+#import "EKNEventTrampolineOutlineView.h"
 #import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
 
@@ -35,7 +35,7 @@
     self.slider.floatValue = [info.value floatValue];
     self.minValue.floatValue = self.slider.minValue;
     self.maxValue.floatValue = self.slider.maxValue;
-    self.fieldName.stringValue = info.label;
+    self.fieldName.stringValue = info.displayName;
     self.currentValue.stringValue = [NSString stringWithFormat:@"%.2f", self.slider.floatValue];
 }
 

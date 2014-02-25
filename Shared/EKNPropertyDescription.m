@@ -26,6 +26,10 @@
     return result;
 }
 
++ (EKNPropertyDescription*)groupPropertyWithName:(NSString *)name properties:(NSArray *)properties {
+    return [self propertyWithName:name type:EKNPropertyTypeGroup parameters:@{@(EKNPropertyGroupChildren) : properties}];
+}
+
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name {
     return [self propertyWithName:name type:EKNPropertyTypeAffineTransform parameters:@{}];
 }
@@ -94,20 +98,21 @@
     return [self propertyWithName:name type:EKNPropertyTypeToggle parameters:@{}];
 }
 
-
+#define EKNNameForTypeArm(name) case name: return @"" #name;
 + (NSString*)nameForType:(EKNPropertyType)type {
     switch (type) {
-        case EKNPropertyTypeAffineTransform: return @"EKNPropertyTypeAffineTransform";
-        case EKNPropertyTypeColor: return @"EKNPropertyTypeColor";
-        case EKNPropertyTypeFloat: return @"EKNPropertyTypeFloat";
-        case EKNPropertyTypeFloatPair: return @"EKNPropertyTypeFloatPair";
-        case EKNPropertyTypeFloatQuad: return @"EKNPropertyTypeFloatQuad";
-        case EKNPropertyTypeImage: return @"EKPropertyTypeImage";
-        case EKNPropertyTypeInt: return @"EKPropertyTypeInt";
-        case EKNPropertyTypePushButton: return @"EKNPropertyTypePushButton";
-        case EKNPropertyTypeSlider: return @"EKNPropertyTypeSlider";
-        case EKNPropertyTypeString: return @"EKNPropertyTypeString";
-        case EKNPropertyTypeToggle: return @"EKNPropertyTypeToggle";
+            EKNNameForTypeArm(EKNPropertyTypeGroup);
+            EKNNameForTypeArm(EKNPropertyTypeAffineTransform);
+            EKNNameForTypeArm(EKNPropertyTypeColor);
+            EKNNameForTypeArm(EKNPropertyTypeFloat);
+            EKNNameForTypeArm(EKNPropertyTypeFloatPair);
+            EKNNameForTypeArm(EKNPropertyTypeFloatQuad);
+            EKNNameForTypeArm(EKNPropertyTypeImage);
+            EKNNameForTypeArm(EKNPropertyTypeInt);
+            EKNNameForTypeArm(EKNPropertyTypePushButton);
+            EKNNameForTypeArm(EKNPropertyTypeSlider);
+            EKNNameForTypeArm(EKNPropertyTypeString);
+            EKNNameForTypeArm(EKNPropertyTypeToggle);
     }
 }
 
@@ -135,4 +140,33 @@
     return [NSString stringWithFormat:@"<%@: %p name = %@, type = %@, parameters = %@> ", [self class], self, self.name, self.typeName, self.parameters];
 }
 
+- (BOOL)isTypeEquivalentToTypeOfDescription:(EKNPropertyDescription*)description {
+    if(description == nil) {
+        return NO;
+    }
+    switch (self.type) {
+        case EKNPropertyTypeGroup: {
+            if(description.type == EKNPropertyTypeGroup) {
+                NSArray* children = self.parameters[@(EKNPropertyGroupChildren)];
+                NSArray* compChildren = description.parameters[@(EKNPropertyGroupChildren)];
+                if(children.count != compChildren.count) {
+                    return NO;
+                }
+                __block BOOL equivalent = YES;
+                [children enumerateObjectsUsingBlock:^(EKNPropertyDescription* child, NSUInteger idx, BOOL *stop) {
+                    EKNPropertyDescription* compChild = [compChildren objectAtIndex:idx];
+                    equivalent = equivalent && [child isTypeEquivalentToTypeOfDescription:compChild];
+                }];
+                return equivalent;
+            }
+            else {
+                return NO;
+            }
+        default:
+            return self.type == description.type;
+        }
+    }
+}
+
 @end
+    

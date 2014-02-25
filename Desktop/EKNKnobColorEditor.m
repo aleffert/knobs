@@ -25,10 +25,10 @@
 
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
-    self.fieldName.stringValue = info.label;
+    self.fieldName.stringValue = info.displayName;
     NSColor* color = info.value;
     if(!self.colorWell.isActive) {
-        if([color isKindOfClass:[NSNull class]]) {
+        if([color isKindOfClass:[NSNull class]] || color == nil) {
             self.colorWell.color = [NSColor clearColor];
         }
         else {

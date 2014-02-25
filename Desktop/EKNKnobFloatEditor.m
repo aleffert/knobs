@@ -8,7 +8,7 @@
 
 #import "EKNKnobFloatEditor.h"
 
-#import "EKNEventTrampolineTableView.h"
+#import "EKNEventTrampolineOutlineView.h"
 #import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
 
@@ -27,7 +27,7 @@
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
     self.field.floatValue = [info.value floatValue];
-    self.fieldName.stringValue = info.label;
+    self.fieldName.stringValue = info.displayName;
 }
 
 - (IBAction)textFieldChanged:(id)sender {

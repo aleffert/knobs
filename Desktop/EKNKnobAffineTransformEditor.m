@@ -54,7 +54,7 @@
             field.floatValue = transformFields[idx];
         }
     }];
-    self.fieldName.stringValue = self.info.label;
+    self.fieldName.stringValue = info.displayName;
 }
 
 - (void)changedToAffineTransform:(CGAffineTransform)transform {

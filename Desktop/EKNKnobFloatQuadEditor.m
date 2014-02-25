@@ -9,7 +9,7 @@
 #import "EKNKnobFloatQuadEditor.h"
 
 #import "EKNKnobInfo.h"
-#import "EKNEventTrampolineTableView.h"
+#import "EKNEventTrampolineOutlineView.h"
 #import "EKNPropertyDescription.h"
 
 @interface EKNKnobFloatQuadEditor () <EKNEventTrampolineKeyHandler>
@@ -61,7 +61,7 @@
         }
     }];
     
-    self.fieldName.stringValue = self.info.label;
+    self.fieldName.stringValue = info.displayName;
 }
 
 - (IBAction)textFieldChanged:(id)sender {

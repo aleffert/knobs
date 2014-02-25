@@ -57,4 +57,13 @@
     return result;
 }
 
+- (CGFloat)componentsSummedAsFloats {
+    CGFloat result = 0;
+    for(NSNumber* number in self) {
+        result += number.floatValue;
+    }
+    
+    return result;
+}
+
 @end

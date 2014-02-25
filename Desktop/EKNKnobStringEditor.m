@@ -32,7 +32,7 @@
         self.content.stringValue = info.value;
     }
     
-    self.fieldName.stringValue = info.label;
+    self.fieldName.stringValue = info.displayName;
 }
 
 - (IBAction)textFieldChanged:(id)sender {

@@ -1,5 +1,5 @@
 //
-//  EKNEventTrampolineTableView.h
+//  EKNEventTrampolineOutlineView.h
 //  Knobs
 //
 //  Created by Akiva Leffert on 12/26/13.
@@ -14,6 +14,6 @@
 
 @end
 
-@interface EKNEventTrampolineTableView : NSTableView
+@interface EKNEventTrampolineOutlineView : NSOutlineView
 
 @end

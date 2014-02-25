@@ -24,7 +24,7 @@
 
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
-    self.button.title = info.label;
+    self.button.title = info.displayName;
 }
 
 - (IBAction)action:(id)sender {

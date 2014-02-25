@@ -11,7 +11,7 @@
 #import "EKNKnobInfo.h"
 #import "EKNPropertyDescription.h"
 
-#import "EKNEventTrampolineTableView.h"
+#import "EKNEventTrampolineOutlineView.h"
 
 @interface EKNKnobFloatPairEditor () <EKNEventTrampolineKeyHandler>
 
@@ -47,7 +47,7 @@
     self.leftName.stringValue = [names objectAtIndex:0];
     self.rightName.stringValue = [names objectAtIndex:1];
     
-    self.fieldName.stringValue = info.label;
+    self.fieldName.stringValue = info.displayName;
 }
 
 - (void)valueChangedToPoint:(NSPoint)point {

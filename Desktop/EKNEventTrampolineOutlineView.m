@@ -1,14 +1,14 @@
 //
-//  EKNEventTrampolineTableView.m
+//  EKNEventTrampolineOutlineView.m
 //  Knobs
 //
 //  Created by Akiva Leffert on 12/26/13.
 //  Copyright (c) 2013 Akiva Leffert. All rights reserved.
 //
 
-#import "EKNEventTrampolineTableView.h"
+#import "EKNEventTrampolineOutlineView.h"
 
-@implementation EKNEventTrampolineTableView
+@implementation EKNEventTrampolineOutlineView
 
 /// Needed so that NSSteppers can work inside table cell
 - (BOOL)validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event {

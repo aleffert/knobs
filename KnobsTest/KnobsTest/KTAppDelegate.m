@@ -9,6 +9,49 @@
 #import "KTAppDelegate.h"
 
 #import <EKNKnobs.h>
+#import <EKNLiveKnobsPlugin.h>
+
+@interface KTTestGroup : NSObject <EKNPropertyDescribing>
+
+@property (strong, nonatomic) UIColor* color;
+@property (assign, nonatomic) CGFloat size;
+
+@end
+
+@implementation KTTestGroup
+
++ (EKNPropertyDescription*)ekn_propertyDescriptionWithName:(NSString *)name {
+    return [EKNPropertyDescription
+            groupPropertyWithName:name
+            properties:@[
+                         [EKNPropertyDescription colorPropertyWithName:@"color"],
+                         [EKNPropertyDescription floatPropertyWithName:@"size"]
+                         ]];
+}
+
++ (KTTestGroup*)ekn_unwrapTransportValue:(NSDictionary*)value {
+    KTTestGroup* group = [[KTTestGroup alloc] init];
+    group.size = [[value objectForKey:@"size"] floatValue];
+    group.color = [value objectForKey:@"color"];
+    
+    return group;
+}
+
+- (id <NSCoding>)ekn_transportValue {
+    NSMutableDictionary* dictionary = @{@"size": @(self.size)}.mutableCopy;
+    if(self.color) {
+        [dictionary setObject:self.color forKey:@"color"];
+    }
+    return dictionary;
+}
+
+@end
+
+@interface KTAppDelegate () <EKNLiveKnobsCallback>
+
+@property (strong, nonatomic) KTTestGroup* testGroup;
+
+@end
 
 @implementation KTAppDelegate
 
@@ -16,34 +59,18 @@
 {
     [[EKNKnobs sharedController] registerDefaultPlugins];
     [[EKNKnobs sharedController] start];
+    
+    self.testGroup = [[KTTestGroup alloc] init];
+    self.testGroup.color = [UIColor redColor];
+    EKNMakeObjectKnob(KTTestGroup, self.testGroup);
+    
+    EKNMakeColorKnob(self.window.rootViewController.view.backgroundColor);
+    
     return YES;
 }
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)ekn_knobChangedNamed:(NSString *)label withDescription:(EKNPropertyDescription *)description toValue:(id)value {
+    self.window.rootViewController.view.backgroundColor = self.testGroup.color;
 }
 
 @end

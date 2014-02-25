@@ -25,7 +25,7 @@
 
 - (void)setInfo:(EKNKnobInfo *)info {
     _info = info;
-    self.fieldName.stringValue = info.label;
+    self.fieldName.stringValue = info.displayName;
     [self.checkbox setState:[info.value boolValue]];
 }
 

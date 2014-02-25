@@ -16,7 +16,7 @@
 		777C2C8718BAFD51006164B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777C2C8518BAFD51006164B7 /* Main.storyboard */; };
 		777C2C8A18BAFD51006164B7 /* KTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777C2C8918BAFD51006164B7 /* KTViewController.m */; };
 		777C2C8C18BAFD51006164B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777C2C8B18BAFD51006164B7 /* Images.xcassets */; };
-		777C2CAE18BAFDD2006164B7 /* libKnobs-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 777C2CAD18BAFDA0006164B7 /* libKnobs-iOS.a */; };
+		777C2CB618BB05CA006164B7 /* libKnobs-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 777C2CAD18BAFDA0006164B7 /* libKnobs-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +25,13 @@
 			containerPortal = 777C2CA818BAFDA0006164B7 /* Knobs-iOS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 772F31E517417285009807FD;
+			remoteInfo = "Knobs-iOS";
+		};
+		777C2CB718BB05CF006164B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 777C2CA818BAFDA0006164B7 /* Knobs-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 772F31E417417285009807FD;
 			remoteInfo = "Knobs-iOS";
 		};
 /* End PBXContainerItemProxy section */
@@ -56,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				777C2CAE18BAFDD2006164B7 /* libKnobs-iOS.a in Frameworks */,
+				777C2CB618BB05CA006164B7 /* libKnobs-iOS.a in Frameworks */,
 				777C2C7618BAFD51006164B7 /* CoreGraphics.framework in Frameworks */,
 				777C2C7818BAFD51006164B7 /* UIKit.framework in Frameworks */,
 				777C2C7418BAFD51006164B7 /* Foundation.framework in Frameworks */,
@@ -161,6 +168,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				777C2CB818BB05CF006164B7 /* PBXTargetDependency */,
 			);
 			name = KnobsTest;
 			productName = KnobsTest;
@@ -236,6 +244,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		777C2CB818BB05CF006164B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Knobs-iOS";
+			targetProxy = 777C2CB718BB05CF006164B7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		777C2C7C18BAFD51006164B7 /* InfoPlist.strings */ = {

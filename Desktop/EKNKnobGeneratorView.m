@@ -15,10 +15,10 @@
 
 #import "NSArray+EKNFunctional.h"
 
-@interface EKNKnobGeneratorView () <NSTableViewDataSource, NSTableViewDelegate>
+@interface EKNKnobGeneratorView () <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (strong, nonatomic) EKNKnobEditorManager* editorManager;
-@property (strong, nonatomic) IBOutlet NSTableView* knobTable;
+@property (strong, nonatomic) IBOutlet NSOutlineView* knobTable;
 @property (strong, nonatomic) id representedObject;
 @property (copy, nonatomic) NSArray* knobs;
 
@@ -68,30 +68,37 @@
 
 #pragma mark Table View
 
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return self.knobs.count;
-}
-
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    if(row < self.knobs.count) {
-        EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        return [self.editorManager editorHeightOfType:info.propertyDescription.type];
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+    if(item == nil) {
+        return self.knobs.count;
     }
     else {
-        // AppKit seems to request this even when the table is empty with row = 0
-        // And it also doesn't support zero height cells
-        return 1;
+        return 0;
     }
 }
 
-- (NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    if(row < self.knobs.count) {
-        EKNKnobInfo* info = [self.knobs objectAtIndex:row];
-        NSView <EKNPropertyEditor>* view = [tableView makeViewWithIdentifier:info.propertyDescription.typeName owner:self];
-        view.info = info;
-        return view;
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(EKNKnobInfo*)info {
+    return [self.editorManager editorHeightWithDescription:info.propertyDescription];
+}
+
+- (NSView*)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(EKNKnobInfo*)info {
+    NSView <EKNPropertyEditor>* view = [self.knobTable makeViewWithIdentifier:info.propertyDescription.typeName owner:self];
+    view.info = info;
+    return view;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+    return NO;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+    if(item == nil) {
+        return self.knobs[index];
     }
-    return nil;
+    else {
+        NSAssert(NO, @"Only root should have children");
+        return nil;
+    }
 }
 
 #pragma mark Editor Delegate
