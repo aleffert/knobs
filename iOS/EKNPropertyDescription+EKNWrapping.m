@@ -7,6 +7,8 @@
 //
 
 #import "EKNPropertyDescription+EKNWrapping.h"
+#import "EKNPropertyDescribing.h"
+#import "EKNGroupTransporting.h"
 
 #import "EKNWireImage.h"
 
@@ -15,7 +17,7 @@
 - (id)wrappedValueFromSource:(id)source {
     id result = [source valueForKeyPath:self.name];
     if(result == nil) {
-        return [NSNull null];
+        return nil;
     }
     else {
         if(self.type == EKNPropertyTypeColor) {
@@ -26,7 +28,7 @@
             CGColorSpaceModel model = CGColorSpaceGetModel(space);
             // UIColor only supports archiving of RGB and White colors. So just ignore if we're not using one of those
             if(!(model == kCGColorSpaceModelCMYK || model == kCGColorSpaceModelRGB)) {
-                result = [NSNull null];
+                return nil;
             }
         }
         else if(self.type == EKNPropertyTypeImage) {
@@ -35,6 +37,18 @@
             }
             else {
                 result = [[EKNWireImage alloc] initWithImage:result];
+            }
+        }
+        else if(self.type == EKNPropertyTypeGroup) {
+            if([result conformsToProtocol:@protocol(EKNGroupTransporting)]) {
+                result = [result ekn_transportValue];
+            }
+            else {
+                NSMutableDictionary* fields = [NSMutableDictionary dictionary];
+                for (EKNPropertyDescription* description in self.parameters[@(EKNPropertyGroupChildren)]) {
+                    fields[description.name] = [description valueWithWrappedValue:[result valueForKey:description.name]];
+                }
+                result = fields;
             }
         }
         
@@ -47,14 +61,28 @@
         return (id)[wrappedValue CGColor];
     }
     else if(self.type == EKNPropertyTypeImage) {
-        if([wrappedValue isEqual:[NSNull null]]) {
-            return nil;
-        }
-        else if([[self.parameters objectForKey:@(EKNPropertyImageWrapCG)] boolValue]) {
+        if([self.parameters[@(EKNPropertyImageWrapCG)] boolValue]) {
             return (id)[wrappedValue CGImage];
         }
         else {
             return [wrappedValue image];
+        }
+    }
+    else if(self.type == EKNPropertyTypeGroup) {
+        NSString* className = self.parameters[@(EKNPropertyGroupClassName)];
+        Class class = NSClassFromString(className);
+        if([class conformsToProtocol:@protocol(EKNGroupTransporting)]) {
+            return [NSClassFromString(className) ekn_unwrapTransportValue:wrappedValue];
+        }
+        else {
+            id object = [[class alloc] init];
+            for(EKNPropertyDescription* child in self.parameters[@(EKNPropertyGroupChildren)]) {
+                id childValue = [child valueWithWrappedValue:wrappedValue[child.name]];
+                if(childValue != nil) {
+                    [object setValue:childValue forKey:child.name];
+                }
+            }
+            return object;
         }
     }
     else {

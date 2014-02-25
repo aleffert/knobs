@@ -16,23 +16,18 @@
 @protocol EKNPropertyDescribing <NSObject>
 
 + (EKNPropertyDescription*)ekn_propertyDescriptionWithName:(NSString*)name;
-/// Returns a value that can be transported between client and app
-/// That is, this should be a value that can be archived/unarchived on the Mac and iOS
-/// For types that return a property description with a group type, it should be an NSDictionary
-- (id <NSCoding>)ekn_transportValue;
-+ (id)ekn_unwrapTransportValue:(id)value;
 
 @end
 
-/// Default implemenations for base types
-@interface UIColor (EKNProperty) <EKNPropertyDescribing>
+@interface UIColor (EKNDescription) <EKNPropertyDescribing>
 
 @end
 
-@interface NSString (EKNProperty) <EKNPropertyDescribing>
+@interface NSString (EKNDescription) <EKNPropertyDescribing>
 
 @end
 
-@interface UIImage (EKNProperty) <EKNPropertyDescribing>
+@interface UIImage (EKNDescription) <EKNPropertyDescribing>
 
 @end
+

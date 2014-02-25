@@ -13,6 +13,7 @@
 #import "EKNKnobListenerInfo.h"
 #import "EKNLiveKnobs.h"
 #import "EKNPropertyDescription.h"
+#import "EKNPropertyDescription+EKNWrapping.h"
 
 #import <objc/runtime.h>
 
@@ -113,7 +114,7 @@
                                      @(EKNLiveKnobsAddDescriptionKey) : info.propertyDescription,
                                      }.mutableCopy;
     if(value) {
-        message[@(EKNLiveKnobsAddInitialValueKey)] = value;
+        message[@(EKNLiveKnobsAddInitialValueKey)] = [info.propertyDescription wrappedValueFromSource:value];
     }
     if(info.externalCode) {
         message[@(EKNLiveKnobsExternalCodeKey)] = info.externalCode;
@@ -184,7 +185,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
         id value = [message objectForKey:@(EKNLiveKnobsUpdateCurrentValueKey)];
         EKNKnobListenerInfo* listenerInfo = [self.listenersByID  objectForKey:uuid];
         if(listenerInfo.callback != nil) {
-            listenerInfo.callback(listenerInfo.owner, value);
+            listenerInfo.callback(listenerInfo.owner, [listenerInfo.propertyDescription valueWithWrappedValue: value]);
         }
     }
     else {
@@ -201,7 +202,7 @@ static NSString* EKNObjectListenersKey = @"EKNObjectListenersKey";
     NSDictionary* message = @{
                               EKNLiveKnobsSentMessageKey : @(EKNLiveKnobsMessageUpdateKnob),
                               @(EKNLiveKnobsUpdateIDKey) : info.uuid,
-                              @(EKNLiveKnobsUpdateCurrentValueKey) : value,
+                              @(EKNLiveKnobsUpdateCurrentValueKey) : [info.propertyDescription wrappedValueFromSource:value],
                               };
     NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:archive onChannel:self.channel];

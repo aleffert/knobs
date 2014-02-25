@@ -10,6 +10,7 @@
 
 #import "EKNDevicePlugin.h"
 
+#import "EKNGroupTransporting.h"
 #import "EKNPropertyDescription.h"
 #import "EKNPropertyDescribing.h"
 
@@ -26,7 +27,7 @@
 /// @param sourcePath Source file this knob resides in. Live source updating won't work unless you go through the EKNMake macros below.
 /// @param externalCode Code that should be used by other knobs picking up the value of this one. Can be nil, in which case the value of the knob is used instead. Used to make things point at symbolic constants instead of raw values
 /// @param callback Action called when the knob changes. May be nil
-- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id <NSCoding>)value externalCode:(NSString*)code sourcePath:(NSString*)path callback:(void(^)(id owner, id value))callback;
+- (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value externalCode:(NSString*)code sourcePath:(NSString*)path callback:(void(^)(id owner, id value))callback;
 
 /// Convenience for calling -[EKNLiveKnobsPlugin registerOwner:info:label:currentValue:externalCode:sourcePath:callback] where externalCode and sourcePath are nil
 - (void)registerOwner:(id)owner info:(EKNPropertyDescription*)description label:(NSString*)label currentValue:(id)value callback:(void(^)(id owner, id value))callback;
@@ -88,8 +89,10 @@ if([innerOwner respondsToSelector:@selector(ekn_knobChangedNamed:withDescription
 #define EKNMakeKnob(owner, propertyDescription, symbol, labelText, wrappedValue, externalCodeText, action) 0
 #endif
 
+/// @param klass The class of the object. Must conform to <EKNPropertyDescribing>
 #define EKNMakeObjectKnobWithOptions(klass, symbol, label, externalCode) \
-EKNMakeKnob(self, [klass ekn_propertyDescriptionWithName:EKNStringify(symbol)], symbol, label, [symbol ekn_transportValue], EKNCodify(#externalCode), ^(id owner, klass* changedValue){symbol = [klass ekn_unwrapTransportValue: changedValue];})
+EKNMakeKnob(self, [klass ekn_propertyDescriptionWithName:EKNStringify(symbol)], symbol, label, symbol, EKNCodify(#externalCode), ^(id owner, klass* changedValue){symbol = changedValue;})
+/// @param klass The class of the object. Must conform to <EKNPropertyDescribing>
 #define EKNMakeObjectKnob(klass, symbol) \
 EKNMakeObjectKnobWithOptions(klass, symbol, EKNDescriptionFromSymbol(EKNStringify(symbol)), nil)
 

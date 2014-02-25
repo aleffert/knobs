@@ -14,7 +14,7 @@
 		7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 7733F48517495FAE0052158B /* EKNPropertyDescription.m */; };
 		77547AF41755518900566AF0 /* EKNUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77547AF31755518900566AF0 /* EKNUUID.m */; };
 		775A828D18A1825C00859BA6 /* NSData+EKNBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 775A828C18A1825C00859BA6 /* NSData+EKNBase64.m */; };
-		777C2CB118BB04F5006164B7 /* EKNPropertyDescribing.m in Sources */ = {isa = PBXBuildFile; fileRef = 777C2CB018BB04F5006164B7 /* EKNPropertyDescribing.m */; };
+		777C2CCC18BC4DFE006164B7 /* EKNPropertyDescribing.m in Sources */ = {isa = PBXBuildFile; fileRef = 777C2CCB18BC4DFE006164B7 /* EKNPropertyDescribing.m */; };
 		778588BF184553C7006913A6 /* EKNChunkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588BA184553C7006913A6 /* EKNChunkConnection.m */; };
 		778588C0184553C7006913A6 /* EKNChunkReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588BC184553C7006913A6 /* EKNChunkReader.m */; };
 		778588C1184553C7006913A6 /* EKNChunkWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 778588BE184553C7006913A6 /* EKNChunkWriter.m */; };
@@ -66,8 +66,9 @@
 		77547AF31755518900566AF0 /* EKNUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNUUID.m; path = iOS/EKNUUID.m; sourceTree = SOURCE_ROOT; };
 		775A828B18A1825C00859BA6 /* NSData+EKNBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+EKNBase64.h"; path = "Shared/NSData+EKNBase64.h"; sourceTree = SOURCE_ROOT; };
 		775A828C18A1825C00859BA6 /* NSData+EKNBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+EKNBase64.m"; path = "Shared/NSData+EKNBase64.m"; sourceTree = SOURCE_ROOT; };
-		777C2CB018BB04F5006164B7 /* EKNPropertyDescribing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyDescribing.m; path = iOS/EKNPropertyDescribing.m; sourceTree = SOURCE_ROOT; };
 		777C2CB218BB0513006164B7 /* EKNPropertyDescribing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNPropertyDescribing.h; path = iOS/Include/EKNPropertyDescribing.h; sourceTree = SOURCE_ROOT; };
+		777C2CCB18BC4DFE006164B7 /* EKNPropertyDescribing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNPropertyDescribing.m; path = iOS/EKNPropertyDescribing.m; sourceTree = SOURCE_ROOT; };
+		777C2CCD18BC4E6C006164B7 /* EKNGroupTransporting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EKNGroupTransporting.h; path = iOS/Include/EKNGroupTransporting.h; sourceTree = SOURCE_ROOT; };
 		778588B9184553C7006913A6 /* EKNChunkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkConnection.h; path = Shared/EKNChunkConnection.h; sourceTree = SOURCE_ROOT; };
 		778588BA184553C7006913A6 /* EKNChunkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNChunkConnection.m; path = Shared/EKNChunkConnection.m; sourceTree = SOURCE_ROOT; };
 		778588BB184553C7006913A6 /* EKNChunkReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNChunkReader.h; path = Shared/EKNChunkReader.h; sourceTree = SOURCE_ROOT; };
@@ -180,8 +181,9 @@
 		77873FF3174147E700A47A27 /* Knobs-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				777C2CCD18BC4E6C006164B7 /* EKNGroupTransporting.h */,
 				777C2CB218BB0513006164B7 /* EKNPropertyDescribing.h */,
-				777C2CB018BB04F5006164B7 /* EKNPropertyDescribing.m */,
+				777C2CCB18BC4DFE006164B7 /* EKNPropertyDescribing.m */,
 				77BFC756186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.h */,
 				77BFC757186FE6090089FB4E /* EKNPropertyDescription+EKNWrapping.m */,
 				77C365D91867866C00B4D9D7 /* EKNNamedGroup.h */,
@@ -335,7 +337,7 @@
 				77A51B2617480BF600A66451 /* EKNLiveKnobsPlugin.m in Sources */,
 				77A51B2F17481C5600A66451 /* EKNKnobListenerInfo.m in Sources */,
 				7733F44F17493F480052158B /* EKNLiveKnobs.m in Sources */,
-				777C2CB118BB04F5006164B7 /* EKNPropertyDescribing.m in Sources */,
+				777C2CCC18BC4DFE006164B7 /* EKNPropertyDescribing.m in Sources */,
 				7733F48617495FAE0052158B /* EKNPropertyDescription.m in Sources */,
 				77547AF41755518900566AF0 /* EKNUUID.m in Sources */,
 				775A828D18A1825C00859BA6 /* NSData+EKNBase64.m in Sources */,

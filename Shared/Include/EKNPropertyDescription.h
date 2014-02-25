@@ -24,7 +24,8 @@ typedef NS_ENUM(NSUInteger, EKNPropertyType) {
 };
 
 typedef NS_ENUM(NSUInteger, EKNPropertyGroupOptions) {
-    EKNPropertyGroupChildren
+    EKNPropertyGroupChildren,
+    EKNPropertyGroupClassName
 };
 
 typedef NS_ENUM(NSUInteger, EKPropertyColorOptions) {
@@ -63,7 +64,7 @@ typedef NS_ENUM (NSUInteger, EKPropertySliderOptions) {
 
 /// Use this to make an aggregate property
 /// @param properties An array of EKNPropertyDescriptions
-+ (EKNPropertyDescription*)groupPropertyWithName:(NSString*)name properties:(NSArray*)properties;
++ (EKNPropertyDescription*)groupPropertyWithName:(NSString*)name properties:(NSArray*)properties class:(Class)class;
 
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name;
 + (EKNPropertyDescription*)colorPropertyWithName:(NSString*)name;

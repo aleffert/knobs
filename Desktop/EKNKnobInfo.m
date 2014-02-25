@@ -52,9 +52,23 @@
         NSMutableDictionary* value = [[NSMutableDictionary alloc] init];
         for(EKNKnobInfo* info in self.children) {
             [info updateValueAfterChildChange];
-            [value setObject:info.value forKey:info.propertyDescription.name];
+            if(info.value != nil) {
+                [value setObject:info.value forKey:info.propertyDescription.name];
+            }
         }
         self.value = value;
+    }
+    else {
+        // base value so do nothing
+    }
+}
+
+- (void)updateChildrenAfterValueChange {
+    if(self.propertyDescription.type == EKNPropertyTypeGroup) {
+        for(EKNKnobInfo* info in self.children) {
+            info.value = [self.value valueForKeyPath:info.propertyDescription.name];
+            [info updateChildrenAfterValueChange];
+        }
     }
     else {
         // base value so do nothing

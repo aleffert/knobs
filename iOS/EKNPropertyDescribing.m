@@ -14,14 +14,6 @@
     return [EKNPropertyDescription colorPropertyWithName:name];
 }
 
-- (UIColor*)ekn_transportValue {
-    return self;
-}
-
-+ (UIColor*)ekn_unwrapTransportValue:(UIColor*)value {
-    return value;
-}
-
 @end
 
 @implementation NSString (EKNProperty)
@@ -30,28 +22,12 @@
     return [EKNPropertyDescription stringPropertyWithName:name];
 }
 
-- (NSString*)ekn_transportValue {
-    return self;
-}
-
-+ (NSString*)ekn_unwrapTransportValue:(NSString*)value {
-    return value;
-}
-
 @end
 
 @implementation UIImage (EKNProperty)
 
 + (EKNPropertyDescription*)ekn_propertyDescriptionWithName:(NSString *)name {
     return [EKNPropertyDescription imagePropertyWithName:name];
-}
-
-- (UIImage*)ekn_transportValue {
-    return self;
-}
-
-+ (UIImage*)ekn_unwrapTransportValue:(UIImage*)value {
-    return value;
 }
 
 @end

@@ -26,8 +26,8 @@
     return result;
 }
 
-+ (EKNPropertyDescription*)groupPropertyWithName:(NSString *)name properties:(NSArray *)properties {
-    return [self propertyWithName:name type:EKNPropertyTypeGroup parameters:@{@(EKNPropertyGroupChildren) : properties}];
++ (EKNPropertyDescription*)groupPropertyWithName:(NSString *)name properties:(NSArray *)properties class:(__unsafe_unretained Class)class {
+    return [self propertyWithName:name type:EKNPropertyTypeGroup parameters:@{@(EKNPropertyGroupChildren) : properties, @(EKNPropertyGroupClassName) : NSStringFromClass(class)}];
 }
 
 + (EKNPropertyDescription*)affineTransformPropertyWithName:(NSString*)name {

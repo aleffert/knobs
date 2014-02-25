@@ -50,30 +50,44 @@
     return YES;
 }
 
+- (void)recursivelyUpdateEditorsForKnob:(EKNKnobInfo*)knob {
+    NSInteger rowIndex = [self.knobTable rowForItem:knob];
+    if(rowIndex != -1) {
+        NSView <EKNPropertyEditor>* editor = [self.knobTable viewAtColumn:0 row:rowIndex makeIfNecessary:NO];
+        editor.info = knob;
+    }
+    
+    for(EKNKnobInfo* child in knob.children) {
+        [self recursivelyUpdateEditorsForKnob:child];
+    }
+
+}
+
 - (void)representObject:(id)object withKnobs:(NSArray *)knobs {
     BOOL fullUpdate = ![self.representedObject isEqual: object] || knobs.count != self.knobs.count;
-    self.representedObject = object;
-    self.knobs = knobs;
     
     if (fullUpdate) {
+        self.representedObject = object;
+        self.knobs = knobs;
         [self.knobTable reloadData];
     }
     else {
         [self.knobs enumerateObjectsUsingBlock:^(EKNKnobInfo* info, NSUInteger index, BOOL *stop) {
-            NSView <EKNPropertyEditor>* editor = [self.knobTable viewAtColumn:0 row:index makeIfNecessary:NO];
-            editor.info = info;
+            info.value = [knobs[index] value];
+            [info updateChildrenAfterValueChange];
+            [self recursivelyUpdateEditorsForKnob:info];
         }];
     }
 }
 
 #pragma mark Table View
 
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(EKNKnobInfo*)item {
     if(item == nil) {
         return self.knobs.count;
     }
     else {
-        return 0;
+        return item.children.count;
     }
 }
 
@@ -87,19 +101,41 @@
     return view;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    return NO;
-}
 
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+- (NSArray*)childrenOfItem:(EKNKnobInfo*)item {
     if(item == nil) {
-        return self.knobs[index];
+        return self.knobs;
     }
     else {
-        NSAssert(NO, @"Only root should have children");
-        return nil;
+        return item.children;
     }
 }
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(EKNKnobInfo*)item {
+    NSArray* children = [self childrenOfItem:item];
+    return children[index];
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+    return [self childrenOfItem:item].count > 0;
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification {
+    /// This is sort of crappy, but otherwise the table doesn't resize
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self knobTable] tile];
+        [self invalidateIntrinsicContentSize];
+    });
+}
+
+- (void)outlineViewItemDidCollapse:(NSNotification *)notification {
+    /// This is sort of crappy, but otherwise the table doesn't resize
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self knobTable] tile];
+        [self invalidateIntrinsicContentSize];
+    });
+}
+
 
 #pragma mark Editor Delegate
 

@@ -25,7 +25,7 @@
 @protocol EKNViewFrobPropertyInfo <NSObject>
 
 /// Array of EKNViewFrobPropertyInfo*
-/// Should call super
+/// Should call super at the beginning
 - (void)frob_accumulatePropertiesInto:(id <EKNViewFrobPropertyContext>)context;
 
 @end

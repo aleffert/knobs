@@ -135,11 +135,12 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
         knobGroup.name = group.name;
         knobGroup.items = [group.items map:^id(EKNPropertyInfo* info) {
             // Reference lazily since this is part of the app itself
-            EKNKnobInfo* knob = [NSClassFromString(@"EKNKnobInfo") knob];
+            EKNKnobInfo* knob = [self.context.editorManager knobInfo];
             knob.propertyDescription = info.propertyDescription;
             knob.value = info.value;
             knob.knobID = knob.propertyDescription.name;
             knob.label = knob.propertyDescription.name;
+            knob.children = [self.context.editorManager generateChildrenOfKnobRecursively:knob];
             return knob;
         }];
         return knobGroup;
@@ -434,8 +435,10 @@ static NSString* EKNViewFrobShowMarginsKey = @"EKNViewFrobShowMarginsKey";
 
 - (void)generatorView:(EKNKnobGeneratorView *)view changedKnob:(EKNKnobInfo *)knob {
     if(self.selectedInfo != nil) {
+        [knob.rootKnob updateValueAfterChildChange];
+        
         //Reference lazily since this is part of the app itself
-        EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.propertyDescription value:knob.value];
+        EKNPropertyInfo* info = [NSClassFromString(@"EKNPropertyInfo") infoWithDescription:knob.rootKnob.propertyDescription value:knob.rootKnob.value];
         NSDictionary* message = @{EKNViewFrobSentMessageKey: EKNViewFrobMessageChangedProperty, EKNViewFrobChangedPropertyInfo : info, EKNViewFrobChangedPropertyViewID : self.selectedInfo.viewID};
         NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:message];
         [self.context sendMessage:archive onChannel:self.channel];

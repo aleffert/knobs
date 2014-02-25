@@ -10,15 +10,16 @@
 
 #import <EKNKnobs.h>
 #import <EKNLiveKnobsPlugin.h>
+#import <UIView+EKNFrobInfo.h>
 
-@interface KTTestGroup : NSObject <EKNPropertyDescribing>
+@interface KTTextStyle : NSObject <EKNPropertyDescribing>
 
 @property (strong, nonatomic) UIColor* color;
 @property (assign, nonatomic) CGFloat size;
 
 @end
 
-@implementation KTTestGroup
+@implementation KTTextStyle
 
 + (EKNPropertyDescription*)ekn_propertyDescriptionWithName:(NSString *)name {
     return [EKNPropertyDescription
@@ -26,30 +27,45 @@
             properties:@[
                          [EKNPropertyDescription colorPropertyWithName:@"color"],
                          [EKNPropertyDescription floatPropertyWithName:@"size"]
-                         ]];
+                         ]
+            class:[self class]];
 }
 
-+ (KTTestGroup*)ekn_unwrapTransportValue:(NSDictionary*)value {
-    KTTestGroup* group = [[KTTestGroup alloc] init];
-    group.size = [[value objectForKey:@"size"] floatValue];
-    group.color = [value objectForKey:@"color"];
-    
-    return group;
+@end
+
+@interface KTLabel : UILabel <EKNViewFrobPropertyInfo>
+
+@property (strong, nonatomic) KTTextStyle* textStyle;
+
+@end
+
+@implementation KTLabel
+
+@synthesize textStyle = _textStyle;
+
+- (void)frob_accumulatePropertiesInto:(id<EKNViewFrobPropertyContext>)context {
+    [super frob_accumulatePropertiesInto:context];
+    [context addGroup:@"KTLabel" withProperties:@[
+         [KTTextStyle ekn_propertyDescriptionWithName:@"textStyle"]
+     ]];
 }
 
-- (id <NSCoding>)ekn_transportValue {
-    NSMutableDictionary* dictionary = @{@"size": @(self.size)}.mutableCopy;
-    if(self.color) {
-        [dictionary setObject:self.color forKey:@"color"];
-    }
-    return dictionary;
+- (void)setTextStyle:(KTTextStyle *)textStyle {
+    _textStyle = textStyle;
+    self.font = [UIFont systemFontOfSize:textStyle.size];
+    self.textColor = textStyle.color;
+}
+
+- (KTTextStyle*)textStyle {
+    return _textStyle;
 }
 
 @end
 
 @interface KTAppDelegate () <EKNLiveKnobsCallback>
 
-@property (strong, nonatomic) KTTestGroup* testGroup;
+@property (strong, nonatomic) KTLabel* label;
+@property (strong, nonatomic) KTTextStyle* style;
 
 @end
 
@@ -60,17 +76,20 @@
     [[EKNKnobs sharedController] registerDefaultPlugins];
     [[EKNKnobs sharedController] start];
     
-    self.testGroup = [[KTTestGroup alloc] init];
-    self.testGroup.color = [UIColor redColor];
-    EKNMakeObjectKnob(KTTestGroup, self.testGroup);
+    KTLabel* label = [[KTLabel alloc] initWithFrame:CGRectZero];
+    label.text = @"Foo";
+    label.transform = CGAffineTransformMakeTranslation(120, 120);
+    [label sizeToFit];
+    self.label = label;
+    [self.window.rootViewController.view addSubview:label];
     
-    EKNMakeColorKnob(self.window.rootViewController.view.backgroundColor);
+    EKNMakeObjectKnob(KTTextStyle, self.style);
     
     return YES;
 }
 
 - (void)ekn_knobChangedNamed:(NSString *)label withDescription:(EKNPropertyDescription *)description toValue:(id)value {
-    self.window.rootViewController.view.backgroundColor = self.testGroup.color;
+    self.label.textStyle = self.style;
 }
 
 @end

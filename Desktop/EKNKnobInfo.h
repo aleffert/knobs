@@ -41,6 +41,7 @@
 @property (readonly, weak, nonatomic) EKNKnobInfo* rootKnob;
 
 - (void)updateValueAfterChildChange;
+- (void)updateChildrenAfterValueChange;
 
 @end
 
