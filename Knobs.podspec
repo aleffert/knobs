@@ -17,10 +17,10 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author             = { "Akiva Leffert" => "akiva@etsy.com" }
   s.platform     = :ios, '6.0'
-  s.source       = { :git => "https://github.com/aleffert/knobs.git", :commit=> "af7aacc74ae874723aacd888c21fdc7ba7b13ef0" }
+  s.source       = { :git => "https://github.com/aleffert/knobs.git", :commit=> "dfd1d0983b7fc85134cd20c5c2d48c449c582263" }
   s.source_files  = 'iOS/*.[hm]', 'iOS/*/*.[hm]', 'Shared/*.[hm]', 'Shared/*/*.[hm]', 'Libraries/*/*.[hm]'
   s.public_header_files = 'iOS/Include/*.h', 'Shared/Include/*.h'
-  s.preserve_paths = 'Desktop/*', 'Knobs.xcodeproj'
+  s.preserve_paths = 'Desktop/*', 'Knobs-Desktop.xcodeproj'
   s.ios.frameworks  = 'CFNetwork'
   s.requires_arc = true
   s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SRCROOT)/iOS/Include/' }
