@@ -16,7 +16,7 @@
 #import "EKNUpdateSourceCellView.h"
 #import "NSArray+EKNFunctional.h"
 
-static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndexDragType";
+static NSString* const EKNSourceTableRowKnobDragType = @"EKNSourceTableRowKnobDragType";
 
 @interface EKNSourcedKnobTable () <NSTableViewDelegate, NSTableViewDataSource, EKNPropertyEditorDelegate, EKNUpdateSourceCellViewDelegate>
 
@@ -42,7 +42,7 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
         
         [self addSubview:self.knobTable];
         
-        [self.knobTable registerForDraggedTypes:@[EKNSourceTableRowIndexDragType]];
+        [self.knobTable registerForDraggedTypes:@[EKNSourceTableRowKnobDragType]];
         
         self.knobTable.translatesAutoresizingMaskIntoConstraints = NO;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_knobTable]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_knobTable)]];
@@ -166,18 +166,18 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 #pragma mark Drag and Drop
 
 - (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-    [pboard declareTypes:@[EKNSourceTableRowIndexDragType] owner:self];
-    [pboard setData:data forType:EKNSourceTableRowIndexDragType];
+    NSAssert(rowIndexes.count == 1, @"Only supports dragging exactly one row");
+    EKNKnobInfo* info = self.knobs[[rowIndexes firstIndex]];
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:info];
+    [pboard declareTypes:@[EKNSourceTableRowKnobDragType] owner:self];
+    [pboard setData:data forType:EKNSourceTableRowKnobDragType];
     return YES;
 }
 
 - (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation {
     if(dropOperation == NSTableViewDropOn) {
-        NSIndexSet* sourceIndices = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowIndexDragType]];
-        NSAssert(sourceIndices.count == 1, @"Only supports dragging exactly one row");
-        NSUInteger index = [sourceIndices firstIndex];
-        EKNKnobInfo* sourceKnob = self.knobs[index];
+        // This is kind of inefficient. Can probably just do something with the knob type itself
+        EKNKnobInfo* sourceKnob = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowKnobDragType]];
         EKNPropertyType sourceType = sourceKnob.propertyDescription.type;
         EKNKnobInfo* destKnob = self.knobs[row];
         EKNPropertyType destType = destKnob.propertyDescription.type;
@@ -190,10 +190,7 @@ static NSString* const EKNSourceTableRowIndexDragType = @"EKNSourceTableRowIndex
 }
 - (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)destRow dropOperation:(NSTableViewDropOperation)op {
     NSAssert(op == NSTableViewDropOn, @"TODO: Support row reordering");
-    NSIndexSet* sourceIndices = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowIndexDragType]];
-    NSAssert(sourceIndices.count == 1, @"Only supports dragging exactly one row");
-    NSUInteger sourceRow = [sourceIndices firstIndex];
-    EKNKnobInfo* sourceKnob = self.knobs[sourceRow];
+    EKNKnobInfo* sourceKnob = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:EKNSourceTableRowKnobDragType]];
     EKNKnobInfo* destKnob = self.knobs[destRow];
     
     destKnob.value = sourceKnob.value;
